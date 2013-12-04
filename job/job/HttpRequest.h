@@ -9,5 +9,5 @@
 #import <Foundation/Foundation.h>
 
 @interface HttpRequest : NSObject
-
+-(void)httpRequestForGet;
 @end

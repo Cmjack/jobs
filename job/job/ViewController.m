@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "CustomCell.h"
+#import "ResumeViewController.h"
 @interface ViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)UITableView *jobTableView;
 @property(nonatomic,strong)CustomCell *customCell;
@@ -84,6 +85,8 @@
 }
 -(void)clickLeftButton:(id)sender
 {
+    ResumeViewController *resume = [[ResumeViewController alloc]initWithNibName:nil bundle:nil];
+    [self.navigationController pushViewController:resume animated:YES];
     
 }
 #pragma mark - UITableViewDataSource
