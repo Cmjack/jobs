@@ -109,7 +109,7 @@
     return _customCell;
 }
 #pragma mark -UITableViewDelegate
--(float)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 70.0f;
 }
@@ -118,9 +118,9 @@
 {
     
 }
--(float)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 30;
+    return 30.0f;
 }
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     UIView *headview = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 30)];

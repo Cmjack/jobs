@@ -39,7 +39,7 @@
 
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
-    NSLog(@"%i",self.textField.tag);
+    NSLog(@"%ld",(long)self.textField.tag);
     return YES;
 }
 

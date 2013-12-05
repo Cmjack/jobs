@@ -9,7 +9,7 @@
 #import "PersonMessageViewController.h"
 #import "PersonMessageCustomCell.h"
 #import "EditDiplomaTableViewController.h"
-
+#import "InputViewController.h"
 @interface PersonMessageViewController ()<UITableViewDelegate,
                                           UITableViewDataSource,
                                           UIActionSheetDelegate,
@@ -77,8 +77,8 @@
     [self.view addSubview:self.PersonTableView];
     float screen_height = [[UIScreen mainScreen]bounds].size.height;
     
-    UIImageView *pickerBackGroundImage = [[UIImageView alloc]initWithFrame:CGRectMake(0, screen_height-216, 320, 216)];
-    pickerBackGroundImage.backgroundColor = [UIColor whiteColor];
+    UIImageView *pickerBackGroundImage = [[UIImageView alloc]initWithFrame:CGRectMake(0, screen_height, 320, 216)];
+    pickerBackGroundImage.image = [UIImage imageNamed:@"datepicker_bg"];
     pickerBackGroundImage.userInteractionEnabled = YES;
     [self.view addSubview:pickerBackGroundImage];
     
@@ -136,31 +136,34 @@
 #pragma mark - UITableViewDelegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    if (indexPath.row == 1) {
-        UIActionSheet * actionSheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"男",@"女", nil];
-        
-        [actionSheet setActionSheetStyle:UIActionSheetStyleAutomatic];
-        [actionSheet showInView:self.view];
+    if (indexPath.row == 0) {
+        InputViewController *input = [[InputViewController alloc]initWithNibName:nil bundle:nil];
+        [self.navigationController pushViewController:input animated:YES];
     }
-    else if (indexPath.row == 2)
-    {
-        EditDiplomaTableViewController *editDiploma = [[EditDiplomaTableViewController alloc]initWithNibName:nil bundle:nil];
-        editDiploma.delegate = self;
-        [self.navigationController pushViewController:editDiploma animated:YES];
-    }
+//    if (indexPath.row == 1) {
+////        UIActionSheet * actionSheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"男",@"女", nil];
+////        
+////        [actionSheet setActionSheetStyle:UIActionSheetStyleAutomatic];
+////        [actionSheet showInView:self.view];
+//    }
+//    else if (indexPath.row == 2)
+//    {
+//        EditDiplomaTableViewController *editDiploma = [[EditDiplomaTableViewController alloc]initWithNibName:nil bundle:nil];
+//        editDiploma.delegate = self;
+//        [self.navigationController pushViewController:editDiploma animated:YES];
+//    }
 }
--(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (buttonIndex == 0) {
-        [self.mutableArr replaceObjectAtIndex:1 withObject:@"男"];
-
-    }else if(buttonIndex ==1){
-        [self.mutableArr replaceObjectAtIndex:1 withObject:@"女"];
-        
-    }
-    [self.PersonTableView reloadData];
-}
+//-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+//{
+//    if (buttonIndex == 0) {
+//        [self.mutableArr replaceObjectAtIndex:1 withObject:@"男"];
+//
+//    }else if(buttonIndex ==1){
+//        [self.mutableArr replaceObjectAtIndex:1 withObject:@"女"];
+//        
+//    }
+//    [self.PersonTableView reloadData];
+//}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -194,6 +197,7 @@
     return [[self.pickerData objectAtIndex:component]objectAtIndex:row];
 
 }
+#pragma mark - initData
 -(NSArray*)getSexData{
 
     NSArray *arr = @[@"男",@"女"];
@@ -246,7 +250,7 @@
 //-(float)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component{
 //    return 44.0f;
 //}
--(float)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component
+-(CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component
 {
     
     float width = 0.0f;
