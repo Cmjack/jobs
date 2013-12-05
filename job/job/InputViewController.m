@@ -41,6 +41,7 @@
     
     UIButton *rightButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 44, 44)];
     [rightButton setTitle:@"保存" forState:UIControlStateNormal];
+    [rightButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     UIBarButtonItem * barButton = [[UIBarButtonItem alloc]initWithCustomView:rightButton];
     self.navigationItem.rightBarButtonItem = barButton;
     
@@ -49,14 +50,14 @@
 }
 -(void)initViews{
     self.nameLab  = [[UILabel alloc]initWithFrame:CGRectMake(LAB_X, LAB_Y, LAB_WIDTH, LAB_HEIGHT)];
-    self.telLab   = [[UILabel alloc]initWithFrame:CGRectMake(LAB_X, LAB_Y+40, LAB_WIDTH, LAB_HEIGHT)];
+    self.cardLab   = [[UILabel alloc]initWithFrame:CGRectMake(LAB_X, LAB_Y+40, LAB_WIDTH, LAB_HEIGHT)];
     self.emailLab = [[UILabel alloc]initWithFrame:CGRectMake(LAB_X, LAB_Y+80, LAB_WIDTH, LAB_HEIGHT)];
-    self.cardLab  = [[UILabel alloc]initWithFrame:CGRectMake(LAB_X, LAB_Y+120, LAB_WIDTH, LAB_HEIGHT)];
+    self.telLab  = [[UILabel alloc]initWithFrame:CGRectMake(LAB_X, LAB_Y+120, LAB_WIDTH, LAB_HEIGHT)];
     
     self.nameLab.text  = @"姓名:";
     self.telLab.text   = @"电话:";
     self.emailLab.text = @"Email:";
-    self.cardLab.text  = @"证件号:";
+    self.cardLab.text  = @"职位:";
     
     [self.view addSubview:self.nameLab];
     [self.view addSubview:self.telLab];
@@ -64,9 +65,9 @@
     [self.view addSubview:self.cardLab];
     
     self.nameTextField    =  [[UITextField alloc]initWithFrame:CGRectMake(LAB_X + LAB_WIDTH, LAB_Y, TF_WIDTH, TF_HEIGHT)];
-    self.telTextField     =  [[UITextField alloc]initWithFrame:CGRectMake(LAB_X + LAB_WIDTH, LAB_Y+40, TF_WIDTH, TF_HEIGHT)];
+    self.cardTextField     =  [[UITextField alloc]initWithFrame:CGRectMake(LAB_X + LAB_WIDTH, LAB_Y+40, TF_WIDTH, TF_HEIGHT)];
     self.emailTextField   =  [[UITextField alloc]initWithFrame:CGRectMake(LAB_X + LAB_WIDTH, LAB_Y+80, TF_WIDTH, TF_HEIGHT)];
-    self.cardTextField    =  [[UITextField alloc]initWithFrame:CGRectMake(LAB_X + LAB_WIDTH, LAB_Y+120, TF_WIDTH, TF_HEIGHT)];
+    self.telTextField    =  [[UITextField alloc]initWithFrame:CGRectMake(LAB_X + LAB_WIDTH, LAB_Y+120, TF_WIDTH, TF_HEIGHT)];
     
     self.nameTextField.tag   = 1001;
     self.telTextField.tag    = 1002;

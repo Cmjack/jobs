@@ -47,27 +47,24 @@
 -(void)initDatas{
 
     self.personArr = @[@"姓       名",
-                       @"性       别",
+                       @"应聘职位",
                        @"最高学历",
                        @"年       龄",
                        @"手机号码",
                        @"Email",
                        @"工作年限",
-                       @"证       件",
-                       @"证件号码"
                        ];
     self.mutableArr = [NSMutableArray arrayWithObjects:
                        @"李某某",
-                       @"男",
+                       @"ios开发工程师",
                        @"本科",
                        @"22",
                        @"1388888888",
                        @"xxxx@163.com",
                        @"3年以上",
-                       @"身份证",
-                       @"360199633567894",
+                       
                        nil];
-    self.pickerData = [NSMutableArray arrayWithObjects:[self getSexData],[self getDiplomaData],[self getAgeData],[self getWorkTimeData],[self getCardTypeData], nil];
+    self.pickerData = [NSMutableArray arrayWithObjects:[self getDiplomaData],[self getAgeData],[self getWorkTimeData], nil];
 }
 
 -(void)initViews{
@@ -99,25 +96,7 @@
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-//    if (indexPath.row == 0 ||indexPath.row ==3||indexPath.row ==4 ||indexPath.row ==5||indexPath.row ==8) {
-//        static NSString * indexCell = @"cellTextField";
-//        self.customCell = [tableView dequeueReusableCellWithIdentifier:indexCell];
-//        if (self.customCell == nil) {
-//            self.customCell = [[PersonMessageCustomCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:indexCell];
-//            [self.customCell initViewsForTextField];
-//            self.customCell.selectionStyle = UITableViewCellSelectionStyleNone;
-//            
-//        }
-//        self.customCell.textLabel.text = [self.personArr objectAtIndex:indexPath.row];
-//        self.customCell.textField.text = [self.mutableArr objectAtIndex:indexPath.row];
-//        self.customCell.textField.tag = 1000+indexPath.row;
-//        return self.customCell;
-//        
-//    }else{
-//        
-//        
-//    
-//    }
+
     static NSString * indexCell = @"cellLab";
     self.customCell = [tableView dequeueReusableCellWithIdentifier:indexCell];
     if (self.customCell == nil) {
@@ -140,30 +119,9 @@
         InputViewController *input = [[InputViewController alloc]initWithNibName:nil bundle:nil];
         [self.navigationController pushViewController:input animated:YES];
     }
-//    if (indexPath.row == 1) {
-////        UIActionSheet * actionSheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"男",@"女", nil];
-////        
-////        [actionSheet setActionSheetStyle:UIActionSheetStyleAutomatic];
-////        [actionSheet showInView:self.view];
-//    }
-//    else if (indexPath.row == 2)
-//    {
-//        EditDiplomaTableViewController *editDiploma = [[EditDiplomaTableViewController alloc]initWithNibName:nil bundle:nil];
-//        editDiploma.delegate = self;
-//        [self.navigationController pushViewController:editDiploma animated:YES];
-//    }
+
 }
-//-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-//{
-//    if (buttonIndex == 0) {
-//        [self.mutableArr replaceObjectAtIndex:1 withObject:@"男"];
-//
-//    }else if(buttonIndex ==1){
-//        [self.mutableArr replaceObjectAtIndex:1 withObject:@"女"];
-//        
-//    }
-//    [self.PersonTableView reloadData];
-//}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -185,7 +143,7 @@
 -(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
 
     
-    return 5;
+    return self.pickerData.count;
 }
 -(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
@@ -250,21 +208,21 @@
 //-(float)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component{
 //    return 44.0f;
 //}
--(CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component
-{
-    
-    float width = 0.0f;
-    if (component == 0 ||component == 2) {
-        width = 35.0f;
-    }else if (component == 4 || component == 3)
-    {
-        width = 80.0f;
-    }else if (component == 1){
-        width= 60.0f;
-    }
-    
-    return width;
-}
+//-(CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component
+//{
+//    
+//    float width = 0.0f;
+//    if (component == 0 ||component == 2) {
+//        width = 35.0f;
+//    }else if (component == 4 || component == 3)
+//    {
+//        width = 80.0f;
+//    }else if (component == 1){
+//        width= 60.0f;
+//    }
+//    
+//    return width;
+//}
 /*
 #pragma mark - Navigation
 

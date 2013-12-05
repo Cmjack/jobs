@@ -9,6 +9,8 @@
 #import "ViewController.h"
 #import "CustomCell.h"
 #import "ResumeViewController.h"
+#import "HttpRequest.h"
+#import "loginViewController.h"
 @interface ViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)UITableView *jobTableView;
 @property(nonatomic,strong)CustomCell *customCell;
@@ -35,7 +37,7 @@
     self.jobTableView.dataSource = self;
     self.jobTableView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:self.jobTableView];
-    self.jobTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.jobTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     
     UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
     leftButton.frame = CGRectMake(20, 5, 60, 30);
@@ -81,12 +83,26 @@
 
 -(void)clickRightButton:(id)sender
 {
-    
+    [HttpRequest check];
 }
 -(void)clickLeftButton:(id)sender
 {
-    ResumeViewController *resume = [[ResumeViewController alloc]initWithNibName:nil bundle:nil];
-    [self.navigationController pushViewController:resume animated:YES];
+    loginViewController *loginVC = [[loginViewController alloc]initWithFrame:CGRectMake(0, self.view.bounds.size.height, 320, self.view.bounds.size.height)];
+    
+    
+    [self.view.window addSubview:loginVC];
+    
+    [UIView animateWithDuration:0.25f animations:^{
+        
+        loginVC.frame = CGRectMake(0, 0, 320, self.view.bounds.size.height);
+        
+    } completion:^(BOOL finished) {
+        
+    }];
+    
+    
+//    ResumeViewController *resume = [[ResumeViewController alloc]initWithNibName:nil bundle:nil];
+//    [self.navigationController pushViewController:resume animated:YES];
     
 }
 #pragma mark - UITableViewDataSource
@@ -102,7 +118,7 @@
     if (_customCell == nil) {
         _customCell = [[CustomCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:indexPathCell];
         [_customCell initViews];
-        _customCell.backgroundColor = [UIColor clearColor];
+//        _customCell.backgroundColor = [UIColor clearColor];
         _customCell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     [_customCell insertData:nil];
@@ -111,23 +127,23 @@
 #pragma mark -UITableViewDelegate
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 70.0f;
+    return 170.0f;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
 }
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    return 30.0f;
-}
--(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    UIView *headview = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 30)];
-    headview.backgroundColor = [UIColor clearColor];
-    [headview addSubview:_headImageView];
-    return headview;
-}
+//-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+//{
+//    return 30.0f;
+//}
+//-(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+//    UIView *headview = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 30)];
+//    headview.backgroundColor = [UIColor clearColor];
+//    [headview addSubview:_headImageView];
+//    return headview;
+//}
 
 
 - (void)didReceiveMemoryWarning

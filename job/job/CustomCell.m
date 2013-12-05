@@ -8,6 +8,7 @@
 
 #import "CustomCell.h"
 #import <QuartzCore/QuartzCore.h>
+#import "Tools.h"
 @implementation CustomCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -20,33 +21,53 @@
 }
 -(void)initViews
 {
-    UIImageView * backimageView = [[UIImageView alloc]initWithFrame:CGRectMake(4, 2.5, 312, 65)];
-    backimageView.backgroundColor = [UIColor whiteColor];
-    backimageView.layer.cornerRadius =2.5f;
-    [self addSubview:backimageView];
+
+    self.iconImageview = [[UIImageView alloc]initWithFrame:CGRectMake(5, 5, 30, 30)];
+    self.iconImageview.layer.cornerRadius = 5.5f;
+    [self addSubview:self.iconImageview];
     
-    self.positionLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, 5, 200, 30)];
-    UIFont *font = [UIFont boldSystemFontOfSize:16.0f];
-    self.positionLabel.font =font;
+    self.fromLabel = [[UILabel alloc]initWithFrame:CGRectMake(45, 5, 240, 15)];
     
-    self.companyLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, 40, 200, 20)];
-    self.companyLabel.font = [UIFont systemFontOfSize:13.0f];
+    UIFont *font = [UIFont systemFontOfSize:12.0f];
+    self.fromLabel.font = font;
+    [self addSubview:self.fromLabel];
     
-    self.areaLabel = [[UILabel alloc]initWithFrame:CGRectMake(220, 10, 80, 20)];
-    self.areaLabel.textAlignment = NSTextAlignmentRight;
-    self.areaLabel.font = [UIFont systemFontOfSize:12.0f];
+
+    self.PCALable = [[UILabel alloc]initWithFrame:CGRectMake(45, 20, 260, 30)];
+    [self addSubview:self.PCALable];
+   
     
-    [self addSubview:self.positionLabel];
-    [self addSubview:self.companyLabel];
-    [self addSubview:self.areaLabel];
+    self.captionLab = [[UILabel alloc]initWithFrame:CGRectMake(45, 60, 260, 20)];
+    [self addSubview:self.captionLab];
+    
+    [self insertData:nil];
     
 }
+
 -(void)insertData:(NSDictionary*)dict
 {
-    self.positionLabel.text = @"iOS开发工程师";
-    self.companyLabel.text = @"上海市XX网络公司";
-    self.areaLabel.text = @"上海-浦东区";
     
+    self.iconImageview.image = [UIImage imageNamed:@"58"];
+    self.fromLabel.text = @"来自58同城";
+    
+    NSString * string = @"Java开发工程师 • 搜狗-用户平台事业部 • 北京市海淀区";
+    self.PCALable.text = string;
+    UIFont *PCAFont = [UIFont boldSystemFontOfSize:13.0f];
+    self.PCALable.font = PCAFont;
+    self.PCALable.numberOfLines = 10;
+    float height = [Tools autoSizeLab:CGSizeMake(260, 300) withFont:PCAFont withSting:string];
+    self.PCALable.frame = CGRectMake(45, 20, 260, height);
+    
+    
+    NSString *captionString =@"【工作职责】\n 1.参与大型系统或产品的需求分析、架构设计和概要设计等；\n 2.负责系统详细设计、核心代码及相关文档的编写 ";
+    
+    self.captionLab.text = captionString;
+    UIFont *capFont = [UIFont systemFontOfSize:13];
+    self.captionLab.font = capFont;
+    self.captionLab.numberOfLines = 0;
+    float caHeight = [Tools autoSizeLab:CGSizeMake(260, 300) withFont:capFont withSting:captionString];
+    self.captionLab.frame = CGRectMake(45, 30+height, 260, caHeight);
+   
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
@@ -54,5 +75,6 @@
 
     // Configure the view for the selected state
 }
+
 
 @end
