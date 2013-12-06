@@ -9,12 +9,21 @@
 #import "ViewController.h"
 #import "CustomCell.h"
 #import "ResumeViewController.h"
-@interface ViewController ()<UITableViewDataSource,UITableViewDelegate>
+#import "HttpRequest.h"
+#import "loginViewController.h"
+#import "DataModel.h"
+#import "Tools.h"
+#import "headSetting.h"
+#import "HttpRequest.h"
+@interface ViewController ()<UITableViewDataSource,UITableViewDelegate,HttpRequestDelegate>
 @property(nonatomic,strong)UITableView *jobTableView;
 @property(nonatomic,strong)CustomCell *customCell;
 @property(nonatomic,strong)UIImageView *headImageView;
 @property(nonatomic,strong)UIButton *positionButton;
 @property(nonatomic,strong)UIButton *areaButton;
+@property(nonatomic,strong)NSArray *jobDataArray;
+@property(nonatomic,strong)DataModel *shareDataModel;
+@property(nonatomic,strong)UIRefreshControl *refresh;
 
 @end
 
@@ -25,6 +34,9 @@
     [super viewDidLoad];
     [self initViews];
     [self CreatHeaderView];
+    [self refreshData];
+//    self.shareDataModel = [DataModel shareData];
+//     self.jobDataArray = self.shareDataModel.shareData;
 	// Do any additional setup after loading the view, typically from a nib.
 }
 -(void)initViews{
@@ -35,7 +47,7 @@
     self.jobTableView.dataSource = self;
     self.jobTableView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:self.jobTableView];
-    self.jobTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.jobTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     
     UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
     leftButton.frame = CGRectMake(20, 5, 60, 30);
@@ -46,11 +58,16 @@
     
     UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc]initWithCustomView:leftButton];
     
-    UIBarButtonItem *rightButton =[[UIBarButtonItem alloc]initWithTitle:@"投递" style:UIBarButtonItemStylePlain target:self action:@selector(clickRightButton:)];
+    UIBarButtonItem *rightButton =[[UIBarButtonItem alloc]initWithTitle:@"发布" style:UIBarButtonItemStylePlain target:self action:@selector(clickRightButton:)];
     
     self.navigationItem.leftBarButtonItem = leftBarButton;
     NSLog(@"%@",leftBarButton);
     self.navigationItem.rightBarButtonItem = rightButton;
+    
+    UIRefreshControl *refresh = [[UIRefreshControl alloc]init];
+    self.refresh = refresh;
+    [refresh addTarget:self action:@selector(refreshData) forControlEvents:UIControlEventValueChanged];
+    [self.jobTableView addSubview:refresh];
 }
 
 -(void)CreatHeaderView{
@@ -82,19 +99,53 @@
 -(void)clickRightButton:(id)sender
 {
     
+    
 }
 -(void)clickLeftButton:(id)sender
 {
-    ResumeViewController *resume = [[ResumeViewController alloc]initWithNibName:nil bundle:nil];
-    [self.navigationController pushViewController:resume animated:YES];
+    loginViewController *loginVC = [[loginViewController alloc]initWithFrame:CGRectMake(0, self.view.bounds.size.height, 320, self.view.bounds.size.height)];
+    
+    
+    [self.view.window addSubview:loginVC];
+    
+    [UIView animateWithDuration:0.25f animations:^{
+        
+        loginVC.frame = CGRectMake(0, 0, 320, self.view.bounds.size.height);
+        
+    } completion:^(BOOL finished) {
+        
+    }];
+    
+    
+//    ResumeViewController *resume = [[ResumeViewController alloc]initWithNibName:nil bundle:nil];
+//    [self.navigationController pushViewController:resume animated:YES];
     
 }
+
+#pragma mark - refreshData
+-(void)refreshData
+{
+    HttpRequest *request = [[HttpRequest alloc]init];
+    request.delegate = self;
+    [request httpRequestForGet];
+    
+}
+#pragma mark - HttpRequestDelegate
+-(void)getDataSucess:(NSArray *)dataArray
+{
+    
+    self.jobDataArray = dataArray;
+    [self.jobTableView reloadData];
+    [self.refresh endRefreshing];
+}
+
+
 #pragma mark - UITableViewDataSource
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 12;
+    return [self.jobDataArray count];
 }
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
   static NSString *indexPathCell =@"cell";
@@ -102,32 +153,43 @@
     if (_customCell == nil) {
         _customCell = [[CustomCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:indexPathCell];
         [_customCell initViews];
-        _customCell.backgroundColor = [UIColor clearColor];
+//        _customCell.backgroundColor = [UIColor clearColor];
         _customCell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-    [_customCell insertData:nil];
+    [_customCell insertData:[self.jobDataArray objectAtIndex:indexPath.row]];
+    
     return _customCell;
 }
 #pragma mark -UITableViewDelegate
--(float)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 70.0f;
+    float height = 30;
+    UIFont *PCAFont = [UIFont boldSystemFontOfSize:13.0f];
+    UIFont *capFont = [UIFont systemFontOfSize:13];
+    NSDictionary *dict = [self.jobDataArray objectAtIndex:indexPath.row];
+    NSMutableString *PCAString = [NSMutableString stringWithFormat:@"%@ • %@ • %@",[dict objectForKey:JOB_TITLE],[dict objectForKey:JOB_COMPANY],[dict objectForKey:JOB_LOCATION]];
+    CGSize size = CGSizeMake(260, 5000);
+    
+    height += [Tools autoSizeLab:size withFont:PCAFont withSting:PCAString];
+    height += [Tools autoSizeLab:size withFont:capFont withSting:[dict objectForKey:JOB_DESC]];
+    
+    return height;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
 }
--(float)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    return 30;
-}
--(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    UIView *headview = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 30)];
-    headview.backgroundColor = [UIColor clearColor];
-    [headview addSubview:_headImageView];
-    return headview;
-}
+//-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+//{
+//    return 30.0f;
+//}
+//-(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+//    UIView *headview = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 30)];
+//    headview.backgroundColor = [UIColor clearColor];
+//    [headview addSubview:_headImageView];
+//    return headview;
+//}
 
 
 - (void)didReceiveMemoryWarning

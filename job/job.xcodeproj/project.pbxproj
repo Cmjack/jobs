@@ -35,6 +35,18 @@
 		9DA9EB07184DABFA00EF35A5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DA9EAE9184DABFA00EF35A5 /* UIKit.framework */; };
 		9DA9EB0F184DABFA00EF35A5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9DA9EB0D184DABFA00EF35A5 /* InfoPlist.strings */; };
 		9DA9EB11184DABFA00EF35A5 /* jobTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DA9EB10184DABFA00EF35A5 /* jobTests.m */; };
+		9DD5657818501A61007939BA /* datepicker_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DD5657618501A61007939BA /* datepicker_bg.png */; };
+		9DD5657918501A61007939BA /* datepicker_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DD5657718501A61007939BA /* datepicker_bg@2x.png */; };
+		9DD5657C18501C4D007939BA /* InputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DD5657B18501C4D007939BA /* InputViewController.m */; };
+		9DD5657E18503530007939BA /* 58.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DD5657D18503530007939BA /* 58.png */; };
+		9DD56580185035F1007939BA /* 58@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DD5657F185035F1007939BA /* 58@2x.png */; };
+		9DD5658318504BA1007939BA /* Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DD5658218504BA1007939BA /* Tools.m */; };
+		9DD5658718504C52007939BA /* JobFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DD5658618504C52007939BA /* JobFont.m */; };
+		9DD5658B1850785B007939BA /* loginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DD5658A1850785B007939BA /* loginViewController.m */; };
+		9DD5658D18508AD2007939BA /* btn_close_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DD5658C18508AD2007939BA /* btn_close_normal@2x.png */; };
+		9DFC874A185166C700997414 /* registerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DFC8749185166C700997414 /* registerView.m */; };
+		9DFC874C1851A8BB00997414 /* wealink.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9DFC874B1851A8BB00997414 /* wealink.jpg */; };
+		9DFC874E1851A8C000997414 /* lagou.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9DFC874D1851A8C000997414 /* lagou.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +104,23 @@
 		9DA9EB0C184DABFA00EF35A5 /* jobTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "jobTests-Info.plist"; sourceTree = "<group>"; };
 		9DA9EB0E184DABFA00EF35A5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		9DA9EB10184DABFA00EF35A5 /* jobTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = jobTests.m; sourceTree = "<group>"; };
+		9DD5657618501A61007939BA /* datepicker_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = datepicker_bg.png; sourceTree = "<group>"; };
+		9DD5657718501A61007939BA /* datepicker_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "datepicker_bg@2x.png"; sourceTree = "<group>"; };
+		9DD5657A18501C4D007939BA /* InputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputViewController.h; sourceTree = "<group>"; };
+		9DD5657B18501C4D007939BA /* InputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputViewController.m; sourceTree = "<group>"; };
+		9DD5657D18503530007939BA /* 58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 58.png; sourceTree = "<group>"; };
+		9DD5657F185035F1007939BA /* 58@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "58@2x.png"; sourceTree = "<group>"; };
+		9DD5658118504BA1007939BA /* Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tools.h; sourceTree = "<group>"; };
+		9DD5658218504BA1007939BA /* Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tools.m; sourceTree = "<group>"; };
+		9DD5658518504C52007939BA /* JobFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobFont.h; sourceTree = "<group>"; };
+		9DD5658618504C52007939BA /* JobFont.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JobFont.m; sourceTree = "<group>"; };
+		9DD565891850785B007939BA /* loginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = loginViewController.h; sourceTree = "<group>"; };
+		9DD5658A1850785B007939BA /* loginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = loginViewController.m; sourceTree = "<group>"; };
+		9DD5658C18508AD2007939BA /* btn_close_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_close_normal@2x.png"; sourceTree = "<group>"; };
+		9DFC8748185166C700997414 /* registerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = registerView.h; sourceTree = "<group>"; };
+		9DFC8749185166C700997414 /* registerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = registerView.m; sourceTree = "<group>"; };
+		9DFC874B1851A8BB00997414 /* wealink.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = wealink.jpg; sourceTree = "<group>"; };
+		9DFC874D1851A8C000997414 /* lagou.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = lagou.jpg; sourceTree = "<group>"; };
 		C9FB0C6BD24F4454B35EAB1F /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -121,7 +150,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		9D66ABA8184ECC4D00C03098 /* views */ = {
+		9D66ABA8184ECC4D00C03098 /* MainViewController */ = {
 			isa = PBXGroup;
 			children = (
 				9DA9EAFA184DABFA00EF35A5 /* ViewController.h */,
@@ -129,7 +158,7 @@
 				9D7EF5AD184DB0E600182DB2 /* CustomCell.h */,
 				9D7EF5AE184DB0E600182DB2 /* CustomCell.m */,
 			);
-			name = views;
+			name = MainViewController;
 			sourceTree = "<group>";
 		};
 		9D66ABA9184ECCEF00C03098 /* resume */ = {
@@ -153,6 +182,8 @@
 				9D66ABB1184EF0C000C03098 /* PersonMessageCustomCell.m */,
 				9D66ABBF184F220900C03098 /* EditDiplomaTableViewController.h */,
 				9D66ABC0184F220900C03098 /* EditDiplomaTableViewController.m */,
+				9DD5657A18501C4D007939BA /* InputViewController.h */,
+				9DD5657B18501C4D007939BA /* InputViewController.m */,
 			);
 			name = personMessgae;
 			sourceTree = "<group>";
@@ -180,8 +211,15 @@
 		9D7EF5B0184DCBB400182DB2 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				9DD5657D18503530007939BA /* 58.png */,
+				9DD5657F185035F1007939BA /* 58@2x.png */,
+				9DFC874B1851A8BB00997414 /* wealink.jpg */,
+				9DFC874D1851A8C000997414 /* lagou.jpg */,
 				9D7EF5B1184DCC1A00182DB2 /* history_list_bg.png */,
 				9D9D85AE184DCEBB0015CD71 /* History_bg.png */,
+				9DD5657618501A61007939BA /* datepicker_bg.png */,
+				9DD5657718501A61007939BA /* datepicker_bg@2x.png */,
+				9DD5658C18508AD2007939BA /* btn_close_normal@2x.png */,
 			);
 			path = images;
 			sourceTree = "<group>";
@@ -236,9 +274,11 @@
 				9DA9EAF4184DABFA00EF35A5 /* AppDelegate.h */,
 				9DA9EAF5184DABFA00EF35A5 /* AppDelegate.m */,
 				9DA9EAF7184DABFA00EF35A5 /* Main.storyboard */,
-				9D66ABA8184ECC4D00C03098 /* views */,
+				9DD5658818507827007939BA /* login */,
+				9D66ABA8184ECC4D00C03098 /* MainViewController */,
 				9D66ABA9184ECCEF00C03098 /* resume */,
 				9D9D85DC184DD31A0015CD71 /* DataModel */,
+				9DD5658418504BA6007939BA /* Tools */,
 				9DA9EAFD184DABFA00EF35A5 /* Images.xcassets */,
 				9D7EF5B0184DCBB400182DB2 /* images */,
 				9DA9EAEC184DABFA00EF35A5 /* Supporting Files */,
@@ -274,6 +314,28 @@
 				9DA9EB0D184DABFA00EF35A5 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9DD5658418504BA6007939BA /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				9DD5658118504BA1007939BA /* Tools.h */,
+				9DD5658218504BA1007939BA /* Tools.m */,
+				9DD5658518504C52007939BA /* JobFont.h */,
+				9DD5658618504C52007939BA /* JobFont.m */,
+			);
+			name = Tools;
+			sourceTree = "<group>";
+		};
+		9DD5658818507827007939BA /* login */ = {
+			isa = PBXGroup;
+			children = (
+				9DD565891850785B007939BA /* loginViewController.h */,
+				9DD5658A1850785B007939BA /* loginViewController.m */,
+				9DFC8748185166C700997414 /* registerView.h */,
+				9DFC8749185166C700997414 /* registerView.m */,
+			);
+			name = login;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -354,11 +416,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9DD5657818501A61007939BA /* datepicker_bg.png in Resources */,
 				9DA9EAFE184DABFA00EF35A5 /* Images.xcassets in Resources */,
+				9DD5657918501A61007939BA /* datepicker_bg@2x.png in Resources */,
 				9D9D85AF184DCEBB0015CD71 /* History_bg.png in Resources */,
 				9DA9EAF0184DABFA00EF35A5 /* InfoPlist.strings in Resources */,
 				9DA9EAF9184DABFA00EF35A5 /* Main.storyboard in Resources */,
+				9DD5657E18503530007939BA /* 58.png in Resources */,
+				9DD56580185035F1007939BA /* 58@2x.png in Resources */,
+				9DFC874E1851A8C000997414 /* lagou.jpg in Resources */,
 				9D7EF5B2184DCC1A00182DB2 /* history_list_bg.png in Resources */,
+				9DFC874C1851A8BB00997414 /* wealink.jpg in Resources */,
+				9DD5658D18508AD2007939BA /* btn_close_normal@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -415,8 +484,13 @@
 				9D9D85E2184DD3A20015CD71 /* HttpRequest.m in Sources */,
 				9DA9EAFC184DABFA00EF35A5 /* ViewController.m in Sources */,
 				9DA9EAF6184DABFA00EF35A5 /* AppDelegate.m in Sources */,
+				9DD5658B1850785B007939BA /* loginViewController.m in Sources */,
 				9D66ABBB184F0CEB00C03098 /* WorkCustomCell.m in Sources */,
+				9DFC874A185166C700997414 /* registerView.m in Sources */,
+				9DD5658718504C52007939BA /* JobFont.m in Sources */,
+				9DD5658318504BA1007939BA /* Tools.m in Sources */,
 				9D66ABB2184EF0C000C03098 /* PersonMessageCustomCell.m in Sources */,
+				9DD5657C18501C4D007939BA /* InputViewController.m in Sources */,
 				9D66ABAF184ED9A500C03098 /* PersonMessageViewController.m in Sources */,
 				9D66ABC1184F220900C03098 /* EditDiplomaTableViewController.m in Sources */,
 				9D7EF5AF184DB0E600182DB2 /* CustomCell.m in Sources */,

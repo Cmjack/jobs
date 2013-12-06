@@ -30,7 +30,7 @@
     [self addSubview:self.textField];
 }
 -(void)initViewsForLable{
-    self.label = [[UILabel alloc]initWithFrame:CGRectMake(150, 5, 130, 30)];
+    self.label = [[UILabel alloc]initWithFrame:CGRectMake(100, 5, 180, 30)];
     
     self.label.textAlignment = NSTextAlignmentRight;
     [self addSubview:_label];
@@ -39,7 +39,7 @@
 
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
-    NSLog(@"%i",self.textField.tag);
+    NSLog(@"%ld",(long)self.textField.tag);
     return YES;
 }
 

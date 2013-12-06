@@ -8,6 +8,8 @@
 
 #import "CustomCell.h"
 #import <QuartzCore/QuartzCore.h>
+#import "Tools.h"
+#import "headSetting.h"
 @implementation CustomCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -20,33 +22,66 @@
 }
 -(void)initViews
 {
-    UIImageView * backimageView = [[UIImageView alloc]initWithFrame:CGRectMake(4, 2.5, 312, 65)];
-    backimageView.backgroundColor = [UIColor whiteColor];
-    backimageView.layer.cornerRadius =2.5f;
-    [self addSubview:backimageView];
+
+    self.iconButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.iconButton.frame = CGRectMake(5, 5, 30, 30);
+    self.iconButton.backgroundColor = [UIColor redColor];
+    //self.iconButton.layer.borderWidth = 2.0;
+    self.iconButton.layer.masksToBounds = YES;
+    self.iconButton.layer.cornerRadius = 5.5f;
+    [self addSubview:self.iconButton];
     
-    self.positionLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, 5, 200, 30)];
-    UIFont *font = [UIFont boldSystemFontOfSize:16.0f];
-    self.positionLabel.font =font;
+    self.fromLabel = [[UILabel alloc]initWithFrame:CGRectMake(45, 5, 240, 15)];
     
-    self.companyLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, 40, 200, 20)];
-    self.companyLabel.font = [UIFont systemFontOfSize:13.0f];
+    UIFont *font = [UIFont systemFontOfSize:12.0f];
+    self.fromLabel.font = font;
+    [self addSubview:self.fromLabel];
     
-    self.areaLabel = [[UILabel alloc]initWithFrame:CGRectMake(220, 10, 80, 20)];
-    self.areaLabel.textAlignment = NSTextAlignmentRight;
-    self.areaLabel.font = [UIFont systemFontOfSize:12.0f];
+
+    self.PCALable = [[UILabel alloc]initWithFrame:CGRectMake(45, 20, 260, 30)];
+    [self addSubview:self.PCALable];
+   
     
-    [self addSubview:self.positionLabel];
-    [self addSubview:self.companyLabel];
-    [self addSubview:self.areaLabel];
+    self.captionLab = [[UILabel alloc]initWithFrame:CGRectMake(45, 60, 260, 20)];
+    [self addSubview:self.captionLab];
+    
+    [self insertData:nil];
     
 }
+
 -(void)insertData:(NSDictionary*)dict
 {
-    self.positionLabel.text = @"iOS开发工程师";
-    self.companyLabel.text = @"上海市XX网络公司";
-    self.areaLabel.text = @"上海-浦东区";
+    if ([[dict objectForKey:JOB_SOURCE]isEqualToString:FROM_58]) {
+       
+        [self.iconButton setImage:[UIImage imageNamed:@"58"] forState:UIControlStateNormal];
+        self.fromLabel.text = @"来自58同城";
+    }else if ([[dict objectForKey:JOB_SOURCE]isEqualToString:FROM_LAGOU]){
+        
+        [self.iconButton setImage:[UIImage imageNamed:@"lagou.jpg"] forState:UIControlStateNormal];
+        self.fromLabel.text = @"来自拉勾网";
+    }else if ([[dict objectForKey:JOB_SOURCE]isEqualToString:FROM_WEALINK]){
+        
+        [self.iconButton setImage:[UIImage imageNamed:@"wealink.jpg"] forState:UIControlStateNormal];
+        self.fromLabel.text = @"来自若邻网";
+    }
     
+    NSMutableString *PCAString = [NSMutableString stringWithFormat:@"%@ • %@ • %@",[dict objectForKey:JOB_TITLE],[dict objectForKey:JOB_COMPANY],[dict objectForKey:JOB_LOCATION]];
+    
+    self.PCALable.text = PCAString;
+    UIFont *PCAFont = [UIFont boldSystemFontOfSize:13.0f];
+    self.PCALable.font = PCAFont;
+    self.PCALable.numberOfLines = 10;
+    float height = [Tools autoSizeLab:CGSizeMake(260, 300) withFont:PCAFont withSting:PCAString];
+    self.PCALable.frame = CGRectMake(45, 20, 260, height);
+    
+    
+    self.captionLab.text = [dict objectForKey:JOB_DESC];
+    UIFont *capFont = [UIFont systemFontOfSize:13];
+    self.captionLab.font = capFont;
+    self.captionLab.numberOfLines = 0;
+    float caHeight = [Tools autoSizeLab:CGSizeMake(260, 8000) withFont:capFont withSting:[dict objectForKey:JOB_DESC]];
+    self.captionLab.frame = CGRectMake(45, 30+height, 260, caHeight);
+   
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
@@ -54,5 +89,6 @@
 
     // Configure the view for the selected state
 }
+
 
 @end

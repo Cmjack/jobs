@@ -13,8 +13,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-//    HttpRequest *hhh = [[HttpRequest alloc]init];
-//    [hhh httpRequestForGet];
+
+
+    
     self.window =[[UIWindow alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
     ViewController *rootView =[[ViewController alloc]initWithNibName:nil bundle:nil];
     UINavigationController *nac =[[UINavigationController alloc]initWithRootViewController:rootView];
