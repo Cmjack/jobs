@@ -9,5 +9,12 @@
 #import "DataModel.h"
 
 @implementation DataModel
-
++(DataModel*)shareData
+{
+    static DataModel * shareData ;
+    if (shareData == nil) {
+        shareData = [[DataModel alloc]init];
+    }
+    return shareData;
+}
 @end

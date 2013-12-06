@@ -44,6 +44,9 @@
 		9DD5658718504C52007939BA /* JobFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DD5658618504C52007939BA /* JobFont.m */; };
 		9DD5658B1850785B007939BA /* loginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DD5658A1850785B007939BA /* loginViewController.m */; };
 		9DD5658D18508AD2007939BA /* btn_close_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DD5658C18508AD2007939BA /* btn_close_normal@2x.png */; };
+		9DFC874A185166C700997414 /* registerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DFC8749185166C700997414 /* registerView.m */; };
+		9DFC874C1851A8BB00997414 /* wealink.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9DFC874B1851A8BB00997414 /* wealink.jpg */; };
+		9DFC874E1851A8C000997414 /* lagou.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9DFC874D1851A8C000997414 /* lagou.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -114,6 +117,10 @@
 		9DD565891850785B007939BA /* loginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = loginViewController.h; sourceTree = "<group>"; };
 		9DD5658A1850785B007939BA /* loginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = loginViewController.m; sourceTree = "<group>"; };
 		9DD5658C18508AD2007939BA /* btn_close_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_close_normal@2x.png"; sourceTree = "<group>"; };
+		9DFC8748185166C700997414 /* registerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = registerView.h; sourceTree = "<group>"; };
+		9DFC8749185166C700997414 /* registerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = registerView.m; sourceTree = "<group>"; };
+		9DFC874B1851A8BB00997414 /* wealink.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = wealink.jpg; sourceTree = "<group>"; };
+		9DFC874D1851A8C000997414 /* lagou.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = lagou.jpg; sourceTree = "<group>"; };
 		C9FB0C6BD24F4454B35EAB1F /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -143,7 +150,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		9D66ABA8184ECC4D00C03098 /* views */ = {
+		9D66ABA8184ECC4D00C03098 /* MainViewController */ = {
 			isa = PBXGroup;
 			children = (
 				9DA9EAFA184DABFA00EF35A5 /* ViewController.h */,
@@ -151,7 +158,7 @@
 				9D7EF5AD184DB0E600182DB2 /* CustomCell.h */,
 				9D7EF5AE184DB0E600182DB2 /* CustomCell.m */,
 			);
-			name = views;
+			name = MainViewController;
 			sourceTree = "<group>";
 		};
 		9D66ABA9184ECCEF00C03098 /* resume */ = {
@@ -206,6 +213,8 @@
 			children = (
 				9DD5657D18503530007939BA /* 58.png */,
 				9DD5657F185035F1007939BA /* 58@2x.png */,
+				9DFC874B1851A8BB00997414 /* wealink.jpg */,
+				9DFC874D1851A8C000997414 /* lagou.jpg */,
 				9D7EF5B1184DCC1A00182DB2 /* history_list_bg.png */,
 				9D9D85AE184DCEBB0015CD71 /* History_bg.png */,
 				9DD5657618501A61007939BA /* datepicker_bg.png */,
@@ -266,7 +275,7 @@
 				9DA9EAF5184DABFA00EF35A5 /* AppDelegate.m */,
 				9DA9EAF7184DABFA00EF35A5 /* Main.storyboard */,
 				9DD5658818507827007939BA /* login */,
-				9D66ABA8184ECC4D00C03098 /* views */,
+				9D66ABA8184ECC4D00C03098 /* MainViewController */,
 				9D66ABA9184ECCEF00C03098 /* resume */,
 				9D9D85DC184DD31A0015CD71 /* DataModel */,
 				9DD5658418504BA6007939BA /* Tools */,
@@ -323,6 +332,8 @@
 			children = (
 				9DD565891850785B007939BA /* loginViewController.h */,
 				9DD5658A1850785B007939BA /* loginViewController.m */,
+				9DFC8748185166C700997414 /* registerView.h */,
+				9DFC8749185166C700997414 /* registerView.m */,
 			);
 			name = login;
 			sourceTree = "<group>";
@@ -413,7 +424,9 @@
 				9DA9EAF9184DABFA00EF35A5 /* Main.storyboard in Resources */,
 				9DD5657E18503530007939BA /* 58.png in Resources */,
 				9DD56580185035F1007939BA /* 58@2x.png in Resources */,
+				9DFC874E1851A8C000997414 /* lagou.jpg in Resources */,
 				9D7EF5B2184DCC1A00182DB2 /* history_list_bg.png in Resources */,
+				9DFC874C1851A8BB00997414 /* wealink.jpg in Resources */,
 				9DD5658D18508AD2007939BA /* btn_close_normal@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -473,6 +486,7 @@
 				9DA9EAF6184DABFA00EF35A5 /* AppDelegate.m in Sources */,
 				9DD5658B1850785B007939BA /* loginViewController.m in Sources */,
 				9D66ABBB184F0CEB00C03098 /* WorkCustomCell.m in Sources */,
+				9DFC874A185166C700997414 /* registerView.m in Sources */,
 				9DD5658718504C52007939BA /* JobFont.m in Sources */,
 				9DD5658318504BA1007939BA /* Tools.m in Sources */,
 				9D66ABB2184EF0C000C03098 /* PersonMessageCustomCell.m in Sources */,

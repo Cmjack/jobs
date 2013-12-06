@@ -13,12 +13,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-   // HttpRequest *hhh = [[HttpRequest alloc]init];
-//    [hhh httpRequestForGet];
-//    [hhh registerUserEmail:@"nba1000@foo.com" withPassWard:@"123123"];
-    
-    
-    //[hhh loginUserName:@"nba1000@foo.com" withSalt:@"123123"];
+
+
     
     self.window =[[UIWindow alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
     ViewController *rootView =[[ViewController alloc]initWithNibName:nil bundle:nil];

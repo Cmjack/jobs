@@ -11,12 +11,19 @@
 #import "ResumeViewController.h"
 #import "HttpRequest.h"
 #import "loginViewController.h"
-@interface ViewController ()<UITableViewDataSource,UITableViewDelegate>
+#import "DataModel.h"
+#import "Tools.h"
+#import "headSetting.h"
+#import "HttpRequest.h"
+@interface ViewController ()<UITableViewDataSource,UITableViewDelegate,HttpRequestDelegate>
 @property(nonatomic,strong)UITableView *jobTableView;
 @property(nonatomic,strong)CustomCell *customCell;
 @property(nonatomic,strong)UIImageView *headImageView;
 @property(nonatomic,strong)UIButton *positionButton;
 @property(nonatomic,strong)UIButton *areaButton;
+@property(nonatomic,strong)NSArray *jobDataArray;
+@property(nonatomic,strong)DataModel *shareDataModel;
+@property(nonatomic,strong)UIRefreshControl *refresh;
 
 @end
 
@@ -27,6 +34,9 @@
     [super viewDidLoad];
     [self initViews];
     [self CreatHeaderView];
+    [self refreshData];
+//    self.shareDataModel = [DataModel shareData];
+//     self.jobDataArray = self.shareDataModel.shareData;
 	// Do any additional setup after loading the view, typically from a nib.
 }
 -(void)initViews{
@@ -48,11 +58,16 @@
     
     UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc]initWithCustomView:leftButton];
     
-    UIBarButtonItem *rightButton =[[UIBarButtonItem alloc]initWithTitle:@"投递" style:UIBarButtonItemStylePlain target:self action:@selector(clickRightButton:)];
+    UIBarButtonItem *rightButton =[[UIBarButtonItem alloc]initWithTitle:@"发布" style:UIBarButtonItemStylePlain target:self action:@selector(clickRightButton:)];
     
     self.navigationItem.leftBarButtonItem = leftBarButton;
     NSLog(@"%@",leftBarButton);
     self.navigationItem.rightBarButtonItem = rightButton;
+    
+    UIRefreshControl *refresh = [[UIRefreshControl alloc]init];
+    self.refresh = refresh;
+    [refresh addTarget:self action:@selector(refreshData) forControlEvents:UIControlEventValueChanged];
+    [self.jobTableView addSubview:refresh];
 }
 
 -(void)CreatHeaderView{
@@ -83,7 +98,8 @@
 
 -(void)clickRightButton:(id)sender
 {
-    [HttpRequest check];
+    
+    
 }
 -(void)clickLeftButton:(id)sender
 {
@@ -105,12 +121,31 @@
 //    [self.navigationController pushViewController:resume animated:YES];
     
 }
+
+#pragma mark - refreshData
+-(void)refreshData
+{
+    HttpRequest *request = [[HttpRequest alloc]init];
+    request.delegate = self;
+    [request httpRequestForGet];
+    
+}
+#pragma mark - HttpRequestDelegate
+-(void)getDataSucess:(NSArray *)dataArray
+{
+    
+    self.jobDataArray = dataArray;
+    [self.jobTableView reloadData];
+    [self.refresh endRefreshing];
+}
+
+
 #pragma mark - UITableViewDataSource
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 12;
+    return [self.jobDataArray count];
 }
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
   static NSString *indexPathCell =@"cell";
@@ -121,13 +156,24 @@
 //        _customCell.backgroundColor = [UIColor clearColor];
         _customCell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-    [_customCell insertData:nil];
+    [_customCell insertData:[self.jobDataArray objectAtIndex:indexPath.row]];
+    
     return _customCell;
 }
 #pragma mark -UITableViewDelegate
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 170.0f;
+    float height = 30;
+    UIFont *PCAFont = [UIFont boldSystemFontOfSize:13.0f];
+    UIFont *capFont = [UIFont systemFontOfSize:13];
+    NSDictionary *dict = [self.jobDataArray objectAtIndex:indexPath.row];
+    NSMutableString *PCAString = [NSMutableString stringWithFormat:@"%@ • %@ • %@",[dict objectForKey:JOB_TITLE],[dict objectForKey:JOB_COMPANY],[dict objectForKey:JOB_LOCATION]];
+    CGSize size = CGSizeMake(260, 5000);
+    
+    height += [Tools autoSizeLab:size withFont:PCAFont withSting:PCAString];
+    height += [Tools autoSizeLab:size withFont:capFont withSting:[dict objectForKey:JOB_DESC]];
+    
+    return height;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

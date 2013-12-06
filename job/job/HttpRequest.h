@@ -8,9 +8,10 @@
 
 #import <Foundation/Foundation.h>
 @protocol HttpRequestDelegate <NSObject>
-
+@optional;
 -(void)loginSucessOrFail:(BOOL)isSucess;
-
+-(void)signSucessOrFail:(BOOL)isSucess;
+-(void)getDataSucess:(NSArray*)dataArray;
 @end
 @interface HttpRequest : NSObject
 @property(nonatomic, weak)id<HttpRequestDelegate> delegate;

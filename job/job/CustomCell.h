@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface CustomCell : UITableViewCell
-@property(strong,nonatomic)UIImageView *iconImageview;
+@property(strong,nonatomic)UIButton *iconButton;
 @property(strong,nonatomic)UILabel     *fromLabel;
 @property(strong,nonatomic)UILabel     *PCALable;
 @property(strong,nonatomic)UILabel     *captionLab;

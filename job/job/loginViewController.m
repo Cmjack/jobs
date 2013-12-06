@@ -8,6 +8,7 @@
 
 #import "loginViewController.h"
 #import "HttpRequest.h"
+#import "registerView.h"
 @interface loginViewController ()<HttpRequestDelegate,UIAlertViewDelegate>
 @property(nonatomic, strong)UITextField *userNameTF;
 @property(nonatomic, strong)UITextField *passWordTF;
@@ -50,7 +51,7 @@
     [self.registerButton setTitle:@"注册" forState:UIControlStateNormal];
     [self.registerButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [self.registerButton  setBackgroundColor:[UIColor brownColor]];
-    [self.registerButton addTarget:self action:@selector(clickResister:) forControlEvents:UIControlEventTouchUpInside];
+    [self.registerButton addTarget:self action:@selector(clickRegister:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:self.registerButton];
     
     self.cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -78,13 +79,35 @@
 }
 -(void)clickLogin
 {
-    HttpRequest *http = [[HttpRequest alloc]init];
-    http.delegate = self;
-    [http loginUserName:self.userNameTF.text withSalt:self.passWordTF.text];
+
+    if ((self.passWordTF.text.length < 1 )|| (self.userNameTF.text.length <1)) {
+        
+        UIAlertView *alertview = [[UIAlertView alloc]initWithTitle:nil message:@"请输入用户名和密码" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+        [alertview show];
+        
+    }else {
+        
+        HttpRequest *http = [[HttpRequest alloc]init];
+        http.delegate = self;
+        [http loginUserName:self.userNameTF.text withSalt:self.passWordTF.text];
+        self.loginButton.enabled = NO;
+        self.registerButton.enabled = NO;
+
+    }
+    
     
 }
--(void)clickResister:(id)sender
+-(void)clickRegister:(id)sender
 {
+    registerView *view = [[registerView alloc]initWithFrame:CGRectMake(0, self.bounds.size.height, 320, self.bounds.size.height)];
+    [self.window addSubview:view];
+    [UIView animateWithDuration:0.25f animations:^{
+        
+        view.frame = CGRectMake(0, 0, 320, self.bounds.size.height);
+        self.frame = CGRectMake(0, 0-self.bounds.size.height, 320, self.bounds.size.height);
+    } completion:^(BOOL finished) {
+        [self removeFromSuperview];
+    }];
     
 }
 - (void)didReceiveMemoryWarning
@@ -107,6 +130,7 @@
         self.frame = CGRectMake(0, self.bounds.size.height, 320, self.bounds.size.height);
     } completion:^(BOOL finished) {
         
+        [self removeFromSuperview];
     }];
 }
 
@@ -114,14 +138,15 @@
 -(void)loginSucessOrFail:(BOOL)isSucess
 {
     
+    self.loginButton.enabled = YES;
+    self.registerButton.enabled = YES;
     if (isSucess) {
         
-        NSLog(@"yes");
         [self popView];
         
     }else
     {
-        NSLog(@"no");
+        
         UIAlertView *alerView = [[UIAlertView alloc]initWithTitle:nil message:@"用户名或密码错误！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
         alerView.delegate = self;
         [alerView show];

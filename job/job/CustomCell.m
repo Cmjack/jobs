@@ -9,6 +9,7 @@
 #import "CustomCell.h"
 #import <QuartzCore/QuartzCore.h>
 #import "Tools.h"
+#import "headSetting.h"
 @implementation CustomCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -22,9 +23,13 @@
 -(void)initViews
 {
 
-    self.iconImageview = [[UIImageView alloc]initWithFrame:CGRectMake(5, 5, 30, 30)];
-    self.iconImageview.layer.cornerRadius = 5.5f;
-    [self addSubview:self.iconImageview];
+    self.iconButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.iconButton.frame = CGRectMake(5, 5, 30, 30);
+    self.iconButton.backgroundColor = [UIColor redColor];
+    //self.iconButton.layer.borderWidth = 2.0;
+    self.iconButton.layer.masksToBounds = YES;
+    self.iconButton.layer.cornerRadius = 5.5f;
+    [self addSubview:self.iconButton];
     
     self.fromLabel = [[UILabel alloc]initWithFrame:CGRectMake(45, 5, 240, 15)];
     
@@ -46,26 +51,35 @@
 
 -(void)insertData:(NSDictionary*)dict
 {
+    if ([[dict objectForKey:JOB_SOURCE]isEqualToString:FROM_58]) {
+       
+        [self.iconButton setImage:[UIImage imageNamed:@"58"] forState:UIControlStateNormal];
+        self.fromLabel.text = @"来自58同城";
+    }else if ([[dict objectForKey:JOB_SOURCE]isEqualToString:FROM_LAGOU]){
+        
+        [self.iconButton setImage:[UIImage imageNamed:@"lagou.jpg"] forState:UIControlStateNormal];
+        self.fromLabel.text = @"来自拉勾网";
+    }else if ([[dict objectForKey:JOB_SOURCE]isEqualToString:FROM_WEALINK]){
+        
+        [self.iconButton setImage:[UIImage imageNamed:@"wealink.jpg"] forState:UIControlStateNormal];
+        self.fromLabel.text = @"来自若邻网";
+    }
     
-    self.iconImageview.image = [UIImage imageNamed:@"58"];
-    self.fromLabel.text = @"来自58同城";
+    NSMutableString *PCAString = [NSMutableString stringWithFormat:@"%@ • %@ • %@",[dict objectForKey:JOB_TITLE],[dict objectForKey:JOB_COMPANY],[dict objectForKey:JOB_LOCATION]];
     
-    NSString * string = @"Java开发工程师 • 搜狗-用户平台事业部 • 北京市海淀区";
-    self.PCALable.text = string;
+    self.PCALable.text = PCAString;
     UIFont *PCAFont = [UIFont boldSystemFontOfSize:13.0f];
     self.PCALable.font = PCAFont;
     self.PCALable.numberOfLines = 10;
-    float height = [Tools autoSizeLab:CGSizeMake(260, 300) withFont:PCAFont withSting:string];
+    float height = [Tools autoSizeLab:CGSizeMake(260, 300) withFont:PCAFont withSting:PCAString];
     self.PCALable.frame = CGRectMake(45, 20, 260, height);
     
     
-    NSString *captionString =@"【工作职责】\n 1.参与大型系统或产品的需求分析、架构设计和概要设计等；\n 2.负责系统详细设计、核心代码及相关文档的编写 ";
-    
-    self.captionLab.text = captionString;
+    self.captionLab.text = [dict objectForKey:JOB_DESC];
     UIFont *capFont = [UIFont systemFontOfSize:13];
     self.captionLab.font = capFont;
     self.captionLab.numberOfLines = 0;
-    float caHeight = [Tools autoSizeLab:CGSizeMake(260, 300) withFont:capFont withSting:captionString];
+    float caHeight = [Tools autoSizeLab:CGSizeMake(260, 8000) withFont:capFont withSting:[dict objectForKey:JOB_DESC]];
     self.captionLab.frame = CGRectMake(45, 30+height, 260, caHeight);
    
 }

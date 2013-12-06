@@ -8,11 +8,22 @@
 
 #import "HttpRequest.h"
 #import <AFNetworking.h>
+#import "DataModel.h"
+#define LOCALURL @"http://192.168.1.114:3000/job"
+#define NETURL @"http://121.199.24.40:3000/job"
+
 @implementation HttpRequest
 -(void)httpRequestForGet{
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:@"http://192.168.1.114:3000/job" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:NETURL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"job: %@", responseObject);
+//        DataModel *data = [DataModel shareData];
+//        data.shareData = responseObject;
+        if ([self.delegate respondsToSelector:@selector(getDataSucess:)])
+        {
+            [self.delegate getDataSucess:responseObject];
+        }
+    
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
     }];
@@ -25,11 +36,13 @@
     [manager POST:@"http://192.168.1.114:3000/register" parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSLog(@"register:%@ ",responseObject);
-        [[NSUserDefaults standardUserDefaults]setObject:responseObject forKey:@"userMesage"];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
-        NSLog(@"error:%@",error);
+        if ([self.delegate respondsToSelector:@selector(signSucessOrFail:)]) {
+            [self.delegate signSucessOrFail:NO];
+        }
+        
         
     }];
 }
@@ -37,8 +50,6 @@
 -(void)loginUserName:(NSString*)name withSalt:(NSString*)salt
 {
     NSDictionary * dict = [NSDictionary dictionaryWithObjectsAndKeys:name,@"username",salt,@"password", nil];
-    
-    NSLog(@"login::::::%@",dict);
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager POST:@"http://192.168.1.114:3000/login" parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -48,19 +59,25 @@
         
         if ([[responseObject objectForKey:@"result"]isEqualToString:@"yes"]) {
             
-            NSLog(@"-");
+            
             isSucess =YES;
         }
         
         if ([self.delegate respondsToSelector:@selector(loginSucessOrFail:)]) {
             
-            NSLog(@"------");
+           
             [self.delegate loginSucessOrFail:isSucess];
         }
         
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
+        if ([self.delegate respondsToSelector:@selector(loginSucessOrFail:)]) {
+            
+            
+            [self.delegate loginSucessOrFail:NO];
+        }
+
         NSLog(@"loginError:%@",error);
         
     }];
