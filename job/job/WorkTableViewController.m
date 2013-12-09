@@ -8,8 +8,13 @@
 
 #import "WorkTableViewController.h"
 #import "WorkCustomCell.h"
+#import "headSetting.h"
+#import "DataModel.h"
+#import "EditWorkViewController.h"
 @interface WorkTableViewController ()
 @property(nonatomic ,strong)WorkCustomCell *customCell;
+@property(nonatomic ,strong)DataModel *dataModel;
+@property(nonatomic ,strong)NSMutableArray *workArray;
 @end
 
 @implementation WorkTableViewController
@@ -26,7 +31,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    self.dataModel =[DataModel shareData];
+    self.workArray = [NSMutableArray arrayWithArray:[self.dataModel.resumeDict objectForKey:KEY_WE]];
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -45,19 +52,26 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 5;
+    if (section ==0) {
+        return 1;
+    }
+    else
+    {
+        return [self.workArray count];
+    }
+    
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 0) {
+    if (indexPath.section == 0) {
         static NSString *cell = @"addCell";
          self.customCell = [tableView dequeueReusableCellWithIdentifier:cell];
         if (self.customCell == nil) {
@@ -91,6 +105,15 @@
 {
     return 44.0f;
 }
+
+
+#pragma mark - tableviewDelegate
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    EditWorkViewController *editview = [[EditWorkViewController alloc]initWithNibName:nil bundle:nil];
+    [self.navigationController pushViewController:editview animated:YES];
+}
+
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath

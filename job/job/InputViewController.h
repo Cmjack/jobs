@@ -7,10 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+@protocol InputViewControllerDelegate <NSObject>
 
+-(void)returnPersonmessgae:(NSMutableDictionary*)mutableDict;
+
+@end
 @interface InputViewController : UIViewController
 @property(nonatomic,strong)UITextField *nameTextField;
 @property(nonatomic,strong)UITextField *telTextField;
 @property(nonatomic,strong)UITextField *emailTextField;
-@property(nonatomic,strong)UITextField *cardTextField;
+@property(nonatomic,strong)UITextField *positionTextField;
+@property(nonatomic,strong)NSMutableDictionary * mutableDict;
+@property(nonatomic,weak)id<InputViewControllerDelegate> delegate;
 @end

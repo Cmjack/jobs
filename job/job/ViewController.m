@@ -35,7 +35,7 @@
     [self initViews];
     [self CreatHeaderView];
     [self refreshData];
-//    self.shareDataModel = [DataModel shareData];
+    self.shareDataModel = [DataModel shareData];
 //     self.jobDataArray = self.shareDataModel.shareData;
 	// Do any additional setup after loading the view, typically from a nib.
 }
@@ -98,27 +98,32 @@
 
 -(void)clickRightButton:(id)sender
 {
-    
+    [[[HttpRequest alloc]init]httpRequestForGetResume];
     
 }
 -(void)clickLeftButton:(id)sender
 {
-    loginViewController *loginVC = [[loginViewController alloc]initWithFrame:CGRectMake(0, self.view.bounds.size.height, 320, self.view.bounds.size.height)];
     
-    
-    [self.view.window addSubview:loginVC];
-    
-    [UIView animateWithDuration:0.25f animations:^{
+    if (self.shareDataModel.isLogin == NO) {
+        loginViewController *loginVC = [[loginViewController alloc]initWithFrame:CGRectMake(0, self.view.bounds.size.height, 320, self.view.bounds.size.height)];
         
-        loginVC.frame = CGRectMake(0, 0, 320, self.view.bounds.size.height);
         
-    } completion:^(BOOL finished) {
+        [self.view.window addSubview:loginVC];
         
-    }];
-    
-    
-//    ResumeViewController *resume = [[ResumeViewController alloc]initWithNibName:nil bundle:nil];
-//    [self.navigationController pushViewController:resume animated:YES];
+        [UIView animateWithDuration:0.25f animations:^{
+            
+            loginVC.frame = CGRectMake(0, 0, 320, self.view.bounds.size.height);
+            
+        } completion:^(BOOL finished) {
+            
+        }];
+
+    }else
+    {
+        ResumeViewController *resume = [[ResumeViewController alloc]initWithNibName:nil bundle:nil];
+        [self.navigationController pushViewController:resume animated:YES];
+    }
+
     
 }
 
