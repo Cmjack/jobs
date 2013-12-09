@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		113F95CA1854032800E6947D /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 113F95C91854032800E6947D /* MobileCoreServices.framework */; };
 		3D4D62864BF741058B88FF74 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C9FB0C6BD24F4454B35EAB1F /* libPods.a */; };
 		9D66ABAC184ECD6B00C03098 /* ResumeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D66ABAB184ECD6B00C03098 /* ResumeViewController.m */; };
 		9D66ABAF184ED9A500C03098 /* PersonMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D66ABAE184ED9A500C03098 /* PersonMessageViewController.m */; };
@@ -61,6 +62,7 @@
 
 /* Begin PBXFileReference section */
 		01DD6B97EB5F403EA03E86D8 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		113F95C91854032800E6947D /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		9D66ABAA184ECD6B00C03098 /* ResumeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResumeViewController.h; sourceTree = "<group>"; };
 		9D66ABAB184ECD6B00C03098 /* ResumeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResumeViewController.m; sourceTree = "<group>"; };
 		9D66ABAD184ED9A500C03098 /* PersonMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonMessageViewController.h; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				113F95CA1854032800E6947D /* MobileCoreServices.framework in Frameworks */,
 				9D9D85E4184DD4440015CD71 /* CFNetwork.framework in Frameworks */,
 				9DA9EAE8184DABFA00EF35A5 /* CoreGraphics.framework in Frameworks */,
 				9DA9EAEA184DABFA00EF35A5 /* UIKit.framework in Frameworks */,
@@ -258,6 +261,7 @@
 		9DA9EAE4184DABFA00EF35A5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				113F95C91854032800E6947D /* MobileCoreServices.framework */,
 				9D9D85E3184DD4440015CD71 /* CFNetwork.framework */,
 				9DA9EAE5184DABFA00EF35A5 /* Foundation.framework */,
 				9DA9EAE7184DABFA00EF35A5 /* CoreGraphics.framework */,
