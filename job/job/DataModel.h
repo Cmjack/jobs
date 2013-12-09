@@ -11,6 +11,6 @@
 @interface DataModel : NSObject
 @property(nonatomic,strong)NSArray *shareData;
 @property(nonatomic,assign)BOOL isLogin;
-@property(nonatomic,strong)NSDictionary *resumeDict;
+@property(nonatomic,strong)NSMutableDictionary *resumeDict;
 +(DataModel*)shareData;
 @end

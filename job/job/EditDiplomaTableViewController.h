@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 @protocol EditDiplomaTableViewControllerDelegate <NSObject>
 
--(void)EditDiplomaTableViewController:(NSString*)string;
 
 @end
 @interface EditDiplomaTableViewController : UITableViewController

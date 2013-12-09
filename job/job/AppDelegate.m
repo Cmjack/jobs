@@ -14,7 +14,13 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 
-
+    NSString *username = [[NSUserDefaults standardUserDefaults]objectForKey:@"username"];
+    NSString *password = [[NSUserDefaults standardUserDefaults]objectForKey:@"password"];
+    NSLog(@"user:%@",username);
+    NSLog(@"password:%@",password);
+    [[[HttpRequest alloc]init]loginUserName:username withSalt:password];
+    
+    
     
     self.window =[[UIWindow alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
     ViewController *rootView =[[ViewController alloc]initWithNibName:nil bundle:nil];
