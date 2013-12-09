@@ -103,22 +103,22 @@
 }
 -(void)clickLeftButton:(id)sender
 {
-    loginViewController *loginVC = [[loginViewController alloc]initWithFrame:CGRectMake(0, self.view.bounds.size.height, 320, self.view.bounds.size.height)];
+//    loginViewController *loginVC = [[loginViewController alloc]initWithFrame:CGRectMake(0, self.view.bounds.size.height, 320, self.view.bounds.size.height)];
+//    
+//    
+//    [self.view.window addSubview:loginVC];
+//    
+//    [UIView animateWithDuration:0.25f animations:^{
+//        
+//        loginVC.frame = CGRectMake(0, 0, 320, self.view.bounds.size.height);
+//        
+//    } completion:^(BOOL finished) {
+//        
+//    }];
     
     
-    [self.view.window addSubview:loginVC];
-    
-    [UIView animateWithDuration:0.25f animations:^{
-        
-        loginVC.frame = CGRectMake(0, 0, 320, self.view.bounds.size.height);
-        
-    } completion:^(BOOL finished) {
-        
-    }];
-    
-    
-//    ResumeViewController *resume = [[ResumeViewController alloc]initWithNibName:nil bundle:nil];
-//    [self.navigationController pushViewController:resume animated:YES];
+    ResumeViewController *resume = [[ResumeViewController alloc]initWithNibName:nil bundle:nil];
+    [self.navigationController pushViewController:resume animated:YES];
     
 }
 

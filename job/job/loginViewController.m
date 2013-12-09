@@ -9,6 +9,7 @@
 #import "loginViewController.h"
 #import "HttpRequest.h"
 #import "registerView.h"
+
 @interface loginViewController ()<HttpRequestDelegate,UIAlertViewDelegate>
 @property(nonatomic, strong)UITextField *userNameTF;
 @property(nonatomic, strong)UITextField *passWordTF;
@@ -141,6 +142,9 @@
     self.loginButton.enabled = YES;
     self.registerButton.enabled = YES;
     if (isSucess) {
+        
+        [[NSUserDefaults standardUserDefaults]setObject:self.userNameTF.text forKey:@"username"];
+        [[NSUserDefaults standardUserDefaults]setObject:self.passWordTF.text forKey:@"password"];
         
         [self popView];
         

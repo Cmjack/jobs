@@ -35,10 +35,20 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager POST:@"http://192.168.1.114:3000/register" parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        NSLog(@"register:%@ ",responseObject);
+        BOOL isSalt = NO;
+        [DataModel shareData].isLogin = NO;
+        if ([responseObject objectForKey:@"salt"]!= NULL) {
+            [DataModel shareData].isLogin = YES;
+            isSalt = YES;
+        }
+        
+        if ([self.delegate respondsToSelector:@selector(signSucessOrFail:)]) {
+            
+            [self.delegate signSucessOrFail:isSalt];
+        }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
+        [DataModel shareData].isLogin = NO;
         if ([self.delegate respondsToSelector:@selector(signSucessOrFail:)]) {
             [self.delegate signSucessOrFail:NO];
         }
@@ -56,10 +66,10 @@
         NSLog(@"login:%@ ",responseObject);
         BOOL isSucess =NO;
         //NSDictionary *dict = (NSDictionary*)responseObject;
-        
+        [DataModel shareData].isLogin = NO;
         if ([[responseObject objectForKey:@"result"]isEqualToString:@"yes"]) {
             
-            
+            [DataModel shareData].isLogin = YES;
             isSucess =YES;
         }
         
@@ -71,7 +81,7 @@
         
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
+        [DataModel shareData].isLogin = NO;
         if ([self.delegate respondsToSelector:@selector(loginSucessOrFail:)]) {
             
             

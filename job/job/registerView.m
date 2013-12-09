@@ -75,6 +75,7 @@
             
             HttpRequest *request = [[HttpRequest alloc]init];
             [request registerUserEmail:self.emailTF.text withPassWard:self.passWordTF.text];
+            request.delegate = self;
             self.registerButton.enabled = NO;
             
         }
@@ -110,6 +111,22 @@
 -(void)signSucessOrFail:(BOOL)isSucess
 {
     self.registerButton.enabled = YES;
+    if (isSucess) {
+        
+        [[NSUserDefaults standardUserDefaults]setObject:self.emailTF.text forKey:@"username"];
+        [[NSUserDefaults standardUserDefaults]setObject:self.passWordTF.text forKey:@"password"];
+        [self popView];
+        
+        NSLog(@"sucess");
+
+    }
+    else
+    {
+        NSLog(@"fail");
+        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:nil message:@"此邮箱已注册" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        [alertView show];
+        
+    }
 }
 
 
