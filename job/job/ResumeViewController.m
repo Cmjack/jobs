@@ -9,6 +9,7 @@
 #import "ResumeViewController.h"
 #import "PersonMessageViewController.h"
 #import "WorkTableViewController.h"
+#import "headSetting.h"
 @interface ResumeViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic ,strong)UITableView *tableview;
 @property (nonatomic ,strong)NSArray *array;
@@ -82,10 +83,111 @@
     {
         PersonMessageViewController *personVC = [[PersonMessageViewController alloc]initWithNibName:nil bundle:nil];
         [self.navigationController pushViewController:personVC animated:YES];
-    }else if (indexPath.section ==0 && indexPath.row ==1){
+        
+    }else if (indexPath.section ==0 && indexPath.row ==1)
+    {
         WorkTableViewController *workTBC = [[WorkTableViewController alloc]initWithNibName:nil bundle:nil];
+        workTBC.type = @"添加工作经历";
+        
+        
+        
+        
+        NSDictionary * dict1 = [NSDictionary  dictionaryWithObjectsAndKeys:
+                                @"腾讯1",KEY_COMPANY,
+                                @"ios",KEY_POSITION,
+                                @"1999-1",KEY_START_DATE,
+                                @"2001-11",KEY_END_DATE,
+                                @"3q大战",KEY_CAPTION,
+                                nil];
+        
+         NSDictionary * dict2 = [NSDictionary  dictionaryWithObjectsAndKeys:
+                                 @"腾讯2",KEY_COMPANY,
+                                 @"ios",KEY_POSITION,
+                                 @"1999-11",KEY_START_DATE,
+                                 @"2001-11",KEY_END_DATE,
+                                 @"3q大战",KEY_CAPTION,
+                                 nil];
+         NSDictionary * dict3 = [NSDictionary  dictionaryWithObjectsAndKeys:
+                                 @"腾讯3",KEY_COMPANY,
+                                 @"ios",KEY_POSITION,
+                                 @"1999-1",KEY_START_DATE,
+                                 @"2001-11",KEY_END_DATE,
+                                 @"3q大战",KEY_CAPTION,
+                                 nil];
+        
+        workTBC.mutableArray = [NSMutableArray arrayWithObjects:dict1,dict2,dict3, nil];
+        
+        [self.navigationController pushViewController:workTBC animated:YES];
+    }else if (indexPath.section ==0 && indexPath.row ==2)
+    {
+        WorkTableViewController *workTBC = [[WorkTableViewController alloc]initWithNibName:nil bundle:nil];
+        workTBC.type = @"添加教育经历";
+        
+        
+        
+        
+        NSDictionary * dict1 = [NSDictionary  dictionaryWithObjectsAndKeys:
+                                @"同济大学",KEY_COMPANY,
+                                @"ios",KEY_POSITION,
+                                @"1999-1",KEY_START_DATE,
+                                @"2001-11",KEY_END_DATE,
+                                @"3q大战",KEY_CAPTION,
+                                nil];
+        
+        NSDictionary * dict2 = [NSDictionary  dictionaryWithObjectsAndKeys:
+                                @"清华大学",KEY_COMPANY,
+                                @"ios",KEY_POSITION,
+                                @"1999-11",KEY_START_DATE,
+                                @"2001-11",KEY_END_DATE,
+                                @"3q大战",KEY_CAPTION,
+                                nil];
+        NSDictionary * dict3 = [NSDictionary  dictionaryWithObjectsAndKeys:
+                                @"北京大学",KEY_COMPANY,
+                                @"ios",KEY_POSITION,
+                                @"1999-1",KEY_START_DATE,
+                                @"2001-11",KEY_END_DATE,
+                                @"3q大战",KEY_CAPTION,
+                                nil];
+        
+        workTBC.mutableArray = [NSMutableArray arrayWithObjects:dict1,dict2,dict3, nil];
+        
+        [self.navigationController pushViewController:workTBC animated:YES];
+    }else if (indexPath.section ==1 && indexPath.row ==1)
+    {
+        WorkTableViewController *workTBC = [[WorkTableViewController alloc]initWithNibName:nil bundle:nil];
+        workTBC.type = @"添加培训经历";
+        
+        
+        
+        
+        NSDictionary * dict1 = [NSDictionary  dictionaryWithObjectsAndKeys:
+                                @"达内",KEY_COMPANY,
+                                @"ios",KEY_POSITION,
+                                @"1999-1",KEY_START_DATE,
+                                @"2001-11",KEY_END_DATE,
+                                @"3q大战",KEY_CAPTION,
+                                nil];
+        
+        NSDictionary * dict2 = [NSDictionary  dictionaryWithObjectsAndKeys:
+                                @"清华大学",KEY_COMPANY,
+                                @"ios",KEY_POSITION,
+                                @"1999-11",KEY_START_DATE,
+                                @"2001-11",KEY_END_DATE,
+                                @"3q大战",KEY_CAPTION,
+                                nil];
+        NSDictionary * dict3 = [NSDictionary  dictionaryWithObjectsAndKeys:
+                                @"北京大学",KEY_COMPANY,
+                                @"ios",KEY_POSITION,
+                                @"2001-11",KEY_END_DATE,
+                                @"3q大战",KEY_CAPTION,
+                                nil];
+        
+        workTBC.mutableArray = [NSMutableArray arrayWithObjects:dict1,dict2,dict3, nil];
+        
         [self.navigationController pushViewController:workTBC animated:YES];
     }
+
+
 }
 - (void)didReceiveMemoryWarning
 {

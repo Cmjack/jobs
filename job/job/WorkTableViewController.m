@@ -11,10 +11,11 @@
 #import "headSetting.h"
 #import "DataModel.h"
 #import "EditWorkViewController.h"
-@interface WorkTableViewController ()
+#import "HttpRequest.h"
+@interface WorkTableViewController ()<EditWorkViewControllerDelegate>
 @property(nonatomic ,strong)WorkCustomCell *customCell;
 @property(nonatomic ,strong)DataModel *dataModel;
-@property(nonatomic ,strong)NSMutableArray *workArray;
+
 @end
 
 @implementation WorkTableViewController
@@ -32,7 +33,7 @@
 {
     [super viewDidLoad];
     self.dataModel =[DataModel shareData];
-    self.workArray = [NSMutableArray arrayWithArray:[self.dataModel.resumeDict objectForKey:KEY_WE]];
+    
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -63,11 +64,10 @@
     }
     else
     {
-        return [self.workArray count];
+        return [self.mutableArray count];
     }
     
 }
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -79,7 +79,7 @@
             [self.customCell initViewForAddLab];
             
         }
-        self.customCell.addLab.text = @"添加工作经验";
+        self.customCell.addLab.text = self.type;
         return self.customCell;
         
     }else{
@@ -88,9 +88,8 @@
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
         if (cell == nil) {
             cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
-            
         }
-        cell.textLabel.text = @"xx公司";
+        cell.textLabel.text = [[self.mutableArray objectAtIndex:indexPath.row] objectForKey:KEY_COMPANY];
         cell.detailTextLabel.text = @"时间";
         return cell;
     }
@@ -110,8 +109,62 @@
 #pragma mark - tableviewDelegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    EditWorkViewController *editview = [[EditWorkViewController alloc]initWithNibName:nil bundle:nil];
-    [self.navigationController pushViewController:editview animated:YES];
+    
+    if (indexPath.section == 0) {
+        EditWorkViewController *editview = [[EditWorkViewController alloc]initWithNibName:nil bundle:nil];
+        
+        if ([self.type isEqualToString:@"添加工作经历"]) {
+            editview.lablesTextArray = [self getWorkArray];
+        }else
+        {
+            editview.lablesTextArray = [self getEducationArray];
+        }
+        
+        editview.delegate =self;
+        [self.navigationController pushViewController:editview animated:YES];
+    }
+    else
+    {
+        EditWorkViewController *editview = [[EditWorkViewController alloc]initWithNibName:nil bundle:nil];
+        if ([self.type isEqualToString:@"添加工作经历"]) {
+            editview.lablesTextArray = [self getWorkArray];
+        }else
+        {
+            editview.lablesTextArray = [self getEducationArray];
+        }
+
+        editview.delegate =self;
+        editview.textsDict = [self.mutableArray objectAtIndex:indexPath.row];
+        [self.navigationController pushViewController:editview animated:YES];
+    }
+    
+      }
+#pragma mark- EditWorkViewControllerDelegate
+-(void)EditWorkViewControllerAddOrAmend:(BOOL)isAdd withData:(NSDictionary *)dict
+{
+    NSString *userName = [[NSUserDefaults standardUserDefaults]objectForKey:@"username"];
+    
+   
+    NSDictionary *dictresume = [NSDictionary dictionaryWithObjectsAndKeys:self.mutableArray,KEY_WE,userName,@"username", nil];
+    
+     NSLog(@"we: %@",dictresume);
+    [HttpRequest httpRequestForSaveResume:dictresume];
+    
+    [[DataModel shareData].resumeDict setObject:self.mutableArray forKey:KEY_WE];
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(NSArray*)getWorkArray
+{
+    NSArray *arr = @[@"公司名称:",@"当前职位:",@"开始时间:",@"结束时间:",@"工作描述:"];
+    return arr;
+}
+
+-(NSArray*)getEducationArray
+{
+    NSArray *arr = @[@"学校名称:",@"专业:",@"开始时间:",@"结束时间:",@"专业描述:"];
+    return arr;
 }
 
 /*

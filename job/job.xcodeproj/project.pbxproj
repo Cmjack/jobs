@@ -34,6 +34,14 @@
 		9DA9EB07184DABFA00EF35A5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DA9EAE9184DABFA00EF35A5 /* UIKit.framework */; };
 		9DA9EB0F184DABFA00EF35A5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9DA9EB0D184DABFA00EF35A5 /* InfoPlist.strings */; };
 		9DA9EB11184DABFA00EF35A5 /* jobTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DA9EB10184DABFA00EF35A5 /* jobTests.m */; };
+		9DAA60F81856C187002FDF1C /* next_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DAA60F21856C187002FDF1C /* next_bg.png */; };
+		9DAA60F91856C187002FDF1C /* home_navigationbutton_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DAA60F31856C187002FDF1C /* home_navigationbutton_normal.png */; };
+		9DAA60FA1856C187002FDF1C /* previous_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DAA60F41856C187002FDF1C /* previous_bg.png */; };
+		9DAA60FB1856C187002FDF1C /* previous.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DAA60F51856C187002FDF1C /* previous.png */; };
+		9DAA60FC1856C187002FDF1C /* home_finished.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DAA60F61856C187002FDF1C /* home_finished.png */; };
+		9DAA60FD1856C187002FDF1C /* next.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DAA60F71856C187002FDF1C /* next.png */; };
+		9DAA61011857190D002FDF1C /* JoinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DAA61001857190D002FDF1C /* JoinViewController.m */; };
+		9DAA6104185719E1002FDF1C /* JoinCustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DAA6103185719E1002FDF1C /* JoinCustomCell.m */; };
 		9DAD589A1855C5AE00F0A2B2 /* EditWorkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DAD58991855C5AE00F0A2B2 /* EditWorkViewController.m */; };
 		9DD5657818501A61007939BA /* datepicker_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DD5657618501A61007939BA /* datepicker_bg.png */; };
 		9DD5657918501A61007939BA /* datepicker_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DD5657718501A61007939BA /* datepicker_bg@2x.png */; };
@@ -102,6 +110,16 @@
 		9DA9EB0C184DABFA00EF35A5 /* jobTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "jobTests-Info.plist"; sourceTree = "<group>"; };
 		9DA9EB0E184DABFA00EF35A5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		9DA9EB10184DABFA00EF35A5 /* jobTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = jobTests.m; sourceTree = "<group>"; };
+		9DAA60F21856C187002FDF1C /* next_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = next_bg.png; sourceTree = "<group>"; };
+		9DAA60F31856C187002FDF1C /* home_navigationbutton_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_navigationbutton_normal.png; sourceTree = "<group>"; };
+		9DAA60F41856C187002FDF1C /* previous_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = previous_bg.png; sourceTree = "<group>"; };
+		9DAA60F51856C187002FDF1C /* previous.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = previous.png; sourceTree = "<group>"; };
+		9DAA60F61856C187002FDF1C /* home_finished.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_finished.png; sourceTree = "<group>"; };
+		9DAA60F71856C187002FDF1C /* next.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = next.png; sourceTree = "<group>"; };
+		9DAA60FF1857190D002FDF1C /* JoinViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JoinViewController.h; sourceTree = "<group>"; };
+		9DAA61001857190D002FDF1C /* JoinViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JoinViewController.m; sourceTree = "<group>"; };
+		9DAA6102185719E1002FDF1C /* JoinCustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JoinCustomCell.h; sourceTree = "<group>"; };
+		9DAA6103185719E1002FDF1C /* JoinCustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JoinCustomCell.m; sourceTree = "<group>"; };
 		9DAD58981855C5AE00F0A2B2 /* EditWorkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditWorkViewController.h; sourceTree = "<group>"; };
 		9DAD58991855C5AE00F0A2B2 /* EditWorkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditWorkViewController.m; sourceTree = "<group>"; };
 		9DD5657618501A61007939BA /* datepicker_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = datepicker_bg.png; sourceTree = "<group>"; };
@@ -220,6 +238,12 @@
 				9DD5657618501A61007939BA /* datepicker_bg.png */,
 				9DD5657718501A61007939BA /* datepicker_bg@2x.png */,
 				9DD5658C18508AD2007939BA /* btn_close_normal@2x.png */,
+				9DAA60F21856C187002FDF1C /* next_bg.png */,
+				9DAA60F31856C187002FDF1C /* home_navigationbutton_normal.png */,
+				9DAA60F41856C187002FDF1C /* previous_bg.png */,
+				9DAA60F51856C187002FDF1C /* previous.png */,
+				9DAA60F61856C187002FDF1C /* home_finished.png */,
+				9DAA60F71856C187002FDF1C /* next.png */,
 			);
 			path = images;
 			sourceTree = "<group>";
@@ -276,6 +300,7 @@
 				9DA9EAF7184DABFA00EF35A5 /* Main.storyboard */,
 				9DD5658818507827007939BA /* login */,
 				9D66ABA8184ECC4D00C03098 /* MainViewController */,
+				9DAA60FE185718C5002FDF1C /* join */,
 				9D66ABA9184ECCEF00C03098 /* resume */,
 				9D9D85DC184DD31A0015CD71 /* DataModel */,
 				9DD5658418504BA6007939BA /* Tools */,
@@ -314,6 +339,17 @@
 				9DA9EB0D184DABFA00EF35A5 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9DAA60FE185718C5002FDF1C /* join */ = {
+			isa = PBXGroup;
+			children = (
+				9DAA60FF1857190D002FDF1C /* JoinViewController.h */,
+				9DAA61001857190D002FDF1C /* JoinViewController.m */,
+				9DAA6102185719E1002FDF1C /* JoinCustomCell.h */,
+				9DAA6103185719E1002FDF1C /* JoinCustomCell.m */,
+			);
+			name = join;
 			sourceTree = "<group>";
 		};
 		9DD5658418504BA6007939BA /* Tools */ = {
@@ -418,13 +454,19 @@
 			files = (
 				9DD5657818501A61007939BA /* datepicker_bg.png in Resources */,
 				9DA9EAFE184DABFA00EF35A5 /* Images.xcassets in Resources */,
+				9DAA60FD1856C187002FDF1C /* next.png in Resources */,
 				9DD5657918501A61007939BA /* datepicker_bg@2x.png in Resources */,
 				9D9D85AF184DCEBB0015CD71 /* History_bg.png in Resources */,
+				9DAA60F81856C187002FDF1C /* next_bg.png in Resources */,
 				9DA9EAF0184DABFA00EF35A5 /* InfoPlist.strings in Resources */,
 				9DA9EAF9184DABFA00EF35A5 /* Main.storyboard in Resources */,
 				9DD5657E18503530007939BA /* 58.png in Resources */,
 				9DD56580185035F1007939BA /* 58@2x.png in Resources */,
+				9DAA60FA1856C187002FDF1C /* previous_bg.png in Resources */,
 				9DFC874E1851A8C000997414 /* lagou.jpg in Resources */,
+				9DAA60FC1856C187002FDF1C /* home_finished.png in Resources */,
+				9DAA60F91856C187002FDF1C /* home_navigationbutton_normal.png in Resources */,
+				9DAA60FB1856C187002FDF1C /* previous.png in Resources */,
 				9D7EF5B2184DCC1A00182DB2 /* history_list_bg.png in Resources */,
 				9DFC874C1851A8BB00997414 /* wealink.jpg in Resources */,
 				9DD5658D18508AD2007939BA /* btn_close_normal@2x.png in Resources */,
@@ -481,10 +523,12 @@
 			files = (
 				9D66ABB8184F0A3B00C03098 /* WorkTableViewController.m in Sources */,
 				9DAD589A1855C5AE00F0A2B2 /* EditWorkViewController.m in Sources */,
+				9DAA6104185719E1002FDF1C /* JoinCustomCell.m in Sources */,
 				9D9D85E2184DD3A20015CD71 /* HttpRequest.m in Sources */,
 				9DA9EAFC184DABFA00EF35A5 /* ViewController.m in Sources */,
 				9DA9EAF6184DABFA00EF35A5 /* AppDelegate.m in Sources */,
 				9DD5658B1850785B007939BA /* loginViewController.m in Sources */,
+				9DAA61011857190D002FDF1C /* JoinViewController.m in Sources */,
 				9D66ABBB184F0CEB00C03098 /* WorkCustomCell.m in Sources */,
 				9DFC874A185166C700997414 /* registerView.m in Sources */,
 				9DD5658718504C52007939BA /* JobFont.m in Sources */,
