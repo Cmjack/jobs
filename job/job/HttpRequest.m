@@ -16,7 +16,7 @@
 -(void)httpRequestForGet{
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:NETURL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"job: %@", responseObject);
+    NSLog(@"job: %@", responseObject);
 //        DataModel *data = [DataModel shareData];
 //        data.shareData = responseObject;
         if ([self.delegate respondsToSelector:@selector(getDataSucess:)])
@@ -100,6 +100,7 @@
 +(void)httpRequestForSaveResume:(NSDictionary*)dict{
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager POST:@"http://192.168.1.114:3000/resume" parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
         NSLog(@"saveSuccess");
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -124,6 +125,18 @@
         NSLog(@"resume:ERROR:%@",error);
         
     }];
+}
+-(void)httpRequestForPostJoinMessgae:(NSDictionary*)dict
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager POST:@"http://192.168.1.114:3000/join" parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"saveSuccess");
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"saveFail");
+    }];
+
 }
 
 +(void)check

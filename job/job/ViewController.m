@@ -15,6 +15,7 @@
 #import "Tools.h"
 #import "headSetting.h"
 #import "HttpRequest.h"
+#import "JoinViewController.h"
 @interface ViewController ()<UITableViewDataSource,UITableViewDelegate,HttpRequestDelegate>
 @property(nonatomic,strong)UITableView *jobTableView;
 @property(nonatomic,strong)CustomCell *customCell;
@@ -98,7 +99,9 @@
 
 -(void)clickRightButton:(id)sender
 {
-    [[[HttpRequest alloc]init]httpRequestForGetResume];
+    //[[[HttpRequest alloc]init]httpRequestForGetResume];
+    JoinViewController *join = [[JoinViewController alloc]initWithNibName:nil bundle:nil];
+    [self.navigationController pushViewController:join animated:YES];
     
 }
 -(void)clickLeftButton:(id)sender
@@ -123,7 +126,8 @@
         ResumeViewController *resume = [[ResumeViewController alloc]initWithNibName:nil bundle:nil];
         [self.navigationController pushViewController:resume animated:YES];
     }
-
+//    ResumeViewController *resume = [[ResumeViewController alloc]initWithNibName:nil bundle:nil];
+//    [self.navigationController pushViewController:resume animated:YES];
     
 }
 

@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface WorkTableViewController : UITableViewController
-
+@property(nonatomic ,strong)NSMutableArray  *mutableArray;
+@property(nonatomic ,strong)NSString *type;
 @end

@@ -20,5 +20,6 @@
 -(void)loginUserName:(NSString*)name withSalt:(NSString*)salt;
 +(void)httpRequestForSaveResume:(NSDictionary*)dict;
 -(void)httpRequestForGetResume;
+-(void)httpRequestForPostJoinMessgae:(NSDictionary*)dict;
 +(void)check;
 @end
