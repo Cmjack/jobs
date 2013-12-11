@@ -15,6 +15,7 @@
 @property(nonatomic, strong)UITableView *joinTableView;
 @property(nonatomic, strong)NSArray *joinDataArray;
 @property(nonatomic, strong)NSArray *placeholderArray;
+@property(nonatomic, strong)NSString *captionString;
 @end
 
 @implementation JoinViewController
@@ -35,16 +36,18 @@
     self.joinTableView = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStylePlain];
     self.joinTableView.delegate = self;
     self.joinTableView.dataSource = self;
-    //self.joinTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [self.view addSubview:self.joinTableView];
-    self.joinDataArray = @[@"log_cabine-25",@"street_view-25",@"map_marker-25"];
-    self.placeholderArray = @[@"请输入公司名称",@"请输入招聘职位",@"请输入公司地址"];
     
+    [self.view addSubview:self.joinTableView];
+    self.title = @"发布招聘信息";
+    self.joinDataArray = @[@"log_cabine-25",@"street_view-25",@"map_marker-25"];
+    self.placeholderArray = @[@"请输入公司名称",@"请输入招聘职位",@"请输入公司所在城市"];
+    self.captionString = @"例如:\n岗位要求：\n1. 有一年以上iPhone系统或苹果软件开发经验\n2. 具备扎实的 Objective C、C/C++ /Cocos2d基础\n4. 熟悉iPhone下网络通信机制，对Socket通信、TCP/IP和HTTP有较深刻的理解和经验，有网络编程经验优先；";
     UIBarButtonItem *sendBarButton = [[UIBarButtonItem alloc]initWithTitle:@"发送" style:UIBarButtonItemStylePlain target:self action:@selector(clickSendButton:)];
     self.navigationItem.rightBarButtonItem = sendBarButton;
     
     // Do any additional setup after loading the view.
 }
+
 -(void)clickSendButton:(id)sender
 {
     UITextField *textfield1 = (UITextField*)[self.joinTableView viewWithTag:1000];
@@ -52,16 +55,28 @@
     UITextField *textfield3 = (UITextField*)[self.joinTableView viewWithTag:1002];
     UITextView  *textView   = (UITextView*) [self.joinTableView viewWithTag:1004];
     
-    NSString *username = [[NSUserDefaults standardUserDefaults]objectForKey:@"username"];
+    if (textView.text.length>0&&(![textView.text isEqualToString:self.captionString])&&textfield1.text.length>0&&textfield2.text.length>0&&textfield3.text.length>0) {
+        NSString *username = [[NSUserDefaults standardUserDefaults]objectForKey:@"username"];
+        
+        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
+                              textfield1.text,KEY_COMPANY,
+                              textfield2.text,KEY_POSITION,
+                              textfield3.text,KEY_LOCATION,
+                              textView.text,KEY_CAPTION,
+                              username,@"username",
+                              nil];
+        [[[HttpRequest alloc]init]httpRequestForPostJoinMessgae:dict];
+        [self.navigationController popViewControllerAnimated:YES];
+        
+    }
+    else{
+        
+        UIAlertView * alerview = [[UIAlertView alloc]initWithTitle:nil message:@"您输入的信息不完全请重新输入" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+        [alerview show];
+        
+    }
     
-    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
-                          textfield1.text,KEY_COMPANY,
-                          textfield2.text,KEY_POSITION,
-                          textfield3.text,KEY_LOCATION,
-                          textView.text,KEY_CAPTION,
-                          username,@"username",
-                          nil];
-    [[[HttpRequest alloc]init]httpRequestForPostJoinMessgae:dict];
+   
     
     
 }
@@ -102,9 +117,10 @@
             [_customCell initLab];
             _customCell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
+        _customCell.iconImageView.image = [UIImage imageNamed:@"ball_point_pen-25"];
+        _customCell.textView.text = self.captionString;
         _customCell.textView.tag = 1004;
         _customCell.textView.delegate = self;
-
     }
     
     return _customCell;
@@ -117,7 +133,7 @@
     if (indexPath.section ==0) {
         return 44;
     }
-    return 120;
+    return 220;
 }
 
 #pragma mark- UITextViewDelegate
@@ -125,6 +141,9 @@
 {
     NSLog(@"start");
     self.joinTableView.contentOffset = CGPointMake(0, 44);
+    if ([textView.text isEqualToString:self.captionString]) {
+        textView.text = @"";
+    }
 
 }
 #pragma mark- UITextFieldDelegate

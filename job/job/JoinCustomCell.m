@@ -22,29 +22,24 @@
 
 -(void)initViews
 {
-    self.textfield = [[UITextField alloc]initWithFrame:CGRectMake(80, 10, 220, 24)];
+    self.textfield = [[UITextField alloc]initWithFrame:CGRectMake(60, 10, 240, 24)];
     self.textfield.rightViewMode = UITextFieldViewModeUnlessEditing;
     self.textfield.font = [UIFont systemFontOfSize:13.0f];
     //self.textfield.layer.borderWidth = 0.5f;
-    self.textfield.placeholder = @"请输入。。。";
     
     [self addSubview:self.textfield];
     
 }
 -(void)initLab
 {
-    self.lable = [[UILabel alloc]initWithFrame:CGRectMake(15, 0, 60, 30)];
-    self.lable.text = @"岗位描述:";
-    self.lable.font = [UIFont systemFontOfSize:13.0f];
-    [self addSubview:self.lable];
+    self.iconImageView = [[UIImageView alloc]initWithFrame:CGRectMake(15, 10, 25, 25)];
+    [self addSubview:self.iconImageView];
     
-    self.textView = [[UITextView alloc]initWithFrame:CGRectMake(80, 8, 220, 100)];
-    self.textView.text = @"例如: 需要会些什么";
+    self.textView = [[UITextView alloc]initWithFrame:CGRectMake(60, 8, 240, 150)];
+    self.textView.font = [UIFont systemFontOfSize:13.0f];
     [self addSubview:self.textView];
     
-    self.textView.layer.borderWidth = 0.5f;
-    
-    
+    //self.textView.layer.borderWidth = 0.5f;
     
 }
 

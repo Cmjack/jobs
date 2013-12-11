@@ -10,7 +10,7 @@
 
 @interface JoinCustomCell : UITableViewCell
 @property(nonatomic,strong)UITextField *textfield;
-@property(nonatomic,strong)UILabel *lable;
+@property(nonatomic,strong)UIImageView *iconImageView;
 @property(nonatomic,strong)UITextView *textView;
 -(void)initViews;
 -(void)initLab;
