@@ -52,7 +52,8 @@
 
 
 #define KEY_LANGUAGE     @"language"//语言等级
-#define KEY_TYPE     @"type"
-#define KEY_LEVEL     @"level"
+#define KEY_TYPE         @"type"
+#define KEY_LEVEL        @"level"
 
+#define KEY_LOCATION     @"location"
 

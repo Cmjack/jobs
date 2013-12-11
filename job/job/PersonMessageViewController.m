@@ -321,6 +321,7 @@
 }
 -(NSDictionary*)getDefaultPersonData
 {
+    
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
                        @"李某某",KEY_NAME,
                        @"ios开发工程师",KEY_POSITION,
@@ -329,7 +330,6 @@
                        @"1388888888",KEY_TEL,
                        @"xxxx@163.com",KEY_EMAIL,
                        @"三年以上",KEY_WORK,
-                       
                        nil];
     return dict;
 }
