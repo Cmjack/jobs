@@ -35,9 +35,9 @@
     self.joinTableView = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStylePlain];
     self.joinTableView.delegate = self;
     self.joinTableView.dataSource = self;
-    self.joinTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    //self.joinTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.joinTableView];
-    self.joinDataArray = @[@"公司名称:",@"招聘职位:",@"公司城市:"];
+    self.joinDataArray = @[@"log_cabine-25",@"street_view-25",@"map_marker-25"];
     self.placeholderArray = @[@"请输入公司名称",@"请输入招聘职位",@"请输入公司地址"];
     
     UIBarButtonItem *sendBarButton = [[UIBarButtonItem alloc]initWithTitle:@"发送" style:UIBarButtonItemStylePlain target:self action:@selector(clickSendButton:)];
@@ -89,7 +89,8 @@
         _customCell.textfield.tag = 1000+indexPath.row;
         _customCell.textfield.delegate = self;
         _customCell.textLabel.font = [UIFont systemFontOfSize:13.0f];
-        _customCell.textLabel.text = [self.joinDataArray objectAtIndex:indexPath.row];
+        //_customCell.textLabel.text = [self.joinDataArray objectAtIndex:indexPath.row];
+        _customCell.imageView.image = [UIImage imageNamed:[self.joinDataArray objectAtIndex:indexPath.row]];
         _customCell.textfield.placeholder = [self.placeholderArray objectAtIndex:indexPath.row];
 
     }else
@@ -116,7 +117,7 @@
     if (indexPath.section ==0) {
         return 44;
     }
-    return 100;
+    return 120;
 }
 
 #pragma mark- UITextViewDelegate

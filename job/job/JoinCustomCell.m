@@ -25,7 +25,7 @@
     self.textfield = [[UITextField alloc]initWithFrame:CGRectMake(80, 10, 220, 24)];
     self.textfield.rightViewMode = UITextFieldViewModeUnlessEditing;
     self.textfield.font = [UIFont systemFontOfSize:13.0f];
-    self.textfield.layer.borderWidth = 0.5f;
+    //self.textfield.layer.borderWidth = 0.5f;
     self.textfield.placeholder = @"请输入。。。";
     
     [self addSubview:self.textfield];
