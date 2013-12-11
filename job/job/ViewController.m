@@ -50,19 +50,14 @@
     [self.view addSubview:self.jobTableView];
     self.jobTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     
-    UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    leftButton.frame = CGRectMake(20, 5, 60, 30);
-    [leftButton setTitle:@"简历" forState:UIControlStateNormal];
-    [leftButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     
-    [leftButton addTarget:self action:@selector(clickLeftButton:) forControlEvents:UIControlEventTouchUpInside];
-    
-    UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc]initWithCustomView:leftButton];
-    
-    UIBarButtonItem *rightButton =[[UIBarButtonItem alloc]initWithTitle:@"发布" style:UIBarButtonItemStylePlain target:self action:@selector(clickRightButton:)];
-    
+    UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"settings-25"] style:UIBarButtonItemStylePlain target:self action:@selector(clickLeftButton:)];
+    leftBarButton.tintColor = [UIColor blackColor];
     self.navigationItem.leftBarButtonItem = leftBarButton;
-    NSLog(@"%@",leftBarButton);
+
+    UIBarButtonItem *rightButton =[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"border_color-25"] style:UIBarButtonItemStylePlain target:self action:@selector(clickRightButton:)];
+    rightButton.tintColor = [UIColor blackColor];
+    
     self.navigationItem.rightBarButtonItem = rightButton;
     
     UIRefreshControl *refresh = [[UIRefreshControl alloc]init];
