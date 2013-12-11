@@ -16,7 +16,7 @@
 #import "headSetting.h"
 #import "HttpRequest.h"
 #import "JoinViewController.h"
-#define  VERSON [[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]floatValue]
+#define  VERSION [[[UIDevice currentDevice] systemVersion]floatValue]
 @interface ViewController ()<UITableViewDataSource,UITableViewDelegate,HttpRequestDelegate>
 @property(nonatomic,strong)UITableView *jobTableView;
 @property(nonatomic,strong)CustomCell *customCell;
@@ -39,8 +39,8 @@
     [self refreshData];
     self.shareDataModel = [DataModel shareData];
     
-//   float  verson =  [[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]floatValue];
-//    
+
+//
 //     self.jobDataArray = self.shareDataModel.shareData;
 	// Do any additional setup after loading the view, typically from a nib.
 }
@@ -199,7 +199,7 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    if (VERSON >7.0) {
+    if (VERSION >=7.0) {
         return 64.0f;
     }
     return 0.0f;
