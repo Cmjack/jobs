@@ -16,6 +16,7 @@
 #import "headSetting.h"
 #import "HttpRequest.h"
 #import "JoinViewController.h"
+#define  VERSON [[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]floatValue]
 @interface ViewController ()<UITableViewDataSource,UITableViewDelegate,HttpRequestDelegate>
 @property(nonatomic,strong)UITableView *jobTableView;
 @property(nonatomic,strong)CustomCell *customCell;
@@ -37,6 +38,9 @@
     [self CreatHeaderView];
     [self refreshData];
     self.shareDataModel = [DataModel shareData];
+    
+//   float  verson =  [[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]floatValue];
+//    
 //     self.jobDataArray = self.shareDataModel.shareData;
 	// Do any additional setup after loading the view, typically from a nib.
 }
@@ -45,7 +49,8 @@
 //    self.view.backgroundColor = [UIColor colorWithWhite:230.0f/255.0f alpha:1.0];
     
     // background image
-    self.view.backgroundColor = [UIColor blackColor];
+    //self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Splash.png"]];
+    NSLog(@"%@",NSStringFromCGRect(self.view.frame));
     UIImageView* bgImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Splash.png"]];
     bgImage.frame = self.view.bounds;
     [self.view addSubview:bgImage];
@@ -54,6 +59,7 @@
     self.jobTableView.delegate = self;
     self.jobTableView.dataSource = self;
     self.jobTableView.backgroundColor = [UIColor clearColor];
+    
     [self.view addSubview:self.jobTableView];
     self.jobTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     
@@ -191,16 +197,20 @@
 {
     
 }
-//-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-//{
-//    return 30.0f;
-//}
-//-(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-//    UIView *headview = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 30)];
-//    headview.backgroundColor = [UIColor clearColor];
-//    [headview addSubview:_headImageView];
-//    return headview;
-//}
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if (VERSON >7.0) {
+        return 64.0f;
+    }
+    return 0.0f;
+}
+-(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    
+    UIView *headview = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 30)];
+    headview.backgroundColor = [UIColor clearColor];
+    
+    return headview;
+}
 
 
 - (void)didReceiveMemoryWarning
