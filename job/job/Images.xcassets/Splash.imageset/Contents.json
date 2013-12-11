@@ -9,6 +9,22 @@
       "idiom" : "universal",
       "scale" : "2x",
       "filename" : "yejob_splash@2x.png"
+    },
+    {
+      "idiom" : "iphone",
+      "scale" : "1x",
+      "filename" : "yejob_splash-1.png"
+    },
+    {
+      "idiom" : "iphone",
+      "scale" : "2x",
+      "filename" : "yejob_splash@2x-1.png"
+    },
+    {
+      "idiom" : "iphone",
+      "filename" : "yejob_splash-568h@2x.png",
+      "subtype" : "retina4",
+      "scale" : "2x"
     }
   ],
   "info" : {
