@@ -31,24 +31,26 @@
     self.iconButton.layer.cornerRadius = 5.5f;
     [self addSubview:self.iconButton];
     
-    self.fromLabel = [[UILabel alloc]initWithFrame:CGRectMake(45, 5, 240, 15)];
-    
-    UIFont *font = [UIFont systemFontOfSize:12.0f];
-    self.fromLabel.font = font;
-    self.fromLabel.textColor = [UIColor whiteColor];
-    [self addSubview:self.fromLabel];
+//    self.fromLabel = [[UILabel alloc]initWithFrame:CGRectMake(45, 5, 240, 15)];
+//    self.fromLabel.backgroundColor = [UIColor clearColor];
+//    UIFont *font = [UIFont systemFontOfSize:12.0f];
+//    self.fromLabel.font = font;
+//    self.fromLabel.textColor = [UIColor whiteColor];
+//    [self addSubview:self.fromLabel];
     
 
-    self.PCALable = [[UILabel alloc]initWithFrame:CGRectMake(45, 20, 260, 30)];
+    self.PCALable = [[UILabel alloc]initWithFrame:CGRectMake(45, 5, 260, 30)];
     self.PCALable.textColor = [UIColor lightGrayColor];
+    self.PCALable.backgroundColor = [UIColor clearColor];
+
     [self addSubview:self.PCALable];
    
     
     self.captionLab = [[UILabel alloc]initWithFrame:CGRectMake(45, 60, 260, 20)];
+    self.captionLab.backgroundColor = [UIColor clearColor];
+
     self.captionLab.textColor = [UIColor lightTextColor];
     [self addSubview:self.captionLab];
-    
-    [self insertData:nil];
     
 }
 
@@ -75,15 +77,14 @@
     self.PCALable.font = PCAFont;
     self.PCALable.numberOfLines = 10;
     float height = [Tools autoSizeLab:CGSizeMake(260, 300) withFont:PCAFont withSting:PCAString];
-    self.PCALable.frame = CGRectMake(45, 20, 260, height);
-    
+    self.PCALable.frame = CGRectMake(45, 5, 260, height);
     
     self.captionLab.text = [dict objectForKey:JOB_DESC];
     UIFont *capFont = [UIFont systemFontOfSize:13];
     self.captionLab.font = capFont;
     self.captionLab.numberOfLines = 0;
     float caHeight = [Tools autoSizeLab:CGSizeMake(260, 8000) withFont:capFont withSting:[dict objectForKey:JOB_DESC]];
-    self.captionLab.frame = CGRectMake(45, 30+height, 260, caHeight);
+    self.captionLab.frame = CGRectMake(45, height, 260, caHeight);
    
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

@@ -16,6 +16,8 @@
 #import "headSetting.h"
 #import "HttpRequest.h"
 #import "JoinViewController.h"
+#import "SettingViewController.h"
+#import "SearchView.h"
 #define  VERSION [[[UIDevice currentDevice] systemVersion]floatValue]
 @interface ViewController ()<UITableViewDataSource,UITableViewDelegate,HttpRequestDelegate>
 @property(nonatomic,strong)UITableView *jobTableView;
@@ -35,14 +37,34 @@
 {
     [super viewDidLoad];
     [self initViews];
-    [self CreatHeaderView];
     [self refreshData];
     self.shareDataModel = [DataModel shareData];
+    self.title = @"事业线";
     
-
+    UIButton *searchButton = [[UIButton alloc]initWithFrame:CGRectMake(185, 30, 24, 24)];
+    [searchButton setBackgroundImage:[UIImage imageNamed:@"ball_point_pen-25"] forState:UIControlStateNormal];
+    [searchButton addTarget:self action:@selector(clickSearchButton) forControlEvents:UIControlEventTouchUpInside];
+    [self.navigationController.view addSubview:searchButton];
+    
 //
 //     self.jobDataArray = self.shareDataModel.shareData;
 	// Do any additional setup after loading the view, typically from a nib.
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+    if (VERSION>=7.0f) {
+        self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:87.0/255.0f green:147.0/255.0f blue:158.0/255.0 alpha:0.5];
+    }
+    
+}
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:YES];
+    if (VERSION>=7.0f) {
+        self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+    }
+
 }
 -(void)initViews{
     
@@ -79,32 +101,17 @@
     [self.jobTableView addSubview:refresh];
 }
 
--(void)CreatHeaderView{
+-(void)clickSearchButton
+{
+    SearchView *search = [[SearchView alloc]initWithFrame:CGRectMake(0,self.view.bounds.size.height , 320, self.view.bounds.size.height)];
+    [self.view.window addSubview:search];
+    [UIView animateWithDuration:0.25 animations:^{
+        search.frame = self.view.bounds;
+    } completion:^(BOOL finished) {
+        
+    }];
     
-    self.headImageView= [[UIImageView alloc]initWithFrame:CGRectMake(4, 0, 312, 30)];
-    _headImageView.backgroundColor = [UIColor whiteColor];
-    
-    UIFont * font = [UIFont systemFontOfSize:15];
-    self.positionButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    _positionButton.frame = CGRectMake(16, 5, 100, 20);
-    _positionButton.titleLabel.font = font;
-    [_positionButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [_positionButton setTitle:@"职位" forState:UIControlStateNormal];
-    _positionButton.titleLabel.textAlignment = NSTextAlignmentLeft;
-    //_positionButton.backgroundColor = [UIColor redColor];
-    [self.headImageView addSubview:_positionButton];
-    
-    self.areaButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    _areaButton.frame = CGRectMake(240, 5, 60, 20);
-    _areaButton.titleLabel.font = font;
-    [_areaButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [_areaButton setTitle:@"地区" forState:UIControlStateNormal];
-    _areaButton.titleLabel.textAlignment = NSTextAlignmentRight;
-    //_areaButton.backgroundColor = [UIColor redColor];
-
-    [self.headImageView addSubview:_areaButton];
 }
-
 -(void)clickRightButton:(id)sender
 {
     //[[[HttpRequest alloc]init]httpRequestForGetResume];
@@ -115,25 +122,29 @@
 -(void)clickLeftButton:(id)sender
 {
     
-    if (self.shareDataModel.isLogin == NO) {
-        loginViewController *loginVC = [[loginViewController alloc]initWithFrame:CGRectMake(0, self.view.bounds.size.height, 320, self.view.bounds.size.height)];
-        
-        
-        [self.view.window addSubview:loginVC];
-        
-        [UIView animateWithDuration:0.25f animations:^{
-            
-            loginVC.frame = CGRectMake(0, 0, 320, self.view.bounds.size.height);
-            
-        } completion:^(BOOL finished) {
-            
-        }];
-
-    }else
-    {
-        ResumeViewController *resume = [[ResumeViewController alloc]initWithNibName:nil bundle:nil];
-        [self.navigationController pushViewController:resume animated:YES];
-    }
+    SettingViewController *setVC = [[SettingViewController alloc]initWithNibName:Nil bundle:nil];
+    
+    [self.navigationController pushViewController:setVC animated:YES];
+    
+//    if (self.shareDataModel.isLogin == NO) {
+//        loginViewController *loginVC = [[loginViewController alloc]initWithFrame:CGRectMake(0, self.view.bounds.size.height, 320, self.view.bounds.size.height)];
+//        
+//        
+//        [self.view.window addSubview:loginVC];
+//        
+//        [UIView animateWithDuration:0.25f animations:^{
+//            
+//            loginVC.frame = CGRectMake(0, 0, 320, self.view.bounds.size.height);
+//            
+//        } completion:^(BOOL finished) {
+//            
+//        }];
+//
+//    }else
+//    {
+//        ResumeViewController *resume = [[ResumeViewController alloc]initWithNibName:nil bundle:nil];
+//        [self.navigationController pushViewController:resume animated:YES];
+//    }
 //    ResumeViewController *resume = [[ResumeViewController alloc]initWithNibName:nil bundle:nil];
 //    [self.navigationController pushViewController:resume animated:YES];
     
@@ -180,7 +191,7 @@
 #pragma mark -UITableViewDelegate
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    float height = 30;
+    float height = 0;
     UIFont *PCAFont = [UIFont boldSystemFontOfSize:13.0f];
     UIFont *capFont = [UIFont systemFontOfSize:13];
     NSDictionary *dict = [self.jobDataArray objectAtIndex:indexPath.row];
