@@ -35,14 +35,17 @@
     
     UIFont *font = [UIFont systemFontOfSize:12.0f];
     self.fromLabel.font = font;
+    self.fromLabel.textColor = [UIColor whiteColor];
     [self addSubview:self.fromLabel];
     
 
     self.PCALable = [[UILabel alloc]initWithFrame:CGRectMake(45, 20, 260, 30)];
+    self.PCALable.textColor = [UIColor lightGrayColor];
     [self addSubview:self.PCALable];
    
     
     self.captionLab = [[UILabel alloc]initWithFrame:CGRectMake(45, 60, 260, 20)];
+    self.captionLab.textColor = [UIColor lightTextColor];
     [self addSubview:self.captionLab];
     
     [self insertData:nil];

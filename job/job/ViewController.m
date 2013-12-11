@@ -42,7 +42,14 @@
 }
 -(void)initViews{
     
-    self.view.backgroundColor = [UIColor colorWithWhite:230.0f/255.0f alpha:1.0];
+//    self.view.backgroundColor = [UIColor colorWithWhite:230.0f/255.0f alpha:1.0];
+    
+    // background image
+    self.view.backgroundColor = [UIColor blackColor];
+    UIImageView* bgImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Splash.png"]];
+    bgImage.frame = self.view.bounds;
+    [self.view addSubview:bgImage];
+    
     self.jobTableView = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStylePlain];
     self.jobTableView.delegate = self;
     self.jobTableView.dataSource = self;
@@ -162,7 +169,7 @@
     if (_customCell == nil) {
         _customCell = [[CustomCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:indexPathCell];
         [_customCell initViews];
-//        _customCell.backgroundColor = [UIColor clearColor];
+        _customCell.backgroundColor = [UIColor clearColor];
         _customCell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     [_customCell insertData:[self.jobDataArray objectAtIndex:indexPath.row]];
