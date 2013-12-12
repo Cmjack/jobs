@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 @protocol SearchViewDelegate <NSObject>
 
--(void)searchDataGetSuccess:(NSArray*)arr;
+-(void)searchDataGetSuccess:(NSArray*)arr withSearchString:(NSString*)searchString;
 
 @end
 

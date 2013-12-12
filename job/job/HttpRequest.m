@@ -15,13 +15,14 @@
 @implementation HttpRequest
 -(void)httpRequestForGet{
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:NETURL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:LOCALURL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
     NSLog(@"job: %@", responseObject);
 //        DataModel *data = [DataModel shareData];
 //        data.shareData = responseObject;
+        NSArray *arr = [responseObject objectForKey:@"Data"];
         if ([self.delegate respondsToSelector:@selector(getDataSucess:)])
         {
-            [self.delegate getDataSucess:responseObject];
+            [self.delegate getDataSucess:arr];
         }
     
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -137,15 +138,13 @@
 }
 
 
--(void)httpRequestForGetSearch:(NSString*)string
+-(void)httpRequestForGetSearch:(NSString*)string withPage:(NSString*)stringPage
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
     NSDictionary *dictTitle = [NSDictionary dictionaryWithObjectsAndKeys:string,@"title", nil];
-    
-    
-    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:dictTitle,@"param", nil];
-    
+
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:dictTitle,@"param",stringPage,@"page", nil];
     
     [manager GET:@"http://192.168.1.114:3000/job" parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
@@ -156,11 +155,9 @@
             [self.delegate getDataSucess:arr];
         }
         
-        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
         NSLog(@"resume:ERROR:%@",error);
-        
     }];
 }
 

@@ -13,6 +13,8 @@
 @property(nonatomic,strong)UILabel *searchLab;
 @property(nonatomic,strong)UITextField *searchTextField;
 @property(nonatomic,strong)UIButton *searchButton;
+@property(nonatomic,strong)NSString *searchString;
+
 @end
 @implementation SearchView
 
@@ -126,13 +128,16 @@
     http.delegate = self;
     
     if (button.tag == 1314) {
-        [http httpRequestForGetSearch:self.searchTextField.text];
+        
+        self.searchString = self.searchTextField.text;
     }
     else
     {
-        [http httpRequestForGetSearch:[self.positionTypeArr objectAtIndex:button.tag - 1000]];
+        self.searchString = [self.positionTypeArr objectAtIndex:button.tag - 1000];
 
-    }    
+    }
+    [http httpRequestForGetSearch:self.searchString withPage:@"1"];
+
     //[self popView];
 }
 -(void)popView
@@ -145,9 +150,9 @@
 }
 -(void)getDataSucess:(NSArray *)dataArray
 {
-    if ([self.delegate respondsToSelector:@selector(searchDataGetSuccess:)]) {
+    if ([self.delegate respondsToSelector:@selector(searchDataGetSuccess:withSearchString:)]) {
         [self popView];
-        [self.delegate searchDataGetSuccess:dataArray];
+        [self.delegate searchDataGetSuccess:dataArray withSearchString:self.searchString];
         
     }
 }
