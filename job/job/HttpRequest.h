@@ -21,5 +21,6 @@
 +(void)httpRequestForSaveResume:(NSDictionary*)dict;
 -(void)httpRequestForGetResume;
 -(void)httpRequestForPostJoinMessgae:(NSDictionary*)dict;
+-(void)httpRequestForGetSearch:(NSString*)string;
 +(void)check;
 @end

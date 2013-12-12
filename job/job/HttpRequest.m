@@ -77,7 +77,6 @@
         
         if ([self.delegate respondsToSelector:@selector(loginSucessOrFail:)]) {
             
-           
             [self.delegate loginSucessOrFail:isSucess];
         }
         
@@ -89,14 +88,12 @@
             
             [self.delegate loginSucessOrFail:NO];
         }
-
         NSLog(@"loginError:%@",error);
         
     }];
     
     
 }
-
 +(void)httpRequestForSaveResume:(NSDictionary*)dict{
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager POST:@"http://192.168.1.114:3000/resume" parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -137,6 +134,34 @@
         NSLog(@"saveFail");
     }];
 
+}
+
+
+-(void)httpRequestForGetSearch:(NSString*)string
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
+    NSDictionary *dictTitle = [NSDictionary dictionaryWithObjectsAndKeys:string,@"title", nil];
+    
+    
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:dictTitle,@"param", nil];
+    
+    
+    [manager GET:@"http://192.168.1.114:3000/job" parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"searchResume: %@", responseObject);
+        NSArray *arr = [responseObject objectForKey:@"Data"];
+        if ([self.delegate respondsToSelector:@selector(getDataSucess:)])
+        {
+            [self.delegate getDataSucess:arr];
+        }
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        NSLog(@"resume:ERROR:%@",error);
+        
+    }];
 }
 
 +(void)check
