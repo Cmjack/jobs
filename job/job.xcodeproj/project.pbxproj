@@ -19,6 +19,12 @@
 		3F6F9D74185845CA00FDF258 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F6F9D73185845CA00FDF258 /* SettingViewController.m */; };
 		3F6F9D771858631500FDF258 /* SearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F6F9D761858631500FDF258 /* SearchView.m */; };
 		3F6F9D7B18587A4600FDF258 /* SearchIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F6F9D7A18587A4600FDF258 /* SearchIcon.png */; };
+		3FA6493F185999E90099D32B /* arrowDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FA64938185999E90099D32B /* arrowDown.png */; };
+		3FA64940185999E90099D32B /* arrowDown@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FA64939185999E90099D32B /* arrowDown@2x.png */; };
+		3FA64941185999E90099D32B /* arrowUp.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FA6493A185999E90099D32B /* arrowUp.png */; };
+		3FA64942185999E90099D32B /* arrowUp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FA6493B185999E90099D32B /* arrowUp@2x.png */; };
+		3FA64943185999E90099D32B /* blueArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FA6493C185999E90099D32B /* blueArrow.png */; };
+		3FA64944185999E90099D32B /* PullingRefreshTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA6493E185999E90099D32B /* PullingRefreshTableView.m */; };
 		9D66ABAC184ECD6B00C03098 /* ResumeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D66ABAB184ECD6B00C03098 /* ResumeViewController.m */; };
 		9D66ABAF184ED9A500C03098 /* PersonMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D66ABAE184ED9A500C03098 /* PersonMessageViewController.m */; };
 		9D66ABB2184EF0C000C03098 /* PersonMessageCustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D66ABB1184EF0C000C03098 /* PersonMessageCustomCell.m */; };
@@ -93,6 +99,13 @@
 		3F6F9D751858631500FDF258 /* SearchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchView.h; sourceTree = "<group>"; };
 		3F6F9D761858631500FDF258 /* SearchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchView.m; sourceTree = "<group>"; };
 		3F6F9D7A18587A4600FDF258 /* SearchIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SearchIcon.png; sourceTree = "<group>"; };
+		3FA64938185999E90099D32B /* arrowDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrowDown.png; sourceTree = "<group>"; };
+		3FA64939185999E90099D32B /* arrowDown@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrowDown@2x.png"; sourceTree = "<group>"; };
+		3FA6493A185999E90099D32B /* arrowUp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrowUp.png; sourceTree = "<group>"; };
+		3FA6493B185999E90099D32B /* arrowUp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrowUp@2x.png"; sourceTree = "<group>"; };
+		3FA6493C185999E90099D32B /* blueArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueArrow.png; sourceTree = "<group>"; };
+		3FA6493D185999E90099D32B /* PullingRefreshTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullingRefreshTableView.h; sourceTree = "<group>"; };
+		3FA6493E185999E90099D32B /* PullingRefreshTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PullingRefreshTableView.m; sourceTree = "<group>"; };
 		9D66ABAA184ECD6B00C03098 /* ResumeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResumeViewController.h; sourceTree = "<group>"; };
 		9D66ABAB184ECD6B00C03098 /* ResumeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResumeViewController.m; sourceTree = "<group>"; };
 		9D66ABAD184ED9A500C03098 /* PersonMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonMessageViewController.h; sourceTree = "<group>"; };
@@ -200,6 +213,20 @@
 				3F6F9D73185845CA00FDF258 /* SettingViewController.m */,
 			);
 			name = Setting;
+			sourceTree = "<group>";
+		};
+		3FA64937185999E90099D32B /* PullingRefresh */ = {
+			isa = PBXGroup;
+			children = (
+				3FA64938185999E90099D32B /* arrowDown.png */,
+				3FA64939185999E90099D32B /* arrowDown@2x.png */,
+				3FA6493A185999E90099D32B /* arrowUp.png */,
+				3FA6493B185999E90099D32B /* arrowUp@2x.png */,
+				3FA6493C185999E90099D32B /* blueArrow.png */,
+				3FA6493D185999E90099D32B /* PullingRefreshTableView.h */,
+				3FA6493E185999E90099D32B /* PullingRefreshTableView.m */,
+			);
+			path = PullingRefresh;
 			sourceTree = "<group>";
 		};
 		9D66ABA8184ECC4D00C03098 /* MainViewController */ = {
@@ -349,6 +376,7 @@
 				9DAA60FE185718C5002FDF1C /* join */,
 				9D66ABA9184ECCEF00C03098 /* resume */,
 				9D9D85DC184DD31A0015CD71 /* DataModel */,
+				3FA64937185999E90099D32B /* PullingRefresh */,
 				9DD5658418504BA6007939BA /* Tools */,
 				9DA9EAFD184DABFA00EF35A5 /* Images.xcassets */,
 				9D7EF5B0184DCBB400182DB2 /* images */,
@@ -507,11 +535,15 @@
 				3F6F9D7B18587A4600FDF258 /* SearchIcon.png in Resources */,
 				3F6F9D6618580F4500FDF258 /* border_color-25.png in Resources */,
 				3F6F9D6E1858169B00FDF258 /* map_marker-25.png in Resources */,
+				3FA64943185999E90099D32B /* blueArrow.png in Resources */,
 				9D9D85AF184DCEBB0015CD71 /* History_bg.png in Resources */,
 				9DAA60F81856C187002FDF1C /* next_bg.png in Resources */,
 				9DA9EAF0184DABFA00EF35A5 /* InfoPlist.strings in Resources */,
+				3FA64940185999E90099D32B /* arrowDown@2x.png in Resources */,
 				9DA9EAF9184DABFA00EF35A5 /* Main.storyboard in Resources */,
 				9DD5657E18503530007939BA /* 58.png in Resources */,
+				3FA6493F185999E90099D32B /* arrowDown.png in Resources */,
+				3FA64941185999E90099D32B /* arrowUp.png in Resources */,
 				3F6F9D701858171F00FDF258 /* ball_point_pen-25.png in Resources */,
 				9DD56580185035F1007939BA /* 58@2x.png in Resources */,
 				9DAA60FA1856C187002FDF1C /* previous_bg.png in Resources */,
@@ -522,6 +554,7 @@
 				9DAA60F91856C187002FDF1C /* home_navigationbutton_normal.png in Resources */,
 				9DAA60FB1856C187002FDF1C /* previous.png in Resources */,
 				9D7EF5B2184DCC1A00182DB2 /* history_list_bg.png in Resources */,
+				3FA64942185999E90099D32B /* arrowUp@2x.png in Resources */,
 				9DFC874C1851A8BB00997414 /* wealink.jpg in Resources */,
 				9DD5658D18508AD2007939BA /* btn_close_normal@2x.png in Resources */,
 			);
@@ -594,6 +627,7 @@
 				9D66ABC1184F220900C03098 /* EditDiplomaTableViewController.m in Sources */,
 				9D7EF5AF184DB0E600182DB2 /* CustomCell.m in Sources */,
 				3F6F9D74185845CA00FDF258 /* SettingViewController.m in Sources */,
+				3FA64944185999E90099D32B /* PullingRefreshTableView.m in Sources */,
 				9D66ABAC184ECD6B00C03098 /* ResumeViewController.m in Sources */,
 				9D9D85DF184DD3570015CD71 /* DataModel.m in Sources */,
 				9DA9EAF2184DABFA00EF35A5 /* main.m in Sources */,

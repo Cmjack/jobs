@@ -14,21 +14,22 @@
 #import "DataModel.h"
 #import "Tools.h"
 #import "headSetting.h"
-#import "HttpRequest.h"
 #import "JoinViewController.h"
 #import "SettingViewController.h"
 #import "SearchView.h"
+#import "PullingRefreshTableView.h"
 #define  VERSION [[[UIDevice currentDevice] systemVersion]floatValue]
-@interface ViewController ()<UITableViewDataSource,UITableViewDelegate,HttpRequestDelegate,SearchViewDelegate>
-@property(nonatomic,strong)UITableView *jobTableView;
+@interface ViewController ()<UITableViewDataSource,UITableViewDelegate,HttpRequestDelegate,SearchViewDelegate,PullingRefreshTableViewDelegate>
+@property(nonatomic,strong)PullingRefreshTableView *jobTableView;
 @property(nonatomic,strong)CustomCell *customCell;
 @property(nonatomic,strong)UIImageView *headImageView;
 @property(nonatomic,strong)UIButton *positionButton;
 @property(nonatomic,strong)UIButton *areaButton;
-@property(nonatomic,strong)NSArray *jobDataArray;
+@property(nonatomic,strong)NSMutableArray *jobDataArray;
 @property(nonatomic,strong)DataModel *shareDataModel;
 @property(nonatomic,strong)UIRefreshControl *refresh;
 @property(nonatomic,strong)UIButton *searchButton;
+@property(nonatomic,strong)NSString *searchString;
 @end
 
 @implementation ViewController
@@ -39,6 +40,7 @@
     [self initViews];
     [self refreshData];
     self.shareDataModel = [DataModel shareData];
+    self.jobDataArray = [NSMutableArray arrayWithCapacity:10];
     self.title = @"事业线";
     
     UIButton *searchButton = [[UIButton alloc]initWithFrame:CGRectMake(185, 30, 24, 24)];
@@ -47,16 +49,11 @@
     [self.navigationController.view addSubview:searchButton];
     self.searchButton = searchButton;
     
-    [self addObserver:self.jobTableView forKeyPath:@"offset" options:NSKeyValueObservingOptionNew context:nil];
-    []
 //
 //     self.jobDataArray = self.shareDataModel.shareData;
 	// Do any additional setup after loading the view, typically from a nib.
 }
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    NSLog(@"chang::::%@",change);
-    
-}
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
@@ -76,7 +73,7 @@
 }
 -(void)initViews{
     
-//    self.view.backgroundColor = [UIColor colorWithWhite:230.0f/255.0f alpha:1.0];
+    self.view.backgroundColor = [UIColor colorWithWhite:230.0f/255.0f alpha:1.0];
     
     // background image
     //self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Splash.png"]];
@@ -85,12 +82,21 @@
     bgImage.frame = self.view.bounds;
     [self.view addSubview:bgImage];
     
-    self.jobTableView = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    CGRect frmae;
+    if (VERSION<7.0) {
+        frmae = CGRectMake(0, 0, 320, self.view.bounds.size.height - 64);
+    }
+    else
+    {
+        frmae = CGRectMake(0, 64, 320, self.view.bounds.size.height - 64);
+    }
+    
+    self.jobTableView = [[PullingRefreshTableView alloc]initWithFrame:frmae pullingDelegate:self];
+    
     self.jobTableView.delegate = self;
     self.jobTableView.dataSource = self;
-    
     self.jobTableView.backgroundColor = [UIColor clearColor];
-    
+    self.jobTableView.autoScrollToNextPage = YES;
     [self.view addSubview:self.jobTableView];
     self.jobTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     
@@ -104,10 +110,10 @@
     
     self.navigationItem.rightBarButtonItem = rightButton;
     
-    UIRefreshControl *refresh = [[UIRefreshControl alloc]init];
-    self.refresh = refresh;
-    [refresh addTarget:self action:@selector(refreshData) forControlEvents:UIControlEventValueChanged];
-    [self.jobTableView addSubview:refresh];
+//    UIRefreshControl *refresh = [[UIRefreshControl alloc]init];
+//    self.refresh = refresh;
+//    [refresh addTarget:self action:@selector(refreshData) forControlEvents:UIControlEventValueChanged];
+//    [self.jobTableView addSubview:refresh];
 }
 
 -(void)clickSearchButton
@@ -124,7 +130,6 @@
 }
 -(void)clickRightButton:(id)sender
 {
-    //[[[HttpRequest alloc]init]httpRequestForGetResume];
     JoinViewController *join = [[JoinViewController alloc]initWithNibName:nil bundle:nil];
     [self.navigationController pushViewController:join animated:YES];
     
@@ -165,22 +170,24 @@
 {
     HttpRequest *request = [[HttpRequest alloc]init];
     request.delegate = self;
-    [request httpRequestForGet];
+    NSString *pageString = [NSString stringWithFormat:@"%i",self.jobDataArray.count/20+1];
+    [request httpRequestForGetSearch:self.searchString withPage:pageString];
     
 }
 #pragma mark - HttpRequestDelegate
 -(void)getDataSucess:(NSArray *)dataArray
 {
-    
-    self.jobDataArray = dataArray;
+    [self.jobDataArray addObjectsFromArray:dataArray];
+    //[self performSelector:@selector(re) withObject:nil afterDelay:5.5];
     [self.jobTableView reloadData];
-    [self.refresh endRefreshing];
 }
 
 #pragma mark - searchviewdelegate
--(void)searchDataGetSuccess:(NSArray *)arr
+-(void)searchDataGetSuccess:(NSArray *)arr withSearchString:(NSString *)searchString
 {
-    self.jobDataArray = arr;
+    self.searchString = searchString;
+    [self.jobDataArray removeAllObjects];
+    [self.jobDataArray addObjectsFromArray:arr];
     [self.jobTableView reloadData];
 }
 #pragma mark - UITableViewDataSource
@@ -200,7 +207,7 @@
         _customCell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     [_customCell insertData:[self.jobDataArray objectAtIndex:indexPath.row]];
-    
+    _customCell.countLab.text = [NSString stringWithFormat:@"%i",indexPath.row];
     return _customCell;
 }
 #pragma mark -UITableViewDelegate
@@ -214,7 +221,7 @@
     NSString *sto= [PCAString stringByReplacingOccurrencesOfString: @"\n" withString:@""];
 
     height += [Tools autoSizeLab:size withFont:PCAFont withSting:sto];
-    height += 50;
+    height += 65;
     
     return height;
 }
@@ -223,27 +230,45 @@
 {
     
 }
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+
+#pragma mark - PullingRefreshTableViewDelegate
+//下拉刷新回调
+
+-(void)pullingTableViewDidStartRefreshing:(PullingRefreshTableView *)tableView
 {
-    if (VERSION >=7.0) {
-        return 64.0f;
-    }
-    return 0.0f;
+    
+    //[self performSelector:@selector(re) withObject:nil afterDelay:6.5];
+    
 }
--(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    
-    UIView *headview = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 30)];
-    headview.backgroundColor = [UIColor clearColor];
-    
-    return headview;
+-(void)re
+{
+    [self.jobTableView tableViewDidFinishedLoading];
 }
 
--(void)scrollViewDidScroll:(UIScrollView *)scrollView
+//上拉加载回调
+-(void)pullingTableViewDidStartLoading:(PullingRefreshTableView *)tableView
 {
-    NSLog(@"---%f",scrollView.contentOffset.y+scrollView.frame.size.height);
-    NSLog(@"----%f",scrollView.contentSize.height);
-    if (scrollView.contentOffset.y+scrollView.frame.size.height - scrollView.contentSize.height >20) {
-    }
+    
+    [self refreshData];
+
+}
+
+#pragma mark - UIScrollViewDelegate
+// －－－－上拉和下拉的刷新必须重写下面的代理方法
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    
+    
+    [self.jobTableView tableViewDidScroll:scrollView];
+    
+}
+
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    
+    [self.jobTableView tableViewDidEndDragging:scrollView];
+    
 }
 
 - (void)didReceiveMemoryWarning
