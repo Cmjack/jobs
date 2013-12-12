@@ -16,6 +16,9 @@
 		3F6F9D6C1858161200FDF258 /* log_cabine-25.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F6F9D6B1858161200FDF258 /* log_cabine-25.png */; };
 		3F6F9D6E1858169B00FDF258 /* map_marker-25.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F6F9D6D1858169B00FDF258 /* map_marker-25.png */; };
 		3F6F9D701858171F00FDF258 /* ball_point_pen-25.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F6F9D6F1858171F00FDF258 /* ball_point_pen-25.png */; };
+		3F6F9D74185845CA00FDF258 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F6F9D73185845CA00FDF258 /* SettingViewController.m */; };
+		3F6F9D771858631500FDF258 /* SearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F6F9D761858631500FDF258 /* SearchView.m */; };
+		3F6F9D7B18587A4600FDF258 /* SearchIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F6F9D7A18587A4600FDF258 /* SearchIcon.png */; };
 		9D66ABAC184ECD6B00C03098 /* ResumeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D66ABAB184ECD6B00C03098 /* ResumeViewController.m */; };
 		9D66ABAF184ED9A500C03098 /* PersonMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D66ABAE184ED9A500C03098 /* PersonMessageViewController.m */; };
 		9D66ABB2184EF0C000C03098 /* PersonMessageCustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D66ABB1184EF0C000C03098 /* PersonMessageCustomCell.m */; };
@@ -85,6 +88,11 @@
 		3F6F9D6B1858161200FDF258 /* log_cabine-25.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "log_cabine-25.png"; sourceTree = "<group>"; };
 		3F6F9D6D1858169B00FDF258 /* map_marker-25.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map_marker-25.png"; sourceTree = "<group>"; };
 		3F6F9D6F1858171F00FDF258 /* ball_point_pen-25.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ball_point_pen-25.png"; sourceTree = "<group>"; };
+		3F6F9D72185845CA00FDF258 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
+		3F6F9D73185845CA00FDF258 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
+		3F6F9D751858631500FDF258 /* SearchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchView.h; sourceTree = "<group>"; };
+		3F6F9D761858631500FDF258 /* SearchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchView.m; sourceTree = "<group>"; };
+		3F6F9D7A18587A4600FDF258 /* SearchIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SearchIcon.png; sourceTree = "<group>"; };
 		9D66ABAA184ECD6B00C03098 /* ResumeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResumeViewController.h; sourceTree = "<group>"; };
 		9D66ABAB184ECD6B00C03098 /* ResumeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResumeViewController.m; sourceTree = "<group>"; };
 		9D66ABAD184ED9A500C03098 /* PersonMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonMessageViewController.h; sourceTree = "<group>"; };
@@ -185,6 +193,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3F6F9D711858459300FDF258 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				3F6F9D72185845CA00FDF258 /* SettingViewController.h */,
+				3F6F9D73185845CA00FDF258 /* SettingViewController.m */,
+			);
+			name = Setting;
+			sourceTree = "<group>";
+		};
 		9D66ABA8184ECC4D00C03098 /* MainViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -192,6 +209,8 @@
 				9DA9EAFB184DABFA00EF35A5 /* ViewController.m */,
 				9D7EF5AD184DB0E600182DB2 /* CustomCell.h */,
 				9D7EF5AE184DB0E600182DB2 /* CustomCell.m */,
+				3F6F9D751858631500FDF258 /* SearchView.h */,
+				3F6F9D761858631500FDF258 /* SearchView.m */,
 			);
 			name = MainViewController;
 			sourceTree = "<group>";
@@ -246,6 +265,7 @@
 		9D7EF5B0184DCBB400182DB2 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				3F6F9D7A18587A4600FDF258 /* SearchIcon.png */,
 				3F6F9D6F1858171F00FDF258 /* ball_point_pen-25.png */,
 				3F6F9D6D1858169B00FDF258 /* map_marker-25.png */,
 				3F6F9D6B1858161200FDF258 /* log_cabine-25.png */,
@@ -325,6 +345,7 @@
 				9DA9EAF7184DABFA00EF35A5 /* Main.storyboard */,
 				9DD5658818507827007939BA /* login */,
 				9D66ABA8184ECC4D00C03098 /* MainViewController */,
+				3F6F9D711858459300FDF258 /* Setting */,
 				9DAA60FE185718C5002FDF1C /* join */,
 				9D66ABA9184ECCEF00C03098 /* resume */,
 				9D9D85DC184DD31A0015CD71 /* DataModel */,
@@ -483,6 +504,7 @@
 				9DAA60FD1856C187002FDF1C /* next.png in Resources */,
 				3F6F9D6218580DB700FDF258 /* settings-25.png in Resources */,
 				9DD5657918501A61007939BA /* datepicker_bg@2x.png in Resources */,
+				3F6F9D7B18587A4600FDF258 /* SearchIcon.png in Resources */,
 				3F6F9D6618580F4500FDF258 /* border_color-25.png in Resources */,
 				3F6F9D6E1858169B00FDF258 /* map_marker-25.png in Resources */,
 				9D9D85AF184DCEBB0015CD71 /* History_bg.png in Resources */,
@@ -553,6 +575,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F6F9D771858631500FDF258 /* SearchView.m in Sources */,
 				9D66ABB8184F0A3B00C03098 /* WorkTableViewController.m in Sources */,
 				9DAD589A1855C5AE00F0A2B2 /* EditWorkViewController.m in Sources */,
 				9DAA6104185719E1002FDF1C /* JoinCustomCell.m in Sources */,
@@ -570,6 +593,7 @@
 				9D66ABAF184ED9A500C03098 /* PersonMessageViewController.m in Sources */,
 				9D66ABC1184F220900C03098 /* EditDiplomaTableViewController.m in Sources */,
 				9D7EF5AF184DB0E600182DB2 /* CustomCell.m in Sources */,
+				3F6F9D74185845CA00FDF258 /* SettingViewController.m in Sources */,
 				9D66ABAC184ECD6B00C03098 /* ResumeViewController.m in Sources */,
 				9D9D85DF184DD3570015CD71 /* DataModel.m in Sources */,
 				9DA9EAF2184DABFA00EF35A5 /* main.m in Sources */,
@@ -698,6 +722,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "job/job-Prefix.pch";
 				INFOPLIST_FILE = "job/job-Info.plist";
@@ -713,6 +738,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "job/job-Prefix.pch";
 				INFOPLIST_FILE = "job/job-Info.plist";

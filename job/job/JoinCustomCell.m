@@ -39,8 +39,6 @@
     self.textView.font = [UIFont systemFontOfSize:13.0f];
     [self addSubview:self.textView];
     
-    //self.textView.layer.borderWidth = 0.5f;
-    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
