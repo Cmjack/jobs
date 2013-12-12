@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+@protocol SearchViewDelegate <NSObject>
+
+-(void)searchDataGetSuccess:(NSArray*)arr;
+
+@end
 
 @interface SearchView : UIView
-
+@property(nonatomic ,weak)id<SearchViewDelegate>  delegate;
 @end

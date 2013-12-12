@@ -19,7 +19,7 @@
 #import "SettingViewController.h"
 #import "SearchView.h"
 #define  VERSION [[[UIDevice currentDevice] systemVersion]floatValue]
-@interface ViewController ()<UITableViewDataSource,UITableViewDelegate,HttpRequestDelegate>
+@interface ViewController ()<UITableViewDataSource,UITableViewDelegate,HttpRequestDelegate,SearchViewDelegate>
 @property(nonatomic,strong)UITableView *jobTableView;
 @property(nonatomic,strong)CustomCell *customCell;
 @property(nonatomic,strong)UIImageView *headImageView;
@@ -28,7 +28,7 @@
 @property(nonatomic,strong)NSArray *jobDataArray;
 @property(nonatomic,strong)DataModel *shareDataModel;
 @property(nonatomic,strong)UIRefreshControl *refresh;
-
+@property(nonatomic,strong)UIButton *searchButton;
 @end
 
 @implementation ViewController
@@ -45,10 +45,17 @@
     [searchButton setBackgroundImage:[UIImage imageNamed:@"ball_point_pen-25"] forState:UIControlStateNormal];
     [searchButton addTarget:self action:@selector(clickSearchButton) forControlEvents:UIControlEventTouchUpInside];
     [self.navigationController.view addSubview:searchButton];
+    self.searchButton = searchButton;
     
+    [self addObserver:self.jobTableView forKeyPath:@"offset" options:NSKeyValueObservingOptionNew context:nil];
+    []
 //
 //     self.jobDataArray = self.shareDataModel.shareData;
 	// Do any additional setup after loading the view, typically from a nib.
+}
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    NSLog(@"chang::::%@",change);
+    
 }
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -56,7 +63,7 @@
     if (VERSION>=7.0f) {
         self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:87.0/255.0f green:147.0/255.0f blue:158.0/255.0 alpha:0.5];
     }
-    
+    self.searchButton.hidden = NO;
 }
 -(void)viewWillDisappear:(BOOL)animated
 {
@@ -64,6 +71,7 @@
     if (VERSION>=7.0f) {
         self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
     }
+    self.searchButton.hidden = YES;
 
 }
 -(void)initViews{
@@ -80,6 +88,7 @@
     self.jobTableView = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStylePlain];
     self.jobTableView.delegate = self;
     self.jobTableView.dataSource = self;
+    
     self.jobTableView.backgroundColor = [UIColor clearColor];
     
     [self.view addSubview:self.jobTableView];
@@ -104,6 +113,7 @@
 -(void)clickSearchButton
 {
     SearchView *search = [[SearchView alloc]initWithFrame:CGRectMake(0,self.view.bounds.size.height , 320, self.view.bounds.size.height)];
+    search.delegate = self;
     [self.view.window addSubview:search];
     [UIView animateWithDuration:0.25 animations:^{
         search.frame = self.view.bounds;
@@ -167,7 +177,12 @@
     [self.refresh endRefreshing];
 }
 
-
+#pragma mark - searchviewdelegate
+-(void)searchDataGetSuccess:(NSArray *)arr
+{
+    self.jobDataArray = arr;
+    [self.jobTableView reloadData];
+}
 #pragma mark - UITableViewDataSource
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
@@ -193,13 +208,13 @@
 {
     float height = 0;
     UIFont *PCAFont = [UIFont boldSystemFontOfSize:13.0f];
-    UIFont *capFont = [UIFont systemFontOfSize:13];
     NSDictionary *dict = [self.jobDataArray objectAtIndex:indexPath.row];
     NSMutableString *PCAString = [NSMutableString stringWithFormat:@"%@ • %@ • %@",[dict objectForKey:JOB_TITLE],[dict objectForKey:JOB_COMPANY],[dict objectForKey:JOB_LOCATION]];
     CGSize size = CGSizeMake(260, 5000);
-    
-    height += [Tools autoSizeLab:size withFont:PCAFont withSting:PCAString];
-    height += [Tools autoSizeLab:size withFont:capFont withSting:[dict objectForKey:JOB_DESC]];
+    NSString *sto= [PCAString stringByReplacingOccurrencesOfString: @"\n" withString:@""];
+
+    height += [Tools autoSizeLab:size withFont:PCAFont withSting:sto];
+    height += 50;
     
     return height;
 }
@@ -223,6 +238,13 @@
     return headview;
 }
 
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    NSLog(@"---%f",scrollView.contentOffset.y+scrollView.frame.size.height);
+    NSLog(@"----%f",scrollView.contentSize.height);
+    if (scrollView.contentOffset.y+scrollView.frame.size.height - scrollView.contentSize.height >20) {
+    }
+}
 
 - (void)didReceiveMemoryWarning
 {

@@ -7,11 +7,12 @@
 //
 
 #import "SearchView.h"
-
-@interface SearchView ()
+#import "HttpRequest.h"
+@interface SearchView ()<UITextFieldDelegate,HttpRequestDelegate>
 @property(nonatomic,strong)NSArray *positionTypeArr;
 @property(nonatomic,strong)UILabel *searchLab;
 @property(nonatomic,strong)UITextField *searchTextField;
+@property(nonatomic,strong)UIButton *searchButton;
 @end
 @implementation SearchView
 
@@ -45,7 +46,8 @@
         [button addTarget:self action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside];
         
         [button addTarget:self action:@selector(touchButton:) forControlEvents:UIControlEventTouchDown];
-        [button addTarget:self action:@selector(touchCancel:) forControlEvents:UIControlEventTouchCancel];
+        
+        [button addTarget:self action:@selector(touchCancel:) forControlEvents:UIControlEventTouchUpOutside];
         [self addSubview:button];
     }
     
@@ -62,21 +64,50 @@
     [self.searchLab addSubview:imageview];
     
     self.searchTextField = [[UITextField alloc]initWithFrame:CGRectMake(50, 5, 160, 30)];
+    self.searchTextField.textColor = [UIColor whiteColor];
     self.searchTextField.backgroundColor = [UIColor clearColor];
+    self.searchTextField.delegate = self;
     [self.searchLab addSubview:self.searchTextField];
+    [self.searchTextField addTarget:self action:@selector(textFieldChange:) forControlEvents:UIControlEventEditingChanged];
     
     UIButton *searchButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    searchButton.tag = 1314;
     searchButton.backgroundColor = [UIColor clearColor];
     searchButton.frame = CGRectMake(220, 5, 30, 30);
     [searchButton setTitle:@"搜索" forState:UIControlStateNormal];
     searchButton.titleLabel.font = [UIFont systemFontOfSize:12.0f];
+    [searchButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [searchButton setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
+    [searchButton addTarget:self action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside];
+    searchButton.enabled = NO;
+    self.searchButton = searchButton;
     [self.searchLab addSubview:searchButton];
     
+}
+-(void)textFieldChange:(UITextField*)sender
+{
+    if (sender.text.length>0) {
+        self.searchButton.enabled = YES;
+    }
+    else
+    {
+        self.searchButton.enabled = NO;
+
+    }
+}
+-(void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    self.searchLab.layer.borderColor = [[UIColor whiteColor]CGColor];
+
+}
+-(void)textFieldDidEndEditing:(UITextField *)textField
+{
+    self.searchLab.layer.borderColor = [[UIColor grayColor]CGColor];
+
 }
 -(void)touchCancel:(id)sender
 {
     UIButton *button = (UIButton*)sender;
-
     button.layer.borderColor = [[UIColor grayColor]CGColor];
 
 }
@@ -89,7 +120,20 @@
 }
 -(void)clickButton:(id)sender
 {
-    [self popView];
+    UIButton *button = (UIButton*)sender;
+    
+    HttpRequest *http =  [[HttpRequest alloc]init];
+    http.delegate = self;
+    
+    if (button.tag == 1314) {
+        [http httpRequestForGetSearch:self.searchTextField.text];
+    }
+    else
+    {
+        [http httpRequestForGetSearch:[self.positionTypeArr objectAtIndex:button.tag - 1000]];
+
+    }    
+    //[self popView];
 }
 -(void)popView
 {
@@ -99,6 +143,15 @@
         [self removeFromSuperview];
     }];
 }
+-(void)getDataSucess:(NSArray *)dataArray
+{
+    if ([self.delegate respondsToSelector:@selector(searchDataGetSuccess:)]) {
+        [self popView];
+        [self.delegate searchDataGetSuccess:dataArray];
+        
+    }
+}
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
