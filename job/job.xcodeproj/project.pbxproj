@@ -36,6 +36,7 @@
 		3FA64942185999E90099D32B /* arrowUp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FA6493B185999E90099D32B /* arrowUp@2x.png */; };
 		3FA64943185999E90099D32B /* blueArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FA6493C185999E90099D32B /* blueArrow.png */; };
 		3FA64944185999E90099D32B /* PullingRefreshTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA6493E185999E90099D32B /* PullingRefreshTableView.m */; };
+		3FA98351185B536000DFF480 /* TecentSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA98350185B536000DFF480 /* TecentSDK.m */; };
 		3FEE698C185AD3350084189B /* login_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FEE698B185AD3350084189B /* login_logo.png */; };
 		3FEE6991185AD6470084189B /* libWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FEE698E185AD6470084189B /* libWeiboSDK.a */; };
 		3FEE6992185AD6470084189B /* WeiboSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3FEE698F185AD6470084189B /* WeiboSDK.bundle */; };
@@ -129,6 +130,8 @@
 		3FA6493C185999E90099D32B /* blueArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueArrow.png; sourceTree = "<group>"; };
 		3FA6493D185999E90099D32B /* PullingRefreshTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullingRefreshTableView.h; sourceTree = "<group>"; };
 		3FA6493E185999E90099D32B /* PullingRefreshTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PullingRefreshTableView.m; sourceTree = "<group>"; };
+		3FA9834F185B536000DFF480 /* TecentSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TecentSDK.h; sourceTree = "<group>"; };
+		3FA98350185B536000DFF480 /* TecentSDK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TecentSDK.m; sourceTree = "<group>"; };
 		3FEE698B185AD3350084189B /* login_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_logo.png; sourceTree = "<group>"; };
 		3FEE698E185AD6470084189B /* libWeiboSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeiboSDK.a; sourceTree = "<group>"; };
 		3FEE698F185AD6470084189B /* WeiboSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WeiboSDK.bundle; sourceTree = "<group>"; };
@@ -382,6 +385,8 @@
 				9D9D85DE184DD3570015CD71 /* DataModel.m */,
 				9D9D85E0184DD3A20015CD71 /* HttpRequest.h */,
 				9D9D85E1184DD3A20015CD71 /* HttpRequest.m */,
+				3FA9834F185B536000DFF480 /* TecentSDK.h */,
+				3FA98350185B536000DFF480 /* TecentSDK.m */,
 			);
 			name = DataModel;
 			sourceTree = "<group>";
@@ -683,6 +688,7 @@
 				9DAD589A1855C5AE00F0A2B2 /* EditWorkViewController.m in Sources */,
 				9DAA6104185719E1002FDF1C /* JoinCustomCell.m in Sources */,
 				9D9D85E2184DD3A20015CD71 /* HttpRequest.m in Sources */,
+				3FA98351185B536000DFF480 /* TecentSDK.m in Sources */,
 				9DA9EAFC184DABFA00EF35A5 /* ViewController.m in Sources */,
 				9DA9EAF6184DABFA00EF35A5 /* AppDelegate.m in Sources */,
 				9DD5658B1850785B007939BA /* loginViewController.m in Sources */,

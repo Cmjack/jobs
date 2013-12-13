@@ -10,6 +10,7 @@
 #import "HttpRequest.h"
 #import "registerView.h"
 #import "DataModel.h"
+#import "TecentSDK.h"
 @interface loginViewController ()<HttpRequestDelegate,UIAlertViewDelegate>
 @property(nonatomic, strong)UILabel *userNameLab;
 @property(nonatomic, strong)UILabel *passwordLab;
@@ -136,8 +137,8 @@
 {
 //    [[[HttpRequest alloc]init]ssoButtonPressed];
     
-    [[DataModel shareData]tencent];
-//    TencentOAuth *tencentOAuth = [[TencentOAuth alloc]initWithAppId:@"100576079" andDelegate:self];
+    NSArray *permissions = [NSArray arrayWithObjects:@"all", nil];
+    [[[TecentSDK getinstance] oauth] authorize:permissions inSafari:NO];//    TencentOAuth *tencentOAuth = [[TencentOAuth alloc]initWithAppId:@"100576079" andDelegate:self];
 //    
 //    NSArray * permissions = [NSArray arrayWithObjects:@"get_user_info", @"add_t", nil];
 //    [tencentOAuth authorize:permissions inSafari:YES];

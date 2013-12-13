@@ -8,23 +8,30 @@
 
 #import "DataModel.h"
 #import <TencentOpenAPI/TencentOAuth.h>
+#import <TencentOpenAPI/TencentMessageObject.h>
 @implementation DataModel
 +(DataModel*)shareData
 {
     static DataModel * shareData ;
-    if (shareData == nil) {
-        shareData = [[DataModel alloc]init];
-        shareData.resumeDict = [NSMutableDictionary dictionaryWithCapacity:10];
+    
+    
+    @synchronized(self)
+    {
+        if (shareData == nil) {
+            shareData = [[DataModel alloc]init];
+            shareData.resumeDict = [NSMutableDictionary dictionaryWithCapacity:10];
+        }
+
     }
+    
     return shareData;
 }
 
 -(void)tencent
 {
     TencentOAuth *tencentOAuth = [[TencentOAuth alloc]initWithAppId:@"100576079" andDelegate:self];
-    
     NSArray * permissions = [NSArray arrayWithObjects:@"all", nil];
-    [tencentOAuth authorize:permissions inSafari:YES];
+    [tencentOAuth authorize:permissions inSafari:NO];
 
 }
 -(void)tencentDidLogin
