@@ -9,11 +9,21 @@
 #import "AppDelegate.h"
 #import "ViewController.h"
 #import "HttpRequest.h"
+#import "WeiboSDK.h"
+#import "headSetting.h"
+#import  <TencentOpenAPI/TencentOAuth.h>
+#import "TencentOpenAPI/QQApiInterface.h"
+#import "DataModel.h"
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 
+//    [WeiboSDK enableDebugMode:YES];
+//    
+//    NSLog(@"WeiboSDK:%i",[WeiboSDK registerApp:kAppKey]);
+    
+    
     NSString *username = [[NSUserDefaults standardUserDefaults]objectForKey:@"username"];
     NSString *password = [[NSUserDefaults standardUserDefaults]objectForKey:@"password"];
     NSLog(@"user:%@",username);
@@ -57,5 +67,16 @@
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+-(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    [QQApiInterface handleOpenURL:url delegate:(id<QQApiInterfaceDelegate>)[DataModel shareData]];
 
+    return [TencentOAuth HandleOpenURL:url];
+}
+
+-(BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+{
+    [QQApiInterface handleOpenURL:url delegate:(id<QQApiInterfaceDelegate>)[DataModel shareData]];
+    return [TencentOAuth HandleOpenURL:url];
+}
 @end

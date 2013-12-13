@@ -5,7 +5,8 @@
 //  Created by impressly on 13-12-3.
 //  Copyright (c) 2013年 impressly. All rights reserved.
 //
-
+#define kAppKey          @"160209186"
+#define kRedirectURI     @"http://www.sina.com"
 #define JOB_ID           @"_id"
 #define JOB_COMPANY      @"company"
 #define JOB_EDU_REQ      @"edu_req"

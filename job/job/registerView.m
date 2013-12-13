@@ -15,6 +15,8 @@
 @property(nonatomic, strong)UITextField *confirmTF;
 @property(nonatomic, strong)UIButton *registerButton;
 @property(nonatomic, strong)UIButton *cancelButton;
+
+
 @end
 
 
@@ -60,11 +62,13 @@
     [self addSubview:self.registerButton];
     
     self.cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.cancelButton.frame = CGRectMake(250, 45, 32, 32);
+    self.cancelButton.frame = CGRectMake(270, 25, 32, 32);
     [self.cancelButton setBackgroundImage:[UIImage imageNamed:@"btn_close_normal"] forState:UIControlStateNormal];
     [self.cancelButton addTarget:self action:@selector(clickCancelButton) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:self.cancelButton];
     
+    
+       
 
 }
 -(void)clickSignButton

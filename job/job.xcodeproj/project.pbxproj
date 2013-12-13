@@ -9,6 +9,17 @@
 /* Begin PBXBuildFile section */
 		113F95CA1854032800E6947D /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 113F95C91854032800E6947D /* MobileCoreServices.framework */; };
 		3D4D62864BF741058B88FF74 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C9FB0C6BD24F4454B35EAB1F /* libPods.a */; };
+		3F0D54F2185AF667005841A6 /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F0D54EF185AF667005841A6 /* TencentOpenAPI.framework */; };
+		3F0D54F3185AF667005841A6 /* TencentOpenApi_IOS_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3F0D54F0185AF667005841A6 /* TencentOpenApi_IOS_Bundle.bundle */; };
+		3F0D54F5185AF957005841A6 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F0D54F4185AF957005841A6 /* Security.framework */; };
+		3F0D54F7185AF974005841A6 /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F0D54F6185AF974005841A6 /* libiconv.dylib */; };
+		3F0D54F9185AF996005841A6 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F0D54F8185AF996005841A6 /* SystemConfiguration.framework */; };
+		3F0D54FB185AF9B1005841A6 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F0D54FA185AF9B1005841A6 /* libsqlite3.dylib */; };
+		3F0D54FD185AF9BF005841A6 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F0D54FC185AF9BF005841A6 /* CoreTelephony.framework */; };
+		3F0D54FF185AF9D3005841A6 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F0D54FE185AF9D3005841A6 /* libstdc++.dylib */; };
+		3F0D5501185AF9DD005841A6 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F0D5500185AF9DD005841A6 /* libz.dylib */; };
+		3F0D5502185AFA0F005841A6 /* TencentOpenAPI.framework in Sources */ = {isa = PBXBuildFile; fileRef = 3F0D54EF185AF667005841A6 /* TencentOpenAPI.framework */; };
+		3F0D5503185AFA14005841A6 /* TencentOpenApi_IOS_Bundle.bundle in Sources */ = {isa = PBXBuildFile; fileRef = 3F0D54F0185AF667005841A6 /* TencentOpenApi_IOS_Bundle.bundle */; };
 		3F6F9D6218580DB700FDF258 /* settings-25.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F6F9D6118580DB700FDF258 /* settings-25.png */; };
 		3F6F9D6618580F4500FDF258 /* border_color-25.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F6F9D6518580F4500FDF258 /* border_color-25.png */; };
 		3F6F9D681858106800FDF258 /* construction_worker-25.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F6F9D671858106800FDF258 /* construction_worker-25.png */; };
@@ -25,6 +36,9 @@
 		3FA64942185999E90099D32B /* arrowUp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FA6493B185999E90099D32B /* arrowUp@2x.png */; };
 		3FA64943185999E90099D32B /* blueArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FA6493C185999E90099D32B /* blueArrow.png */; };
 		3FA64944185999E90099D32B /* PullingRefreshTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA6493E185999E90099D32B /* PullingRefreshTableView.m */; };
+		3FEE698C185AD3350084189B /* login_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FEE698B185AD3350084189B /* login_logo.png */; };
+		3FEE6991185AD6470084189B /* libWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FEE698E185AD6470084189B /* libWeiboSDK.a */; };
+		3FEE6992185AD6470084189B /* WeiboSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3FEE698F185AD6470084189B /* WeiboSDK.bundle */; };
 		9D66ABAC184ECD6B00C03098 /* ResumeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D66ABAB184ECD6B00C03098 /* ResumeViewController.m */; };
 		9D66ABAF184ED9A500C03098 /* PersonMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D66ABAE184ED9A500C03098 /* PersonMessageViewController.m */; };
 		9D66ABB2184EF0C000C03098 /* PersonMessageCustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D66ABB1184EF0C000C03098 /* PersonMessageCustomCell.m */; };
@@ -87,6 +101,15 @@
 /* Begin PBXFileReference section */
 		01DD6B97EB5F403EA03E86D8 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		113F95C91854032800E6947D /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		3F0D54EF185AF667005841A6 /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TencentOpenAPI.framework; sourceTree = "<group>"; };
+		3F0D54F0185AF667005841A6 /* TencentOpenApi_IOS_Bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TencentOpenApi_IOS_Bundle.bundle; sourceTree = "<group>"; };
+		3F0D54F4185AF957005841A6 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		3F0D54F6185AF974005841A6 /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
+		3F0D54F8185AF996005841A6 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		3F0D54FA185AF9B1005841A6 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		3F0D54FC185AF9BF005841A6 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		3F0D54FE185AF9D3005841A6 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
+		3F0D5500185AF9DD005841A6 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		3F6F9D6118580DB700FDF258 /* settings-25.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings-25.png"; sourceTree = "<group>"; };
 		3F6F9D6518580F4500FDF258 /* border_color-25.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "border_color-25.png"; sourceTree = "<group>"; };
 		3F6F9D671858106800FDF258 /* construction_worker-25.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "construction_worker-25.png"; sourceTree = "<group>"; };
@@ -106,6 +129,10 @@
 		3FA6493C185999E90099D32B /* blueArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueArrow.png; sourceTree = "<group>"; };
 		3FA6493D185999E90099D32B /* PullingRefreshTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullingRefreshTableView.h; sourceTree = "<group>"; };
 		3FA6493E185999E90099D32B /* PullingRefreshTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PullingRefreshTableView.m; sourceTree = "<group>"; };
+		3FEE698B185AD3350084189B /* login_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_logo.png; sourceTree = "<group>"; };
+		3FEE698E185AD6470084189B /* libWeiboSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeiboSDK.a; sourceTree = "<group>"; };
+		3FEE698F185AD6470084189B /* WeiboSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WeiboSDK.bundle; sourceTree = "<group>"; };
+		3FEE6990185AD6470084189B /* WeiboSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboSDK.h; sourceTree = "<group>"; };
 		9D66ABAA184ECD6B00C03098 /* ResumeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResumeViewController.h; sourceTree = "<group>"; };
 		9D66ABAB184ECD6B00C03098 /* ResumeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResumeViewController.m; sourceTree = "<group>"; };
 		9D66ABAD184ED9A500C03098 /* PersonMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonMessageViewController.h; sourceTree = "<group>"; };
@@ -184,9 +211,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F0D5501185AF9DD005841A6 /* libz.dylib in Frameworks */,
+				3F0D54FF185AF9D3005841A6 /* libstdc++.dylib in Frameworks */,
+				3F0D54FD185AF9BF005841A6 /* CoreTelephony.framework in Frameworks */,
+				3F0D54FB185AF9B1005841A6 /* libsqlite3.dylib in Frameworks */,
+				3F0D54F9185AF996005841A6 /* SystemConfiguration.framework in Frameworks */,
+				3F0D54F7185AF974005841A6 /* libiconv.dylib in Frameworks */,
+				3F0D54F5185AF957005841A6 /* Security.framework in Frameworks */,
 				113F95CA1854032800E6947D /* MobileCoreServices.framework in Frameworks */,
+				3F0D54F2185AF667005841A6 /* TencentOpenAPI.framework in Frameworks */,
 				9D9D85E4184DD4440015CD71 /* CFNetwork.framework in Frameworks */,
 				9DA9EAE8184DABFA00EF35A5 /* CoreGraphics.framework in Frameworks */,
+				3FEE6991185AD6470084189B /* libWeiboSDK.a in Frameworks */,
 				9DA9EAEA184DABFA00EF35A5 /* UIKit.framework in Frameworks */,
 				9DA9EAE6184DABFA00EF35A5 /* Foundation.framework in Frameworks */,
 				3D4D62864BF741058B88FF74 /* libPods.a in Frameworks */,
@@ -206,6 +242,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3F0D54EB185AF667005841A6 /* tencentSDK */ = {
+			isa = PBXGroup;
+			children = (
+				3F0D54EF185AF667005841A6 /* TencentOpenAPI.framework */,
+				3F0D54F0185AF667005841A6 /* TencentOpenApi_IOS_Bundle.bundle */,
+			);
+			path = tencentSDK;
+			sourceTree = "<group>";
+		};
 		3F6F9D711858459300FDF258 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
@@ -227,6 +272,16 @@
 				3FA6493E185999E90099D32B /* PullingRefreshTableView.m */,
 			);
 			path = PullingRefresh;
+			sourceTree = "<group>";
+		};
+		3FEE698D185AD6470084189B /* libWeiboSDK */ = {
+			isa = PBXGroup;
+			children = (
+				3FEE698E185AD6470084189B /* libWeiboSDK.a */,
+				3FEE698F185AD6470084189B /* WeiboSDK.bundle */,
+				3FEE6990185AD6470084189B /* WeiboSDK.h */,
+			);
+			path = libWeiboSDK;
 			sourceTree = "<group>";
 		};
 		9D66ABA8184ECC4D00C03098 /* MainViewController */ = {
@@ -292,6 +347,7 @@
 		9D7EF5B0184DCBB400182DB2 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				3FEE698B185AD3350084189B /* login_logo.png */,
 				3F6F9D7A18587A4600FDF258 /* SearchIcon.png */,
 				3F6F9D6F1858171F00FDF258 /* ball_point_pen-25.png */,
 				3F6F9D6D1858169B00FDF258 /* map_marker-25.png */,
@@ -353,6 +409,13 @@
 		9DA9EAE4184DABFA00EF35A5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3F0D5500185AF9DD005841A6 /* libz.dylib */,
+				3F0D54FE185AF9D3005841A6 /* libstdc++.dylib */,
+				3F0D54FC185AF9BF005841A6 /* CoreTelephony.framework */,
+				3F0D54FA185AF9B1005841A6 /* libsqlite3.dylib */,
+				3F0D54F8185AF996005841A6 /* SystemConfiguration.framework */,
+				3F0D54F6185AF974005841A6 /* libiconv.dylib */,
+				3F0D54F4185AF957005841A6 /* Security.framework */,
 				113F95C91854032800E6947D /* MobileCoreServices.framework */,
 				9D9D85E3184DD4440015CD71 /* CFNetwork.framework */,
 				9DA9EAE5184DABFA00EF35A5 /* Foundation.framework */,
@@ -367,9 +430,11 @@
 		9DA9EAEB184DABFA00EF35A5 /* job */ = {
 			isa = PBXGroup;
 			children = (
+				3F0D54EB185AF667005841A6 /* tencentSDK */,
 				9DA9EAF4184DABFA00EF35A5 /* AppDelegate.h */,
 				9DA9EAF5184DABFA00EF35A5 /* AppDelegate.m */,
 				9DA9EAF7184DABFA00EF35A5 /* Main.storyboard */,
+				3FEE698D185AD6470084189B /* libWeiboSDK */,
 				9DD5658818507827007939BA /* login */,
 				9D66ABA8184ECC4D00C03098 /* MainViewController */,
 				3F6F9D711858459300FDF258 /* Setting */,
@@ -526,6 +591,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F0D54F3185AF667005841A6 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				3F6F9D6A185814AF00FDF258 /* street_view-25.png in Resources */,
 				9DD5657818501A61007939BA /* datepicker_bg.png in Resources */,
 				9DA9EAFE184DABFA00EF35A5 /* Images.xcassets in Resources */,
@@ -534,8 +600,10 @@
 				9DD5657918501A61007939BA /* datepicker_bg@2x.png in Resources */,
 				3F6F9D7B18587A4600FDF258 /* SearchIcon.png in Resources */,
 				3F6F9D6618580F4500FDF258 /* border_color-25.png in Resources */,
+				3FEE6992185AD6470084189B /* WeiboSDK.bundle in Resources */,
 				3F6F9D6E1858169B00FDF258 /* map_marker-25.png in Resources */,
 				3FA64943185999E90099D32B /* blueArrow.png in Resources */,
+				3FEE698C185AD3350084189B /* login_logo.png in Resources */,
 				9D9D85AF184DCEBB0015CD71 /* History_bg.png in Resources */,
 				9DAA60F81856C187002FDF1C /* next_bg.png in Resources */,
 				9DA9EAF0184DABFA00EF35A5 /* InfoPlist.strings in Resources */,
@@ -608,6 +676,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F0D5503185AFA14005841A6 /* TencentOpenApi_IOS_Bundle.bundle in Sources */,
+				3F0D5502185AFA0F005841A6 /* TencentOpenAPI.framework in Sources */,
 				3F6F9D771858631500FDF258 /* SearchView.m in Sources */,
 				9D66ABB8184F0A3B00C03098 /* WorkTableViewController.m in Sources */,
 				9DAD589A1855C5AE00F0A2B2 /* EditWorkViewController.m in Sources */,
@@ -757,10 +827,18 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/caiming/ios/jobs/job/job/tencentSDK,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "job/job-Prefix.pch";
 				INFOPLIST_FILE = "job/job-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/caiming/ios/jobs/job/job/libWeiboSDK,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -773,10 +851,18 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/caiming/ios/jobs/job/job/tencentSDK,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "job/job-Prefix.pch";
 				INFOPLIST_FILE = "job/job-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/caiming/ios/jobs/job/job/libWeiboSDK,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

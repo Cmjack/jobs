@@ -13,28 +13,22 @@
 #define kPRMargin 5.f
 #define kPRLabelHeight 20.f
 #define kPRLabelWidth 100.f
-#define kPRArrowWidth 20.f  
-#define kPRArrowHeight 40.f
+#define kPRArrowWidth 38.f  
+#define kPRArrowHeight 38.f
 
 #define kTextColor [UIColor colorWithRed:87.0/255.0 green:108.0/255.0 blue:137.0/255.0 alpha:1.0]
-#define kPRBGColor [UIColor clearColor]
-//[UIColor colorWithRed:226.0/255.0 green:231.0/255.0 blue:237.0/255.0 alpha:1.0]
+#define kPRBGColor [UIColor colorWithRed:226.0/255.0 green:231.0/255.0 blue:237.0/255.0 alpha:0.0]
+#define kPRAnimationDuration .18f
 
-#define kPRAnimationDuration 0.18f
-
-@interface LoadingView () 
+@interface PullLoadingView () 
 - (void)updateRefreshDate :(NSDate *)date;
 - (void)layouts;
 @end
 
-@implementation LoadingView
+@implementation PullLoadingView
 @synthesize atTop = _atTop;
 @synthesize state = _state;
 @synthesize loading = _loading;
-
-- (void)dealloc{
-
-}
 
  //Default is at top
 - (id)initWithFrame:(CGRect)frame atTop:(BOOL)top {
@@ -43,21 +37,19 @@
         self.atTop = top;
         self.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 		self.backgroundColor = kPRBGColor;
-        
 //        self.backgroundColor = [UIColor clearColor];
-        UIFont *ft = [UIFont systemFontOfSize:15.f];
+        UIFont *ft = [UIFont systemFontOfSize:12.f];
         _stateLabel = [[UILabel alloc] init ];
         _stateLabel.font = ft;
-        _stateLabel.textColor = [UIColor blackColor];
+        _stateLabel.textColor = kTextColor;
         _stateLabel.textAlignment = NSTextAlignmentCenter;
         _stateLabel.backgroundColor = kPRBGColor;
         _stateLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         _stateLabel.text = NSLocalizedString(@"下拉刷新", @"");
         [self addSubview:_stateLabel];
 
-        _dateLabel = [[UILabel alloc] init ];
-        UIFont *ft2 = [UIFont systemFontOfSize:12.f];
-        _dateLabel.font = ft2;
+        _dateLabel = [[UILabel alloc] init];
+        _dateLabel.font = ft;
         _dateLabel.textColor = kTextColor;
         _dateLabel.textAlignment = NSTextAlignmentCenter;
         _dateLabel.backgroundColor = kPRBGColor;
@@ -65,12 +57,15 @@
 //        _dateLabel.text = NSLocalizedString(@"最后更新", @"");
         [self addSubview:_dateLabel];
         
-        _arrowView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 30, 60, 75) ];
-        self.clipsToBounds = YES;
-        
-        [_arrowView setImage:[UIImage imageNamed:@"drop_down_renovate"]];
-        
-        [self addSubview:_arrowView];
+        _arrowView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 20, 20) ];
+
+        _arrow = [CALayer layer];
+        _arrow.frame = CGRectMake(0, 0, 20, 20);
+        _arrow.contentsGravity = kCAGravityResizeAspect;
+      
+        _arrow.contents = (id)[UIImage imageWithCGImage:[UIImage imageNamed:@"blueArrow.png"].CGImage scale:1 orientation:UIImageOrientationDown].CGImage;
+
+        [self.layer addSublayer:_arrow];
         
         _activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         [self addSubview:_activityView];
@@ -101,8 +96,12 @@
         y = size.height - margin - kPRArrowHeight;
         arrowFrame = CGRectMake(4*x, y, kPRArrowWidth, kPRArrowHeight);
         
+        // 这里添加默认的下拉
+        UIImage *arrow = [UIImage imageNamed:@"arrowUp"];
+        _arrow.contents = (id)arrow.CGImage;
+        
     } else {    //at bottom
-        y = margin + 10;
+        y = margin;
         stateFrame = CGRectMake(0, y, size.width, kPRLabelHeight );
         
         y = y + kPRLabelHeight;
@@ -112,13 +111,17 @@
         y = margin;
         arrowFrame = CGRectMake(4*x, y, kPRArrowWidth, kPRArrowHeight);
         
+        UIImage *arrow = [UIImage imageNamed:@"arrowDown"];        
+        _arrow.contents = (id)arrow.CGImage;
         _stateLabel.text = NSLocalizedString(@"上拉加载", @"");
     }
+    
     _stateLabel.frame = stateFrame;
     _dateLabel.frame = dateFrame;
-    _arrowView.frame = CGRectMake(arrowFrame.origin.x,arrowFrame.origin.y , 60, 75);//arrowFrame;
-    
-    _activityView.center = CGPointMake(size.width - 30, arrowFrame.origin.y+20);
+    _arrowView.frame = arrowFrame;
+    _activityView.center = _arrowView.center;
+    _arrow.frame = arrowFrame;
+    _arrow.transform = CATransform3DIdentity;
 }
 
 - (void)setState:(PRState)state {
@@ -126,10 +129,12 @@
 }
 
 - (void)setState:(PRState)state animated:(BOOL)animated{
+    float duration = animated ? kPRAnimationDuration : 0.f;
     if (_state != state) {
         _state = state;
         if (_state == kPRStateLoading) {    //Loading
             
+            _arrow.hidden = YES;
             _activityView.hidden = NO;
             [_activityView startAnimating];
             
@@ -142,8 +147,14 @@
             
         } else if (_state == kPRStatePulling && !_loading) {    //Scrolling
             
+            _arrow.hidden = NO;
             _activityView.hidden = YES;
             [_activityView stopAnimating];
+            
+            [CATransaction begin];
+            [CATransaction setAnimationDuration:duration];
+            _arrow.transform = CATransform3DMakeRotation(M_PI, 0, 0, 1);
+            [CATransaction commit];
             
             if (self.isAtTop) {
                 _stateLabel.text = NSLocalizedString(@"释放刷新", @"");
@@ -153,17 +164,24 @@
             
         } else if (_state == kPRStateNormal && !_loading){    //Reset
             
+            _arrow.hidden = NO;
             _activityView.hidden = YES;
             [_activityView stopAnimating];
             
+            [CATransaction begin];
+            [CATransaction setAnimationDuration:duration];
+            _arrow.transform = CATransform3DIdentity;
+            [CATransaction commit];
+            
             if (self.isAtTop) {
-                _stateLabel.text = NSLocalizedString(@"下拉刷新", @"");
+                _stateLabel.text = @"下拉刷新";
             } else {
-                _stateLabel.text = NSLocalizedString(@"上拉加载更多", @"");
+                _stateLabel.text = @"上拉加载更多";
             }
         } else if (_state == kPRStateHitTheEnd) {
             if (!self.isAtTop) {    //footer
-                _stateLabel.text = NSLocalizedString(@"没有了哦", @"");
+                _arrow.hidden = YES;
+                _stateLabel.text = @"没有了哦";
             }
         }
     }
@@ -220,7 +238,7 @@
 
 - (void)dealloc {
     [self removeObserver:self forKeyPath:@"contentSize"];
-
+    
 }
 
 - (id)initWithFrame:(CGRect)frame style:(UITableViewStyle)style
@@ -228,21 +246,16 @@
     self = [super initWithFrame:frame style:style];
     if (self) {
         // Initialization code
-        self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"pic_background"]];
-        self.separatorStyle = UITableViewCellSeparatorStyleNone;
         
         CGRect rect = CGRectMake(0, 0 - frame.size.height, frame.size.width, frame.size.height);
-        _headerView = [[LoadingView alloc] initWithFrame:rect atTop:YES];
+        _headerView = [[PullLoadingView alloc] initWithFrame:rect atTop:YES];
         _headerView.atTop = YES;
         [self addSubview:_headerView];
         
-        
         rect = CGRectMake(0, frame.size.height, frame.size.width, frame.size.height);
-        _footerView = [[LoadingView alloc] initWithFrame:rect atTop:NO];
+        _footerView = [[PullLoadingView alloc] initWithFrame:rect atTop:NO];
         _footerView.atTop = NO;
         [self addSubview:_footerView];
-        
-        [self sendSubviewToBack:_headerView];
         
         [self addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionNew context:nil];
         
@@ -295,8 +308,6 @@
                      }];
 }
 
-
-
 - (void)tableViewDidScroll:(UIScrollView *)scrollView {
 
     if (_headerView.state == kPRStateLoading || _footerView.state == kPRStateLoading) {
@@ -310,13 +321,8 @@
     float yMargin = offset.y + size.height - contentSize.height;
     if (offset.y < -kPROffsetY) {   //header totally appeard
          _headerView.state = kPRStatePulling;
-        [_headerView.arrowView setCenter:CGPointMake(_headerView.arrowView.center.x, 528)];
-        
-        
     } else if (offset.y > -kPROffsetY && offset.y < 0){ //header part appeared
         _headerView.state = kPRStateNormal;
-        
-        [_headerView.arrowView setCenter:CGPointMake(_headerView.arrowView.center.x, 588 + offset.y)];
         
     } else if ( yMargin > kPROffsetY){  //footer totally appeared
         if (_footerView.state != kPRStateHitTheEnd) {
@@ -379,7 +385,7 @@
             date = [_pullingDelegate pullingTableViewRefreshingFinishedDate];
         }
         [_headerView updateRefreshDate:date];
-        [UIView animateWithDuration:kPRAnimationDuration delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        [UIView animateWithDuration:kPRAnimationDuration*2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
             self.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
         } completion:^(BOOL bl){
             if (msg != nil && ![msg isEqualToString:@""]) {
@@ -409,24 +415,24 @@
 
 - (void)flashMessage:(NSString *)msg{
     //Show message
-    __block CGRect rect = CGRectMake(0, self.contentOffset.y - 20, self.bounds.size.width, 20);
+    __block CGRect rect = CGRectMake(0, self.contentOffset.y - 32, self.bounds.size.width, 32);
     
     if (_msgLabel == nil) {
         _msgLabel = [[UILabel alloc] init];
         _msgLabel.frame = rect;
-        _msgLabel.font = [UIFont systemFontOfSize:14.f];
+        _msgLabel.font = [UIFont systemFontOfSize:18.f];
         _msgLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-        _msgLabel.backgroundColor = [UIColor orangeColor];
+        _msgLabel.backgroundColor = [UIColor brownColor];
         _msgLabel.textAlignment = NSTextAlignmentCenter;
         [self addSubview:_msgLabel];    
     }
     _msgLabel.text = msg;
     
-    rect.origin.y += 20;
+    rect.origin.y += 32;
     [UIView animateWithDuration:.4f animations:^{
         _msgLabel.frame = rect;
     } completion:^(BOOL finished){
-        rect.origin.y -= 20;
+        rect.origin.y -= 32;
         [UIView animateWithDuration:.4f delay:1.2f options:UIViewAnimationOptionCurveLinear animations:^{
             _msgLabel.frame = rect;
         } completion:^(BOOL finished){
@@ -453,7 +459,6 @@
     CGSize contentSize = self.contentSize;
     frame.origin.y = contentSize.height < self.frame.size.height ? self.frame.size.height : contentSize.height;
     _footerView.frame = frame;
-    NSLog(@"frame:%@",NSStringFromCGRect(_footerView.frame));
     if (self.autoScrollToNextPage && _isFooterInAction) {
         [self scrollToNextPage];
         _isFooterInAction = NO;

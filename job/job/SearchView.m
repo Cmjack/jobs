@@ -148,11 +148,11 @@
         [self removeFromSuperview];
     }];
 }
--(void)getDataSucess:(NSArray *)dataArray
+-(void)getDataSucess:(NSDictionary *)dataDict
 {
     if ([self.delegate respondsToSelector:@selector(searchDataGetSuccess:withSearchString:)]) {
         [self popView];
-        [self.delegate searchDataGetSuccess:dataArray withSearchString:self.searchString];
+        [self.delegate searchDataGetSuccess:dataDict withSearchString:self.searchString];
         
     }
 }

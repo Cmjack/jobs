@@ -15,14 +15,14 @@ typedef enum {
     kPRStateHitTheEnd = 3
 } PRState;
 
-@interface LoadingView : UIView {
+@interface PullLoadingView : UIView {
     UILabel *_stateLabel;
     UILabel *_dateLabel;
+    UIImageView *_arrowView;
     UIActivityIndicatorView *_activityView;
     CALayer *_arrow;
     BOOL _loading;
 }
-@property (nonatomic,strong) UIImageView *arrowView;
 @property (nonatomic,getter = isLoading) BOOL loading;    
 @property (nonatomic,getter = isAtTop) BOOL atTop;
 @property (nonatomic) PRState state;
@@ -36,8 +36,8 @@ typedef enum {
 @protocol PullingRefreshTableViewDelegate;
 
 @interface PullingRefreshTableView : UITableView <UIScrollViewDelegate>{
-    LoadingView *_headerView;
-    LoadingView *_footerView;
+    PullLoadingView *_headerView;
+    PullLoadingView *_footerView;
     UILabel *_msgLabel;
     BOOL _loading;
     BOOL _isFooterInAction;
@@ -60,6 +60,7 @@ typedef enum {
 
 - (void)launchRefreshing;
 
+- (void)flashMessage:(NSString *)msg;
 @end
 
 

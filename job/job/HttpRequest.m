@@ -9,20 +9,25 @@
 #import "HttpRequest.h"
 #import <AFNetworking.h>
 #import "DataModel.h"
+#import "headSetting.h"
+#import <TencentOpenAPI/TencentOAuth.h>
 #define LOCALURL @"http://192.168.1.114:3000/job"
 #define NETURL @"http://121.199.24.40:3000/job"
 
 @implementation HttpRequest
+
+
+
+
 -(void)httpRequestForGet{
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:LOCALURL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
     NSLog(@"job: %@", responseObject);
 //        DataModel *data = [DataModel shareData];
 //        data.shareData = responseObject;
-        NSArray *arr = [responseObject objectForKey:@"Data"];
         if ([self.delegate respondsToSelector:@selector(getDataSucess:)])
         {
-            [self.delegate getDataSucess:arr];
+            [self.delegate getDataSucess:responseObject];
         }
     
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -149,10 +154,9 @@
     [manager GET:@"http://192.168.1.114:3000/job" parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSLog(@"searchResume: %@", responseObject);
-        NSArray *arr = [responseObject objectForKey:@"Data"];
         if ([self.delegate respondsToSelector:@selector(getDataSucess:)])
         {
-            [self.delegate getDataSucess:arr];
+            [self.delegate getDataSucess:responseObject];
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -167,4 +171,31 @@
     NSLog(@"%i",manager.networkReachabilityStatus);
     
 }
+#pragma mark - sina ----
+- (void)ssoButtonPressed
+{
+    
+//    WBAuthorizeRequest *request = [WBAuthorizeRequest request];
+//    request.redirectURI = kRedirectURI;
+//    request.scope = @"all";
+//    
+//    [WeiboSDK sendRequest:request];
+//    [WBHttpRequest requestWithURL:str httpMethod:@"GET" params:Nil delegate:self withTag:@"1"];
+}
+
+//-(void)request:(WBHttpRequest *)request didFinishLoadingWithResult:(NSString *)result
+//{
+//    NSLog(@"sss");
+//}
+//-(void)request:(WBHttpRequest *)request didReceiveResponse:(NSURLResponse *)response
+//{
+//    
+//}
+//-(void)request:(WBHttpRequest *)request didFinishLoadingWithDataResult:(NSData *)data
+//{
+//    
+//}
+
+
+
 @end
