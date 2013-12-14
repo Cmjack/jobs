@@ -7,15 +7,23 @@
 //
 
 #import "DataModel.h"
-
 @implementation DataModel
+
 +(DataModel*)shareData
 {
     static DataModel * shareData ;
-    if (shareData == nil) {
-        shareData = [[DataModel alloc]init];
-        shareData.resumeDict = [NSMutableDictionary dictionaryWithCapacity:10];
+    
+    
+    @synchronized(self)
+    {
+        if (shareData == nil) {
+            shareData = [[DataModel alloc]init];
+            shareData.resumeDict = [NSMutableDictionary dictionaryWithCapacity:10];
+        }
+
     }
+    
     return shareData;
 }
+
 @end

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+
 @interface DataModel : NSObject
 @property(nonatomic,strong)NSArray *shareData;
 @property(nonatomic,assign)BOOL isLogin;

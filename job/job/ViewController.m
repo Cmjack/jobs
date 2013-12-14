@@ -30,6 +30,7 @@
 @property(nonatomic,strong)UIRefreshControl *refresh;
 @property(nonatomic,strong)UIButton *searchButton;
 @property(nonatomic,strong)NSString *searchString;
+@property(nonatomic,strong)NSString *requestEndString;
 @end
 
 @implementation ViewController
@@ -137,32 +138,29 @@
 -(void)clickLeftButton:(id)sender
 {
     
-    SettingViewController *setVC = [[SettingViewController alloc]initWithNibName:Nil bundle:nil];
+//    SettingViewController *setVC = [[SettingViewController alloc]initWithNibName:Nil bundle:nil];
+//    
+//    [self.navigationController pushViewController:setVC animated:YES];
     
-    [self.navigationController pushViewController:setVC animated:YES];
-    
-//    if (self.shareDataModel.isLogin == NO) {
-//        loginViewController *loginVC = [[loginViewController alloc]initWithFrame:CGRectMake(0, self.view.bounds.size.height, 320, self.view.bounds.size.height)];
-//        
-//        
-//        [self.view.window addSubview:loginVC];
-//        
-//        [UIView animateWithDuration:0.25f animations:^{
-//            
-//            loginVC.frame = CGRectMake(0, 0, 320, self.view.bounds.size.height);
-//            
-//        } completion:^(BOOL finished) {
-//            
-//        }];
-//
-//    }else
-//    {
-//        ResumeViewController *resume = [[ResumeViewController alloc]initWithNibName:nil bundle:nil];
-//        [self.navigationController pushViewController:resume animated:YES];
-//    }
-//    ResumeViewController *resume = [[ResumeViewController alloc]initWithNibName:nil bundle:nil];
-//    [self.navigationController pushViewController:resume animated:YES];
-    
+    if (self.shareDataModel.isLogin == NO) {
+        loginViewController *loginVC = [[loginViewController alloc]initWithFrame:CGRectMake(0, self.view.bounds.size.height, 320, self.view.bounds.size.height)];
+        
+        
+        [self.view.window addSubview:loginVC];
+        
+        [UIView animateWithDuration:0.25f animations:^{
+            
+            loginVC.frame = CGRectMake(0, 0, 320, self.view.bounds.size.height);
+            
+        } completion:^(BOOL finished) {
+            
+        }];
+
+    }else
+    {
+        ResumeViewController *resume = [[ResumeViewController alloc]initWithNibName:nil bundle:nil];
+        [self.navigationController pushViewController:resume animated:YES];
+    }
 }
 
 #pragma mark - refreshData
@@ -175,19 +173,21 @@
     
 }
 #pragma mark - HttpRequestDelegate
--(void)getDataSucess:(NSArray *)dataArray
+-(void)getDataSucess:(NSDictionary *)dataDict
 {
-    [self.jobDataArray addObjectsFromArray:dataArray];
-    //[self performSelector:@selector(re) withObject:nil afterDelay:5.5];
+    self.requestEndString = [dataDict objectForKey:@"end"];
+    [self.jobDataArray addObjectsFromArray:[dataDict objectForKey:@"Data"]];
+    [self performSelector:@selector(re) withObject:nil afterDelay:0.5];
     [self.jobTableView reloadData];
 }
 
 #pragma mark - searchviewdelegate
--(void)searchDataGetSuccess:(NSArray *)arr withSearchString:(NSString *)searchString
+-(void)searchDataGetSuccess:(NSDictionary *)dict withSearchString:(NSString *)searchString
 {
+    self.requestEndString = [dict objectForKey:@"end"];
     self.searchString = searchString;
     [self.jobDataArray removeAllObjects];
-    [self.jobDataArray addObjectsFromArray:arr];
+    [self.jobDataArray addObjectsFromArray:[dict objectForKey:@"Data"]];
     [self.jobTableView reloadData];
 }
 #pragma mark - UITableViewDataSource
@@ -248,8 +248,17 @@
 //上拉加载回调
 -(void)pullingTableViewDidStartLoading:(PullingRefreshTableView *)tableView
 {
+    if ([self.requestEndString isEqualToString:@"true"])
+    {
+        //[self.jobTableView tableViewDidFinishedLoadingWithMessage:@"没有了"];
+        [self.jobTableView flashMessage:@"meiyou le "];
+        [self performSelector:@selector(re) withObject:nil afterDelay:1.5];
+
+    }else
+    {
+        [self refreshData];
+    }
     
-    [self refreshData];
 
 }
 
@@ -258,9 +267,7 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     
-    
     [self.jobTableView tableViewDidScroll:scrollView];
-    
 }
 
 
