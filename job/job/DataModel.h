@@ -7,13 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <TencentOpenAPI/TencentOAuth.h>
-#import <TencentOpenAPI/TencentApiInterface.h>
 
-@interface DataModel : NSObject<TencentSessionDelegate,TCAPIRequestDelegate,TencentApiInterfaceDelegate>
+
+@interface DataModel : NSObject
 @property(nonatomic,strong)NSArray *shareData;
 @property(nonatomic,assign)BOOL isLogin;
 @property(nonatomic,strong)NSMutableDictionary *resumeDict;
 +(DataModel*)shareData;
--(void)tencent;
 @end

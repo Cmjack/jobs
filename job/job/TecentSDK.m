@@ -33,19 +33,20 @@ static TecentSDK *g_instance = nil;
 }
 - (id)init
 {
-    //    if (self = [super init])
-    //    {
+    
     NSString *appid = @"100576079";
     _oauth = [[TencentOAuth alloc] initWithAppId:appid
                                      andDelegate:self];
     
-    //}
     return self;
 }
 - (void)tencentDidLogin
 {
-    //[[NSNotificationCenter defaultCenter] postNotificationName:kLoginSuccessed object:self];
+    NSLog(@"-----授权成功！！！");
+    
     [_oauth getUserInfo];
+    NSLog(@"token:%@",[_oauth accessToken]);
+    
 }
 
 - (void)tencentDidNotLogin:(BOOL)cancelled

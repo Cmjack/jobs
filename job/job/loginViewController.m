@@ -138,7 +138,9 @@
 //    [[[HttpRequest alloc]init]ssoButtonPressed];
     
     NSArray *permissions = [NSArray arrayWithObjects:@"all", nil];
-    [[[TecentSDK getinstance] oauth] authorize:permissions inSafari:NO];//    TencentOAuth *tencentOAuth = [[TencentOAuth alloc]initWithAppId:@"100576079" andDelegate:self];
+    [[[TecentSDK getinstance] oauth] authorize:permissions inSafari:NO];
+    
+//    TencentOAuth *tencentOAuth = [[TencentOAuth alloc]initWithAppId:@"100576079" andDelegate:self];
 //    
 //    NSArray * permissions = [NSArray arrayWithObjects:@"get_user_info", @"add_t", nil];
 //    [tencentOAuth authorize:permissions inSafari:YES];

@@ -7,9 +7,8 @@
 //
 
 #import "DataModel.h"
-#import <TencentOpenAPI/TencentOAuth.h>
-#import <TencentOpenAPI/TencentMessageObject.h>
 @implementation DataModel
+
 +(DataModel*)shareData
 {
     static DataModel * shareData ;
@@ -27,36 +26,4 @@
     return shareData;
 }
 
--(void)tencent
-{
-    TencentOAuth *tencentOAuth = [[TencentOAuth alloc]initWithAppId:@"100576079" andDelegate:self];
-    NSArray * permissions = [NSArray arrayWithObjects:@"all", nil];
-    [tencentOAuth authorize:permissions inSafari:NO];
-
-}
--(void)tencentDidLogin
-{
-    NSLog(@"login");
-}
-- (void)getUserInfoResponse:(APIResponse*) response
-{
-    NSLog(@"%@",response);
-}
-
--(void)tencentDidLogout
-{
-    
-}
--(void)tencentDidNotNetWork
-{
-    
-}
--(void)tencentDidNotLogin:(BOOL)cancelled
-{
-    
-}
--(BOOL)onTencentReq:(TencentApiReq *)req
-{
-    return YES;
-}
 @end

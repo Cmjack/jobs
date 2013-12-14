@@ -183,18 +183,7 @@
 //    [WBHttpRequest requestWithURL:str httpMethod:@"GET" params:Nil delegate:self withTag:@"1"];
 }
 
-//-(void)request:(WBHttpRequest *)request didFinishLoadingWithResult:(NSString *)result
-//{
-//    NSLog(@"sss");
-//}
-//-(void)request:(WBHttpRequest *)request didReceiveResponse:(NSURLResponse *)response
-//{
-//    
-//}
-//-(void)request:(WBHttpRequest *)request didFinishLoadingWithDataResult:(NSData *)data
-//{
-//    
-//}
+
 
 
 
