@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface JoinViewController : UIViewController
-
+@property(nonatomic, strong)NSDictionary *dictMessage;
 @end

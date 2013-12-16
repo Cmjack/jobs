@@ -74,7 +74,7 @@
         //NSDictionary *dict = (NSDictionary*)responseObject;
         [DataModel shareData].isLogin = NO;
         if ([[responseObject objectForKey:@"result"]isEqualToString:@"yes"]) {
-            [self httpRequestForGetResume];
+            //[self httpRequestForGetResume];
 
             [DataModel shareData].isLogin = YES;
             NSLog(@"sss");
@@ -132,7 +132,7 @@
 -(void)httpRequestForPostJoinMessgae:(NSDictionary*)dict
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager POST:@"http://192.168.1.114:3000/join" parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager POST:@"http://192.168.1.114:3000/job" parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSLog(@"saveSuccess");
         
@@ -142,6 +142,21 @@
 
 }
 
+-(void)httpRequestForPostJoinList:(NSDictionary*)dict
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:@"http://192.168.1.114:3000/myjoinlist" parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"list:%@",responseObject);
+        if ([self.delegate respondsToSelector:@selector(getJoinMessage:)])
+        {
+            [self.delegate getJoinMessage:responseObject];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+       
+        NSLog(@"list _error%@",error);
+    }];
+    
+}
 
 -(void)httpRequestForGetSearch:(NSString*)string withPage:(NSString*)stringPage
 {
@@ -165,23 +180,30 @@
     }];
 }
 
+-(void)sinaGetUserInfo:(NSDictionary*)dict
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
+    [manager GET:@"https://api.weibo.com/2/users/show.json" parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"userinfo: %@", responseObject);
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        NSLog(@"userinfo:ERROR:%@",error);
+    }];
+
+}
+
+
 +(void)check
 {
     AFNetworkReachabilityManager *manager = [AFNetworkReachabilityManager sharedManager];
     NSLog(@"%i",manager.networkReachabilityStatus);
     
 }
-#pragma mark - sina ----
-- (void)ssoButtonPressed
-{
-    
-//    WBAuthorizeRequest *request = [WBAuthorizeRequest request];
-//    request.redirectURI = kRedirectURI;
-//    request.scope = @"all";
-//    
-//    [WeiboSDK sendRequest:request];
-//    [WBHttpRequest requestWithURL:str httpMethod:@"GET" params:Nil delegate:self withTag:@"1"];
-}
+
 
 
 

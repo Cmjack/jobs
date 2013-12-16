@@ -13,13 +13,13 @@
 
 @protocol TecentSDKDelegate <NSObject>
 
--(void)tencentLoginIsSuccess:(BOOL)isSuccess;
+-(void)tencentLoginIsSuccess:(BOOL)isSuccess withDict:(NSDictionary*)userInfo;
 
 @end
-@interface TecentSDK : NSObject<TencentApiInterfaceDelegate,TencentSessionDelegate,TencentLoginDelegate>
+@interface TecentSDK : NSObject<TencentSessionDelegate>
 @property (nonatomic, retain)TencentOAuth *oauth;
 
 @property (nonatomic, strong)id<TecentSDKDelegate> delegate;
-
+-(void)tencentLogout;
 +(id)getinstance;
 @end

@@ -14,14 +14,16 @@
 #import  <TencentOpenAPI/TencentOAuth.h>
 #import "TencentOpenAPI/QQApiInterface.h"
 #import "DataModel.h"
+@interface AppDelegate()<WeiboSDKDelegate>
+@end
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 
-//    [WeiboSDK enableDebugMode:YES];
-//    
-//    NSLog(@"WeiboSDK:%i",[WeiboSDK registerApp:kAppKey]);
+    [WeiboSDK enableDebugMode:YES];
+    
+    NSLog(@"WeiboSDK:%i",[WeiboSDK registerApp:kAppKey]);
     
     
     NSString *username = [[NSUserDefaults standardUserDefaults]objectForKey:@"username"];
@@ -67,16 +69,70 @@
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
+- (void)didReceiveWeiboResponse:(WBBaseResponse *)response
+{
+    if ([response isKindOfClass:WBSendMessageToWeiboResponse.class])
+    {
+//        NSString *title = @"发送结果";
+//        NSString *message = [NSString stringWithFormat:@"响应状态: %d\n响应UserInfo数据: %@\n原请求UserInfo数据: %@",
+//                             response.statusCode, response.userInfo, response.requestUserInfo];
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
+//                                                        message:message
+//                                                       delegate:nil
+//                                              cancelButtonTitle:@"确定"
+//                                              otherButtonTitles:nil];
+//        [alert show];
+    }
+    else if ([response isKindOfClass:WBAuthorizeResponse.class])
+    {
+//        NSString *title = @"认证结果";
+//        NSString *message = [NSString stringWithFormat:@"响应状态: %d\nresponse.userId: %@\nresponse.accessToken: %@\n响应UserInfo数据: %@\n原请求UserInfo数据: %@",
+//                             response.statusCode, [(WBAuthorizeResponse *)response userID], [(WBAuthorizeResponse *)response accessToken], response.userInfo, response.requestUserInfo];
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
+//                                                        message:message
+//                                                       delegate:nil
+//                                              cancelButtonTitle:@"确定"
+//                                              otherButtonTitles:nil];
+//        [alert show];
+        
+        [[NSUserDefaults standardUserDefaults]setObject:[(WBAuthorizeResponse *)response accessToken] forKey:WEIBOTOKEN];
+        NSLog(@"%@\n",response.userInfo);
+        NSLog(@"%@\n",[(WBAuthorizeResponse *)response userID]);
+        NSLog(@"%@\n",response.requestUserInfo);
+        
+        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[(WBAuthorizeResponse *)response accessToken],@"access_token",[(WBAuthorizeResponse *)response userID],@"uid", nil];
+        
+        
+        [[[HttpRequest alloc]init]sinaGetUserInfo:dict];
+        
+    }
+    
+   
+    
+    
+}
 -(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
-    [QQApiInterface handleOpenURL:url delegate:(id<QQApiInterfaceDelegate>)[DataModel shareData]];
+    
+    NSString *loginType = [[NSUserDefaults standardUserDefaults]objectForKey:LOGINTYPE];
+    if ([loginType isEqualToString:QQLOGIN]) {
+        [QQApiInterface handleOpenURL:url delegate:(id<QQApiInterfaceDelegate>)[DataModel shareData]];
+        
+        return [TencentOAuth HandleOpenURL:url];
+        
+    }
+    else if ([loginType isEqualToString:WEIBOLOGIN])
+    {
+        return [WeiboSDK handleOpenURL:url delegate:self];
 
-    return [TencentOAuth HandleOpenURL:url];
+    }
+    return YES;
 }
 
--(BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
-{
-    [QQApiInterface handleOpenURL:url delegate:(id<QQApiInterfaceDelegate>)[DataModel shareData]];
-    return [TencentOAuth HandleOpenURL:url];
-}
+//-(BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+//{
+//    [QQApiInterface handleOpenURL:url delegate:(id<QQApiInterfaceDelegate>)[DataModel shareData]];
+//    return [TencentOAuth HandleOpenURL:url];
+//}
 @end

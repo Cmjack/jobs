@@ -15,6 +15,7 @@
 @property(nonatomic, strong)UITableView *joinTableView;
 @property(nonatomic, strong)NSArray *joinDataArray;
 @property(nonatomic, strong)NSArray *placeholderArray;
+@property(nonatomic, strong)NSArray *messageKey;
 @property(nonatomic, strong)NSString *captionString;
 @end
 
@@ -45,7 +46,9 @@
     UIBarButtonItem *sendBarButton = [[UIBarButtonItem alloc]initWithTitle:@"发送" style:UIBarButtonItemStylePlain target:self action:@selector(clickSendButton:)];
     self.navigationItem.rightBarButtonItem = sendBarButton;
     
+    self.messageKey = @[JOB_COMPANY,JOB_TITLE,JOB_LOCATION];
     // Do any additional setup after loading the view.
+    
 }
 
 -(void)clickSendButton:(id)sender
@@ -54,18 +57,25 @@
     UITextField *textfield2 = (UITextField*)[self.joinTableView viewWithTag:1001];
     UITextField *textfield3 = (UITextField*)[self.joinTableView viewWithTag:1002];
     UITextView  *textView   = (UITextView*) [self.joinTableView viewWithTag:1004];
-    
-    if (textView.text.length>0&&(![textView.text isEqualToString:self.captionString])&&textfield1.text.length>0&&textfield2.text.length>0&&textfield3.text.length>0) {
-        NSString *username = [[NSUserDefaults standardUserDefaults]objectForKey:@"username"];
+    NSString *username = [[NSUserDefaults standardUserDefaults]objectForKey:@"username"];
+
+    NSLog(@"%@",username);
+    if (textView.text.length>0&&(![textView.text isEqualToString:self.captionString])&&textfield1.text.length>0&&textfield2.text.length>0&&textfield3.text.length>0&&username.length >0) {
         
-        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
-                              textfield1.text,KEY_COMPANY,
-                              textfield2.text,KEY_POSITION,
-                              textfield3.text,KEY_LOCATION,
-                              textView.text,KEY_CAPTION,
+        NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                              textfield1.text,JOB_COMPANY,
+                              textfield2.text,JOB_TITLE,
+                              textfield3.text,JOB_LOCATION,
+                              textView.text,JOB_DESC,
                               username,@"username",
                               nil];
-        [[[HttpRequest alloc]init]httpRequestForPostJoinMessgae:dict];
+        if ([self.dictMessage objectForKey:@"_id"]!=NULL) {
+            
+            [dict setValue:[self.dictMessage objectForKey:JOB_ID] forKey:JOB_ID];
+        }
+        NSLog(@"send:%@",dict);
+
+        [[[HttpRequest alloc]init]httpRequestForPostJoinMessgae:[NSDictionary dictionaryWithObjectsAndKeys:dict,@"param", nil]];
         [self.navigationController popViewControllerAnimated:YES];
         
     }
@@ -107,6 +117,9 @@
         //_customCell.textLabel.text = [self.joinDataArray objectAtIndex:indexPath.row];
         _customCell.imageView.image = [UIImage imageNamed:[self.joinDataArray objectAtIndex:indexPath.row]];
         _customCell.textfield.placeholder = [self.placeholderArray objectAtIndex:indexPath.row];
+        if (self.dictMessage != NULL) {
+            _customCell.textfield.text = [self.dictMessage objectForKey:[self.messageKey objectAtIndex:indexPath.row]];
+        }
 
     }else
     {
@@ -119,6 +132,11 @@
         }
         _customCell.iconImageView.image = [UIImage imageNamed:@"ball_point_pen-25"];
         _customCell.textView.text = self.captionString;
+        
+        if ([self.dictMessage objectForKey:JOB_DESC]!=NULL) {
+            _customCell.textView.text = [self.dictMessage objectForKey:JOB_DESC];
+
+        }
         _customCell.textView.tag = 1004;
         _customCell.textView.delegate = self;
     }

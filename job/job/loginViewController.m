@@ -11,7 +11,9 @@
 #import "registerView.h"
 #import "DataModel.h"
 #import "TecentSDK.h"
-@interface loginViewController ()<HttpRequestDelegate,UIAlertViewDelegate>
+#import "SinaSDK.h"
+#import "headSetting.h"
+@interface loginViewController ()<HttpRequestDelegate,UIAlertViewDelegate,TecentSDKDelegate>
 @property(nonatomic, strong)UILabel *userNameLab;
 @property(nonatomic, strong)UILabel *passwordLab;
 
@@ -22,7 +24,9 @@
 @property(nonatomic, strong)UIButton *cancelButton;
 
 @property(nonatomic, strong)UIButton *autoLogin;
-@property(nonatomic,strong)UIButton  *sinaLogin;
+@property(nonatomic, strong)UIButton  *sinaLogin;
+
+@property(nonatomic ,strong)UIButton *QQLogin;
 
 @end
 
@@ -84,10 +88,23 @@
     self.sinaLogin.backgroundColor = [UIColor brownColor];
     [self.sinaLogin setImage:[UIImage imageNamed:@"login_logo"] forState:UIControlStateNormal];
     [self.sinaLogin setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 106)];
-    [self.sinaLogin setTitle:@"微博账号" forState:UIControlStateNormal];
+    [self.sinaLogin setTitle:@"新浪微博" forState:UIControlStateNormal];
     [self.sinaLogin setTitleEdgeInsets:UIEdgeInsetsMake(0, -106, 0, 0)];
     [self.sinaLogin addTarget:self action:@selector(clickSinaLogin) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:self.sinaLogin];
+    
+    
+    self.QQLogin = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.QQLogin.frame = CGRectMake(90, 310, 150, 44);
+    self.QQLogin.backgroundColor = [UIColor brownColor];
+    [self.QQLogin setImage:[UIImage imageNamed:@"qq"] forState:UIControlStateNormal];
+    
+    [self.QQLogin setImageEdgeInsets:UIEdgeInsetsMake(5, 5, 5, 106)];
+    
+    [self.QQLogin setTitle:@"QQ" forState:UIControlStateNormal];
+    [self.QQLogin setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+    [self.QQLogin addTarget:self action:@selector(clickQQLogin) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:self.QQLogin];
     
 
 }
@@ -135,15 +152,17 @@
 }
 -(void)clickSinaLogin
 {
-//    [[[HttpRequest alloc]init]ssoButtonPressed];
-    
+    [[[SinaSDK alloc]init]ssoButtonPressed];
+    [[NSUserDefaults standardUserDefaults]setObject:WEIBOLOGIN forKey:LOGINTYPE];
+
+}
+
+-(void)clickQQLogin
+{
     NSArray *permissions = [NSArray arrayWithObjects:@"all", nil];
     [[[TecentSDK getinstance] oauth] authorize:permissions inSafari:NO];
-    
-//    TencentOAuth *tencentOAuth = [[TencentOAuth alloc]initWithAppId:@"100576079" andDelegate:self];
-//    
-//    NSArray * permissions = [NSArray arrayWithObjects:@"get_user_info", @"add_t", nil];
-//    [tencentOAuth authorize:permissions inSafari:YES];
+    [[TecentSDK getinstance]setDelegate:self];
+    [[NSUserDefaults standardUserDefaults]setObject:QQLOGIN forKey:LOGINTYPE];
 
 }
 -(void)clickRegister:(id)sender
@@ -174,8 +193,6 @@
     [self.userNameTF resignFirstResponder];
     [self.passWordTF resignFirstResponder];
     [UIView animateWithDuration:0.25f animations:^{
-        
-    
         self.frame = CGRectMake(0, self.bounds.size.height, 320, self.bounds.size.height);
     } completion:^(BOOL finished) {
         
@@ -186,7 +203,6 @@
 #pragma mark - httpdelegate
 -(void)loginSucessOrFail:(BOOL)isSucess
 {
-    
     self.loginButton.enabled = YES;
     self.registerButton.enabled = YES;
     if (isSucess) {
@@ -206,26 +222,15 @@
     
     
 }
-//-(void)tencentDidLogin
-//{
-//    
-//}
-//-(void)tencentDidLogout
-//{
-//    
-//}
-//-(void)tencentDidNotNetWork
-//{
-//    
-//}
-//-(void)tencentDidNotLogin:(BOOL)cancelled
-//{
-//    
-//}
-//- (void)getUserInfoResponse:(APIResponse*) response
-//{
-//    NSLog(@"%@",response);
-//}
+#pragma mark - TecentSDKDelegate
+-(void)tencentLoginIsSuccess:(BOOL)isSuccess withDict:(NSDictionary *)userInfo
+{
+    [self popView];
+    if ([self.delegate respondsToSelector:@selector(loginSuccess:)]) {
+        [self.delegate loginSuccess:userInfo];
+        
+    }
+}
 /*
 #pragma mark - Navigation
 
