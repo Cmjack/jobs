@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+@protocol loginViewControllerDelegate <NSObject>
 
+-(void)loginSuccess:(NSDictionary*)userInfo;
+
+
+@end
 @interface loginViewController : UIView
-
+@property(nonatomic,weak)id<loginViewControllerDelegate> delegate;
 @end

@@ -20,6 +20,11 @@
 		3F0D5501185AF9DD005841A6 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F0D5500185AF9DD005841A6 /* libz.dylib */; };
 		3F0D5502185AFA0F005841A6 /* TencentOpenAPI.framework in Sources */ = {isa = PBXBuildFile; fileRef = 3F0D54EF185AF667005841A6 /* TencentOpenAPI.framework */; };
 		3F0D5503185AFA14005841A6 /* TencentOpenApi_IOS_Bundle.bundle in Sources */ = {isa = PBXBuildFile; fileRef = 3F0D54F0185AF667005841A6 /* TencentOpenApi_IOS_Bundle.bundle */; };
+		3F5FF564185EB61D0063EACB /* qq.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F5FF563185EB61D0063EACB /* qq.png */; };
+		3F5FF567185ECA7A0063EACB /* SettingCustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F5FF566185ECA7A0063EACB /* SettingCustomCell.m */; };
+		3F5FF569185ECDEA0063EACB /* Avatar1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F5FF568185ECDEA0063EACB /* Avatar1.png */; };
+		3F5FF56C185F039F0063EACB /* JionMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F5FF56B185F039F0063EACB /* JionMessageViewController.m */; };
+		3F657C46185C66F400F13554 /* SinaSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F657C45185C66F400F13554 /* SinaSDK.m */; };
 		3F6F9D6218580DB700FDF258 /* settings-25.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F6F9D6118580DB700FDF258 /* settings-25.png */; };
 		3F6F9D6618580F4500FDF258 /* border_color-25.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F6F9D6518580F4500FDF258 /* border_color-25.png */; };
 		3F6F9D681858106800FDF258 /* construction_worker-25.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F6F9D671858106800FDF258 /* construction_worker-25.png */; };
@@ -111,6 +116,14 @@
 		3F0D54FC185AF9BF005841A6 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		3F0D54FE185AF9D3005841A6 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		3F0D5500185AF9DD005841A6 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		3F5FF563185EB61D0063EACB /* qq.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = qq.png; sourceTree = "<group>"; };
+		3F5FF565185ECA7A0063EACB /* SettingCustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingCustomCell.h; sourceTree = "<group>"; };
+		3F5FF566185ECA7A0063EACB /* SettingCustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingCustomCell.m; sourceTree = "<group>"; };
+		3F5FF568185ECDEA0063EACB /* Avatar1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Avatar1.png; sourceTree = "<group>"; };
+		3F5FF56A185F039F0063EACB /* JionMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JionMessageViewController.h; sourceTree = "<group>"; };
+		3F5FF56B185F039F0063EACB /* JionMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JionMessageViewController.m; sourceTree = "<group>"; };
+		3F657C44185C66F400F13554 /* SinaSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinaSDK.h; sourceTree = "<group>"; };
+		3F657C45185C66F400F13554 /* SinaSDK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinaSDK.m; sourceTree = "<group>"; };
 		3F6F9D6118580DB700FDF258 /* settings-25.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings-25.png"; sourceTree = "<group>"; };
 		3F6F9D6518580F4500FDF258 /* border_color-25.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "border_color-25.png"; sourceTree = "<group>"; };
 		3F6F9D671858106800FDF258 /* construction_worker-25.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "construction_worker-25.png"; sourceTree = "<group>"; };
@@ -259,6 +272,10 @@
 			children = (
 				3F6F9D72185845CA00FDF258 /* SettingViewController.h */,
 				3F6F9D73185845CA00FDF258 /* SettingViewController.m */,
+				3F5FF565185ECA7A0063EACB /* SettingCustomCell.h */,
+				3F5FF566185ECA7A0063EACB /* SettingCustomCell.m */,
+				3F5FF56A185F039F0063EACB /* JionMessageViewController.h */,
+				3F5FF56B185F039F0063EACB /* JionMessageViewController.m */,
 			);
 			name = Setting;
 			sourceTree = "<group>";
@@ -350,6 +367,8 @@
 		9D7EF5B0184DCBB400182DB2 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				3F5FF568185ECDEA0063EACB /* Avatar1.png */,
+				3F5FF563185EB61D0063EACB /* qq.png */,
 				3FEE698B185AD3350084189B /* login_logo.png */,
 				3F6F9D7A18587A4600FDF258 /* SearchIcon.png */,
 				3F6F9D6F1858171F00FDF258 /* ball_point_pen-25.png */,
@@ -387,6 +406,8 @@
 				9D9D85E1184DD3A20015CD71 /* HttpRequest.m */,
 				3FA9834F185B536000DFF480 /* TecentSDK.h */,
 				3FA98350185B536000DFF480 /* TecentSDK.m */,
+				3F657C44185C66F400F13554 /* SinaSDK.h */,
+				3F657C45185C66F400F13554 /* SinaSDK.m */,
 			);
 			name = DataModel;
 			sourceTree = "<group>";
@@ -606,11 +627,13 @@
 				3F6F9D7B18587A4600FDF258 /* SearchIcon.png in Resources */,
 				3F6F9D6618580F4500FDF258 /* border_color-25.png in Resources */,
 				3FEE6992185AD6470084189B /* WeiboSDK.bundle in Resources */,
+				3F5FF569185ECDEA0063EACB /* Avatar1.png in Resources */,
 				3F6F9D6E1858169B00FDF258 /* map_marker-25.png in Resources */,
 				3FA64943185999E90099D32B /* blueArrow.png in Resources */,
 				3FEE698C185AD3350084189B /* login_logo.png in Resources */,
 				9D9D85AF184DCEBB0015CD71 /* History_bg.png in Resources */,
 				9DAA60F81856C187002FDF1C /* next_bg.png in Resources */,
+				3F5FF564185EB61D0063EACB /* qq.png in Resources */,
 				9DA9EAF0184DABFA00EF35A5 /* InfoPlist.strings in Resources */,
 				3FA64940185999E90099D32B /* arrowDown@2x.png in Resources */,
 				9DA9EAF9184DABFA00EF35A5 /* Main.storyboard in Resources */,
@@ -689,13 +712,16 @@
 				9DAA6104185719E1002FDF1C /* JoinCustomCell.m in Sources */,
 				9D9D85E2184DD3A20015CD71 /* HttpRequest.m in Sources */,
 				3FA98351185B536000DFF480 /* TecentSDK.m in Sources */,
+				3F657C46185C66F400F13554 /* SinaSDK.m in Sources */,
 				9DA9EAFC184DABFA00EF35A5 /* ViewController.m in Sources */,
 				9DA9EAF6184DABFA00EF35A5 /* AppDelegate.m in Sources */,
 				9DD5658B1850785B007939BA /* loginViewController.m in Sources */,
 				9DAA61011857190D002FDF1C /* JoinViewController.m in Sources */,
 				9D66ABBB184F0CEB00C03098 /* WorkCustomCell.m in Sources */,
 				9DFC874A185166C700997414 /* registerView.m in Sources */,
+				3F5FF567185ECA7A0063EACB /* SettingCustomCell.m in Sources */,
 				9DD5658718504C52007939BA /* JobFont.m in Sources */,
+				3F5FF56C185F039F0063EACB /* JionMessageViewController.m in Sources */,
 				9DD5658318504BA1007939BA /* Tools.m in Sources */,
 				9D66ABB2184EF0C000C03098 /* PersonMessageCustomCell.m in Sources */,
 				9DD5657C18501C4D007939BA /* InputViewController.m in Sources */,

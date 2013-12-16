@@ -40,11 +40,12 @@ static TecentSDK *g_instance = nil;
     
     return self;
 }
+
 - (void)tencentDidLogin
 {
     NSLog(@"-----授权成功！！！");
     
-    [_oauth getUserInfo];
+    [_oauth getVipInfo];
     NSLog(@"token:%@",[_oauth accessToken]);
     
 }
@@ -63,14 +64,8 @@ static TecentSDK *g_instance = nil;
 {
     NSLog(@"%@---",permissions);
     NSLog(@"%@---",extraParams);
-    return nil;
+    return permissions;
 }
-
-- (void)tencentDidLogout
-{
-    
-}
-
 
 - (BOOL)tencentNeedPerformIncrAuth:(TencentOAuth *)tencentOAuth withPermissions:(NSArray *)permissions
 {
@@ -91,6 +86,7 @@ static TecentSDK *g_instance = nil;
 
 - (void)tencentFailedUpdate:(UpdateFailType)reason
 {
+    
 }
 
 
@@ -99,7 +95,27 @@ static TecentSDK *g_instance = nil;
     for (id key in response.jsonResponse) {
         NSLog(@"%@-- %@",key, [response.jsonResponse objectForKey:key]);
     }
-    NSLog(@"respone---%@",response);
+    
+    if ([self.delegate respondsToSelector:@selector(tencentLoginIsSuccess: withDict:)]) {
+        
+        [self.delegate tencentLoginIsSuccess:YES withDict:response.jsonResponse];
+    }
+    
+    NSLog(@"respone---%@",response.jsonResponse);
 }
 
+-(void)tencentLogout
+{
+    [_oauth logout:self];
+    
+}
+-(void)tencentDidLogout
+{
+    NSLog(@"logout");
+}
+- (void)getVipInfoResponse:(APIResponse*) response
+{
+    NSLog(@"respone---%@",response.jsonResponse);
+
+}
 @end

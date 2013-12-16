@@ -15,9 +15,10 @@
 -(void)loginSucessOrFail:(BOOL)isSucess;
 -(void)signSucessOrFail:(BOOL)isSucess;
 -(void)getDataSucess:(NSDictionary*)dataDict;
+-(void)getJoinMessage:(NSArray*)array;
 @end
 
-@interface HttpRequest : NSObject<TencentSessionDelegate>
+@interface HttpRequest : NSObject
 @property(nonatomic, weak)id<HttpRequestDelegate> delegate;
 -(void)httpRequestForGet;
 -(void)registerUserEmail:(NSString*)email withPassWard:(NSString*)passWord;
@@ -26,6 +27,7 @@
 -(void)httpRequestForGetResume;
 -(void)httpRequestForPostJoinMessgae:(NSDictionary*)dict;
 -(void)httpRequestForGetSearch:(NSString*)string withPage:(NSString*)stringPage;
-- (void)ssoButtonPressed;
+-(void)sinaGetUserInfo:(NSDictionary*)dict;
+-(void)httpRequestForPostJoinList:(NSDictionary*)dict;
 +(void)check;
 @end

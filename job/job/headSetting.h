@@ -5,8 +5,18 @@
 //  Created by impressly on 13-12-3.
 //  Copyright (c) 2013年 impressly. All rights reserved.
 //
+
+#define LOGINTYPE        @"loginType"
+#define WEIBOLOGIN       @"weiboLogin"
+#define QQLOGIN          @"QQLogin"
+#define MYAPPLOGIN       @"myAPPLogin"
+
+#define WEIBOTOKEN       @"weiboToken"
+
 #define kAppKey          @"160209186"
-#define kRedirectURI     @"http://www.sina.com"
+#define kRedirectURI     @"http://www.baidu.com"
+
+#define USERNAME         @"username"
 #define JOB_ID           @"_id"
 #define JOB_COMPANY      @"company"
 #define JOB_EDU_REQ      @"edu_req"
@@ -55,6 +65,5 @@
 #define KEY_LANGUAGE     @"language"//语言等级
 #define KEY_TYPE         @"type"
 #define KEY_LEVEL        @"level"
-
 #define KEY_LOCATION     @"location"
 

@@ -18,8 +18,9 @@
 #import "SettingViewController.h"
 #import "SearchView.h"
 #import "PullingRefreshTableView.h"
+
 #define  VERSION [[[UIDevice currentDevice] systemVersion]floatValue]
-@interface ViewController ()<UITableViewDataSource,UITableViewDelegate,HttpRequestDelegate,SearchViewDelegate,PullingRefreshTableViewDelegate>
+@interface ViewController ()<UITableViewDataSource,UITableViewDelegate,HttpRequestDelegate,SearchViewDelegate,PullingRefreshTableViewDelegate,loginViewControllerDelegate>
 @property(nonatomic,strong)PullingRefreshTableView *jobTableView;
 @property(nonatomic,strong)CustomCell *customCell;
 @property(nonatomic,strong)UIImageView *headImageView;
@@ -138,13 +139,11 @@
 -(void)clickLeftButton:(id)sender
 {
     
-//    SettingViewController *setVC = [[SettingViewController alloc]initWithNibName:Nil bundle:nil];
-//    
-//    [self.navigationController pushViewController:setVC animated:YES];
+   
     
     if (self.shareDataModel.isLogin == NO) {
         loginViewController *loginVC = [[loginViewController alloc]initWithFrame:CGRectMake(0, self.view.bounds.size.height, 320, self.view.bounds.size.height)];
-        
+        loginVC.delegate = self;
         
         [self.view.window addSubview:loginVC];
         
@@ -156,10 +155,12 @@
             
         }];
 
-    }else
+    }
+    else
     {
-        ResumeViewController *resume = [[ResumeViewController alloc]initWithNibName:nil bundle:nil];
-        [self.navigationController pushViewController:resume animated:YES];
+        SettingViewController *setVC = [[SettingViewController alloc]initWithNibName:Nil bundle:nil];
+        
+        [self.navigationController pushViewController:setVC animated:YES];
     }
 }
 
@@ -277,7 +278,17 @@
     [self.jobTableView tableViewDidEndDragging:scrollView];
     
 }
-
+#pragma mark - loginViewControllerDelegate
+-(void)loginSuccess:(NSDictionary *)userInfo
+{
+    
+    [[NSUserDefaults standardUserDefaults]setObject:userInfo forKey:@"userinfo"];
+    SettingViewController *setVC = [[SettingViewController alloc]initWithNibName:Nil bundle:nil];
+    
+    [self.navigationController pushViewController:setVC animated:YES];
+    
+    
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
