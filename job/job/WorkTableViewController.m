@@ -142,9 +142,8 @@
 #pragma mark- EditWorkViewControllerDelegate
 -(void)EditWorkViewControllerAddOrAmend:(BOOL)isAdd withData:(NSDictionary *)dict
 {
+
     NSString *userName = [[NSUserDefaults standardUserDefaults]objectForKey:@"username"];
-    
-   
     NSDictionary *dictresume = [NSDictionary dictionaryWithObjectsAndKeys:self.mutableArray,KEY_WE,userName,@"username", nil];
     
      NSLog(@"we: %@",dictresume);

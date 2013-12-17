@@ -10,6 +10,7 @@
 #import "SettingCustomCell.h"
 #import "HttpRequest.h"
 #import "JionMessageViewController.h"
+#import "ResumeViewController.h"
 @interface SettingViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic, strong)UITableView *setTableview;
 @property(nonatomic, strong)NSArray *array;
@@ -46,7 +47,7 @@
     UIBarButtonItem *barbutton =[[UIBarButtonItem alloc]initWithTitle:@"登录" style:UIBarButtonItemStylePlain target:self action:@selector(clickBarButton)];
     self.navigationItem.rightBarButtonItem = barbutton;
 	// Do any additional setup after loading the view.
-    self.array = @[@"招聘中心",@"简历中心",@"切换用户",@"关于应用"];
+    self.array = @[@"已发招聘信息",@"已收简历信息",@"已申请职位信息",@"个人简历信息",@"切换用户",@"关于应用"];
     self.userInfo = [[NSUserDefaults standardUserDefaults]objectForKey:@"userinfo"];
 }
 #pragma mark - UITableViewDataSource
@@ -104,6 +105,9 @@
     if (indexPath.section == 1 && indexPath.row == 0) {
         JionMessageViewController *join = [[JionMessageViewController alloc]initWithNibName:nil bundle:nil];
         [self.navigationController pushViewController:join animated:YES];
+    }else if (indexPath.section == 1 && indexPath.row == 3){
+        ResumeViewController *resume = [[ResumeViewController alloc]initWithNibName:nil bundle:nil];
+        [self.navigationController pushViewController:resume animated:YES];
     }
 }
 

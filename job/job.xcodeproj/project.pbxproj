@@ -20,6 +20,9 @@
 		3F0D5501185AF9DD005841A6 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F0D5500185AF9DD005841A6 /* libz.dylib */; };
 		3F0D5502185AFA0F005841A6 /* TencentOpenAPI.framework in Sources */ = {isa = PBXBuildFile; fileRef = 3F0D54EF185AF667005841A6 /* TencentOpenAPI.framework */; };
 		3F0D5503185AFA14005841A6 /* TencentOpenApi_IOS_Bundle.bundle in Sources */ = {isa = PBXBuildFile; fileRef = 3F0D54F0185AF667005841A6 /* TencentOpenApi_IOS_Bundle.bundle */; };
+		3F596A87186003C900C63C95 /* JobDatailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F596A86186003C900C63C95 /* JobDatailViewController.m */; };
+		3F596A8A1860044700C63C95 /* JobDetailsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F596A891860044700C63C95 /* JobDetailsCell.m */; };
+		3F596A8D1860293800C63C95 /* JobWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F596A8C1860293800C63C95 /* JobWebViewController.m */; };
 		3F5FF564185EB61D0063EACB /* qq.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F5FF563185EB61D0063EACB /* qq.png */; };
 		3F5FF567185ECA7A0063EACB /* SettingCustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F5FF566185ECA7A0063EACB /* SettingCustomCell.m */; };
 		3F5FF569185ECDEA0063EACB /* Avatar1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F5FF568185ECDEA0063EACB /* Avatar1.png */; };
@@ -116,6 +119,12 @@
 		3F0D54FC185AF9BF005841A6 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		3F0D54FE185AF9D3005841A6 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		3F0D5500185AF9DD005841A6 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		3F596A85186003C900C63C95 /* JobDatailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobDatailViewController.h; sourceTree = "<group>"; };
+		3F596A86186003C900C63C95 /* JobDatailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JobDatailViewController.m; sourceTree = "<group>"; };
+		3F596A881860044700C63C95 /* JobDetailsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobDetailsCell.h; sourceTree = "<group>"; };
+		3F596A891860044700C63C95 /* JobDetailsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JobDetailsCell.m; sourceTree = "<group>"; };
+		3F596A8B1860293800C63C95 /* JobWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobWebViewController.h; sourceTree = "<group>"; };
+		3F596A8C1860293800C63C95 /* JobWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JobWebViewController.m; sourceTree = "<group>"; };
 		3F5FF563185EB61D0063EACB /* qq.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = qq.png; sourceTree = "<group>"; };
 		3F5FF565185ECA7A0063EACB /* SettingCustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingCustomCell.h; sourceTree = "<group>"; };
 		3F5FF566185ECA7A0063EACB /* SettingCustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingCustomCell.m; sourceTree = "<group>"; };
@@ -311,8 +320,14 @@
 				9DA9EAFB184DABFA00EF35A5 /* ViewController.m */,
 				9D7EF5AD184DB0E600182DB2 /* CustomCell.h */,
 				9D7EF5AE184DB0E600182DB2 /* CustomCell.m */,
+				3F596A85186003C900C63C95 /* JobDatailViewController.h */,
+				3F596A86186003C900C63C95 /* JobDatailViewController.m */,
+				3F596A881860044700C63C95 /* JobDetailsCell.h */,
+				3F596A891860044700C63C95 /* JobDetailsCell.m */,
 				3F6F9D751858631500FDF258 /* SearchView.h */,
 				3F6F9D761858631500FDF258 /* SearchView.m */,
+				3F596A8B1860293800C63C95 /* JobWebViewController.h */,
+				3F596A8C1860293800C63C95 /* JobWebViewController.m */,
 			);
 			name = MainViewController;
 			sourceTree = "<group>";
@@ -713,8 +728,10 @@
 				9D9D85E2184DD3A20015CD71 /* HttpRequest.m in Sources */,
 				3FA98351185B536000DFF480 /* TecentSDK.m in Sources */,
 				3F657C46185C66F400F13554 /* SinaSDK.m in Sources */,
+				3F596A8D1860293800C63C95 /* JobWebViewController.m in Sources */,
 				9DA9EAFC184DABFA00EF35A5 /* ViewController.m in Sources */,
 				9DA9EAF6184DABFA00EF35A5 /* AppDelegate.m in Sources */,
+				3F596A8A1860044700C63C95 /* JobDetailsCell.m in Sources */,
 				9DD5658B1850785B007939BA /* loginViewController.m in Sources */,
 				9DAA61011857190D002FDF1C /* JoinViewController.m in Sources */,
 				9D66ABBB184F0CEB00C03098 /* WorkCustomCell.m in Sources */,
@@ -731,6 +748,7 @@
 				3F6F9D74185845CA00FDF258 /* SettingViewController.m in Sources */,
 				3FA64944185999E90099D32B /* PullingRefreshTableView.m in Sources */,
 				9D66ABAC184ECD6B00C03098 /* ResumeViewController.m in Sources */,
+				3F596A87186003C900C63C95 /* JobDatailViewController.m in Sources */,
 				9D9D85DF184DD3570015CD71 /* DataModel.m in Sources */,
 				9DA9EAF2184DABFA00EF35A5 /* main.m in Sources */,
 			);

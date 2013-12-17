@@ -172,7 +172,11 @@
     if ([self checkPersonMessage]) {
         
         NSString *userName = [[NSUserDefaults standardUserDefaults]objectForKey:@"username"];
+        
         NSDictionary *dictresume = [NSDictionary dictionaryWithObjectsAndKeys:self.personDict,KEY_PERSON,userName,@"username", nil];
+        
+        
+        
         
         [HttpRequest httpRequestForSaveResume:dictresume];
         
