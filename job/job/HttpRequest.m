@@ -101,7 +101,10 @@
     
 }
 +(void)httpRequestForSaveResume:(NSDictionary*)dict{
+    
+
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
     [manager POST:@"http://192.168.1.114:3000/resume" parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSLog(@"saveSuccess");
