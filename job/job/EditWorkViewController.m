@@ -47,12 +47,18 @@
     [self initViews];
     UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc]initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(clickRightBarButton)];
     self.navigationItem.rightBarButtonItem = rightBarButton;
+//    UIImageView *background = [[UIImageView alloc]initWithFrame:self.view.bounds];
+//    background.backgroundColor = [UIColor whiteColor];
+//    [self.view addSubview:background];
+    
     // Do any additional setup after loading the view.
 }
 -(void)clickRightBarButton
 {
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:self.companyTextField.text,KEY_COMPANY,self.positionTextfield.text,KEY_POSITION,self.startTimeTF.text,KEY_START_DATE,self.endTimeTF.text,KEY_END_DATE,self.captionTextView.text,KEY_CAPTION, nil];
+    
     if ([self.delegate respondsToSelector:@selector(EditWorkViewControllerAddOrAmend:withData:)]) {
-        [self.delegate EditWorkViewControllerAddOrAmend:self.isAdd withData:nil];
+        [self.delegate EditWorkViewControllerAddOrAmend:self.isAdd withData:dict];
     }
 }
 -(void)initViews{
@@ -180,8 +186,8 @@
 {
     self.companyTextField.text = [dict objectForKey:KEY_COMPANY];
     self.positionTextfield.text = [dict objectForKey:KEY_POSITION];
-    self.startTimeTF.text = [dict objectForKey:KEY_START_DATE];
-    self.endTimeTF.text = [dict objectForKey:KEY_END_DATE];
+    self.startTimeTF.text = [[dict objectForKey:KEY_START_DATE]substringToIndex:7];
+    self.endTimeTF.text = [[dict objectForKey:KEY_END_DATE]substringToIndex:7];
     self.captionTextView.text = [dict objectForKey:KEY_CAPTION];
 
 }

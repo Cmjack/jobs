@@ -39,6 +39,9 @@
 		3F6F9D771858631500FDF258 /* SearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F6F9D761858631500FDF258 /* SearchView.m */; };
 		3F6F9D7B18587A4600FDF258 /* SearchIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F6F9D7A18587A4600FDF258 /* SearchIcon.png */; };
 		3F8F3FF118613DE80021A65D /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F8F3FF018613DE80021A65D /* AboutViewController.m */; };
+		3FA37F3C18616C4900E0FC6B /* JIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA37F3B18616C4900E0FC6B /* JIViewController.m */; };
+		3FA37F3F1861702C00E0FC6B /* EditJITBC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA37F3E1861702C00E0FC6B /* EditJITBC.m */; };
+		3FA37F4218617B8600E0FC6B /* JIInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA37F4118617B8600E0FC6B /* JIInputView.m */; };
 		3FA6493F185999E90099D32B /* arrowDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FA64938185999E90099D32B /* arrowDown.png */; };
 		3FA64940185999E90099D32B /* arrowDown@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FA64939185999E90099D32B /* arrowDown@2x.png */; };
 		3FA64941185999E90099D32B /* arrowUp.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FA6493A185999E90099D32B /* arrowUp.png */; };
@@ -148,6 +151,12 @@
 		3F6F9D7A18587A4600FDF258 /* SearchIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SearchIcon.png; sourceTree = "<group>"; };
 		3F8F3FEF18613DE80021A65D /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
 		3F8F3FF018613DE80021A65D /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
+		3FA37F3A18616C4900E0FC6B /* JIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JIViewController.h; sourceTree = "<group>"; };
+		3FA37F3B18616C4900E0FC6B /* JIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JIViewController.m; sourceTree = "<group>"; };
+		3FA37F3D1861702C00E0FC6B /* EditJITBC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditJITBC.h; sourceTree = "<group>"; };
+		3FA37F3E1861702C00E0FC6B /* EditJITBC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditJITBC.m; sourceTree = "<group>"; };
+		3FA37F4018617B8600E0FC6B /* JIInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JIInputView.h; sourceTree = "<group>"; };
+		3FA37F4118617B8600E0FC6B /* JIInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JIInputView.m; sourceTree = "<group>"; };
 		3FA64938185999E90099D32B /* arrowDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrowDown.png; sourceTree = "<group>"; };
 		3FA64939185999E90099D32B /* arrowDown@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrowDown@2x.png"; sourceTree = "<group>"; };
 		3FA6493A185999E90099D32B /* arrowUp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrowUp.png; sourceTree = "<group>"; };
@@ -294,6 +303,19 @@
 			name = Setting;
 			sourceTree = "<group>";
 		};
+		3FA37F3818616A4500E0FC6B /* Job iIntension */ = {
+			isa = PBXGroup;
+			children = (
+				3FA37F3A18616C4900E0FC6B /* JIViewController.h */,
+				3FA37F3B18616C4900E0FC6B /* JIViewController.m */,
+				3FA37F3D1861702C00E0FC6B /* EditJITBC.h */,
+				3FA37F3E1861702C00E0FC6B /* EditJITBC.m */,
+				3FA37F4018617B8600E0FC6B /* JIInputView.h */,
+				3FA37F4118617B8600E0FC6B /* JIInputView.m */,
+			);
+			name = "Job iIntension";
+			sourceTree = "<group>";
+		};
 		3FA64937185999E90099D32B /* PullingRefresh */ = {
 			isa = PBXGroup;
 			children = (
@@ -344,7 +366,7 @@
 				9D66ABAB184ECD6B00C03098 /* ResumeViewController.m */,
 				9D66ABB3184F08EF00C03098 /* personMessgae */,
 				9D66ABB5184F096600C03098 /* work */,
-				9D66ABB4184F090900C03098 /* education */,
+				3FA37F3818616A4500E0FC6B /* Job iIntension */,
 			);
 			name = resume;
 			sourceTree = "<group>";
@@ -362,13 +384,6 @@
 				9DD5657B18501C4D007939BA /* InputViewController.m */,
 			);
 			name = personMessgae;
-			sourceTree = "<group>";
-		};
-		9D66ABB4184F090900C03098 /* education */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "\U001deducation";
 			sourceTree = "<group>";
 		};
 		9D66ABB5184F096600C03098 /* work */ = {
@@ -744,7 +759,9 @@
 				3F5FF567185ECA7A0063EACB /* SettingCustomCell.m in Sources */,
 				9DD5658718504C52007939BA /* JobFont.m in Sources */,
 				3F5FF56C185F039F0063EACB /* JionMessageViewController.m in Sources */,
+				3FA37F3F1861702C00E0FC6B /* EditJITBC.m in Sources */,
 				9DD5658318504BA1007939BA /* Tools.m in Sources */,
+				3FA37F3C18616C4900E0FC6B /* JIViewController.m in Sources */,
 				9D66ABB2184EF0C000C03098 /* PersonMessageCustomCell.m in Sources */,
 				9DD5657C18501C4D007939BA /* InputViewController.m in Sources */,
 				9D66ABAF184ED9A500C03098 /* PersonMessageViewController.m in Sources */,
@@ -752,6 +769,7 @@
 				9D7EF5AF184DB0E600182DB2 /* CustomCell.m in Sources */,
 				3F6F9D74185845CA00FDF258 /* SettingViewController.m in Sources */,
 				3FA64944185999E90099D32B /* PullingRefreshTableView.m in Sources */,
+				3FA37F4218617B8600E0FC6B /* JIInputView.m in Sources */,
 				9D66ABAC184ECD6B00C03098 /* ResumeViewController.m in Sources */,
 				3F596A87186003C900C63C95 /* JobDatailViewController.m in Sources */,
 				3F8F3FF118613DE80021A65D /* AboutViewController.m in Sources */,

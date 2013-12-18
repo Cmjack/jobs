@@ -33,7 +33,7 @@
     self.countLab = [[UILabel alloc]initWithFrame:CGRectMake(5, 35, 30, 30)];
     self.countLab.font = [UIFont systemFontOfSize:7.0f];
     self.countLab.textColor = [UIColor whiteColor];
-    [self addSubview:self.countLab];
+    //[self addSubview:self.countLab];
     
     self.fromLabel = [[UILabel alloc]initWithFrame:CGRectMake(45, 5, 140, 10)];
     self.fromLabel.backgroundColor = [UIColor clearColor];

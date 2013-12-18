@@ -19,7 +19,8 @@
 #import "SearchView.h"
 #import "PullingRefreshTableView.h"
 #import "JobDatailViewController.h"
-#define  VERSION [[[UIDevice currentDevice] systemVersion]floatValue]
+#import "headSetting.h"
+
 @interface ViewController ()<UITableViewDataSource,UITableViewDelegate,HttpRequestDelegate,SearchViewDelegate,PullingRefreshTableViewDelegate,loginViewControllerDelegate>
 @property(nonatomic,strong)PullingRefreshTableView *jobTableView;
 @property(nonatomic,strong)CustomCell *customCell;
@@ -140,28 +141,30 @@
 {
     
 
-   
+    SettingViewController *setVC = [[SettingViewController alloc]initWithNibName:Nil bundle:nil];
     
-    if (self.shareDataModel.isLogin == NO) {
-        loginViewController *loginVC = [[loginViewController alloc]initWithFrame:CGRectMake(0, self.view.bounds.size.height, 320, self.view.bounds.size.height)];
-        loginVC.delegate = self;
-        
-        [self.view.window addSubview:loginVC];
-        
-        [UIView animateWithDuration:0.25f animations:^{
-            
-            loginVC.frame = CGRectMake(0, 0, 320, self.view.bounds.size.height);
-            
-        } completion:^(BOOL finished) {
-            
-        }];
-    }
-    else
-    {
-        SettingViewController *setVC = [[SettingViewController alloc]initWithNibName:Nil bundle:nil];
-        
-        [self.navigationController pushViewController:setVC animated:YES];
-    }
+    [self.navigationController pushViewController:setVC animated:YES];
+    
+//    if (self.shareDataModel.isLogin == NO) {
+//        loginViewController *loginVC = [[loginViewController alloc]initWithFrame:CGRectMake(0, self.view.bounds.size.height, 320, self.view.bounds.size.height)];
+//        loginVC.delegate = self;
+//        
+//        [self.view.window addSubview:loginVC];
+//        
+//        [UIView animateWithDuration:0.25f animations:^{
+//            
+//            loginVC.frame = CGRectMake(0, 0, 320, self.view.bounds.size.height);
+//            
+//        } completion:^(BOOL finished) {
+//            
+//        }];
+//    }
+//    else
+//    {
+//        SettingViewController *setVC = [[SettingViewController alloc]initWithNibName:Nil bundle:nil];
+//        
+//        [self.navigationController pushViewController:setVC animated:YES];
+//    }
 }
 
 #pragma mark - refreshData

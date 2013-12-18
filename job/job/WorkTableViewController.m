@@ -15,6 +15,7 @@
 @interface WorkTableViewController ()<EditWorkViewControllerDelegate>
 @property(nonatomic ,strong)WorkCustomCell *customCell;
 @property(nonatomic ,strong)DataModel *dataModel;
+@property(nonatomic ,assign)NSInteger selectRow;
 
 @end
 
@@ -114,12 +115,14 @@
         EditWorkViewController *editview = [[EditWorkViewController alloc]initWithNibName:nil bundle:nil];
         
         if ([self.type isEqualToString:@"添加工作经历"]) {
+            
             editview.lablesTextArray = [self getWorkArray];
+            
         }else
         {
             editview.lablesTextArray = [self getEducationArray];
         }
-        
+        self.selectRow = -1;
         editview.delegate =self;
         [self.navigationController pushViewController:editview animated:YES];
     }
@@ -132,7 +135,7 @@
         {
             editview.lablesTextArray = [self getEducationArray];
         }
-
+        self.selectRow = indexPath.row;
         editview.delegate =self;
         editview.textsDict = [self.mutableArray objectAtIndex:indexPath.row];
         [self.navigationController pushViewController:editview animated:YES];
@@ -142,16 +145,37 @@
 #pragma mark- EditWorkViewControllerDelegate
 -(void)EditWorkViewControllerAddOrAmend:(BOOL)isAdd withData:(NSDictionary *)dict
 {
-
-    NSString *userName = [[NSUserDefaults standardUserDefaults]objectForKey:@"username"];
-    NSDictionary *dictresume = [NSDictionary dictionaryWithObjectsAndKeys:self.mutableArray,KEY_WE,userName,@"username", nil];
+    if (self.selectRow == -1) {
+        
+        if ([self.mutableArray count] == 0) {
+            
+            self.mutableArray = [NSMutableArray arrayWithCapacity:1];
+        }
+        [self.mutableArray addObject:dict];
+    }else
+    {
+        [self.mutableArray replaceObjectAtIndex:self.selectRow withObject:dict];
+    }
     
-     NSLog(@"we: %@",dictresume);
+    NSString *key;
+    if ([self.type isEqualToString:@"添加工作经历"]) {
+        key = KEY_WE;
+    }else if ([self.type isEqualToString:@"添加教育经历"]){
+        key = KEY_EDUCATION;
+    }else if ([self.type isEqualToString:@"添加培训经历"]){
+        key = KEY_TRAINING;
+    }
+    
+    NSString *userName = [[NSUserDefaults standardUserDefaults]objectForKey:@"username"];
+    NSDictionary *dictresume = [NSDictionary dictionaryWithObjectsAndKeys:self.mutableArray,key,userName,@"username", nil];
+    
+     NSLog(@"%@: %@",key,dictresume);
     [HttpRequest httpRequestForSaveResume:dictresume];
     
-    [[DataModel shareData].resumeDict setObject:self.mutableArray forKey:KEY_WE];
+    [[DataModel shareData].resumeDict setObject:self.mutableArray forKey:key];
     
     [self.navigationController popViewControllerAnimated:YES];
+    [self.tableView reloadData];
 }
 
 -(NSArray*)getWorkArray

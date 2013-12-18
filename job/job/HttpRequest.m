@@ -123,15 +123,23 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
     NSDictionary * user = [NSDictionary dictionaryWithObject:[[NSUserDefaults standardUserDefaults]objectForKey:@"username"] forKey:@"username"];
+    
     NSLog(@"user:%@",user);
     [manager GET:@"http://192.168.1.114:3000/resume" parameters:user success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSLog(@"resume: %@", responseObject);
-        [DataModel shareData].resumeDict = [NSMutableDictionary dictionaryWithDictionary:responseObject];
+        //[DataModel shareData].resumeDict = [NSMutableDictionary dictionaryWithDictionary:responseObject];
+        if ([self.delegate respondsToSelector:@selector(getUserResumeMessage:)]) {
+            
+            [self.delegate getUserResumeMessage:responseObject];
+        }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
-        NSLog(@"resume:ERROR:%@",error);
+        if ([self.delegate respondsToSelector:@selector(getUserResumeMessage:)]) {
+            
+            [self.delegate getUserResumeMessage:NULL];
+        }
         
     }];
 }
