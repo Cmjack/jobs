@@ -38,6 +38,7 @@
 		3F6F9D74185845CA00FDF258 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F6F9D73185845CA00FDF258 /* SettingViewController.m */; };
 		3F6F9D771858631500FDF258 /* SearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F6F9D761858631500FDF258 /* SearchView.m */; };
 		3F6F9D7B18587A4600FDF258 /* SearchIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F6F9D7A18587A4600FDF258 /* SearchIcon.png */; };
+		3F8F3FF118613DE80021A65D /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F8F3FF018613DE80021A65D /* AboutViewController.m */; };
 		3FA6493F185999E90099D32B /* arrowDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FA64938185999E90099D32B /* arrowDown.png */; };
 		3FA64940185999E90099D32B /* arrowDown@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FA64939185999E90099D32B /* arrowDown@2x.png */; };
 		3FA64941185999E90099D32B /* arrowUp.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FA6493A185999E90099D32B /* arrowUp.png */; };
@@ -145,6 +146,8 @@
 		3F6F9D751858631500FDF258 /* SearchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchView.h; sourceTree = "<group>"; };
 		3F6F9D761858631500FDF258 /* SearchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchView.m; sourceTree = "<group>"; };
 		3F6F9D7A18587A4600FDF258 /* SearchIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SearchIcon.png; sourceTree = "<group>"; };
+		3F8F3FEF18613DE80021A65D /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
+		3F8F3FF018613DE80021A65D /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 		3FA64938185999E90099D32B /* arrowDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrowDown.png; sourceTree = "<group>"; };
 		3FA64939185999E90099D32B /* arrowDown@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrowDown@2x.png"; sourceTree = "<group>"; };
 		3FA6493A185999E90099D32B /* arrowUp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrowUp.png; sourceTree = "<group>"; };
@@ -285,6 +288,8 @@
 				3F5FF566185ECA7A0063EACB /* SettingCustomCell.m */,
 				3F5FF56A185F039F0063EACB /* JionMessageViewController.h */,
 				3F5FF56B185F039F0063EACB /* JionMessageViewController.m */,
+				3F8F3FEF18613DE80021A65D /* AboutViewController.h */,
+				3F8F3FF018613DE80021A65D /* AboutViewController.m */,
 			);
 			name = Setting;
 			sourceTree = "<group>";
@@ -749,6 +754,7 @@
 				3FA64944185999E90099D32B /* PullingRefreshTableView.m in Sources */,
 				9D66ABAC184ECD6B00C03098 /* ResumeViewController.m in Sources */,
 				3F596A87186003C900C63C95 /* JobDatailViewController.m in Sources */,
+				3F8F3FF118613DE80021A65D /* AboutViewController.m in Sources */,
 				9D9D85DF184DD3570015CD71 /* DataModel.m in Sources */,
 				9DA9EAF2184DABFA00EF35A5 /* main.m in Sources */,
 			);

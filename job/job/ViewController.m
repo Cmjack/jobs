@@ -138,30 +138,30 @@
 }
 -(void)clickLeftButton:(id)sender
 {
-    loginViewController *loginVC = [[loginViewController alloc]initWithFrame:CGRectMake(0, self.view.bounds.size.height, 320, self.view.bounds.size.height)];
-    loginVC.delegate = self;
     
-    [self.view.window addSubview:loginVC];
-    
-    [UIView animateWithDuration:0.25f animations:^{
-        
-        loginVC.frame = CGRectMake(0, 0, 320, self.view.bounds.size.height);
-        
-    } completion:^(BOOL finished) {
-        
-    }];
 
    
     
-//    if (self.shareDataModel.isLogin == NO) {
-//        
-//    }
-//    else
-//    {
-//        SettingViewController *setVC = [[SettingViewController alloc]initWithNibName:Nil bundle:nil];
-//        
-//        [self.navigationController pushViewController:setVC animated:YES];
-//    }
+    if (self.shareDataModel.isLogin == NO) {
+        loginViewController *loginVC = [[loginViewController alloc]initWithFrame:CGRectMake(0, self.view.bounds.size.height, 320, self.view.bounds.size.height)];
+        loginVC.delegate = self;
+        
+        [self.view.window addSubview:loginVC];
+        
+        [UIView animateWithDuration:0.25f animations:^{
+            
+            loginVC.frame = CGRectMake(0, 0, 320, self.view.bounds.size.height);
+            
+        } completion:^(BOOL finished) {
+            
+        }];
+    }
+    else
+    {
+        SettingViewController *setVC = [[SettingViewController alloc]initWithNibName:Nil bundle:nil];
+        
+        [self.navigationController pushViewController:setVC animated:YES];
+    }
 }
 
 #pragma mark - refreshData
