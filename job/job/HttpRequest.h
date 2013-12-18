@@ -14,8 +14,9 @@
 @optional;
 -(void)loginSucessOrFail:(BOOL)isSucess;
 -(void)signSucessOrFail:(BOOL)isSucess;
--(void)getDataSucess:(NSDictionary*)dataDict;
--(void)getJoinMessage:(NSArray*)array;
+-(void)getDataSucess:(NSDictionary*)dataDict;//获取招聘信息
+-(void)getJoinMessage:(NSArray*)array;//获取用户已发招聘信息
+-(void)getUserResumeMessage:(NSDictionary*)resumeMessage;
 @end
 
 @interface HttpRequest : NSObject

@@ -11,6 +11,8 @@
 #import "HttpRequest.h"
 #import "JionMessageViewController.h"
 #import "ResumeViewController.h"
+#import "AboutViewController.h"
+
 @interface SettingViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic, strong)UITableView *setTableview;
 @property(nonatomic, strong)NSArray *array;
@@ -102,12 +104,17 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section == 1 && indexPath.row == 0) {
         JionMessageViewController *join = [[JionMessageViewController alloc]initWithNibName:nil bundle:nil];
         [self.navigationController pushViewController:join animated:YES];
     }else if (indexPath.section == 1 && indexPath.row == 3){
         ResumeViewController *resume = [[ResumeViewController alloc]initWithNibName:nil bundle:nil];
         [self.navigationController pushViewController:resume animated:YES];
+    }else if (indexPath.section == 1 && indexPath.row == 5)
+    {
+        AboutViewController *about = [[AboutViewController alloc]initWithNibName:nil bundle:nil];
+        [self.navigationController pushViewController:about animated:YES];
     }
 }
 

@@ -55,10 +55,9 @@
     self.dataModel = [DataModel shareData];
     self.personDict = [NSMutableDictionary dictionaryWithDictionary:[self.dataModel.resumeDict objectForKey:KEY_PERSON]];
     NSLog(@"1:personDict %@",self.personDict);
+    
     if ([self.personDict objectForKey:KEY_NAME ]== NULL) {
-        
         self.personDict = [NSMutableDictionary dictionaryWithDictionary:[self getDefaultPersonData]];
-        
         NSLog(@"2:personDict %@",self.personDict);
     }
     
