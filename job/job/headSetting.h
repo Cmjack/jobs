@@ -32,6 +32,7 @@
 #define FROM_58          @"58.com"
 #define FROM_WEALINK     @"wealink.com"
 #define FROM_LAGOU       @"lagou.com"
+#define FROM_51          @"wuyao.com"
 
 #define KEY_PERSON       @"person"//个人基本信息
 

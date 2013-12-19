@@ -10,4 +10,5 @@
 
 @interface SinaSDK : NSObject
 - (void)ssoButtonPressed;
++ (void)ssoOutButtonPressed;
 @end

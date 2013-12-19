@@ -9,7 +9,7 @@
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIdentifier</key>
-	<string>qq.${PRODUCT_NAME:rfc1034identifier}</string>
+	<string>com.impressly.jobline</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -36,7 +36,7 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>qq.job</string>
+			<string>com.impressly.jobline</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>WB160209186</string>

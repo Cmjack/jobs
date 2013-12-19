@@ -27,6 +27,8 @@
 		3F5FF567185ECA7A0063EACB /* SettingCustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F5FF566185ECA7A0063EACB /* SettingCustomCell.m */; };
 		3F5FF569185ECDEA0063EACB /* Avatar1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F5FF568185ECDEA0063EACB /* Avatar1.png */; };
 		3F5FF56C185F039F0063EACB /* JionMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F5FF56B185F039F0063EACB /* JionMessageViewController.m */; };
+		3F6287DB1862C80C00360749 /* 51Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F6287DA1862C80C00360749 /* 51Icon.png */; };
+		3F6287DE1862E37A00360749 /* LoginHelp.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F6287DD1862E37A00360749 /* LoginHelp.m */; };
 		3F657C46185C66F400F13554 /* SinaSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F657C45185C66F400F13554 /* SinaSDK.m */; };
 		3F6F9D6218580DB700FDF258 /* settings-25.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F6F9D6118580DB700FDF258 /* settings-25.png */; };
 		3F6F9D6618580F4500FDF258 /* border_color-25.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F6F9D6518580F4500FDF258 /* border_color-25.png */; };
@@ -135,6 +137,9 @@
 		3F5FF568185ECDEA0063EACB /* Avatar1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Avatar1.png; sourceTree = "<group>"; };
 		3F5FF56A185F039F0063EACB /* JionMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JionMessageViewController.h; sourceTree = "<group>"; };
 		3F5FF56B185F039F0063EACB /* JionMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JionMessageViewController.m; sourceTree = "<group>"; };
+		3F6287DA1862C80C00360749 /* 51Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 51Icon.png; sourceTree = "<group>"; };
+		3F6287DC1862E37A00360749 /* LoginHelp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginHelp.h; sourceTree = "<group>"; };
+		3F6287DD1862E37A00360749 /* LoginHelp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginHelp.m; sourceTree = "<group>"; };
 		3F657C44185C66F400F13554 /* SinaSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinaSDK.h; sourceTree = "<group>"; };
 		3F657C45185C66F400F13554 /* SinaSDK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinaSDK.m; sourceTree = "<group>"; };
 		3F6F9D6118580DB700FDF258 /* settings-25.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings-25.png"; sourceTree = "<group>"; };
@@ -403,6 +408,7 @@
 			isa = PBXGroup;
 			children = (
 				3F5FF568185ECDEA0063EACB /* Avatar1.png */,
+				3F6287DA1862C80C00360749 /* 51Icon.png */,
 				3F5FF563185EB61D0063EACB /* qq.png */,
 				3FEE698B185AD3350084189B /* login_logo.png */,
 				3F6F9D7A18587A4600FDF258 /* SearchIcon.png */,
@@ -570,6 +576,8 @@
 				9DD5658A1850785B007939BA /* loginViewController.m */,
 				9DFC8748185166C700997414 /* registerView.h */,
 				9DFC8749185166C700997414 /* registerView.m */,
+				3F6287DC1862E37A00360749 /* LoginHelp.h */,
+				3F6287DD1862E37A00360749 /* LoginHelp.m */,
 			);
 			name = login;
 			sourceTree = "<group>";
@@ -684,6 +692,7 @@
 				3F6F9D681858106800FDF258 /* construction_worker-25.png in Resources */,
 				9DAA60F91856C187002FDF1C /* home_navigationbutton_normal.png in Resources */,
 				9DAA60FB1856C187002FDF1C /* previous.png in Resources */,
+				3F6287DB1862C80C00360749 /* 51Icon.png in Resources */,
 				9D7EF5B2184DCC1A00182DB2 /* history_list_bg.png in Resources */,
 				3FA64942185999E90099D32B /* arrowUp@2x.png in Resources */,
 				9DFC874C1851A8BB00997414 /* wealink.jpg in Resources */,
@@ -764,6 +773,7 @@
 				3FA37F3C18616C4900E0FC6B /* JIViewController.m in Sources */,
 				9D66ABB2184EF0C000C03098 /* PersonMessageCustomCell.m in Sources */,
 				9DD5657C18501C4D007939BA /* InputViewController.m in Sources */,
+				3F6287DE1862E37A00360749 /* LoginHelp.m in Sources */,
 				9D66ABAF184ED9A500C03098 /* PersonMessageViewController.m in Sources */,
 				9D66ABC1184F220900C03098 /* EditDiplomaTableViewController.m in Sources */,
 				9D7EF5AF184DB0E600182DB2 /* CustomCell.m in Sources */,

@@ -12,7 +12,8 @@
 #import "JionMessageViewController.h"
 #import "ResumeViewController.h"
 #import "AboutViewController.h"
-
+#import "LoginHelp.h"
+#import "Tools.h"
 @interface SettingViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic, strong)UITableView *setTableview;
 @property(nonatomic, strong)NSArray *array;
@@ -75,7 +76,9 @@
             _customCell = [[SettingCustomCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellString];
             
         }
-        _customCell.userNameLab.text = [self.userInfo objectForKey:@"nickname"];
+        _customCell.userNameLab.text = [self.userInfo objectForKey:@"nick_name"];
+        
+        _customCell.headImageView.image = [Tools imageLoading];
         return _customCell;
         
     }else
@@ -115,6 +118,15 @@
     {
         AboutViewController *about = [[AboutViewController alloc]initWithNibName:nil bundle:nil];
         [self.navigationController pushViewController:about animated:YES];
+    }else if (indexPath.section == 1 && indexPath.row == 4)
+    {
+        if ([self.delegate respondsToSelector:@selector(cancelUser)]) {
+            
+            [LoginHelp removeUserInfo];
+            [self.navigationController popViewControllerAnimated:NO];
+            [self.delegate cancelUser];
+            
+        }
     }
 }
 

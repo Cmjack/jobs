@@ -40,11 +40,9 @@
     NSDictionary * dict = [NSDictionary dictionaryWithObjectsAndKeys:email,@"email",passWord,@"password", nil];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager POST:@"http://192.168.1.114:3000/register" parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
+        NSLog(@"register:%@",responseObject);
         BOOL isSalt = NO;
-        [DataModel shareData].isLogin = NO;
         if ([responseObject objectForKey:@"salt"]!= NULL) {
-            [DataModel shareData].isLogin = YES;
             isSalt = YES;
         }
         
@@ -54,7 +52,6 @@
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [DataModel shareData].isLogin = NO;
         if ([self.delegate respondsToSelector:@selector(signSucessOrFail:)]) {
             [self.delegate signSucessOrFail:NO];
         }
@@ -72,11 +69,9 @@
         NSLog(@"login:%@ ",responseObject);
         BOOL isSucess =NO;
         //NSDictionary *dict = (NSDictionary*)responseObject;
-        [DataModel shareData].isLogin = NO;
         if ([[responseObject objectForKey:@"result"]isEqualToString:@"yes"]) {
             //[self httpRequestForGetResume];
 
-            [DataModel shareData].isLogin = YES;
             NSLog(@"sss");
             isSucess =YES;
         }
@@ -88,9 +83,7 @@
         
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [DataModel shareData].isLogin = NO;
         if ([self.delegate respondsToSelector:@selector(loginSucessOrFail:)]) {
-            
             
             [self.delegate loginSucessOrFail:NO];
         }
@@ -200,8 +193,9 @@
     
     [manager GET:@"https://api.weibo.com/2/users/show.json" parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        NSLog(@"userinfo: %@", responseObject);
-        
+       // NSLog(@"userinfo: %@", responseObject);
+        [[NSNotificationCenter defaultCenter]postNotificationName:@"weibologin" object:nil userInfo:responseObject];
+
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
@@ -210,6 +204,27 @@
 
 }
 
+-(void)getRefreshJobMessage:(NSString*)_idString
+{
+    NSDictionary *dict =@{@"id": _idString};
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+
+    [manager GET:@"http://192.168.1.114:3000/job_timeline" parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"newData:%@",responseObject);
+        NSArray *arr = [responseObject objectForKey:@"Data"];
+        if ([self.delegate respondsToSelector:@selector(getRefreshJobMessage:)]) {
+            
+            [self.delegate getRefreshJobMessage:arr];
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        NSLog(@"newData-error:%@",error);
+    }];
+
+}
 
 +(void)check
 {
@@ -217,10 +232,6 @@
     NSLog(@"%i",manager.networkReachabilityStatus);
     
 }
-
-
-
-
 
 
 @end

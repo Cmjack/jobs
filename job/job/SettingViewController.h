@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+@protocol SettingViewControllerDelegate <NSObject>
 
-@interface SettingViewController : UIViewController
+-(void)cancelUser;
 
 @end
+@interface SettingViewController : UIViewController
+@property(nonatomic  ,weak)id<SettingViewControllerDelegate> delegate;
+@end
+
+
+

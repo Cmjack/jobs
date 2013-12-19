@@ -17,6 +17,8 @@
 -(void)getDataSucess:(NSDictionary*)dataDict;//获取招聘信息
 -(void)getJoinMessage:(NSArray*)array;//获取用户已发招聘信息
 -(void)getUserResumeMessage:(NSDictionary*)resumeMessage;
+-(void)getRefreshJobMessage:(NSArray*)refreshMessage;
+
 @end
 
 @interface HttpRequest : NSObject
@@ -30,5 +32,7 @@
 -(void)httpRequestForGetSearch:(NSString*)string withPage:(NSString*)stringPage;
 -(void)sinaGetUserInfo:(NSDictionary*)dict;
 -(void)httpRequestForPostJoinList:(NSDictionary*)dict;
+-(void)getRefreshJobMessage:(NSString*)_idString;
+
 +(void)check;
 @end

@@ -13,6 +13,7 @@
 #import "TecentSDK.h"
 #import "SinaSDK.h"
 #import "headSetting.h"
+#import "DataModel.h"
 @interface loginViewController ()<HttpRequestDelegate,UIAlertViewDelegate,TecentSDKDelegate>
 @property(nonatomic, strong)UILabel *userNameLab;
 @property(nonatomic, strong)UILabel *passwordLab;
@@ -44,7 +45,8 @@
 }
 - (void)loadView
 {
-    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(weiboLogin:) name:@"weibologin" object:nil];
+
     self.backgroundColor = [UIColor whiteColor];
     
     [self initViews];
@@ -117,6 +119,7 @@
     self.userNameTF = [[UITextField alloc]initWithFrame:CGRectMake(90, 80, 200, 34)];
     self.userNameTF.placeholder = @"用户名/电子邮箱";
     self.userNameTF.borderStyle = UITextBorderStyleBezel;
+    self.userNameTF.keyboardType = UIKeyboardTypeEmailAddress;
     [self addSubview:self.userNameTF];
     
     self.userNameLab = [[UILabel alloc]initWithFrame:CGRectMake(30, 130, 60, 34)];
@@ -209,12 +212,12 @@
         
         [[NSUserDefaults standardUserDefaults]setObject:self.userNameTF.text forKey:@"username"];
         [[NSUserDefaults standardUserDefaults]setObject:self.passWordTF.text forKey:@"password"];
-        
+        [DataModel shareData].isLogin = YES;
         [self popView];
         
     }else
     {
-        
+        [DataModel shareData].isLogin = NO;
         UIAlertView *alerView = [[UIAlertView alloc]initWithTitle:nil message:@"用户名或密码错误！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
         alerView.delegate = self;
         [alerView show];
@@ -225,11 +228,38 @@
 #pragma mark - TecentSDKDelegate
 -(void)tencentLoginIsSuccess:(BOOL)isSuccess withDict:(NSDictionary *)userInfo
 {
+    
+    NSDictionary *newUserInfo = [NSDictionary dictionaryWithObjectsAndKeys:[userInfo objectForKey:@"nickname"],@"nick_name",[userInfo objectForKey:@"figureurl_qq_2"],@"head_url", nil];
+    
+    [DataModel shareData].isLogin = YES;
     [self popView];
     if ([self.delegate respondsToSelector:@selector(loginSuccess:)]) {
-        [self.delegate loginSuccess:userInfo];
+        [self.delegate loginSuccess:newUserInfo];
         
     }
+}
+#pragma mark -NSNotificationCenter
+-(void)weiboLogin:(NSNotification*)dict
+{
+    NSDictionary *userinfo = [dict userInfo];
+    [[NSUserDefaults standardUserDefaults]setObject:WEIBOLOGIN forKey:LOGINTYPE];
+    [DataModel shareData].isLogin = YES;
+    NSLog(@"%@",userinfo);
+    NSString * wbUserName = [NSString stringWithFormat:@"wb%@",[userinfo objectForKey:@"id"]];
+    NSDictionary *newUserInfo = [NSDictionary dictionaryWithObjectsAndKeys:[userinfo objectForKey:@"avatar_hd"],@"head_url",
+                                 [userinfo objectForKey:@"screen_name"],@"nick_name",
+                                 
+                                 nil];
+    
+    [[NSUserDefaults standardUserDefaults]setObject:wbUserName forKey:@"username"];
+    
+    [[[HttpRequest alloc]init]registerUserEmail:wbUserName withPassWard:@"1234"];
+    [self popView];
+    if ([self.delegate respondsToSelector:@selector(loginSuccess:)]) {
+        [self.delegate loginSuccess:newUserInfo];
+        
+    }
+    
 }
 /*
 #pragma mark - Navigation

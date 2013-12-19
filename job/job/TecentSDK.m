@@ -10,6 +10,8 @@
 #import <TencentOpenAPI/TencentOAuth.h>
 #import <TencentOpenAPI/TencentApiInterface.h>
 #import <TencentOpenAPI/TencentOAuthObject.h>
+#import "HttpRequest.h"
+#import "headSetting.h"
 static TecentSDK *g_instance = nil;
 @implementation TecentSDK
 @synthesize oauth = _oauth;
@@ -45,21 +47,22 @@ static TecentSDK *g_instance = nil;
 {
     NSLog(@"-----授权成功！！！");
     
-    [_oauth getVipInfo];
-    NSLog(@"token:%@",[_oauth accessToken]);
+    [_oauth getUserInfo];
     
+    [[NSUserDefaults standardUserDefaults]setObject:QQLOGIN forKey:LOGINTYPE];
+    NSString * qqUserName = [NSString stringWithFormat:@"qq%@",[_oauth openId]];
+    [[NSUserDefaults standardUserDefaults]setObject:qqUserName forKey:@"username"];
+    [[[HttpRequest alloc]init]registerUserEmail:qqUserName withPassWard:@"1234"];
 }
 
 - (void)tencentDidNotLogin:(BOOL)cancelled
 {
-   // [[NSNotificationCenter defaultCenter] postNotificationName:kLoginFailed object:self];
+   
 }
 
 - (void)tencentDidNotNetWork
 {
-    //[[NSNotificationCenter defaultCenter] postNotificationName:kLoginFailed object:self];
 }
-
 - (NSArray *)getAuthorizedPermissions:(NSArray *)permissions withExtraParams:(NSDictionary *)extraParams
 {
     NSLog(@"%@---",permissions);
@@ -92,16 +95,12 @@ static TecentSDK *g_instance = nil;
 
 - (void)getUserInfoResponse:(APIResponse*) response
 {
-    for (id key in response.jsonResponse) {
-        NSLog(@"%@-- %@",key, [response.jsonResponse objectForKey:key]);
-    }
     
     if ([self.delegate respondsToSelector:@selector(tencentLoginIsSuccess: withDict:)]) {
         
         [self.delegate tencentLoginIsSuccess:YES withDict:response.jsonResponse];
     }
     
-    NSLog(@"respone---%@",response.jsonResponse);
 }
 
 -(void)tencentLogout
