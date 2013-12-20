@@ -34,13 +34,23 @@
 {
     [super viewDidLoad];
     self.dataModel =[DataModel shareData];
-    
+    [self setTitle];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+-(void)setTitle
+{
+    if ([self.type isEqualToString:@"添加工作经历"]) {
+        self.title = @"工作经历";
+    }else if ([self.type isEqualToString:@"添加教育经历"]){
+        self.title = @"教育经历";
+    }else if ([self.type isEqualToString:@"添加培训经历"]){
+        self.title = @"培训经历";
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -105,7 +115,6 @@
 {
     return 44.0f;
 }
-
 
 #pragma mark - tableviewDelegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

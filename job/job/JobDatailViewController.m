@@ -101,9 +101,16 @@
 }
 -(void)sendApply
 {
-    JobWebViewController *web = [[JobWebViewController alloc]initWithNibName:nil bundle:nil];
-    web.urlStr = [self.jobMessageDict objectForKey:JOB_URL];
-    [self.navigationController pushViewController:web animated:YES];
+    if ([[self.jobMessageDict objectForKey:JOB_URL]length]>0) {
+        JobWebViewController *web = [[JobWebViewController alloc]initWithNibName:nil bundle:nil];
+        web.urlStr = [self.jobMessageDict objectForKey:JOB_URL];
+        [self.navigationController pushViewController:web animated:YES];
+    }
+    else
+    {
+        NSLog(@"%@",self.jobMessageDict);
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning

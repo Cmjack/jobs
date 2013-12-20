@@ -10,6 +10,7 @@
 #import "JoinCustomCell.h"
 #import "headSetting.h"
 #import "HttpRequest.h"
+#import "loginViewController.h"
 @interface JoinViewController ()<UITableViewDataSource,UITableViewDelegate,UITextViewDelegate,UITextFieldDelegate>
 @property(nonatomic, strong)JoinCustomCell *customCell;
 @property(nonatomic, strong)UITableView *joinTableView;
@@ -51,6 +52,25 @@
     
 }
 
+-(void)showLoginView
+{
+    UIWindow *keywindow = [[UIApplication sharedApplication]keyWindow];
+    
+    loginViewController *loginVC = [[loginViewController alloc]initWithFrame:CGRectMake(0, self.view.bounds.size.height, 320, self.view.bounds.size.height)];
+    
+    
+    
+    [keywindow addSubview:loginVC];
+    
+    [UIView animateWithDuration:0.25f animations:^{
+        
+        loginVC.frame = CGRectMake(0, 0, 320, self.view.bounds.size.height);
+        
+    } completion:^(BOOL finished) {
+        
+    }];
+}
+
 -(void)clickSendButton:(id)sender
 {
     UITextField *textfield1 = (UITextField*)[self.joinTableView viewWithTag:1000];
@@ -58,33 +78,45 @@
     UITextField *textfield3 = (UITextField*)[self.joinTableView viewWithTag:1002];
     UITextView  *textView   = (UITextView*) [self.joinTableView viewWithTag:1004];
     NSString *username = [[NSUserDefaults standardUserDefaults]objectForKey:@"username"];
-
-    NSLog(@"%@",username);
-    if (textView.text.length>0&&(![textView.text isEqualToString:self.captionString])&&textfield1.text.length>0&&textfield2.text.length>0&&textfield3.text.length>0&&username.length >0) {
+    if (username.length <=0) {
         
-        NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                              textfield1.text,JOB_COMPANY,
-                              textfield2.text,JOB_TITLE,
-                              textfield3.text,JOB_LOCATION,
-                              textView.text,JOB_DESC,
-                              username,@"username",
-                              nil];
-        if ([self.dictMessage objectForKey:@"_id"]!=NULL) {
+        [textfield1 resignFirstResponder];
+        [textfield2 resignFirstResponder];
+        [textfield3 resignFirstResponder];
+        [textView resignFirstResponder];
+        
+        [self showLoginView];
+    }
+    else
+    {
+        if (textView.text.length>0&&(![textView.text isEqualToString:self.captionString])&&textfield1.text.length>0&&textfield2.text.length>0&&textfield3.text.length>0&&username.length >0) {
             
-            [dict setValue:[self.dictMessage objectForKey:JOB_ID] forKey:JOB_ID];
+            NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                         textfield1.text,JOB_COMPANY,
+                                         textfield2.text,JOB_TITLE,
+                                         textfield3.text,JOB_LOCATION,
+                                         textView.text,JOB_DESC,
+                                         username,@"username",
+                                         nil];
+            if ([self.dictMessage objectForKey:@"_id"]!=NULL) {
+                
+                [dict setValue:[self.dictMessage objectForKey:JOB_ID] forKey:JOB_ID];
+            }
+            NSLog(@"send:%@",dict);
+            
+            [[[HttpRequest alloc]init]httpRequestForPostJoinMessgae:[NSDictionary dictionaryWithObjectsAndKeys:dict,@"param", nil]];
+            [self.navigationController popViewControllerAnimated:YES];
+            
         }
-        NSLog(@"send:%@",dict);
+        else{
+            
+            UIAlertView * alerview = [[UIAlertView alloc]initWithTitle:nil message:@"您输入的信息不完全请重新输入" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            [alerview show];
+            
+        }
 
-        [[[HttpRequest alloc]init]httpRequestForPostJoinMessgae:[NSDictionary dictionaryWithObjectsAndKeys:dict,@"param", nil]];
-        [self.navigationController popViewControllerAnimated:YES];
-        
     }
-    else{
-        
-        UIAlertView * alerview = [[UIAlertView alloc]initWithTitle:nil message:@"您输入的信息不完全请重新输入" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
-        [alerview show];
-        
-    }
+    
     
    
     

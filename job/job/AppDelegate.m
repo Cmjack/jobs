@@ -14,6 +14,7 @@
 #import  <TencentOpenAPI/TencentOAuth.h>
 #import "TencentOpenAPI/QQApiInterface.h"
 #import "DataModel.h"
+#import "LoginHelp.h"
 @interface AppDelegate()<WeiboSDKDelegate>
 @end
 @implementation AppDelegate
@@ -26,12 +27,8 @@
     NSLog(@"WeiboSDK:%i",[WeiboSDK registerApp:kAppKey]);
     
     
-    NSString *username = [[NSUserDefaults standardUserDefaults]objectForKey:@"username"];
-    NSString *password = [[NSUserDefaults standardUserDefaults]objectForKey:@"password"];
-    NSLog(@"user:%@",username);
-    NSLog(@"password:%@",password);
-    [[[HttpRequest alloc]init]loginUserName:username withSalt:password];
     
+    [LoginHelp autoLogin];
     
     
     self.window =[[UIWindow alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -69,41 +66,23 @@
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
-
+-(void)didReceiveWeiboRequest:(WBBaseRequest *)request
+{
+    
+}
 - (void)didReceiveWeiboResponse:(WBBaseResponse *)response
 {
     if ([response isKindOfClass:WBSendMessageToWeiboResponse.class])
     {
-//        NSString *title = @"发送结果";
-//        NSString *message = [NSString stringWithFormat:@"响应状态: %d\n响应UserInfo数据: %@\n原请求UserInfo数据: %@",
-//                             response.statusCode, response.userInfo, response.requestUserInfo];
-//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
-//                                                        message:message
-//                                                       delegate:nil
-//                                              cancelButtonTitle:@"确定"
-//                                              otherButtonTitles:nil];
-//        [alert show];
+
     }
     else if ([response isKindOfClass:WBAuthorizeResponse.class])
     {
-//        NSString *title = @"认证结果";
-//        NSString *message = [NSString stringWithFormat:@"响应状态: %d\nresponse.userId: %@\nresponse.accessToken: %@\n响应UserInfo数据: %@\n原请求UserInfo数据: %@",
-//                             response.statusCode, [(WBAuthorizeResponse *)response userID], [(WBAuthorizeResponse *)response accessToken], response.userInfo, response.requestUserInfo];
-//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
-//                                                        message:message
-//                                                       delegate:nil
-//                                              cancelButtonTitle:@"确定"
-//                                              otherButtonTitles:nil];
-//        [alert show];
+        
         
         [[NSUserDefaults standardUserDefaults]setObject:[(WBAuthorizeResponse *)response accessToken] forKey:WEIBOTOKEN];
-        NSLog(@"%@\n",response.userInfo);
-        NSLog(@"%@\n",[(WBAuthorizeResponse *)response userID]);
-        NSLog(@"%@\n",response.requestUserInfo);
-        
+        NSLog(@"token %@",[(WBAuthorizeResponse *)response accessToken]);
         NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[(WBAuthorizeResponse *)response accessToken],@"access_token",[(WBAuthorizeResponse *)response userID],@"uid", nil];
-        
-        
         [[[HttpRequest alloc]init]sinaGetUserInfo:dict];
         
     }

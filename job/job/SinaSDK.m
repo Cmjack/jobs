@@ -24,7 +24,7 @@
     [WeiboSDK sendRequest:request];
 }
 
-- (void)ssoOutButtonPressed
++ (void)ssoOutButtonPressed
 {
     NSString *token = [[NSUserDefaults standardUserDefaults]objectForKey:WEIBOTOKEN];
     [WeiboSDK logOutWithToken:token delegate:self withTag:@"user1"];

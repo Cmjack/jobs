@@ -8,6 +8,7 @@
 
 #import "registerView.h"
 #import "HttpRequest.h"
+#import "DataModel.h"
 #define HEIGHT 60
 @interface registerView ()<HttpRequestDelegate,UIAlertViewDelegate>
 @property(nonatomic, strong)UITextField *emailTF;
@@ -116,7 +117,7 @@
 {
     self.registerButton.enabled = YES;
     if (isSucess) {
-        
+        [DataModel shareData].isLogin = YES;
         [[NSUserDefaults standardUserDefaults]setObject:self.emailTF.text forKey:@"username"];
         [[NSUserDefaults standardUserDefaults]setObject:self.passWordTF.text forKey:@"password"];
         [self popView];
@@ -129,7 +130,7 @@
         NSLog(@"fail");
         UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:nil message:@"此邮箱已注册" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
         [alertView show];
-        
+        [DataModel shareData].isLogin = NO;
     }
 }
 

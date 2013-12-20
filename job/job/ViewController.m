@@ -21,7 +21,7 @@
 #import "JobDatailViewController.h"
 #import "headSetting.h"
 
-@interface ViewController ()<UITableViewDataSource,UITableViewDelegate,HttpRequestDelegate,SearchViewDelegate,PullingRefreshTableViewDelegate,loginViewControllerDelegate>
+@interface ViewController ()<UITableViewDataSource,UITableViewDelegate,HttpRequestDelegate,SearchViewDelegate,PullingRefreshTableViewDelegate,loginViewControllerDelegate,SettingViewControllerDelegate>
 @property(nonatomic,strong)PullingRefreshTableView *jobTableView;
 @property(nonatomic,strong)CustomCell *customCell;
 @property(nonatomic,strong)UIImageView *headImageView;
@@ -41,7 +41,7 @@
 {
     [super viewDidLoad];
     [self initViews];
-    [self refreshData];
+    [self loadData];
     self.shareDataModel = [DataModel shareData];
     self.jobDataArray = [NSMutableArray arrayWithCapacity:10];
     self.title = @"事业线";
@@ -52,9 +52,6 @@
     [self.navigationController.view addSubview:searchButton];
     self.searchButton = searchButton;
     
-//
-//     self.jobDataArray = self.shareDataModel.shareData;
-	// Do any additional setup after loading the view, typically from a nib.
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -113,10 +110,7 @@
     
     self.navigationItem.rightBarButtonItem = rightButton;
     
-//    UIRefreshControl *refresh = [[UIRefreshControl alloc]init];
-//    self.refresh = refresh;
-//    [refresh addTarget:self action:@selector(refreshData) forControlEvents:UIControlEventValueChanged];
-//    [self.jobTableView addSubview:refresh];
+
 }
 
 -(void)clickSearchButton
@@ -139,36 +133,60 @@
 }
 -(void)clickLeftButton:(id)sender
 {
+     if (self.shareDataModel.isLogin == NO) {
+         [self showLoginView];
+    }
+    else
+    {
+        SettingViewController *setVC = [[SettingViewController alloc]initWithNibName:Nil bundle:nil];
+        setVC.delegate = self;
+        [self.navigationController pushViewController:setVC animated:YES];
+    }
+}
+-(void)showLoginView
+{
+    UIWindow *keywindow = [[UIApplication sharedApplication]keyWindow];
     
-
-    SettingViewController *setVC = [[SettingViewController alloc]initWithNibName:Nil bundle:nil];
+    loginViewController *loginVC = [[loginViewController alloc]initWithFrame:CGRectMake(0, self.view.bounds.size.height, 320, self.view.bounds.size.height)];
     
-    [self.navigationController pushViewController:setVC animated:YES];
+    loginVC.delegate = self;
     
-//    if (self.shareDataModel.isLogin == NO) {
-//        loginViewController *loginVC = [[loginViewController alloc]initWithFrame:CGRectMake(0, self.view.bounds.size.height, 320, self.view.bounds.size.height)];
-//        loginVC.delegate = self;
-//        
-//        [self.view.window addSubview:loginVC];
-//        
-//        [UIView animateWithDuration:0.25f animations:^{
-//            
-//            loginVC.frame = CGRectMake(0, 0, 320, self.view.bounds.size.height);
-//            
-//        } completion:^(BOOL finished) {
-//            
-//        }];
-//    }
-//    else
-//    {
-//        SettingViewController *setVC = [[SettingViewController alloc]initWithNibName:Nil bundle:nil];
-//        
-//        [self.navigationController pushViewController:setVC animated:YES];
-//    }
+    [keywindow addSubview:loginVC];
+    
+    [UIView animateWithDuration:0.25f animations:^{
+        
+        loginVC.frame = CGRectMake(0, 0, 320, self.view.bounds.size.height);
+        
+    } completion:^(BOOL finished) {
+        
+    }];
 }
 
 #pragma mark - refreshData
 -(void)refreshData
+{
+    HttpRequest *request = [[HttpRequest alloc]init];
+    request.delegate = self;
+    NSLog(@"%@",self.jobDataArray);
+    if (self.jobDataArray.count >0) {
+        NSString *_id = [[self.jobDataArray objectAtIndex:0]objectForKey:@"_id"];
+        [request getRefreshJobMessage:_id];
+    }
+}
+-(void)getRefreshJobMessage:(NSArray *)refreshMessage
+{
+    NSRange range;
+    range.length = refreshMessage.count;
+    range.location = 0;
+    
+    NSIndexSet *indexSet = [[NSIndexSet alloc]initWithIndexesInRange:range];
+    [self.jobDataArray insertObjects:refreshMessage atIndexes:indexSet];
+    
+    [self.jobTableView reloadData];
+    [self stopRefresh];
+}
+#pragma mark - loadData
+-(void)loadData
 {
     HttpRequest *request = [[HttpRequest alloc]init];
     request.delegate = self;
@@ -181,7 +199,7 @@
 {
     self.requestEndString = [dataDict objectForKey:@"end"];
     [self.jobDataArray addObjectsFromArray:[dataDict objectForKey:@"Data"]];
-    [self performSelector:@selector(re) withObject:nil afterDelay:0.5];
+    [self performSelector:@selector(stopRefresh) withObject:nil afterDelay:0.5];
     [self.jobTableView reloadData];
 }
 
@@ -242,11 +260,9 @@
 
 -(void)pullingTableViewDidStartRefreshing:(PullingRefreshTableView *)tableView
 {
-    
-    //[self performSelector:@selector(re) withObject:nil afterDelay:6.5];
-    [self re];
+    [self refreshData];
 }
--(void)re
+-(void)stopRefresh
 {
     [self.jobTableView tableViewDidFinishedLoading];
 }
@@ -257,12 +273,12 @@
     if ([self.requestEndString isEqualToString:@"true"])
     {
         //[self.jobTableView tableViewDidFinishedLoadingWithMessage:@"没有了"];
-        [self.jobTableView flashMessage:@"meiyou le "];
-        [self performSelector:@selector(re) withObject:nil afterDelay:1.5];
+        [self.jobTableView flashMessage:@"没有更多招聘信息"];
+        [self performSelector:@selector(stopRefresh) withObject:nil afterDelay:1.0];
 
     }else
     {
-        [self refreshData];
+        [self loadData];
     }
     
 
@@ -275,8 +291,6 @@
     
     [self.jobTableView tableViewDidScroll:scrollView];
 }
-
-
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
     
@@ -286,14 +300,20 @@
 #pragma mark - loginViewControllerDelegate
 -(void)loginSuccess:(NSDictionary *)userInfo
 {
-    
+    [DataModel shareData].isLogin = YES;
     [[NSUserDefaults standardUserDefaults]setObject:userInfo forKey:@"userinfo"];
     SettingViewController *setVC = [[SettingViewController alloc]initWithNibName:Nil bundle:nil];
-    
+    setVC.delegate = self;
     [self.navigationController pushViewController:setVC animated:YES];
     
-    
 }
+#pragma mark- SettingViewControllerDelegate
+-(void)cancelUser
+{
+    [self showLoginView];
+}
+
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

@@ -12,7 +12,8 @@
 #import "JionMessageViewController.h"
 #import "ResumeViewController.h"
 #import "AboutViewController.h"
-
+#import "LoginHelp.h"
+#import "Tools.h"
 @interface SettingViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic, strong)UITableView *setTableview;
 @property(nonatomic, strong)NSArray *array;
@@ -45,9 +46,8 @@
     self.setTableview.dataSource = self;
     self.setTableview.backgroundColor = [UIColor clearColor];
     [self.view addSubview:self.setTableview];
+    self.title = @"个人中心";
     
-    UIBarButtonItem *barbutton =[[UIBarButtonItem alloc]initWithTitle:@"登录" style:UIBarButtonItemStylePlain target:self action:@selector(clickBarButton)];
-    self.navigationItem.rightBarButtonItem = barbutton;
 	// Do any additional setup after loading the view.
     self.array = @[@"已发招聘信息",@"已收简历信息",@"已申请职位信息",@"个人简历信息",@"切换用户",@"关于应用"];
     self.userInfo = [[NSUserDefaults standardUserDefaults]objectForKey:@"userinfo"];
@@ -75,7 +75,9 @@
             _customCell = [[SettingCustomCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellString];
             
         }
-        _customCell.userNameLab.text = [self.userInfo objectForKey:@"nickname"];
+        _customCell.userNameLab.text = [self.userInfo objectForKey:@"nick_name"];
+        
+        _customCell.headImageView.image = [Tools imageLoading];
         return _customCell;
         
     }else
@@ -115,6 +117,15 @@
     {
         AboutViewController *about = [[AboutViewController alloc]initWithNibName:nil bundle:nil];
         [self.navigationController pushViewController:about animated:YES];
+    }else if (indexPath.section == 1 && indexPath.row == 4)
+    {
+        if ([self.delegate respondsToSelector:@selector(cancelUser)]) {
+            
+            [LoginHelp removeUserInfo];
+            [self.navigationController popViewControllerAnimated:NO];
+            [self.delegate cancelUser];
+            
+        }
     }
 }
 
