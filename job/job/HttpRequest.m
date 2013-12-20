@@ -35,6 +35,7 @@
         NSLog(@"register:%@",responseObject);
         BOOL isSalt = NO;
         if ([responseObject objectForKey:@"salt"]!= NULL) {
+            [[NSUserDefaults standardUserDefaults]setObject:[responseObject objectForKey:@"salt"] forKey:@"mytoken"];
             isSalt = YES;
         }
         if ([self.delegate respondsToSelector:@selector(signSucessOrFail:)]) {
@@ -60,9 +61,10 @@
         NSLog(@"login:%@ ",responseObject);
         BOOL isSucess =NO;
         //NSDictionary *dict = (NSDictionary*)responseObject;
-        if ([[responseObject objectForKey:@"result"]isEqualToString:@"yes"]) {
+        if ([[[responseObject objectForKey:@"data"] objectForKey:@"salt"] length]>0) {
             //[self httpRequestForGetResume];
-
+            [[NSUserDefaults standardUserDefaults]setObject:[[responseObject objectForKey:@"data"] objectForKey:@"salt"] forKey:@"mytoken"];
+            [DataModel shareData].isLogin = YES;
             NSLog(@"sss");
             isSucess =YES;
         }
