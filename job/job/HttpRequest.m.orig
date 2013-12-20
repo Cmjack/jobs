@@ -20,14 +20,17 @@
 
 @implementation HttpRequest
 
+<<<<<<< HEAD
+-(void)registerUserEmail:(NSString*)email withPassWard:(NSString*)passWord withType:(NSString*)type
+=======
 -(id)init {
     if (self = [super init]) {
         NSLog(@"[HttpRequest init] server url: %@", SERVER_URL);
     }
     return self;
 }
-
--(void)registerUserEmail:(NSString*)email withPassWard:(NSString*)passWord withType:(NSString*)type
+-(void)registerUserEmail:(NSString*)email withPassWard:(NSString*)passWord
+>>>>>>> 684ec4cfed70cee67d4809afdcd3dc3715447e04
 {
     NSDictionary * dict = [NSDictionary dictionaryWithObjectsAndKeys:email,@"email",passWord,@"password",type,@"type", nil];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
