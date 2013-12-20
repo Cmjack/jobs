@@ -34,6 +34,10 @@
 @property (strong, nonatomic) IBOutlet UILabel *dateTimeLable;
 @property (strong, nonatomic) IBOutlet UILabel *captionLable;
 
+-(void)insertDataForBasic:(NSDictionary*)dict;
 -(void)insertData:(NSDictionary*)dict;
+-(void)insertdataForCO:(NSDictionary*)dict;
+
+-(void)insertDataForTitleType:(NSArray*)arr;
 
 @end

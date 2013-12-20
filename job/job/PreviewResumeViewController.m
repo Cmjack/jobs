@@ -8,10 +8,15 @@
 
 #import "PreviewResumeViewController.h"
 #import "PreviewResumeCell.h"
+#import "DataModel.h"
+#import "headSetting.h"
+#import "Tools.h"
 @interface PreviewResumeViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)UITableView *preTableview;
 @property(nonatomic,strong)NSMutableArray * resumeDataArray;
-@property(nonatomic,strong)NSArray *basicMessgae;
+@property(nonatomic,strong)NSArray *workMessgae;
+@property(nonatomic,strong)NSArray *schoolMessage;
+@property(nonatomic,strong)NSDictionary *resumeDict;
 @end
 
 @implementation PreviewResumeViewController
@@ -28,15 +33,19 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.resumeDict = [DataModel shareData].resumeDict;
+    NSLog(@" resume %@",self.resumeDict);
 	// Do any additional setup after loading the view.
     self.preTableview = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
     self.preTableview.delegate = self;
     self.preTableview.dataSource = self;
     [self.view addSubview:self.preTableview];
     
-    self.resumeDataArray = [NSMutableArray arrayWithObjects:@[@"个人基本基本信息"],@[@"工作经历"],@[@"教育经历"],@[@"培训经历"],@[@"求职意向"], nil];
+    self.resumeDataArray = [NSMutableArray arrayWithObjects:@[@"基本信息"],@[@"工作经历"],@[@"教育经历"],@[@"培训经历"],@[@"求职意向"], nil];
     
-    self.basicMessgae = @[@"基本信息",@"姓名",@"应聘职位",@"最高学历",@"年龄",@"手机号码",@"Email",@"工作年限"];
+    self.workMessgae = @[@"职位",@"公司"];
+    self.schoolMessage = @[@"专业",@"学校"];
     
 }
 #pragma mark - UITableViewDataSource
@@ -46,6 +55,31 @@
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if (section == 1) {
+        if ([[self.resumeDict objectForKey:KEY_WE] count]>0) {
+            
+            return [[self.resumeDict objectForKey:KEY_WE] count];
+        }
+        
+        
+    }
+    else if (section == 2)
+    {
+        if ([[self.resumeDict objectForKey:KEY_EDUCATION] count]>0) {
+            
+            return [[self.resumeDict objectForKey:KEY_EDUCATION] count];
+        }
+    }
+    else if (section == 3)
+    {
+        if ([[self.resumeDict objectForKey:KEY_TRAINING] count]>0) {
+            
+            return [[self.resumeDict objectForKey:KEY_TRAINING] count];
+        }
+    }
+
+    
+    
     return 1;
 }
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -59,8 +93,9 @@
         if (cell == NULL) {
             NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"PreviewResumeCell" owner:nil options:nil];
             cell = [nib objectAtIndex:0];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
-        cell.nameLab.text = @"修改成功";
+        [cell insertDataForBasic:[self.resumeDict objectForKey:KEY_PERSON]];
         return cell;
         
     }else if (indexPath.section == 4)
@@ -72,11 +107,11 @@
             
             NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"PreviewResumeCell" owner:nil options:nil];
             cell1 = [nib objectAtIndex:2];
-            
+            cell1.selectionStyle = UITableViewCellSelectionStyleNone;
+
         }
-        NSLog(@"apply :%@,--%@ ",cell1,cell1.salaryLable);
-        
-        cell1.positionLable.text = @"android";
+        [cell1 insertdataForCO:[self.resumeDict objectForKey:KEY_CO]];
+
         return cell1;
     }
     else
@@ -88,10 +123,28 @@
             
             NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"PreviewResumeCell" owner:nil options:nil];
             cell2 = [nib objectAtIndex:1];
+            cell2.selectionStyle = UITableViewCellSelectionStyleNone;
+
         }
-        NSLog(@"work :%@",cell2);
-        cell2.position.text = @"ios1111";
-        [cell2 insertData:nil];
+        if (indexPath.section == 1) {
+            
+            [cell2 insertDataForTitleType:self.workMessgae];
+            [cell2 insertData:[[self.resumeDict objectForKey:KEY_WE] objectAtIndex:indexPath.row]];
+        }
+        else if (indexPath.section == 2)
+        {
+            [cell2 insertDataForTitleType:self.schoolMessage];
+            [cell2 insertData:[[self.resumeDict objectForKey:KEY_EDUCATION] objectAtIndex:indexPath.row]];
+
+        }
+        else if (indexPath.section == 3)
+        {
+            [cell2 insertDataForTitleType:self.schoolMessage];
+            [cell2 insertData:[[self.resumeDict objectForKey:KEY_TRAINING] objectAtIndex:indexPath.row]];
+
+        }
+        
+        
         return cell2;
     }
     
@@ -100,7 +153,35 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 170;
+    
+//    UIFont *font = [UIFont systemFontOfSize:14.0f];
+//    if (indexPath.section ==1) {
+//        
+//       NSString *str = [[[self.resumeDict objectForKey:KEY_WE]objectAtIndex:indexPath.row]objectForKey:KEY_CAPTION];
+//       float height= [Tools autoSizeLab:CGSizeMake(250, 10000) withFont:font withSting:str];
+//        return height +80;
+//    
+//    }
+//    else if (indexPath.section == 2)
+//    {
+//        NSString *str = [[[self.resumeDict objectForKey:KEY_EDUCATION]objectAtIndex:indexPath.row]objectForKey:KEY_CAPTION];
+//        float height= [Tools autoSizeLab:CGSizeMake(250, 10000) withFont:font withSting:str];
+//        return height +80;
+//
+//    }else if (indexPath.section == 3)
+//    {
+//        NSString *str = [[[self.resumeDict objectForKey:KEY_TRAINING]objectAtIndex:indexPath.row]objectForKey:KEY_CAPTION];
+//        float height= [Tools autoSizeLab:CGSizeMake(250, 10000) withFont:font withSting:str];
+//        return height +80;
+//    }
+//    else if (indexPath.section == 4)
+//    {
+//        NSString *str = [[self.resumeDict objectForKey:KEY_CO]objectForKey:KEY_CAPTION];
+//        float height = [Tools autoSizeLab:CGSizeMake(220, 10000) withFont:font withSting:str];
+//        return height +88;
+//    }
+    
+    return 180;
 }
 -(NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
