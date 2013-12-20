@@ -67,9 +67,6 @@
     [self.cancelButton setBackgroundImage:[UIImage imageNamed:@"btn_close_normal"] forState:UIControlStateNormal];
     [self.cancelButton addTarget:self action:@selector(clickCancelButton) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:self.cancelButton];
-    
-    
-       
 
 }
 -(void)clickSignButton
@@ -79,7 +76,7 @@
         if ([self.passWordTF.text isEqualToString:self.confirmTF.text]) {
             
             HttpRequest *request = [[HttpRequest alloc]init];
-            [request registerUserEmail:self.emailTF.text withPassWard:self.passWordTF.text];
+            [request registerUserEmail:self.emailTF.text withPassWard:self.passWordTF.text withType:@"default"];
             request.delegate = self;
             self.registerButton.enabled = NO;
             

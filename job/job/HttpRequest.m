@@ -35,17 +35,17 @@
     }];
 }
 
--(void)registerUserEmail:(NSString*)email withPassWard:(NSString*)passWord
+-(void)registerUserEmail:(NSString*)email withPassWard:(NSString*)passWord withType:(NSString*)type
 {
-    NSDictionary * dict = [NSDictionary dictionaryWithObjectsAndKeys:email,@"email",passWord,@"password", nil];
+    NSDictionary * dict = [NSDictionary dictionaryWithObjectsAndKeys:email,@"email",passWord,@"password",type,@"type", nil];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager POST:@"http://192.168.1.114:3000/register" parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
         NSLog(@"register:%@",responseObject);
         BOOL isSalt = NO;
         if ([responseObject objectForKey:@"salt"]!= NULL) {
             isSalt = YES;
         }
-        
         if ([self.delegate respondsToSelector:@selector(signSucessOrFail:)]) {
             
             [self.delegate signSucessOrFail:isSalt];
@@ -223,6 +223,19 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
         NSLog(@"newData-error:%@",error);
+    }];
+
+}
+-(void)httpPostApplyJob:(NSDictionary*)dict
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
+    [manager POST:@"http://192.168.1.114:3000/apple" parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"saveSuccess");
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"saveFail");
     }];
 
 }
