@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		113F95CA1854032800E6947D /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 113F95C91854032800E6947D /* MobileCoreServices.framework */; };
+		11E8D9011864607800EB6A76 /* oschina@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 11E8D8FF1864607800EB6A76 /* oschina@2x.png */; };
+		11E8D9021864607800EB6A76 /* oschina.png in Resources */ = {isa = PBXBuildFile; fileRef = 11E8D9001864607800EB6A76 /* oschina.png */; };
 		3D4D62864BF741058B88FF74 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C9FB0C6BD24F4454B35EAB1F /* libPods.a */; };
 		3F0D54F2185AF667005841A6 /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F0D54EF185AF667005841A6 /* TencentOpenAPI.framework */; };
 		3F0D54F3185AF667005841A6 /* TencentOpenApi_IOS_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3F0D54F0185AF667005841A6 /* TencentOpenApi_IOS_Bundle.bundle */; };
@@ -119,6 +121,8 @@
 /* Begin PBXFileReference section */
 		01DD6B97EB5F403EA03E86D8 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		113F95C91854032800E6947D /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		11E8D8FF1864607800EB6A76 /* oschina@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "oschina@2x.png"; sourceTree = "<group>"; };
+		11E8D9001864607800EB6A76 /* oschina.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = oschina.png; sourceTree = "<group>"; };
 		3F0D54EF185AF667005841A6 /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TencentOpenAPI.framework; sourceTree = "<group>"; };
 		3F0D54F0185AF667005841A6 /* TencentOpenApi_IOS_Bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TencentOpenApi_IOS_Bundle.bundle; sourceTree = "<group>"; };
 		3F0D54F4185AF957005841A6 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -292,6 +296,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		11E8D8FE18645FBC00EB6A76 /* source icon */ = {
+			isa = PBXGroup;
+			children = (
+				3F6287DA1862C80C00360749 /* 51Icon.png */,
+				11E8D8FF1864607800EB6A76 /* oschina@2x.png */,
+				11E8D9001864607800EB6A76 /* oschina.png */,
+				9DD5657D18503530007939BA /* 58.png */,
+				9DD5657F185035F1007939BA /* 58@2x.png */,
+				9DFC874B1851A8BB00997414 /* wealink.jpg */,
+				9DFC874D1851A8C000997414 /* lagou.jpg */,
+			);
+			name = "source icon";
+			sourceTree = "<group>";
+		};
 		3F0D54EB185AF667005841A6 /* tencentSDK */ = {
 			isa = PBXGroup;
 			children = (
@@ -428,7 +446,7 @@
 			isa = PBXGroup;
 			children = (
 				3F5FF568185ECDEA0063EACB /* Avatar1.png */,
-				3F6287DA1862C80C00360749 /* 51Icon.png */,
+				11E8D8FE18645FBC00EB6A76 /* source icon */,
 				3F5FF563185EB61D0063EACB /* qq.png */,
 				3FEE698B185AD3350084189B /* login_logo.png */,
 				3F6F9D7A18587A4600FDF258 /* SearchIcon.png */,
@@ -439,10 +457,6 @@
 				3F6F9D671858106800FDF258 /* construction_worker-25.png */,
 				3F6F9D6518580F4500FDF258 /* border_color-25.png */,
 				3F6F9D6118580DB700FDF258 /* settings-25.png */,
-				9DD5657D18503530007939BA /* 58.png */,
-				9DD5657F185035F1007939BA /* 58@2x.png */,
-				9DFC874B1851A8BB00997414 /* wealink.jpg */,
-				9DFC874D1851A8C000997414 /* lagou.jpg */,
 				9D7EF5B1184DCC1A00182DB2 /* history_list_bg.png */,
 				9D9D85AE184DCEBB0015CD71 /* History_bg.png */,
 				9DD5657618501A61007939BA /* datepicker_bg.png */,
@@ -681,6 +695,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11E8D9011864607800EB6A76 /* oschina@2x.png in Resources */,
 				3F0D54F3185AF667005841A6 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				3FA8A6B71864194C00398522 /* PreviewResumeCell.xib in Resources */,
 				3F6F9D6A185814AF00FDF258 /* street_view-25.png in Resources */,
@@ -691,6 +706,7 @@
 				9DD5657918501A61007939BA /* datepicker_bg@2x.png in Resources */,
 				3F6F9D7B18587A4600FDF258 /* SearchIcon.png in Resources */,
 				3F6F9D6618580F4500FDF258 /* border_color-25.png in Resources */,
+				11E8D9021864607800EB6A76 /* oschina.png in Resources */,
 				3FEE6992185AD6470084189B /* WeiboSDK.bundle in Resources */,
 				3F5FF569185ECDEA0063EACB /* Avatar1.png in Resources */,
 				3F6F9D6E1858169B00FDF258 /* map_marker-25.png in Resources */,
@@ -938,6 +954,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/caiming/ios/jobs/job/job/tencentSDK,
+					/Users/airball/ios/joblineapp/job/job/tencentSDK,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "job/job-Prefix.pch";
@@ -946,6 +963,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/caiming/ios/jobs/job/job/libWeiboSDK,
+					/Users/airball/ios/joblineapp/job/job/libWeiboSDK,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -962,6 +980,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/caiming/ios/jobs/job/job/tencentSDK,
+					/Users/airball/ios/joblineapp/job/job/tencentSDK,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "job/job-Prefix.pch";
@@ -970,6 +989,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/caiming/ios/jobs/job/job/libWeiboSDK,
+					/Users/airball/ios/joblineapp/job/job/libWeiboSDK,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
