@@ -47,7 +47,7 @@
     self.title = @"事业线";
     
     UIButton *searchButton = [[UIButton alloc]initWithFrame:CGRectMake(185, 30, 24, 24)];
-    [searchButton setBackgroundImage:[UIImage imageNamed:@"ball_point_pen-25"] forState:UIControlStateNormal];
+    [searchButton setBackgroundImage:[UIImage imageNamed:@"SearchIcon"] forState:UIControlStateNormal];
     [searchButton addTarget:self action:@selector(clickSearchButton) forControlEvents:UIControlEventTouchUpInside];
     [self.navigationController.view addSubview:searchButton];
     self.searchButton = searchButton;
