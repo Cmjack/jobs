@@ -11,36 +11,20 @@
 #import "DataModel.h"
 #import "headSetting.h"
 #import <TencentOpenAPI/TencentOAuth.h>
-#define LOCALURL @"http://192.168.1.114:3000/job"
-#define NETURL @"http://121.199.24.40:3000/job"
+
+#ifdef DEBUG
+#define SERVER_URL @"http://192.168.1.114:3000"
+#else
+#define SERVER_URL @"http://121.199.24.40:3000"
+#endif
 
 @implementation HttpRequest
-
-
-
-
--(void)httpRequestForGet{
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:LOCALURL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-    NSLog(@"job: %@", responseObject);
-//        DataModel *data = [DataModel shareData];
-//        data.shareData = responseObject;
-        if ([self.delegate respondsToSelector:@selector(getDataSucess:)])
-        {
-            [self.delegate getDataSucess:responseObject];
-        }
-    
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
-    }];
-}
 
 -(void)registerUserEmail:(NSString*)email withPassWard:(NSString*)passWord withType:(NSString*)type
 {
     NSDictionary * dict = [NSDictionary dictionaryWithObjectsAndKeys:email,@"email",passWord,@"password",type,@"type", nil];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager POST:@"http://192.168.1.114:3000/register" parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
+    [manager POST:[NSString stringWithFormat:@"%@/register", SERVER_URL] parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"register:%@",responseObject);
         BOOL isSalt = NO;
         if ([responseObject objectForKey:@"salt"]!= NULL) {
@@ -65,7 +49,7 @@
     NSDictionary * dict = [NSDictionary dictionaryWithObjectsAndKeys:name,@"username",salt,@"password", nil];
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager POST:@"http://192.168.1.114:3000/login" parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager POST:[NSString stringWithFormat:@"%@/login", SERVER_URL] parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"login:%@ ",responseObject);
         BOOL isSucess =NO;
         //NSDictionary *dict = (NSDictionary*)responseObject;
@@ -101,7 +85,7 @@
    
     manager.requestSerializer  = [AFJSONRequestSerializer serializer];
     
-    [manager POST:@"http://192.168.1.114:3000/resume" parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager POST:[NSString stringWithFormat:@"%@/resume", SERVER_URL] parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSLog(@"saveSuccess");
         
@@ -120,7 +104,7 @@
     NSDictionary * user = [NSDictionary dictionaryWithObject:[[NSUserDefaults standardUserDefaults]objectForKey:@"username"] forKey:@"username"];
     
     NSLog(@"user:%@",user);
-    [manager GET:@"http://192.168.1.114:3000/resume" parameters:user success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:[NSString stringWithFormat:@"%@/resume", SERVER_URL] parameters:user success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSLog(@"resume: %@", responseObject);
         //[DataModel shareData].resumeDict = [NSMutableDictionary dictionaryWithDictionary:responseObject];
@@ -141,7 +125,7 @@
 -(void)httpRequestForPostJoinMessgae:(NSDictionary*)dict
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager POST:@"http://192.168.1.114:3000/job" parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager POST:[NSString stringWithFormat:@"%@/job", SERVER_URL] parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSLog(@"saveSuccess");
         
@@ -154,7 +138,7 @@
 -(void)httpRequestForPostJoinList:(NSDictionary*)dict
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:@"http://192.168.1.114:3000/myjoinlist" parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:[NSString stringWithFormat:@"%@/myjoinlist", SERVER_URL] parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"list:%@",responseObject);
         if ([self.delegate respondsToSelector:@selector(getJoinMessage:)])
         {
@@ -175,7 +159,7 @@
 
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:dictTitle,@"param",stringPage,@"page", nil];
     
-    [manager GET:@"http://192.168.1.114:3000/job" parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:[NSString stringWithFormat:@"%@/job", SERVER_URL] parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSLog(@"searchResume: %@", responseObject);
         if ([self.delegate respondsToSelector:@selector(getDataSucess:)])
@@ -211,7 +195,7 @@
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
 
-    [manager GET:@"http://192.168.1.114:3000/job_timeline" parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:[NSString stringWithFormat:@"%@/job_timeline", SERVER_URL] parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSLog(@"newData:%@",responseObject);
         NSArray *arr = [responseObject objectForKey:@"Data"];

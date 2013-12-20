@@ -29,18 +29,33 @@
     
     self.applyButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.applyButton.frame = CGRectMake(220, 10, 80, 30);
-    [self.applyButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//    [self.applyButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    
+    UIColor* jade = [UIColor colorWithRed:19/255.0 green:77/255.0 blue:53/255.0 alpha:0.7f] ;
+    UIColor* jadeLight = [UIColor colorWithRed:30/255.0 green:186/255.0 blue:121/255.0 alpha:0.7f];
+    
+    [self.applyButton setTitleColor:jade forState:UIControlStateNormal];
+    [self.applyButton setTitleColor:jadeLight forState:UIControlStateHighlighted];
+    
     [self.applyButton setTitle:@"立即申请" forState:UIControlStateNormal];
-    self.applyButton.layer.borderWidth = 0.5f;
+    self.applyButton.layer.borderWidth = 1.0f;
+    self.applyButton.layer.borderColor = jade.CGColor;
     self.applyButton.layer.cornerRadius = 4.0f;
-    self.applyButton.backgroundColor = [UIColor colorWithRed:1.0 green:0.5 blue:0.0 alpha:0.7];
     
+//    self.applyButton.backgroundColor = [UIColor colorWithRed:1.0 green:0.5 blue:0.0 alpha:0.7];
+//    self.applyButton.backgroundColor = [UIColor whiteColor];
     
-    [self.applyButton addTarget:self action:@selector(clickApplyButtonDown) forControlEvents:UIControlEventTouchDown];
+//    [self.applyButton addTarget:self action:@selector(clickApplyButtonDown) forControlEvents:UIControlEventTouchDown];
+//    
+//    [self.applyButton addTarget:self action:@selector(clickApplyButtonOutSide) forControlEvents:UIControlEventTouchUpOutside];
+//    
+//    [self.applyButton addTarget:self action:@selector(clickApplyButton) forControlEvents:UIControlEventTouchUpInside];
     
-    [self.applyButton addTarget:self action:@selector(clickApplyButtonOutSide) forControlEvents:UIControlEventTouchUpOutside];
+    [self.applyButton addTarget:self action:@selector(apply) forControlEvents:UIControlEventTouchUpInside];
+    if (![self.delegate respondsToSelector:@selector(sendApply)]) {
+        self.applyButton.enabled = NO;
+    }
     
-    [self.applyButton addTarget:self action:@selector(clickApplyButton) forControlEvents:UIControlEventTouchUpInside];
     
    // [self.applyButton addTarget:self action:@selector(clickApplyButtonCancel) forControlEvents:UIControlEventTouchCancel];
     
@@ -109,6 +124,9 @@
     NSLog(@"%f",height);
     self.captionLab.frame = CGRectMake(10, 10, 300,height+20);
     
+}
+-(void)apply {
+    [self.delegate sendApply];
 }
 
 -(void)clickApplyButtonDown

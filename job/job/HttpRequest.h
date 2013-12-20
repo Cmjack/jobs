@@ -23,7 +23,7 @@
 
 @interface HttpRequest : NSObject
 @property(nonatomic, weak)id<HttpRequestDelegate> delegate;
--(void)httpRequestForGet;
+//-(void)httpRequestForGet;
 -(void)registerUserEmail:(NSString*)email withPassWard:(NSString*)passWord withType:(NSString*)type;
 -(void)loginUserName:(NSString*)name withSalt:(NSString*)salt;
 +(void)httpRequestForSaveResume:(NSDictionary*)dict;
@@ -34,8 +34,6 @@
 -(void)httpRequestForPostJoinList:(NSDictionary*)dict;
 -(void)getRefreshJobMessage:(NSString*)_idString;
 -(void)httpPostApplyJob:(NSDictionary*)dict;
-
-
 
 +(void)check;
 @end
