@@ -106,7 +106,9 @@
         NSLog(@"saveSuccess");
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
         NSLog(@"saveFail");
+        
     }];
   
 }

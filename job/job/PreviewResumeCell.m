@@ -7,7 +7,8 @@
 //
 
 #import "PreviewResumeCell.h"
-
+#import "headSetting.h"
+#import "Tools.h"
 @implementation PreviewResumeCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -18,17 +19,60 @@
     }
     return self;
 }
-
+//基本信息
+-(void)insertDataForBasic:(NSDictionary*)dict
+{
+    self.nameLab.text = [dict objectForKey:KEY_NAME];
+    self.positionLab.text = [dict objectForKey:KEY_POSITION];
+    self.diplomaLeb.text = [dict objectForKey:KEY_DIPLOMA];
+    self.ageLab.text = [dict objectForKey:KEY_AGE];
+    self.telLab.text = [dict objectForKey:KEY_TEL];
+    self.emailLab.text = [dict objectForKey:KEY_EMAIL];
+    self.workLab.text = [dict objectForKey:KEY_WORK];
+}
 //工作、教育、培训
 -(void)insertData:(NSDictionary*)dict
 {
-    NSLog(@"    %@",self.position);
-    self.position.text = @"sss";
-    NSString *str = @"您的应用“事业线”已经通过我方的来源文案审核，经由您的应用所发出的微博信息将会显示相应的来源文案，同时，您可以查看《微博开放平台审核指南》，对您的应用进行优化。感谢您对新浪微博开放平台的支持！";
+    
+    self.position.text = [dict objectForKey:KEY_POSITION];
+    self.companyLab.text = [dict objectForKey:KEY_COMPANY];
+    NSString *starDate = [[dict objectForKey:KEY_START_DATE]substringToIndex:7];
+    NSString *endDate = [[dict objectForKey:KEY_END_DATE]substringToIndex:7];
+    self.startLab.text = [NSString stringWithFormat:@"%@ 至 %@",starDate,endDate];
+    NSString *str = [dict objectForKey:KEY_CAPTION];
+    
     self.desLab.numberOfLines = 0;
     self.desLab.lineBreakMode = NSLineBreakByWordWrapping;
     self.desLab.text = str;
+    self.desLab.backgroundColor = [UIColor clearColor];
+     UIFont *font = [UIFont systemFontOfSize:14.0f];
+    float height = [Tools autoSizeLab:CGSizeMake(250, 10000) withFont:font withSting:str];
+    NSLog(@"%f",height);
+    self.desLab.frame = CGRectMake(50, 72, 250, height);
     
+}
+-(void)insertDataForTitleType:(NSArray*)arr
+{
+    self.psoitionTitle.text = [arr objectAtIndex:0];
+    self.companyTitle.text = [arr objectAtIndex:1];
+    
+}
+
+//求职意向
+-(void)insertdataForCO:(NSDictionary*)dict
+{
+    self.positionLable.text = [dict objectForKey:KEY_POSITION];
+    self.salaryLable.text = [dict objectForKey:KEY_SALARY];
+    self.dateTimeLable.text = [dict objectForKey:KEY_START_DATE];
+    
+    NSString * str = [dict objectForKey:KEY_CAPTION];
+    self.captionLable.text = str;
+    self.captionLable.numberOfLines = 0;
+    self.captionLable.lineBreakMode = NSLineBreakByWordWrapping;
+    self.captionLable.backgroundColor = [UIColor clearColor];
+    UIFont *font = [UIFont systemFontOfSize:14.0f];
+    float height = [Tools autoSizeLab:CGSizeMake(220, 10000) withFont:font withSting:str];
+    self.captionLable.frame = CGRectMake(80, 72, 220, height);
 }
 
 

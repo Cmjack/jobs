@@ -116,11 +116,11 @@
                 <outlet property="workLab" destination="gzT-v8-g8f" id="vAK-a4-cxC"/>
             </connections>
         </tableViewCell>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="work" rowHeight="195" id="U1s-xO-Pcv" customClass="PreviewResumeCell">
-            <rect key="frame" x="0.0" y="0.0" width="317" height="195"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="work" rowHeight="176" id="U1s-xO-Pcv" customClass="PreviewResumeCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="170"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="U1s-xO-Pcv" id="6Xt-U5-D71">
-                <rect key="frame" x="0.0" y="0.0" width="317" height="194"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="169"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="职位:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IpO-oe-MUM">
@@ -173,7 +173,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="特特" lineBreakMode="wordWrap" baselineAdjustment="none" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1fw-AA-KnK">
-                        <rect key="frame" x="51" y="72" width="249" height="90"/>
+                        <rect key="frame" x="50" y="72" width="250" height="100"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -181,12 +181,22 @@
                     </label>
                 </subviews>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="companyLab" destination="FDC-In-Mgs" id="rJc-Zk-Brb"/>
+                <outlet property="companyTitle" destination="Ajl-wC-knj" id="Mbl-Le-c7Y"/>
+                <outlet property="dateTitle" destination="FVD-az-gCa" id="FwO-8Y-MV3"/>
+                <outlet property="desLab" destination="1fw-AA-KnK" id="3Db-2t-SH0"/>
+                <outlet property="desTitle" destination="bJ7-NP-Tde" id="qls-ez-YBs"/>
+                <outlet property="position" destination="5GL-up-euo" id="wb5-8b-aP6"/>
+                <outlet property="psoitionTitle" destination="IpO-oe-MUM" id="z3l-DW-6fF"/>
+                <outlet property="startLab" destination="9cE-QN-8yh" id="AWO-0K-Ou6"/>
+            </connections>
         </tableViewCell>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="apply" rowHeight="202" id="VHK-ei-q1b" customClass="PreviewResumeCell">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="apply" rowHeight="172" id="VHK-ei-q1b" customClass="PreviewResumeCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="170"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VHK-ei-q1b" id="YSb-ep-Sfi">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="199"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="169"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="职       位:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ont-Oe-49d">
@@ -232,13 +242,19 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="04p-ii-wAP">
-                        <rect key="frame" x="81" y="71" width="219" height="108"/>
+                        <rect key="frame" x="80" y="72" width="220" height="90"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="captionLable" destination="04p-ii-wAP" id="ypm-iG-VkM"/>
+                <outlet property="dateTimeLable" destination="CXX-Rr-ZMQ" id="WpU-6K-R38"/>
+                <outlet property="positionLable" destination="Dpw-Q6-FAg" id="PPH-gh-f9u"/>
+                <outlet property="salaryLable" destination="ggq-ZO-iwB" id="Nms-4j-bnM"/>
+            </connections>
         </tableViewCell>
     </objects>
     <resources>

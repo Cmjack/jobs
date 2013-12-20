@@ -7,8 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+@protocol EditJITBCDelegate <NSObject>
 
+-(void)retuanChoose:(NSString*)str;
+
+@end
 @interface EditJITBC : UITableViewController
+
+@property(nonatomic,weak)id<EditJITBCDelegate> delegate;
+
 @property(nonatomic,strong)NSArray * myArray;
 @end
 

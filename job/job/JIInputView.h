@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+@protocol JIInputViewDelegate <NSObject>
 
+-(void)retuanSelfCaption:(NSString*)str;
+
+@end
 @interface JIInputView : UIViewController
+@property(nonatomic,weak)id<JIInputViewDelegate> degate;
 @property(nonatomic,strong)NSString *textViewString;
 @end

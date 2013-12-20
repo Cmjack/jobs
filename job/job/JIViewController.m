@@ -10,10 +10,16 @@
 #import "headSetting.h"
 #import "EditJITBC.h"
 #import "JIInputView.h"
-@interface JIViewController ()<UITableViewDataSource,UITableViewDelegate>
+#import "DataModel.h"
+#import "JIViewCell.h"
+#import "HttpRequest.h"
+@interface JIViewController ()<UITableViewDataSource,UITableViewDelegate,EditJITBCDelegate,JIInputViewDelegate>
 @property(nonatomic,strong)UITableView *myTableview;
 @property(nonatomic,strong)NSArray *myArray;
 @property(nonatomic,strong)NSArray *arr;
+@property(nonatomic,strong)NSMutableDictionary *mutableDict;
+@property(nonatomic,strong)NSArray *key;
+@property(nonatomic,assign)NSInteger selectRow;
 @end
 
 @implementation JIViewController
@@ -31,6 +37,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    self.mutableDict = [NSMutableDictionary dictionaryWithDictionary:[[DataModel shareData].resumeDict objectForKey:KEY_CO]];
+    
     self.view.backgroundColor = [UIColor whiteColor];
     
     self.myTableview = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
@@ -46,11 +54,25 @@
                 
                 ];
     
+    self.key = @[KEY_POSITION,KEY_SALARY,KEY_START_DATE,KEY_CAPTION];
+    
     UIBarButtonItem *barButton= [[UIBarButtonItem alloc]initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(clickRightBarButton)];
     self.navigationItem.rightBarButtonItem = barButton;
 }
 -(void)clickRightBarButton
 {
+    
+    NSString *userName = [[NSUserDefaults standardUserDefaults]objectForKey:@"username"];
+    
+    NSDictionary *dictresume = [NSDictionary dictionaryWithObjectsAndKeys:self.mutableDict,KEY_CO,userName,@"username", nil];
+    
+    [[DataModel shareData].resumeDict setObject:self.mutableDict forKey:KEY_CO];
+
+    [HttpRequest httpRequestForSaveResume:dictresume];
+    
+    
+    [self.navigationController popViewControllerAnimated:YES];
+
     
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -64,33 +86,52 @@
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString * indexCell = @"cell";
-    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:indexCell];
+    JIViewCell * cell = [tableView dequeueReusableCellWithIdentifier:indexCell];
     if (cell == NULL) {
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:indexCell];
+        cell = [[JIViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:indexCell];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        
+        [cell initViews];
     }
-    cell.textLabel.text = [self.myArray objectAtIndex:indexPath.row];
-    
+    cell.titleLab.text = [self.myArray objectAtIndex:indexPath.row];
+    cell.textLab.text = [self.mutableDict objectForKey:[self.key objectAtIndex:indexPath.row]];
     return cell;
     
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    self.selectRow = indexPath.row;
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.row == 3) {
         JIInputView *input = [[JIInputView alloc]initWithNibName:nil bundle:nil];
+        input.degate = self;
         [self.navigationController pushViewController:input animated:YES];
     }
     else
     {
         EditJITBC *edit = [[EditJITBC alloc]initWithNibName:nil bundle:nil];
         edit.myArray = [self.arr objectAtIndex:indexPath.row];
+        edit.delegate = self;
         [self.navigationController pushViewController:edit animated:YES];
 
     }
 }
+-(void)retuanChoose:(NSString *)str
+{
+    
+    [self.mutableDict setObject:str forKey:[self.key objectAtIndex:self.selectRow]];
+    [self.myTableview reloadData];
+}
+-(void)retuanSelfCaption:(NSString *)str
+{
+    [self.mutableDict setObject:str forKey:KEY_CAPTION];
+    
+    [self.myTableview reloadData];
 
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 44.0f;
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

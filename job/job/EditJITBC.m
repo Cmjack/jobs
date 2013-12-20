@@ -68,7 +68,14 @@
 }
 
 
-
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([self.delegate respondsToSelector:@selector(retuanChoose:)]) {
+        
+        [self.delegate retuanChoose:[self.myArray objectAtIndex:indexPath.row]];
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath

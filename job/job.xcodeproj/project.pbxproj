@@ -23,6 +23,7 @@
 		3F596A87186003C900C63C95 /* JobDatailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F596A86186003C900C63C95 /* JobDatailViewController.m */; };
 		3F596A8A1860044700C63C95 /* JobDetailsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F596A891860044700C63C95 /* JobDetailsCell.m */; };
 		3F596A8D1860293800C63C95 /* JobWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F596A8C1860293800C63C95 /* JobWebViewController.m */; };
+		3F5ADEA518645886008D210D /* JIViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F5ADEA418645886008D210D /* JIViewCell.m */; };
 		3F5FF564185EB61D0063EACB /* qq.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F5FF563185EB61D0063EACB /* qq.png */; };
 		3F5FF567185ECA7A0063EACB /* SettingCustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F5FF566185ECA7A0063EACB /* SettingCustomCell.m */; };
 		3F5FF569185ECDEA0063EACB /* Avatar1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F5FF568185ECDEA0063EACB /* Avatar1.png */; };
@@ -134,6 +135,8 @@
 		3F596A891860044700C63C95 /* JobDetailsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JobDetailsCell.m; sourceTree = "<group>"; };
 		3F596A8B1860293800C63C95 /* JobWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobWebViewController.h; sourceTree = "<group>"; };
 		3F596A8C1860293800C63C95 /* JobWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JobWebViewController.m; sourceTree = "<group>"; };
+		3F5ADEA318645886008D210D /* JIViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JIViewCell.h; sourceTree = "<group>"; };
+		3F5ADEA418645886008D210D /* JIViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JIViewCell.m; sourceTree = "<group>"; };
 		3F5FF563185EB61D0063EACB /* qq.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = qq.png; sourceTree = "<group>"; };
 		3F5FF565185ECA7A0063EACB /* SettingCustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingCustomCell.h; sourceTree = "<group>"; };
 		3F5FF566185ECA7A0063EACB /* SettingCustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingCustomCell.m; sourceTree = "<group>"; };
@@ -321,6 +324,8 @@
 			children = (
 				3FA37F3A18616C4900E0FC6B /* JIViewController.h */,
 				3FA37F3B18616C4900E0FC6B /* JIViewController.m */,
+				3F5ADEA318645886008D210D /* JIViewCell.h */,
+				3F5ADEA418645886008D210D /* JIViewCell.m */,
 				3FA37F3D1861702C00E0FC6B /* EditJITBC.h */,
 				3FA37F3E1861702C00E0FC6B /* EditJITBC.m */,
 				3FA37F4018617B8600E0FC6B /* JIInputView.h */,
@@ -775,6 +780,7 @@
 				3F0D5502185AFA0F005841A6 /* TencentOpenAPI.framework in Sources */,
 				3F6F9D771858631500FDF258 /* SearchView.m in Sources */,
 				9D66ABB8184F0A3B00C03098 /* WorkTableViewController.m in Sources */,
+				3F5ADEA518645886008D210D /* JIViewCell.m in Sources */,
 				3FA8A6B51864151800398522 /* PreviewResumeCell.m in Sources */,
 				9DAD589A1855C5AE00F0A2B2 /* EditWorkViewController.m in Sources */,
 				9DAA6104185719E1002FDF1C /* JoinCustomCell.m in Sources */,
