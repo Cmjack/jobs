@@ -23,7 +23,7 @@
 
 @interface HttpRequest : NSObject
 @property(nonatomic, weak)id<HttpRequestDelegate> delegate;
--(void)httpRequestForGet;
+//-(void)httpRequestForGet;
 -(void)registerUserEmail:(NSString*)email withPassWard:(NSString*)passWord;
 -(void)loginUserName:(NSString*)name withSalt:(NSString*)salt;
 +(void)httpRequestForSaveResume:(NSDictionary*)dict;
