@@ -30,6 +30,12 @@
 -(void)initViews
 {
     self.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.90f];
+    
+    UITapGestureRecognizer *singleFingerTap =
+    [[UITapGestureRecognizer alloc] initWithTarget:self
+                                            action:@selector(backgroundTap)];
+    [self addGestureRecognizer:singleFingerTap];
+    
     self.positionTypeArr = @[@"iOS",@"Android",@"JAVA",@"PHP",@"web前端",@"c++"];
     for (int i = 0; i< [self.positionTypeArr count]; i++) {
         UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -107,6 +113,11 @@
     self.searchLab.layer.borderColor = [[UIColor grayColor]CGColor];
 
 }
+
+-(void)backgroundTap {
+    [self popView];
+}
+
 -(void)touchCancel:(id)sender
 {
     UIButton *button = (UIButton*)sender;
