@@ -12,14 +12,20 @@
 #import "headSetting.h"
 #import <TencentOpenAPI/TencentOAuth.h>
 
-#ifdef DEBUG
-#define SERVER_URL @"http://192.168.1.114:3000"
-#else
+#ifdef RELEASE
 #define SERVER_URL @"http://121.199.24.40:3000"
+#else
+#define SERVER_URL @"http://192.168.1.114:3000"
 #endif
 
 @implementation HttpRequest
 
+-(id)init {
+    if (self = [super init]) {
+        NSLog(@"[HttpRequest init] server url: %@", SERVER_URL);
+    }
+    return self;
+}
 -(void)registerUserEmail:(NSString*)email withPassWard:(NSString*)passWord
 {
     NSDictionary * dict = [NSDictionary dictionaryWithObjectsAndKeys:email,@"email",passWord,@"password", nil];
