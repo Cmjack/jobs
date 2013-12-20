@@ -11,6 +11,8 @@
 #import "headSetting.h"
 #import "Tools.h"
 #import "JobWebViewController.h"
+#import "DataModel.h"
+#import "HttpRequest.h"
 @interface JobDatailViewController ()<UITableViewDataSource,UITableViewDelegate,JobDetailsCellDelegate>
 @property(nonatomic,strong)UITableView * JDTableview;
 
@@ -108,7 +110,14 @@
     }
     else
     {
-        NSLog(@"%@",self.jobMessageDict);
+       NSString *jobId = [self.jobMessageDict objectForKey:JOB_ID];
+       NSString *userId = [[NSUserDefaults standardUserDefaults]objectForKey:@"username"];
+       NSString *resumeId = [[DataModel shareData].resumeDict objectForKey:@"_id"];
+       NSString  *token = [[NSUserDefaults standardUserDefaults]objectForKey:@"mytoken"];
+        
+       NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:jobId,@"job_id",userId,@"user_id",resumeId,@"resume_id",token,@"token", nil];
+        [[[HttpRequest alloc]init]httpPostApplyJob:dict];
+       
     }
     
 }

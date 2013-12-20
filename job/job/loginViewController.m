@@ -245,7 +245,7 @@
     [[NSUserDefaults standardUserDefaults]setObject:WEIBOLOGIN forKey:LOGINTYPE];
     [DataModel shareData].isLogin = YES;
     NSLog(@"%@",userinfo);
-    NSString * wbUserName = [NSString stringWithFormat:@"wb%@",[userinfo objectForKey:@"id"]];
+    NSString * wbUserName = [NSString stringWithFormat:@"%@",[userinfo objectForKey:@"id"]];
     NSDictionary *newUserInfo = [NSDictionary dictionaryWithObjectsAndKeys:[userinfo objectForKey:@"avatar_hd"],@"head_url",
                                  [userinfo objectForKey:@"screen_name"],@"nick_name",
                                  
@@ -253,7 +253,7 @@
     
     [[NSUserDefaults standardUserDefaults]setObject:wbUserName forKey:@"username"];
     
-    [[[HttpRequest alloc]init]registerUserEmail:wbUserName withPassWard:@"1234"];
+    [[[HttpRequest alloc]init]registerUserEmail:wbUserName withPassWard:@"1234" withType:@"weibo"];
     [self popView];
     if ([self.delegate respondsToSelector:@selector(loginSuccess:)]) {
         [self.delegate loginSuccess:newUserInfo];

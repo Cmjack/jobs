@@ -51,9 +51,9 @@ static TecentSDK *g_instance = nil;
     NSLog(@"%@",[_oauth accessToken]);
     
     [[NSUserDefaults standardUserDefaults]setObject:QQLOGIN forKey:LOGINTYPE];
-    NSString * qqUserName = [NSString stringWithFormat:@"qq%@",[_oauth openId]];
+    NSString * qqUserName = [NSString stringWithFormat:@"%@",[_oauth openId]];
     [[NSUserDefaults standardUserDefaults]setObject:qqUserName forKey:@"username"];
-    [[[HttpRequest alloc]init]registerUserEmail:qqUserName withPassWard:@"1234"];
+    [[[HttpRequest alloc]init]registerUserEmail:qqUserName withPassWard:@"1234" withType:@"qq" ];
 }
 
 - (void)tencentDidNotLogin:(BOOL)cancelled
