@@ -66,6 +66,11 @@
 
 -(void)insertData:(NSDictionary*)dict
 {
+    if ([[dict objectForKey:JOB_URL]length]>0) {
+        
+        [self.applyButton setTitle:@"打开链接" forState:UIControlStateNormal];
+
+    }
     self.jobDict = dict;
     self.positionLab.text = [dict objectForKey:JOB_TITLE];
     self.companYLab.text = [dict objectForKey:JOB_COMPANY];

@@ -196,7 +196,6 @@
        // NSLog(@"userinfo: %@", responseObject);
         [[NSNotificationCenter defaultCenter]postNotificationName:@"weibologin" object:nil userInfo:responseObject];
 
-        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
         NSLog(@"userinfo:ERROR:%@",error);

@@ -78,8 +78,10 @@
     }
     else if ([response isKindOfClass:WBAuthorizeResponse.class])
     {
-
+        
+        
         [[NSUserDefaults standardUserDefaults]setObject:[(WBAuthorizeResponse *)response accessToken] forKey:WEIBOTOKEN];
+        NSLog(@"token %@",[(WBAuthorizeResponse *)response accessToken]);
         NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[(WBAuthorizeResponse *)response accessToken],@"access_token",[(WBAuthorizeResponse *)response userID],@"uid", nil];
         [[[HttpRequest alloc]init]sinaGetUserInfo:dict];
         

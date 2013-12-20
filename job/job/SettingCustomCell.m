@@ -7,7 +7,7 @@
 //
 
 #import "SettingCustomCell.h"
-
+#import <QuartzCore/QuartzCore.h>
 @implementation SettingCustomCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -22,11 +22,12 @@
 -(void)initViews
 {
     self.headImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"Avatar1"]];
-    self.headImageView.frame = CGRectMake(5, 5, 48, 48);
+    self.headImageView.frame = CGRectMake(15, 5, 48, 48);
+    self.headImageView.layer.masksToBounds = YES;
+    self.headImageView.layer.cornerRadius = 2.5f;
     [self addSubview:self.headImageView];
-    self.userNameLab = [[UILabel alloc]initWithFrame:CGRectMake(70, 5, 200, 25)];
+    self.userNameLab = [[UILabel alloc]initWithFrame:CGRectMake(80, 5, 200, 25)];
     self.userNameLab.backgroundColor = [UIColor clearColor];
-    self.userNameLab.text = @"262552198@qq.com";
     [self addSubview:self.userNameLab];
 }
 

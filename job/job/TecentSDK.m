@@ -48,6 +48,7 @@ static TecentSDK *g_instance = nil;
     NSLog(@"-----授权成功！！！");
     
     [_oauth getUserInfo];
+    NSLog(@"%@",[_oauth accessToken]);
     
     [[NSUserDefaults standardUserDefaults]setObject:QQLOGIN forKey:LOGINTYPE];
     NSString * qqUserName = [NSString stringWithFormat:@"qq%@",[_oauth openId]];

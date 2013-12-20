@@ -13,6 +13,7 @@
 #import "JIViewController.h"
 #import "HttpRequest.h"
 #import "DataModel.h"
+#import "PreviewResumeViewController.h"
 @interface ResumeViewController ()<UITableViewDataSource,UITableViewDelegate,HttpRequestDelegate>
 @property (nonatomic ,strong)UITableView *tableview;
 @property (nonatomic ,strong)NSArray *array;
@@ -46,6 +47,12 @@
     HttpRequest *http = [[HttpRequest alloc]init];
     http.delegate = self;
     [http httpRequestForGetResume];
+    
+    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc]initWithTitle:@"简历预览" style:UIBarButtonItemStylePlain target:self action:@selector(clickRightButton)];
+    
+    self.navigationItem.rightBarButtonItem = rightButton;
+    
+    
 }
 -(void)initViews{
     self.tableview = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
@@ -62,6 +69,12 @@
     [self.view addSubview:self.loadingLab];
     
 }
+-(void)clickRightButton
+{
+    PreviewResumeViewController *preview = [[PreviewResumeViewController alloc]initWithNibName:nil bundle:nil];
+    [self.navigationController pushViewController:preview animated:YES];
+}
+
 #pragma mark- UITableViewDataSource
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {

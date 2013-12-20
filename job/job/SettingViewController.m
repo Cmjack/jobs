@@ -46,9 +46,8 @@
     self.setTableview.dataSource = self;
     self.setTableview.backgroundColor = [UIColor clearColor];
     [self.view addSubview:self.setTableview];
+    self.title = @"个人中心";
     
-    UIBarButtonItem *barbutton =[[UIBarButtonItem alloc]initWithTitle:@"登录" style:UIBarButtonItemStylePlain target:self action:@selector(clickBarButton)];
-    self.navigationItem.rightBarButtonItem = barbutton;
 	// Do any additional setup after loading the view.
     self.array = @[@"已发招聘信息",@"已收简历信息",@"已申请职位信息",@"个人简历信息",@"切换用户",@"关于应用"];
     self.userInfo = [[NSUserDefaults standardUserDefaults]objectForKey:@"userinfo"];
