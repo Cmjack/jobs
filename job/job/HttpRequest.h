@@ -38,5 +38,6 @@
 -(void)httpPostApplyJob:(NSDictionary*)dict;
 -(void)httpGetMyApplylist:(NSDictionary*)dict;
 -(void)httpGetApplylist:(NSDictionary*)dict;
-+(void)check;
++(BOOL)check;
++(BOOL)checkNotShowAlertView;
 @end

@@ -286,11 +286,25 @@
 }
 
 
-+(void)check
++(BOOL)check
+{
+    AFNetworkReachabilityManager *manager = [AFNetworkReachabilityManager sharedManager];
+    if (manager.networkReachabilityStatus == AFNetworkReachabilityStatusNotReachable|| manager.networkReachabilityStatus == AFNetworkReachabilityStatusUnknown) {
+        UIAlertView * alertView = [[UIAlertView alloc]initWithTitle:nil message:@"当前网络不可用！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+        [alertView show];
+        return YES;
+    }
+    return NO;
+}
++(BOOL)checkNotShowAlertView
 {
     AFNetworkReachabilityManager *manager = [AFNetworkReachabilityManager sharedManager];
     NSLog(@"%i",manager.networkReachabilityStatus);
-    
+    if (manager.networkReachabilityStatus == AFNetworkReachabilityStatusNotReachable|| manager.networkReachabilityStatus == AFNetworkReachabilityStatusUnknown) {
+        
+        return YES;
+    }
+    return NO;
 }
 
 

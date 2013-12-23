@@ -26,7 +26,11 @@
     
     NSLog(@"WeiboSDK:%i",[WeiboSDK registerApp:kAppKey]);
     
-    [LoginHelp autoLogin];
+    BOOL isNetWork = [HttpRequest checkNotShowAlertView];
+    if (!isNetWork) {
+        [LoginHelp autoLogin];
+
+    }
     
     
     self.window =[[UIWindow alloc]initWithFrame:[[UIScreen mainScreen] bounds]];

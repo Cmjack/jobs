@@ -118,6 +118,9 @@
 
 -(void)clickSearchButton
 {
+    if ([HttpRequest check]) {
+        return;
+    }
     NSLog(@"%f",SCREEN_HEIGHT);
     SearchView *search = [[SearchView alloc]initWithFrame:CGRectMake(0,SCREEN_HEIGHT, 320, SCREEN_HEIGHT)];
     search.delegate = self;
@@ -131,12 +134,18 @@
 }
 -(void)clickRightButton:(id)sender
 {
+    if ([HttpRequest check]) {
+        return;
+    }
     JoinViewController *join = [[JoinViewController alloc]initWithNibName:nil bundle:nil];
     [self.navigationController pushViewController:join animated:YES];
     
 }
 -(void)clickLeftButton:(id)sender
 {
+    if ([HttpRequest check]) {
+        return;
+    }
      if (self.shareDataModel.isLogin == NO) {
          [self showLoginView];
     }
@@ -169,6 +178,11 @@
 #pragma mark - refreshData
 -(void)refreshData
 {
+    if ([HttpRequest check]) {
+        [self stopRefresh];
+        return;
+    }
+    
     HttpRequest *request = [[HttpRequest alloc]init];
     request.delegate = self;
     NSLog(@"%@",self.jobDataArray);
@@ -192,6 +206,9 @@
 #pragma mark - loadData
 -(void)loadData
 {
+    if ([HttpRequest check]) {
+        return;
+    }
     HttpRequest *request = [[HttpRequest alloc]init];
     request.delegate = self;
     NSString *pageString = [NSString stringWithFormat:@"%i",self.jobDataArray.count/20+1];
