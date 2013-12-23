@@ -16,7 +16,6 @@
 @property(nonatomic,strong)NSMutableArray * resumeDataArray;
 @property(nonatomic,strong)NSArray *workMessgae;
 @property(nonatomic,strong)NSArray *schoolMessage;
-@property(nonatomic,strong)NSDictionary *resumeDict;
 @end
 
 @implementation PreviewResumeViewController
@@ -34,7 +33,6 @@
 {
     [super viewDidLoad];
     
-    self.resumeDict = [DataModel shareData].resumeDict;
     NSLog(@" resume %@",self.resumeDict);
 	// Do any additional setup after loading the view.
     self.preTableview = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
@@ -129,18 +127,44 @@
         if (indexPath.section == 1) {
             
             [cell2 insertDataForTitleType:self.workMessgae];
-            [cell2 insertData:[[self.resumeDict objectForKey:KEY_WE] objectAtIndex:indexPath.row]];
+            if ([[self.resumeDict objectForKey:KEY_WE] count]>0) {
+                
+                [cell2 insertData:[[self.resumeDict objectForKey:KEY_WE] objectAtIndex:indexPath.row]];
+
+            }
+            else
+            {
+                [cell2 insertData:NULL];
+            }
         }
         else if (indexPath.section == 2)
         {
             [cell2 insertDataForTitleType:self.schoolMessage];
-            [cell2 insertData:[[self.resumeDict objectForKey:KEY_EDUCATION] objectAtIndex:indexPath.row]];
+            if ([[self.resumeDict objectForKey:KEY_EDUCATION] count]>0) {
+                
+                [cell2 insertData:[[self.resumeDict objectForKey:KEY_EDUCATION] objectAtIndex:indexPath.row]];
+                
+            }else
+            {
+                [cell2 insertData:NULL];
+            }
+            
+
+            
 
         }
         else if (indexPath.section == 3)
         {
             [cell2 insertDataForTitleType:self.schoolMessage];
-            [cell2 insertData:[[self.resumeDict objectForKey:KEY_TRAINING] objectAtIndex:indexPath.row]];
+            if ([[self.resumeDict objectForKey:KEY_TRAINING] count]>0) {
+                
+                [cell2 insertData:[[self.resumeDict objectForKey:KEY_TRAINING] objectAtIndex:indexPath.row]];
+                
+            }
+            else
+            {
+                [cell2 insertData:NULL];
+            }
 
         }
         

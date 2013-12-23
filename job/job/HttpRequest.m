@@ -33,9 +33,12 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager POST:[NSString stringWithFormat:@"%@/register", SERVER_URL] parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"register:%@",responseObject);
+        [self httpRequestForGetResume];
         BOOL isSalt = NO;
         if ([responseObject objectForKey:@"salt"]!= NULL) {
-            [[NSUserDefaults standardUserDefaults]setObject:[responseObject objectForKey:@"salt"] forKey:@"mytoken"];
+            [[NSUserDefaults standardUserDefaults]setObject:[responseObject objectForKey:@"salt"] forKey:MYAPPTOKEN];
+            [[NSUserDefaults standardUserDefaults]setObject:[[responseObject objectForKey:@"data"] objectForKey:@"_id"] forKey:USER_ID];
+
             isSalt = YES;
         }
         if ([self.delegate respondsToSelector:@selector(signSucessOrFail:)]) {
@@ -60,10 +63,12 @@
     [manager POST:[NSString stringWithFormat:@"%@/login", SERVER_URL] parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"login:%@ ",responseObject);
         BOOL isSucess =NO;
+        [self httpRequestForGetResume];
         //NSDictionary *dict = (NSDictionary*)responseObject;
         if ([[[responseObject objectForKey:@"data"] objectForKey:@"salt"] length]>0) {
             //[self httpRequestForGetResume];
-            [[NSUserDefaults standardUserDefaults]setObject:[[responseObject objectForKey:@"data"] objectForKey:@"salt"] forKey:@"mytoken"];
+            [[NSUserDefaults standardUserDefaults]setObject:[[responseObject objectForKey:@"data"] objectForKey:@"salt"] forKey:MYAPPTOKEN];
+            [[NSUserDefaults standardUserDefaults]setObject:[[responseObject objectForKey:@"data"] objectForKey:@"_id"] forKey:USER_ID];
             [DataModel shareData].isLogin = YES;
             NSLog(@"sss");
             isSucess =YES;
@@ -96,8 +101,9 @@
     
     [manager POST:[NSString stringWithFormat:@"%@/resume", SERVER_URL] parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        NSLog(@"saveSuccess");
-        
+        NSLog(@"%@",responseObject);
+        [DataModel shareData].resumeDict = [NSMutableDictionary dictionaryWithDictionary:responseObject];
+
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
         NSLog(@"saveFail");
@@ -112,11 +118,11 @@
     
     NSDictionary * user = [NSDictionary dictionaryWithObject:[[NSUserDefaults standardUserDefaults]objectForKey:@"username"] forKey:@"username"];
     
-    NSLog(@"user:%@",user);
+   
     [manager GET:[NSString stringWithFormat:@"%@/resume", SERVER_URL] parameters:user success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSLog(@"resume: %@", responseObject);
-        //[DataModel shareData].resumeDict = [NSMutableDictionary dictionaryWithDictionary:responseObject];
+        [DataModel shareData].resumeDict = [NSMutableDictionary dictionaryWithDictionary:responseObject];
         if ([self.delegate respondsToSelector:@selector(getUserResumeMessage:)]) {
             
             [self.delegate getUserResumeMessage:responseObject];
@@ -223,8 +229,8 @@
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
-    [manager POST:@"http://192.168.1.114:3000/apple" parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
+    [manager POST:[NSString stringWithFormat:@"%@/job/apple",SERVER_URL] parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"apply:%@",responseObject);
         NSLog(@"saveSuccess");
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -232,6 +238,45 @@
     }];
 
 }
+-(void)httpGetMyApplylist:(NSDictionary*)dict
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
+    [manager GET:[NSString stringWithFormat:@"%@/myapplylist", SERVER_URL] parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"applylist:%@",responseObject);
+        NSArray *arr = [responseObject objectForKey:@"data"];
+        if ([self.delegate respondsToSelector:@selector(getApplyJobs:)]) {
+            [self.delegate getApplyJobs:arr];
+        }
+       
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if ([self.delegate respondsToSelector:@selector(getApplyJobs:)]) {
+            [self.delegate getApplyJobs:NULL];
+        }
+        NSLog(@"applylist _error%@",error);
+    }];
+
+}
+-(void)httpGetApplylist:(NSDictionary*)dict//
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
+    [manager GET:[NSString stringWithFormat:@"%@/resumelist", SERVER_URL] parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"applylist:%@",responseObject);
+        NSArray *arr = [responseObject objectForKey:@"data"];
+        if ([self.delegate respondsToSelector:@selector(getResume:)]) {
+            [self.delegate getResume:arr];
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if ([self.delegate respondsToSelector:@selector(getResume:)]) {
+            [self.delegate getResume:NULL];
+        }
+        NSLog(@"applylist _error%@",error);
+    }];
+    
+}
+
 
 +(void)check
 {

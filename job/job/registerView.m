@@ -9,6 +9,7 @@
 #import "registerView.h"
 #import "HttpRequest.h"
 #import "DataModel.h"
+#import "headSetting.h"
 #define HEIGHT 60
 @interface registerView ()<HttpRequestDelegate,UIAlertViewDelegate>
 @property(nonatomic, strong)UITextField *emailTF;
@@ -117,6 +118,8 @@
         [DataModel shareData].isLogin = YES;
         [[NSUserDefaults standardUserDefaults]setObject:self.emailTF.text forKey:@"username"];
         [[NSUserDefaults standardUserDefaults]setObject:self.passWordTF.text forKey:@"password"];
+        [[NSUserDefaults standardUserDefaults]setObject:MYAPPLOGIN forKey:LOGINTYPE];
+
         [self popView];
         
         NSLog(@"sucess");

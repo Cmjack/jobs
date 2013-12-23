@@ -210,6 +210,7 @@
     self.registerButton.enabled = YES;
     if (isSucess) {
         
+        [[NSUserDefaults standardUserDefaults]setObject:MYAPPLOGIN forKey:LOGINTYPE];
         [[NSUserDefaults standardUserDefaults]setObject:self.userNameTF.text forKey:@"username"];
         [[NSUserDefaults standardUserDefaults]setObject:self.passWordTF.text forKey:@"password"];
         [DataModel shareData].isLogin = YES;
