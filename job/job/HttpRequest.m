@@ -289,7 +289,10 @@
 +(BOOL)check
 {
     AFNetworkReachabilityManager *manager = [AFNetworkReachabilityManager sharedManager];
-    if (manager.networkReachabilityStatus == AFNetworkReachabilityStatusNotReachable|| manager.networkReachabilityStatus == AFNetworkReachabilityStatusUnknown) {
+    NSLog(@"网络状态:%i",manager.networkReachabilityStatus);
+    if (manager.networkReachabilityStatus == AFNetworkReachabilityStatusNotReachable) {
+        
+        
         UIAlertView * alertView = [[UIAlertView alloc]initWithTitle:nil message:@"当前网络不可用！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
         [alertView show];
         return YES;

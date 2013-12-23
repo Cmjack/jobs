@@ -189,6 +189,9 @@
     if (self.jobDataArray.count >0) {
         NSString *_id = [[self.jobDataArray objectAtIndex:0]objectForKey:@"_id"];
         [request getRefreshJobMessage:_id];
+    }else
+    {
+        [self loadData];
     }
 }
 -(void)getRefreshJobMessage:(NSArray *)refreshMessage
@@ -207,6 +210,8 @@
 -(void)loadData
 {
     if ([HttpRequest check]) {
+        [self performSelector:@selector(stopRefresh) withObject:nil afterDelay:0.5];
+
         return;
     }
     HttpRequest *request = [[HttpRequest alloc]init];
