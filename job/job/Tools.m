@@ -7,7 +7,7 @@
 //
 
 #import "Tools.h"
-
+#import "HttpRequest.h"
 @implementation Tools
 
 +(float)autoSizeLab:(CGSize)size  withFont:(UIFont*)font withSting:(NSString*)string
@@ -22,5 +22,7 @@
     NSURL *url = [NSURL URLWithString:string];
     NSData *data = [NSData dataWithContentsOfURL:url];
     return [UIImage imageWithData:data];
+    
 }
+
 @end
