@@ -6,6 +6,8 @@
 //  Copyright (c) 2013年 impressly. All rights reserved.
 //
 #define  VERSION [[[UIDevice currentDevice] systemVersion]floatValue]
+#define SCREEN_HEIGHT   [[UIScreen mainScreen]bounds].size.height
+#define SCREEN_BOUNDS   [[UIScreen mainScreen]bounds]
 
 #define USER_ID          @"user_id"
 #define MYAPPTOKEN       @"mytoken"

@@ -33,12 +33,14 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager POST:[NSString stringWithFormat:@"%@/register", SERVER_URL] parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"register:%@",responseObject);
-        [self httpRequestForGetResume];
+        
         BOOL isSalt = NO;
         if ([responseObject objectForKey:@"salt"]!= NULL) {
             [[NSUserDefaults standardUserDefaults]setObject:[responseObject objectForKey:@"salt"] forKey:MYAPPTOKEN];
             [[NSUserDefaults standardUserDefaults]setObject:[[responseObject objectForKey:@"data"] objectForKey:@"_id"] forKey:USER_ID];
-
+            [[NSUserDefaults standardUserDefaults]setObject:email forKey:@"username"];
+            [[NSUserDefaults standardUserDefaults]setObject:passWord forKey:@"password"];
+            [self httpRequestForGetResume];
             isSalt = YES;
         }
         if ([self.delegate respondsToSelector:@selector(signSucessOrFail:)]) {
@@ -63,13 +65,19 @@
     [manager POST:[NSString stringWithFormat:@"%@/login", SERVER_URL] parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"login:%@ ",responseObject);
         BOOL isSucess =NO;
-        [self httpRequestForGetResume];
+        
         //NSDictionary *dict = (NSDictionary*)responseObject;
         if ([[[responseObject objectForKey:@"data"] objectForKey:@"salt"] length]>0) {
             //[self httpRequestForGetResume];
             [[NSUserDefaults standardUserDefaults]setObject:[[responseObject objectForKey:@"data"] objectForKey:@"salt"] forKey:MYAPPTOKEN];
             [[NSUserDefaults standardUserDefaults]setObject:[[responseObject objectForKey:@"data"] objectForKey:@"_id"] forKey:USER_ID];
+            
+            [[NSUserDefaults standardUserDefaults]setObject:MYAPPLOGIN forKey:LOGINTYPE];
+            [[NSUserDefaults standardUserDefaults]setObject:name forKey:@"username"];
+            [[NSUserDefaults standardUserDefaults]setObject:salt forKey:@"password"];
+            
             [DataModel shareData].isLogin = YES;
+            [self httpRequestForGetResume];
             NSLog(@"sss");
             isSucess =YES;
         }
