@@ -80,7 +80,7 @@
         
         [self.iconButton setImage:[UIImage imageNamed:@"wealink.jpg"] forState:UIControlStateNormal];
         self.fromLabel.text = @"来自若邻网";
-    }else if ([[dict objectForKey:JOB_SOURCE]isEqualToString:FROM_WEALINK]) {
+    }else if ([[dict objectForKey:JOB_SOURCE]isEqualToString:FROM_51]) {
         [self.iconButton setImage:[UIImage imageNamed:@"51Icon.png"] forState:UIControlStateNormal];
         self.fromLabel.text = @"来自前程无忧";
     }else if ([[dict objectForKey:JOB_SOURCE]isEqualToString:FROM_OSCHINA]) {
@@ -89,9 +89,8 @@
     }
     else
     {
-        self.iconButton.layer.borderWidth = 0.5f;
-        self.iconButton.layer.borderColor = [[UIColor grayColor]CGColor];
-
+        [self.iconButton setImage:[UIImage imageNamed:@"AppIcon40x40"] forState:UIControlStateNormal];
+        self.fromLabel.text = @"来自事业线";
     }
     
     

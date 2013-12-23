@@ -21,6 +21,8 @@
 #import "JobDatailViewController.h"
 #import "headSetting.h"
 
+
+
 @interface ViewController ()<UITableViewDataSource,UITableViewDelegate,HttpRequestDelegate,SearchViewDelegate,PullingRefreshTableViewDelegate,loginViewControllerDelegate,SettingViewControllerDelegate>
 @property(nonatomic,strong)PullingRefreshTableView *jobTableView;
 @property(nonatomic,strong)CustomCell *customCell;
@@ -201,6 +203,7 @@
     [self.jobDataArray addObjectsFromArray:[dataDict objectForKey:@"Data"]];
     [self performSelector:@selector(stopRefresh) withObject:nil afterDelay:0.5];
     [self.jobTableView reloadData];
+    
 }
 
 #pragma mark - searchviewdelegate

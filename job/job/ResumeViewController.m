@@ -72,6 +72,7 @@
 -(void)clickRightButton
 {
     PreviewResumeViewController *preview = [[PreviewResumeViewController alloc]initWithNibName:nil bundle:nil];
+    preview.resumeDict = self.dataModel.resumeDict;
     [self.navigationController pushViewController:preview animated:YES];
 }
 
@@ -154,7 +155,6 @@
 #pragma mark - HttprequestDelegate
 -(void)getUserResumeMessage:(NSDictionary *)resumeMessage
 {
-    self.dataModel.resumeDict = [NSMutableDictionary dictionaryWithDictionary:resumeMessage];
     self.tableview.hidden = NO;
     self.loadingLab.hidden = YES;
 }

@@ -18,7 +18,9 @@
 -(void)getJoinMessage:(NSArray*)array;//获取用户已发招聘信息
 -(void)getUserResumeMessage:(NSDictionary*)resumeMessage;
 -(void)getRefreshJobMessage:(NSArray*)refreshMessage;
+-(void)getResume:(NSArray*)resumeArray;//
 
+-(void)getApplyJobs:(NSArray*)jobArrray;
 @end
 
 @interface HttpRequest : NSObject
@@ -34,6 +36,7 @@
 -(void)httpRequestForPostJoinList:(NSDictionary*)dict;
 -(void)getRefreshJobMessage:(NSString*)_idString;
 -(void)httpPostApplyJob:(NSDictionary*)dict;
-
+-(void)httpGetMyApplylist:(NSDictionary*)dict;
+-(void)httpGetApplylist:(NSDictionary*)dict;
 +(void)check;
 @end

@@ -14,11 +14,15 @@
 #import "AboutViewController.h"
 #import "LoginHelp.h"
 #import "Tools.h"
+#import "headSetting.h"
+#import "DataModel.h"
+#import "ApplyJobsViewController.h"
 @interface SettingViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic, strong)UITableView *setTableview;
 @property(nonatomic, strong)NSArray *array;
 @property(nonatomic, strong)SettingCustomCell *customCell;
 @property(nonatomic, strong)NSDictionary *userInfo;
+@property(nonatomic, strong)NSString *loginType;
 
 @end
 
@@ -49,8 +53,9 @@
     self.title = @"个人中心";
     
 	// Do any additional setup after loading the view.
-    self.array = @[@"已发招聘信息",@"已收简历信息",@"已申请职位信息",@"个人简历信息",@"切换用户",@"关于应用"];
+    self.array = @[@"已发招聘信息",@"已申请职位信息",@"个人简历信息",@"注销用户",@"关于应用"];
     self.userInfo = [[NSUserDefaults standardUserDefaults]objectForKey:@"userinfo"];
+    self.loginType = [[NSUserDefaults standardUserDefaults]objectForKey:LOGINTYPE];
 }
 #pragma mark - UITableViewDataSource
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -73,11 +78,18 @@
         _customCell = [tableView dequeueReusableCellWithIdentifier:cellString];
         if (_customCell == nil) {
             _customCell = [[SettingCustomCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellString];
-            
+            _customCell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
-        _customCell.userNameLab.text = [self.userInfo objectForKey:@"nick_name"];
+        if ([self.loginType isEqualToString:MYAPPLOGIN]) {
+            _customCell.userNameLab.text = [[NSUserDefaults standardUserDefaults]objectForKey:USERNAME];
+            
+        }else
+        {
+            _customCell.userNameLab.text = [self.userInfo objectForKey:@"nick_name"];
+            
+            _customCell.headImageView.image = [Tools imageLoading];
+        }
         
-        _customCell.headImageView.image = [Tools imageLoading];
         return _customCell;
         
     }else
@@ -110,14 +122,14 @@
     if (indexPath.section == 1 && indexPath.row == 0) {
         JionMessageViewController *join = [[JionMessageViewController alloc]initWithNibName:nil bundle:nil];
         [self.navigationController pushViewController:join animated:YES];
-    }else if (indexPath.section == 1 && indexPath.row == 3){
+    }else if (indexPath.section == 1 && indexPath.row == 2){
         ResumeViewController *resume = [[ResumeViewController alloc]initWithNibName:nil bundle:nil];
         [self.navigationController pushViewController:resume animated:YES];
-    }else if (indexPath.section == 1 && indexPath.row == 5)
+    }else if (indexPath.section == 1 && indexPath.row == 4)
     {
         AboutViewController *about = [[AboutViewController alloc]initWithNibName:nil bundle:nil];
         [self.navigationController pushViewController:about animated:YES];
-    }else if (indexPath.section == 1 && indexPath.row == 4)
+    }else if (indexPath.section == 1 && indexPath.row == 3)
     {
         if ([self.delegate respondsToSelector:@selector(cancelUser)]) {
             
@@ -126,6 +138,15 @@
             [self.delegate cancelUser];
             
         }
+    }else if (indexPath.section == 1 && indexPath.row == 1)
+    {
+        NSString *userId = [[NSUserDefaults standardUserDefaults]objectForKey:USER_ID];
+        NSString *resumeId= [[DataModel shareData].resumeDict objectForKey:@"_id"];
+        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:userId,@"user_id",resumeId,@"resume_id", nil];
+        ApplyJobsViewController *apply = [[ApplyJobsViewController alloc]initWithNibName:Nil bundle:Nil];
+        apply.dict =dict;
+        [self.navigationController pushViewController:apply animated:YES];
+        
     }
 }
 

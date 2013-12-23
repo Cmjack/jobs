@@ -12,9 +12,12 @@
 #import "HttpRequest.h"
 #import "headSetting.h"
 #import "Tools.h"
+#import <QuartzCore/QuartzCore.h>
+#import "GetResumeViewController.h"
 @interface JionMessageViewController ()<HttpRequestDelegate>
 @property(nonatomic,strong)CustomCell  *customCell;
 @property(nonatomic,strong)NSArray *joinMessageArray;
+@property(nonatomic,strong)UIButton *LookButton;
 @end
 
 @implementation JionMessageViewController
@@ -38,18 +41,49 @@
     http.delegate = self;
     
     [http httpRequestForPostJoinList:dict];
-    
+    self.title = @"招聘信息";
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
+-(void)initLookButton
+{
+    UIColor* jade = [UIColor colorWithRed:19/255.0 green:77/255.0 blue:53/255.0 alpha:0.7f] ;
+    UIColor* jadeLight = [UIColor colorWithRed:30/255.0 green:186/255.0 blue:121/255.0 alpha:0.7f];
+    self.LookButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.LookButton.frame = CGRectMake(240, 5, 60, 24);
+    [self.LookButton setTitle:@"已收简历" forState:UIControlStateNormal];
+    self.LookButton.titleLabel.font = [UIFont systemFontOfSize:14.0f];
+    [self.LookButton setTitleColor:jade forState:UIControlStateNormal];
+    [self.LookButton setTitleColor:jadeLight forState:UIControlStateHighlighted];
+    self.LookButton.layer.borderWidth = 0.5f;
+    self.LookButton.layer.cornerRadius = 4.0f;
+    [self.LookButton addTarget:self action:@selector(clickLooKButton:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+-(void)clickLooKButton:(id)sender
+{
+    UIButton *button = (UIButton*)sender;
+    NSString *jobId = [[self.joinMessageArray objectAtIndex:button.tag - 1000]objectForKey:@"_id"];
+    NSDictionary * dict = [NSDictionary dictionaryWithObjectsAndKeys:jobId,@"job_id", nil];
+    
+    GetResumeViewController *getResume = [[GetResumeViewController alloc]initWithNibName:nil bundle:nil];
+    getResume.jobId = dict;
+    [self.navigationController pushViewController:getResume animated:YES];
+    
+    
+}
+
+
 -(void)getJoinMessage:(NSArray *)array
 {
     self.joinMessageArray = array;
     [self.tableView reloadData];
 }
+
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -77,9 +111,16 @@
     if (_customCell == NULL) {
         _customCell = [[CustomCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         [_customCell initViews];
+        _customCell.fromLabel.textColor = [UIColor blackColor];
+        _customCell.captionLab.textColor = [UIColor blackColor];
+        _customCell.PCALable.textColor = [UIColor blackColor];
+        _customCell.creatDateLab.hidden = YES;
+        [self initLookButton];
+        [_customCell addSubview:self.LookButton];
+        
     }
     [_customCell insertData:[self.joinMessageArray objectAtIndex:indexPath.row]];
-
+    self.LookButton.tag = 1000+indexPath.row;
     // Configure the cell...
     
     return _customCell;

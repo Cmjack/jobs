@@ -82,9 +82,6 @@
 //        
 //    }
     
-    
-    
-    
     return NULL;
 }
 
@@ -111,12 +108,22 @@
     else
     {
        NSString *jobId = [self.jobMessageDict objectForKey:JOB_ID];
-       NSString *userId = [[NSUserDefaults standardUserDefaults]objectForKey:@"username"];
+       NSString *userId = [[NSUserDefaults standardUserDefaults]objectForKey:@"user_id"];
        NSString *resumeId = [[DataModel shareData].resumeDict objectForKey:@"_id"];
-       NSString  *token = [[NSUserDefaults standardUserDefaults]objectForKey:@"mytoken"];
+       NSString  *token = [[NSUserDefaults standardUserDefaults]objectForKey:MYAPPTOKEN];
+        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:jobId,@"job_id",userId,@"user_id",resumeId,@"resume_id",token,@"token", nil];
+        NSLog(@"%@",dict);
+        if (jobId.length>0 && userId.length>0 && resumeId.length >0 && token.length>0) {
+           
+            [[[HttpRequest alloc]init]httpPostApplyJob:dict];
+        }else
+        {
+            UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:nil message:@"对不起，暂时无法帮你投递！" delegate:self cancelButtonTitle:@"确认" otherButtonTitles: nil];
+            [alertView show];
+        }
         
-       NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:jobId,@"job_id",userId,@"user_id",resumeId,@"resume_id",token,@"token", nil];
-        [[[HttpRequest alloc]init]httpPostApplyJob:dict];
+        
+      
        
     }
     

@@ -26,8 +26,6 @@
     
     NSLog(@"WeiboSDK:%i",[WeiboSDK registerApp:kAppKey]);
     
-    
-    
     [LoginHelp autoLogin];
     
     

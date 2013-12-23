@@ -7,6 +7,8 @@
 //
 #define  VERSION [[[UIDevice currentDevice] systemVersion]floatValue]
 
+#define USER_ID          @"user_id"
+#define MYAPPTOKEN       @"mytoken"
 #define LOGINTYPE        @"loginType"
 #define WEIBOLOGIN       @"weiboLogin"
 #define QQLOGIN          @"QQLogin"
