@@ -54,6 +54,7 @@
     [self.navigationController.view addSubview:searchButton];
     self.searchButton = searchButton;
     
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -117,11 +118,12 @@
 
 -(void)clickSearchButton
 {
-    SearchView *search = [[SearchView alloc]initWithFrame:CGRectMake(0,self.view.bounds.size.height , 320, self.view.bounds.size.height)];
+    NSLog(@"%f",SCREEN_HEIGHT);
+    SearchView *search = [[SearchView alloc]initWithFrame:CGRectMake(0,SCREEN_HEIGHT, 320, SCREEN_HEIGHT)];
     search.delegate = self;
     [self.view.window addSubview:search];
     [UIView animateWithDuration:0.25 animations:^{
-        search.frame = self.view.bounds;
+        search.frame = SCREEN_BOUNDS;
     } completion:^(BOOL finished) {
         
     }];
@@ -149,7 +151,7 @@
 {
     UIWindow *keywindow = [[UIApplication sharedApplication]keyWindow];
     
-    loginViewController *loginVC = [[loginViewController alloc]initWithFrame:CGRectMake(0, self.view.bounds.size.height, 320, self.view.bounds.size.height)];
+    loginViewController *loginVC = [[loginViewController alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT, 320, SCREEN_HEIGHT)];
     
     loginVC.delegate = self;
     
@@ -157,7 +159,7 @@
     
     [UIView animateWithDuration:0.25f animations:^{
         
-        loginVC.frame = CGRectMake(0, 0, 320, self.view.bounds.size.height);
+        loginVC.frame = SCREEN_BOUNDS;
         
     } completion:^(BOOL finished) {
         

@@ -56,7 +56,7 @@
 {
     UIWindow *keywindow = [[UIApplication sharedApplication]keyWindow];
     
-    loginViewController *loginVC = [[loginViewController alloc]initWithFrame:CGRectMake(0, self.view.bounds.size.height, 320, self.view.bounds.size.height)];
+    loginViewController *loginVC = [[loginViewController alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT, 320, SCREEN_HEIGHT)];
     
     
     
@@ -64,7 +64,7 @@
     
     [UIView animateWithDuration:0.25f animations:^{
         
-        loginVC.frame = CGRectMake(0, 0, 320, self.view.bounds.size.height);
+        loginVC.frame = SCREEN_BOUNDS;
         
     } completion:^(BOOL finished) {
         
