@@ -17,12 +17,13 @@
 #import "headSetting.h"
 #import "DataModel.h"
 #import "ApplyJobsViewController.h"
-@interface SettingViewController ()<UITableViewDataSource,UITableViewDelegate>
+@interface SettingViewController ()<UITableViewDataSource,UITableViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property(nonatomic, strong)UITableView *setTableview;
 @property(nonatomic, strong)NSArray *array;
 @property(nonatomic, strong)SettingCustomCell *customCell;
 @property(nonatomic, strong)NSDictionary *userInfo;
 @property(nonatomic, strong)NSString *loginType;
+@property(nonatomic, strong)UIImage *headImage;
 
 @end
 
@@ -36,8 +37,15 @@
     }
     return self;
 }
--(void)clickBarButton
+-(void)clickHeadButton:(id)sender
 {
+    UIImagePickerController * picker = [[UIImagePickerController alloc]init];
+    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    picker.delegate = self;
+    picker.allowsEditing = YES;
+    [self presentViewController:picker animated:YES completion:^{
+        
+    }];
     
 }
 - (void)viewDidLoad
@@ -45,7 +53,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     
-    self.setTableview = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    self.setTableview = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
     self.setTableview.delegate = self;
     self.setTableview.dataSource = self;
     self.setTableview.backgroundColor = [UIColor clearColor];
@@ -53,22 +61,21 @@
     self.title = @"个人中心";
     
 	// Do any additional setup after loading the view.
-    self.array = @[@"已发招聘信息",@"已申请职位信息",@"个人简历信息",@"注销用户",@"关于应用"];
+    self.array = @[@[@"账户资料"],@[@"已发招聘信息",],@[@"已申请职位",@"简历中心"],@[@"注销",@"关于"]];
     self.userInfo = [[NSUserDefaults standardUserDefaults]objectForKey:@"userinfo"];
     self.loginType = [[NSUserDefaults standardUserDefaults]objectForKey:LOGINTYPE];
+    self.headImage = [Tools imageLoading];
 }
 #pragma mark - UITableViewDataSource
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return self.array.count;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section == 0) {
-        return 1;
-    }
+   
     
-    return [self.array count];
+    return [[self.array objectAtIndex:section]count];
 }
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -87,8 +94,9 @@
         {
             _customCell.userNameLab.text = [self.userInfo objectForKey:@"nick_name"];
             
-            _customCell.headImageView.image = [Tools imageLoading];
+           [_customCell.headImageView setBackgroundImage:self.headImage forState:UIControlStateNormal];
         }
+        [_customCell.headImageView addTarget:self action:@selector(clickHeadButton:) forControlEvents:UIControlEventTouchUpInside];
         
         return _customCell;
         
@@ -102,7 +110,7 @@
             [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
             
         }
-        cell.textLabel.text = [self.array objectAtIndex:indexPath.row];
+        cell.textLabel.text = [[self.array objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
         return cell;
     }
     
@@ -122,14 +130,14 @@
     if (indexPath.section == 1 && indexPath.row == 0) {
         JionMessageViewController *join = [[JionMessageViewController alloc]initWithNibName:nil bundle:nil];
         [self.navigationController pushViewController:join animated:YES];
-    }else if (indexPath.section == 1 && indexPath.row == 2){
+    }else if (indexPath.section == 2 && indexPath.row ==1){
         ResumeViewController *resume = [[ResumeViewController alloc]initWithNibName:nil bundle:nil];
         [self.navigationController pushViewController:resume animated:YES];
-    }else if (indexPath.section == 1 && indexPath.row == 4)
+    }else if (indexPath.section == 3 && indexPath.row == 1)
     {
         AboutViewController *about = [[AboutViewController alloc]initWithNibName:nil bundle:nil];
         [self.navigationController pushViewController:about animated:YES];
-    }else if (indexPath.section == 1 && indexPath.row == 3)
+    }else if (indexPath.section == 3 && indexPath.row == 0)
     {
         if ([self.delegate respondsToSelector:@selector(cancelUser)]) {
             
@@ -138,7 +146,7 @@
             [self.delegate cancelUser];
             
         }
-    }else if (indexPath.section == 1 && indexPath.row == 1)
+    }else if (indexPath.section == 2 && indexPath.row == 0)
     {
         NSString *userId = [[NSUserDefaults standardUserDefaults]objectForKey:USER_ID];
         NSString *resumeId= [[DataModel shareData].resumeDict objectForKey:@"_id"];
@@ -148,6 +156,45 @@
         [self.navigationController pushViewController:apply animated:YES];
         
     }
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 30.0f;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 0.0f;
+}
+-(NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    if (section == 0) {
+        return @"账户资料";
+        
+    }else if (section == 1)
+    {
+        return @"招聘中心";
+    }else if (section == 2)
+    {
+        return @"求职中心";
+    }else
+    {
+        return @"应用信息";
+    }
+}
+#pragma mark UIImagePickerControllerDelegate methods
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo
+{
+    //加载图片
+    //选择框消失
+    self.headImage =image;
+    [self.setTableview reloadData];
+    [[[HttpRequest alloc]init]httpPostFile:image];
+    
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+-(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning

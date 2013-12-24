@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface SettingCustomCell : UITableViewCell
-@property(nonatomic,strong)UIImageView *headImageView;
+@property(nonatomic,strong)UIButton *headImageView;
 @property(nonatomic,strong)UILabel     *userNameLab;
 
 @end

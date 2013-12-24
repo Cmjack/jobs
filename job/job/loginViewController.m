@@ -24,7 +24,7 @@
 @property(nonatomic, strong)UIButton *registerButton;
 @property(nonatomic, strong)UIButton *cancelButton;
 
-@property(nonatomic, strong)UIButton *autoLogin;
+
 @property(nonatomic, strong)UIButton  *sinaLogin;
 
 @property(nonatomic ,strong)UIButton *QQLogin;
@@ -50,14 +50,7 @@
     self.backgroundColor = [UIColor whiteColor];
     
     [self initViews];
-    
-    self.autoLogin = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.autoLogin.frame = CGRectMake(90, 173, 18, 18);
-    self.autoLogin.layer.borderWidth = 1.0;
-    self.autoLogin.layer.cornerRadius = 4.0f;
-    self.autoLogin.layer.borderColor = [[UIColor grayColor]CGColor];
-    [self addSubview:self.autoLogin];
-    
+        
     // Do any additional setup after loading the view.
     self.loginButton = [UIButton buttonWithType:UIButtonTypeCustom];
     //float y= self.bounds.size.height*1/3;
@@ -258,7 +251,6 @@
         [self.delegate loginSuccess:newUserInfo];
         
     }
-    
 }
 /*
 #pragma mark - Navigation

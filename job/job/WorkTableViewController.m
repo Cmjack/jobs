@@ -96,13 +96,15 @@
     }else{
     
         static NSString *reuseIdentifier = @"cell";
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
-        if (cell == nil) {
-            cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
+        self.customCell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
+        if (self.customCell== nil) {
+            self.customCell = [[WorkCustomCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseIdentifier];
+            [self.customCell initendDate];
         }
-        cell.textLabel.text = [[self.mutableArray objectAtIndex:indexPath.row] objectForKey:KEY_COMPANY];
-        cell.detailTextLabel.text = @"时间";
-        return cell;
+        self.customCell.textLabel.text = [[self.mutableArray objectAtIndex:indexPath.row] objectForKey:KEY_COMPANY];
+        self.customCell.detailTextLabel.text =[[self.mutableArray objectAtIndex:indexPath.row] objectForKey:KEY_POSITION];
+        self.customCell.endDate.text = [self endDate:[self.mutableArray objectAtIndex:indexPath.row]];
+        return self.customCell;
     }
     
     
@@ -113,6 +115,9 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (indexPath.section == 0) {
+        return 44.0f;
+    }
     return 44.0f;
 }
 
@@ -198,7 +203,13 @@
     NSArray *arr = @[@"学校名称:",@"专业:",@"开始时间:",@"结束时间:",@"专业描述:"];
     return arr;
 }
+-(NSString*)endDate:(NSDictionary*)dict
+{
+    NSString *start = [[dict objectForKey:KEY_START_DATE]substringToIndex:7];
+    NSString *end = [[dict objectForKey:KEY_END_DATE]substringToIndex:7];
+    return [NSString stringWithFormat:@"%@ 至 %@",start,end];
 
+}
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath

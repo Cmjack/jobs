@@ -37,6 +37,9 @@
     self.workLab.text = [dict objectForKey:KEY_WORK];
 }
 //工作、教育、培训
+
+
+
 -(void)insertData:(NSDictionary*)dict
 {
     
@@ -44,17 +47,20 @@
     self.companyLab.text = [dict objectForKey:KEY_COMPANY];
     NSString *starDate = [[dict objectForKey:KEY_START_DATE]substringToIndex:7];
     NSString *endDate = [[dict objectForKey:KEY_END_DATE]substringToIndex:7];
-    self.startLab.text = [NSString stringWithFormat:@"%@ 至 %@",starDate,endDate];
-    NSString *str = [dict objectForKey:KEY_CAPTION];
+    if (starDate.length>0 && endDate.length>0) {
+        self.startLab.text = [NSString stringWithFormat:@"%@ 至 %@",starDate,endDate];
+
+    }
+//    NSString *str = [dict objectForKey:KEY_CAPTION];
     
-    self.desLab.numberOfLines = 0;
-    self.desLab.lineBreakMode = NSLineBreakByWordWrapping;
-    self.desLab.text = str;
-    self.desLab.backgroundColor = [UIColor clearColor];
-     UIFont *font = [UIFont systemFontOfSize:14.0f];
-    float height = [Tools autoSizeLab:CGSizeMake(250, 10000) withFont:font withSting:str];
-    NSLog(@"%f",height);
-    self.desLab.frame = CGRectMake(50, 72, 250, height);
+//    self.desLab.numberOfLines = 0;
+//    self.desLab.lineBreakMode = NSLineBreakByWordWrapping;
+//    self.desLab.text = str;
+//    self.desLab.backgroundColor = [UIColor redColor];
+//     UIFont *font = [UIFont systemFontOfSize:14.0f];
+//    float height = [Tools autoSizeLab:CGSizeMake(250, 10000) withFont:font withSting:str];
+//    NSLog(@"%f",height);
+//    self.desLab.frame = CGRectMake(50, 72, 250, height);
     
 }
 -(void)insertDataForTitleType:(NSArray*)arr
@@ -65,20 +71,22 @@
 }
 
 //求职意向
+
 -(void)insertdataForCO:(NSDictionary*)dict
 {
+    
     self.positionLable.text = [dict objectForKey:KEY_POSITION];
     self.salaryLable.text = [dict objectForKey:KEY_SALARY];
     self.dateTimeLable.text = [dict objectForKey:KEY_START_DATE];
     
-    NSString * str = [dict objectForKey:KEY_CAPTION];
-    self.captionLable.text = str;
-    self.captionLable.numberOfLines = 0;
-    self.captionLable.lineBreakMode = NSLineBreakByWordWrapping;
-    self.captionLable.backgroundColor = [UIColor clearColor];
-    UIFont *font = [UIFont systemFontOfSize:14.0f];
-    float height = [Tools autoSizeLab:CGSizeMake(220, 10000) withFont:font withSting:str];
-    self.captionLable.frame = CGRectMake(80, 72, 220, height);
+//    NSString * str = [dict objectForKey:KEY_CAPTION];
+//    self.captionLable.text = str;
+//    self.captionLable.numberOfLines = 0;
+//    self.captionLable.lineBreakMode = NSLineBreakByWordWrapping;
+//    self.captionLable.backgroundColor = [UIColor brownColor];
+//    UIFont *font = [UIFont systemFontOfSize:14.0f];
+//    float height = [Tools autoSizeLab:CGSizeMake(220, 10000) withFont:font withSting:str];
+//    self.captionLable.frame = CGRectMake(80, 72, 220, height);
 }
 
 

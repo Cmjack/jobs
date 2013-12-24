@@ -56,10 +56,10 @@
     self.personDict = [NSMutableDictionary dictionaryWithDictionary:[self.dataModel.resumeDict objectForKey:KEY_PERSON]];
     NSLog(@"1:personDict %@",self.personDict);
     
-    if ([self.personDict objectForKey:KEY_NAME ]== NULL) {
-        self.personDict = [NSMutableDictionary dictionaryWithDictionary:[self getDefaultPersonData]];
-        NSLog(@"2:personDict %@",self.personDict);
-    }
+//    if ([self.personDict objectForKey:KEY_NAME ]== NULL) {
+//       // self.personDict = [NSMutableDictionary dictionaryWithDictionary:[self getDefaultPersonData]];
+//        NSLog(@"2:personDict %@",self.personDict);
+//    }
     
         // Do any additional setup after loading the view.
 }
@@ -326,20 +326,20 @@
                     ];
     return arr;
 }
--(NSDictionary*)getDefaultPersonData
-{
-    
-    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
-                       @"李某某",KEY_NAME,
-                       @"ios开发工程师",KEY_POSITION,
-                       @"本科",KEY_DIPLOMA,
-                       @"22岁", KEY_AGE,
-                       @"1388888888",KEY_TEL,
-                       @"xxxx@163.com",KEY_EMAIL,
-                       @"三年以上",KEY_WORK,
-                       nil];
-    return dict;
-}
+//-(NSDictionary*)getDefaultPersonData
+//{
+//    
+////    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
+////                       @"李某某",KEY_NAME,
+////                       @"ios开发工程师",KEY_POSITION,
+////                       @"本科",KEY_DIPLOMA,
+////                       @"22岁", KEY_AGE,
+////                       @"1388888888",KEY_TEL,
+////                       @"xxxx@163.com",KEY_EMAIL,
+////                       @"三年以上",KEY_WORK,
+////                       nil];
+////    return dict;
+//}
 #pragma mark - InputViewControllerDelegate
 -(void)returnPersonmessgae:(NSMutableDictionary *)mutableDict
 {

@@ -109,8 +109,8 @@
     
     [manager POST:[NSString stringWithFormat:@"%@/resume", SERVER_URL] parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        NSLog(@"%@",responseObject);
-        [DataModel shareData].resumeDict = [NSMutableDictionary dictionaryWithDictionary:responseObject];
+        NSLog(@"save resume:%@",responseObject);
+       // [DataModel shareData].resumeDict = [NSMutableDictionary dictionaryWithDictionary:responseObject];
 
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
@@ -202,7 +202,6 @@
     
     [manager GET:@"https://api.weibo.com/2/users/show.json" parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-       // NSLog(@"userinfo: %@", responseObject);
         [[NSNotificationCenter defaultCenter]postNotificationName:@"weibologin" object:nil userInfo:responseObject];
 
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -212,9 +211,9 @@
 
 }
 
--(void)getRefreshJobMessage:(NSString*)_idString
+-(void)getRefreshJobMessage:(NSString*)_idString withkey:(NSString*)key
 {
-    NSDictionary *dict =@{@"id": _idString};
+    NSDictionary *dict =@{@"id": _idString,@"key":key};
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
 
@@ -284,7 +283,23 @@
     }];
     
 }
-
+-(void)httpPostFile:(UIImage*)image
+{
+   // UIImage *image = [UIImage imageNamed:@"Avatar"];
+    
+    NSData *data = UIImagePNGRepresentation(image);
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager POST:[NSString stringWithFormat:@"%@/file_updata", SERVER_URL] parameters:NULL constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        [formData appendPartWithFileData:data name:@"avatar" fileName:@"filename" mimeType:@"image/png"];
+        
+    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"file :%@",responseObject);
+        [self saveHeadURLTOUserInfo:[[responseObject objectForKey:@"result"] objectForKey:@"url"]];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"file error:%@",error);
+    }];
+}
 
 +(BOOL)check
 {
@@ -309,6 +324,10 @@
     }
     return NO;
 }
-
+-(void)saveHeadURLTOUserInfo:(NSString*)url
+{
+    
+    
+}
 
 @end

@@ -188,7 +188,7 @@
     NSLog(@"%@",self.jobDataArray);
     if (self.jobDataArray.count >0) {
         NSString *_id = [[self.jobDataArray objectAtIndex:0]objectForKey:@"_id"];
-        [request getRefreshJobMessage:_id];
+        [request getRefreshJobMessage:_id withkey:self.searchString];
     }else
     {
         [self loadData];
@@ -265,6 +265,7 @@
     float height = 0;
     UIFont *PCAFont = [UIFont boldSystemFontOfSize:13.0f];
     NSDictionary *dict = [self.jobDataArray objectAtIndex:indexPath.row];
+    
     NSMutableString *PCAString = [NSMutableString stringWithFormat:@"%@ • %@ • %@",[dict objectForKey:JOB_TITLE],[dict objectForKey:JOB_COMPANY],[dict objectForKey:JOB_LOCATION]];
     CGSize size = CGSizeMake(260, 5000);
     NSString *sto= [PCAString stringByReplacingOccurrencesOfString: @"\n" withString:@""];
