@@ -27,6 +27,15 @@
     [self addSubview:self.addLab];
   
 }
+-(void)initendDate
+{
+    self.endDate = [[UILabel alloc]initWithFrame:CGRectMake(180, 27,130, 14)];
+    self.endDate.backgroundColor = [UIColor clearColor];
+    self.endDate.textAlignment = NSTextAlignmentRight;
+    self.endDate.font = [UIFont systemFontOfSize:13.0f];
+    [self addSubview:self.endDate];
+}
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];

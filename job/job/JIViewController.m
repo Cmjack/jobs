@@ -104,6 +104,7 @@
     if (indexPath.row == 3) {
         JIInputView *input = [[JIInputView alloc]initWithNibName:nil bundle:nil];
         input.degate = self;
+        input.textViewString = [self.mutableDict objectForKey:KEY_CAPTION];
         [self.navigationController pushViewController:input animated:YES];
     }
     else

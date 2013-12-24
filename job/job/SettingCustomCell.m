@@ -21,16 +21,23 @@
 }
 -(void)initViews
 {
-    self.headImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"Avatar1"]];
+    self.headImageView = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.headImageView setBackgroundImage:[UIImage imageNamed:@"Avatar1"] forState:UIControlStateNormal];
     self.headImageView.frame = CGRectMake(15, 5, 48, 48);
     self.headImageView.layer.masksToBounds = YES;
     self.headImageView.layer.cornerRadius = 2.5f;
+    
+    //[self.headImageView addTarget:self action:@selector(clickHeadButton:) forControlEvents:UIControlEventTouchUpInside];
+    
     [self addSubview:self.headImageView];
     self.userNameLab = [[UILabel alloc]initWithFrame:CGRectMake(80, 5, 200, 25)];
     self.userNameLab.backgroundColor = [UIColor clearColor];
     [self addSubview:self.userNameLab];
 }
-
+//-(void)clickHeadButton:(id)sender
+//{
+//    
+//}
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];

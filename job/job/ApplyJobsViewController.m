@@ -78,6 +78,7 @@
         _customCell.captionLab.textColor = [UIColor blackColor];
         _customCell.PCALable.textColor = [UIColor blackColor];
         _customCell.creatDateLab.textColor = [UIColor blackColor];
+        [_customCell setSelectionStyle:UITableViewCellSelectionStyleNone];
     }
     [_customCell insertData:[self.jobMessageArray objectAtIndex:indexPath.row]];
     // Configure the cell...

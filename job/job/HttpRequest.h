@@ -34,10 +34,11 @@
 -(void)httpRequestForGetSearch:(NSString*)string withPage:(NSString*)stringPage;
 -(void)sinaGetUserInfo:(NSDictionary*)dict;
 -(void)httpRequestForPostJoinList:(NSDictionary*)dict;
--(void)getRefreshJobMessage:(NSString*)_idString;
+-(void)getRefreshJobMessage:(NSString*)_idString withkey:(NSString*)key;
 -(void)httpPostApplyJob:(NSDictionary*)dict;
 -(void)httpGetMyApplylist:(NSDictionary*)dict;
 -(void)httpGetApplylist:(NSDictionary*)dict;
+-(void)httpPostFile:(UIImage*)image;
 +(BOOL)check;
 +(BOOL)checkNotShowAlertView;
 @end

@@ -11,6 +11,7 @@
 @interface WorkCustomCell : UITableViewCell
 @property(nonatomic ,strong)UILabel *addLab;
 @property(nonatomic ,strong)UILabel *companyLab;
-
+@property(nonatomic ,strong)UILabel *endDate;
 -(void)initViewForAddLab;
+-(void)initendDate;
 @end
