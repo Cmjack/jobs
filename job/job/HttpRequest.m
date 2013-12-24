@@ -303,7 +303,7 @@
 {
     AFNetworkReachabilityManager *manager = [AFNetworkReachabilityManager sharedManager];
     NSLog(@"%i",manager.networkReachabilityStatus);
-    if (manager.networkReachabilityStatus == AFNetworkReachabilityStatusNotReachable|| manager.networkReachabilityStatus == AFNetworkReachabilityStatusUnknown) {
+    if (manager.networkReachabilityStatus == AFNetworkReachabilityStatusNotReachable) {
         
         return YES;
     }

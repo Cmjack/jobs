@@ -171,11 +171,15 @@
     if ([self checkPersonMessage]) {
         
         NSString *userName = [[NSUserDefaults standardUserDefaults]objectForKey:@"username"];
+        NSString *type = [[NSUserDefaults standardUserDefaults]objectForKey:LOGINTYPE];
+        if (![type isEqualToString:MYAPPLOGIN]) {
+           NSDictionary *dict = [[NSUserDefaults standardUserDefaults]objectForKey:@"userinfo"];
+            NSString *head_url = [dict objectForKey:@"head_url"];
+            [self.personDict setObject:head_url forKey:@"icon_url"];
+        }
+        
         
         NSDictionary *dictresume = [NSDictionary dictionaryWithObjectsAndKeys:self.personDict,KEY_PERSON,userName,@"username", nil];
-        
-        
-        
         
         [HttpRequest httpRequestForSaveResume:dictresume];
         

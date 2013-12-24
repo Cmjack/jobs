@@ -24,5 +24,12 @@
     return [UIImage imageWithData:data];
     
 }
++(UIImage*)imageLoadingForUrl:(NSString*)stringURL
+{
+    NSURL *url = [NSURL URLWithString:stringURL];
+    NSData *data = [NSData dataWithContentsOfURL:url];
+    return [UIImage imageWithData:data];
+
+}
 
 @end

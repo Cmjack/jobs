@@ -146,7 +146,7 @@
     if ([HttpRequest check]) {
         return;
     }
-     if (self.shareDataModel.isLogin == NO) {
+    if (self.shareDataModel.isLogin == NO) {
          [self showLoginView];
     }
     else

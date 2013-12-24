@@ -32,6 +32,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.title = @"招聘详情";
 	// Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
     self.JDTableview = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStylePlain];

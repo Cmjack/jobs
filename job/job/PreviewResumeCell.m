@@ -22,6 +22,12 @@
 //基本信息
 -(void)insertDataForBasic:(NSDictionary*)dict
 {
+    static  int once = 0;
+    
+    if ([[dict objectForKey:@"icon_url"]length]>0 && once == 0) {
+        self.headImage.image = [Tools imageLoadingForUrl:[dict objectForKey:@"icon_url"]];
+        once +=1;
+    }
     self.nameLab.text = [dict objectForKey:KEY_NAME];
     self.positionLab.text = [dict objectForKey:KEY_POSITION];
     self.diplomaLeb.text = [dict objectForKey:KEY_DIPLOMA];
