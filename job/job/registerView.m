@@ -77,7 +77,7 @@
         if ([self.passWordTF.text isEqualToString:self.confirmTF.text]) {
             
             HttpRequest *request = [[HttpRequest alloc]init];
-            [request registerUserEmail:self.emailTF.text withPassWard:self.passWordTF.text withType:@"default"];
+            [request registerUserEmail:self.emailTF.text withPassWard:self.passWordTF.text withType:MYAPPLOGIN];
             request.delegate = self;
             self.registerButton.enabled = NO;
             
@@ -115,19 +115,13 @@
 {
     self.registerButton.enabled = YES;
     if (isSucess) {
-        [DataModel shareData].isLogin = YES;
-        [[NSUserDefaults standardUserDefaults]setObject:self.emailTF.text forKey:@"username"];
-        [[NSUserDefaults standardUserDefaults]setObject:self.passWordTF.text forKey:@"password"];
-        [[NSUserDefaults standardUserDefaults]setObject:MYAPPLOGIN forKey:LOGINTYPE];
-
         [self popView];
-        
-        NSLog(@"sucess");
+        NSLog(@"注册成功");
 
     }
     else
     {
-        NSLog(@"fail");
+        NSLog(@"注册失败");
         UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:nil message:@"此邮箱已注册" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
         [alertView show];
         [DataModel shareData].isLogin = NO;

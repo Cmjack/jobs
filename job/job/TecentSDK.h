@@ -10,13 +10,13 @@
 #import <TencentOpenAPI/TencentOAuth.h>
 #import <TencentOpenAPI/TencentApiInterface.h>
 #import <TencentOpenAPI/TencentOAuthObject.h>
-
+#import "HttpRequest.h"
 @protocol TecentSDKDelegate <NSObject>
 
 -(void)tencentLoginIsSuccess:(BOOL)isSuccess withDict:(NSDictionary*)userInfo;
 
 @end
-@interface TecentSDK : NSObject<TencentSessionDelegate>
+@interface TecentSDK : NSObject<TencentSessionDelegate,HttpRequestDelegate>
 @property (nonatomic, retain)TencentOAuth *oauth;
 
 @property (nonatomic, strong)id<TecentSDKDelegate> delegate;

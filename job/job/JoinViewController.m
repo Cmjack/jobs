@@ -11,6 +11,7 @@
 #import "headSetting.h"
 #import "HttpRequest.h"
 #import "loginViewController.h"
+#import "DataModel.h"
 @interface JoinViewController ()<UITableViewDataSource,UITableViewDelegate,UITextViewDelegate,UITextFieldDelegate>
 @property(nonatomic, strong)JoinCustomCell *customCell;
 @property(nonatomic, strong)UITableView *joinTableView;
@@ -91,6 +92,7 @@
     {
         if (textView.text.length>0&&(![textView.text isEqualToString:self.captionString])&&textfield1.text.length>0&&textfield2.text.length>0&&textfield3.text.length>0&&username.length >0) {
             
+            
             NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                          textfield1.text,JOB_COMPANY,
                                          textfield2.text,JOB_TITLE,
@@ -98,6 +100,10 @@
                                          textView.text,JOB_DESC,
                                          username,@"username",
                                          nil];
+            if ([DataModel getHeadURL].length>0) {
+                [dict setObject:[DataModel getHeadURL] forKey:@"icon_url"];
+            }
+            
             if ([self.dictMessage objectForKey:@"_id"]!=NULL) {
                 
                 [dict setValue:[self.dictMessage objectForKey:JOB_ID] forKey:JOB_ID];

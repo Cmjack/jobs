@@ -15,16 +15,16 @@
 #import "TencentOpenAPI/QQApiInterface.h"
 #import "DataModel.h"
 #import "LoginHelp.h"
-@interface AppDelegate()<WeiboSDKDelegate>
+#import "SinaSDK.h"
+#import "TecentSDK.h"
+@interface AppDelegate()
 @end
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 
-    [WeiboSDK enableDebugMode:YES];
-    
-    NSLog(@"WeiboSDK:%i",[WeiboSDK registerApp:kAppKey]);
+   
     
     BOOL isNetWork = [HttpRequest checkNotShowAlertView];
     if (!isNetWork) {
@@ -68,44 +68,22 @@
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
--(void)didReceiveWeiboRequest:(WBBaseRequest *)request
-{
-    
-}
-- (void)didReceiveWeiboResponse:(WBBaseResponse *)response
-{
-    if ([response isKindOfClass:WBSendMessageToWeiboResponse.class])
-    {
 
-    }
-    else if ([response isKindOfClass:WBAuthorizeResponse.class])
-    {
-        
-        
-        [[NSUserDefaults standardUserDefaults]setObject:[(WBAuthorizeResponse *)response accessToken] forKey:WEIBOTOKEN];
-        NSLog(@"token %@",[(WBAuthorizeResponse *)response accessToken]);
-        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[(WBAuthorizeResponse *)response accessToken],@"access_token",[(WBAuthorizeResponse *)response userID],@"uid", nil];
-        [[[HttpRequest alloc]init]sinaGetUserInfo:dict];
-        
-    }
-    
-   
-    
-    
-}
+
+
 -(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
     
     NSString *loginType = [[NSUserDefaults standardUserDefaults]objectForKey:LOGINTYPE];
     if ([loginType isEqualToString:QQLOGIN]) {
-        [QQApiInterface handleOpenURL:url delegate:(id<QQApiInterfaceDelegate>)[DataModel shareData]];
+        [QQApiInterface handleOpenURL:url delegate:(id<QQApiInterfaceDelegate>)[TecentSDK getinstance]];
         
         return [TencentOAuth HandleOpenURL:url];
         
     }
     else if ([loginType isEqualToString:WEIBOLOGIN])
     {
-        return [WeiboSDK handleOpenURL:url delegate:self];
+        return [WeiboSDK handleOpenURL:url delegate:[SinaSDK shareSinaSdk]];
 
     }
     return YES;

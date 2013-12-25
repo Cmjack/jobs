@@ -7,8 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+@protocol SinaSDKDelegate <NSObject>
 
+-(void)sinaLoginSuccess;
+
+
+@end
 @interface SinaSDK : NSObject
+@property(nonatomic, strong)id<SinaSDKDelegate> delegate;
 - (void)ssoButtonPressed;
-+ (void)ssoOutButtonPressed;
++(id)shareSinaSdk;
 @end

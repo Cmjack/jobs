@@ -128,11 +128,46 @@
         self.pickerBackGroundView.frame = CGRectMake(0, SCREEN_HEIGHT - 250, 320, 250);
     } completion:^(BOOL finished) {
         
-        [self.pickerView selectRow:[[self.pickerData objectAtIndex:0] indexOfObject:[self.personDict objectForKey:KEY_DIPLOMA]] inComponent:0 animated:YES];
+        if ([[self.personDict objectForKey:KEY_DIPLOMA] length]>0) {
+            
+            [self.pickerView selectRow:[[self.pickerData objectAtIndex:0] indexOfObject:[self.personDict objectForKey:KEY_DIPLOMA]] inComponent:0 animated:YES];
+            
+
+        }else
+        {
+            [self.pickerView selectRow:0 inComponent:0 animated:YES];
+            
+
+        }
         
-        [self.pickerView selectRow:[[self.pickerData objectAtIndex:1] indexOfObject:[self.personDict objectForKey:KEY_AGE]] inComponent:1 animated:YES];
+        if ([[self.personDict objectForKey:KEY_AGE] length]>0) {
+            
+            
+            [self.pickerView selectRow:[[self.pickerData objectAtIndex:1] indexOfObject:[self.personDict objectForKey:KEY_AGE]] inComponent:1 animated:YES];
+            
+        }else
+        {
+            
+            [self.pickerView selectRow:0 inComponent:1 animated:YES];
+            
+        }
         
-        [self.pickerView selectRow:[[self.pickerData objectAtIndex:2] indexOfObject:[self.personDict objectForKey:KEY_WORK]] inComponent:2 animated:YES];
+        if ([[self.personDict objectForKey:KEY_WORK] length]>0) {
+            
+            
+            
+            [self.pickerView selectRow:[[self.pickerData objectAtIndex:2] indexOfObject:[self.personDict objectForKey:KEY_WORK]] inComponent:2 animated:YES];
+        }else
+        {
+            
+            
+            [self.pickerView selectRow:0 inComponent:2 animated:YES];
+        }
+
+        
+        
+        
+        [[self.pickerData objectAtIndex:1] objectAtIndex:0];
     }];
 }
 
@@ -155,7 +190,10 @@
     NSEnumerator *enumerator = [self.personDict keyEnumerator];
     for (NSObject  *key in enumerator) {
         
-        if ([[self.personDict objectForKey:key] length]<1) {
+        if ([key isEqual:HEAD_URL]) {
+            break;
+        }
+        if ([[self.personDict objectForKey:key] length]<1 ) {
             
             isFull = NO;
             return NO;
@@ -170,15 +208,13 @@
     
     if ([self checkPersonMessage]) {
         
-        NSString *userName = [[NSUserDefaults standardUserDefaults]objectForKey:@"username"];
-        NSString *type = [[NSUserDefaults standardUserDefaults]objectForKey:LOGINTYPE];
-        if (![type isEqualToString:MYAPPLOGIN]) {
-           NSDictionary *dict = [[NSUserDefaults standardUserDefaults]objectForKey:@"userinfo"];
-            NSString *head_url = [dict objectForKey:@"head_url"];
+        NSString *userName = [DataModel getUserName];
+        //NSString *type = [[NSUserDefaults standardUserDefaults]objectForKey:LOGINTYPE];
+        
+        if ([DataModel getHeadURL].length >0) {
+            NSString *head_url = [DataModel getHeadURL];
             [self.personDict setObject:head_url forKey:@"icon_url"];
         }
-        
-        
         NSDictionary *dictresume = [NSDictionary dictionaryWithObjectsAndKeys:self.personDict,KEY_PERSON,userName,@"username", nil];
         
         [HttpRequest httpRequestForSaveResume:dictresume];

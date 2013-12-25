@@ -62,8 +62,8 @@
     
 	// Do any additional setup after loading the view.
     self.array = @[@[@"账户资料"],@[@"已发招聘信息",],@[@"已申请职位",@"简历中心"],@[@"注销",@"关于"]];
-    self.userInfo = [[NSUserDefaults standardUserDefaults]objectForKey:@"userinfo"];
-    self.loginType = [[NSUserDefaults standardUserDefaults]objectForKey:LOGINTYPE];
+    //self.userInfo = [[NSUserDefaults standardUserDefaults]objectForKey:@"userinfo"];
+    self.loginType = [DataModel getLoginType];
     self.headImage = [Tools imageLoading];
 }
 #pragma mark - UITableViewDataSource
@@ -88,14 +88,20 @@
             _customCell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
         if ([self.loginType isEqualToString:MYAPPLOGIN]) {
-            _customCell.userNameLab.text = [[NSUserDefaults standardUserDefaults]objectForKey:USERNAME];
+            _customCell.userNameLab.text = [DataModel getUserName];
+            NSLog(@"%@",[DataModel getUserName]);
             
         }else
         {
-            _customCell.userNameLab.text = [self.userInfo objectForKey:@"nick_name"];
+            _customCell.userNameLab.text = [DataModel getNickName];
             
-           [_customCell.headImageView setBackgroundImage:self.headImage forState:UIControlStateNormal];
         }
+        
+        if (self.headImage != NULL) {
+            [_customCell.headImageView setBackgroundImage:self.headImage forState:UIControlStateNormal];
+
+        }
+        
         [_customCell.headImageView addTarget:self action:@selector(clickHeadButton:) forControlEvents:UIControlEventTouchUpInside];
         
         return _customCell;

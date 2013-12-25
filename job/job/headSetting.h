@@ -9,18 +9,21 @@
 #define SCREEN_HEIGHT   [[UIScreen mainScreen]bounds].size.height
 #define SCREEN_BOUNDS   [[UIScreen mainScreen]bounds]
 
+#define NICK_NAME         @"nick_name"
+#define HEAD_URL         @"head_url"
 #define USER_ID          @"user_id"
 #define MYAPPTOKEN       @"mytoken"
 #define LOGINTYPE        @"loginType"
-#define WEIBOLOGIN       @"weiboLogin"
-#define QQLOGIN          @"QQLogin"
-#define MYAPPLOGIN       @"myAPPLogin"
+#define WEIBOLOGIN       @"weibo"
+#define QQLOGIN          @"qq"
+#define MYAPPLOGIN       @"default"
 
 #define WEIBOTOKEN       @"weiboToken"
 
 #define kAppKey          @"160209186"
 #define kRedirectURI     @"http://www.baidu.com"
 
+#define PASSWORD         @"password"
 #define USERNAME         @"username"
 #define JOB_ID           @"_id"
 #define JOB_COMPANY      @"company"
