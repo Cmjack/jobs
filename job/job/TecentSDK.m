@@ -12,6 +12,7 @@
 #import <TencentOpenAPI/TencentOAuthObject.h>
 #import "HttpRequest.h"
 #import "headSetting.h"
+#import "DataModel.h"
 static TecentSDK *g_instance = nil;
 @implementation TecentSDK
 @synthesize oauth = _oauth;
@@ -39,7 +40,7 @@ static TecentSDK *g_instance = nil;
     NSString *appid = @"100576079";
     _oauth = [[TencentOAuth alloc] initWithAppId:appid
                                      andDelegate:self];
-    
+    [DataModel setLoginType:QQLOGIN];
     return self;
 }
 
@@ -50,11 +51,32 @@ static TecentSDK *g_instance = nil;
     [_oauth getUserInfo];
     NSLog(@"%@",[_oauth accessToken]);
     
-    [[NSUserDefaults standardUserDefaults]setObject:QQLOGIN forKey:LOGINTYPE];
-    NSString * qqUserName = [NSString stringWithFormat:@"%@",[_oauth openId]];
-    [[NSUserDefaults standardUserDefaults]setObject:qqUserName forKey:@"username"];
-    [[[HttpRequest alloc]init]registerUserEmail:qqUserName withPassWard:@"1234" withType:@"qq" ];
+//    NSString * qqUserName = [NSString stringWithFormat:@"%@",[_oauth openId]];
+//    [[[HttpRequest alloc]init]registerUserEmail:qqUserName withPassWard:@"1234" withType:@"qq" ];
 }
+
+- (void)getUserInfoResponse:(APIResponse*) response
+{
+    NSDictionary *userInfo = response.jsonResponse;
+    [DataModel setNickName:[userInfo objectForKey:@"nickname"]];
+    [DataModel setHeadURL:[userInfo objectForKey:@"figureurl_qq_2"]];
+    
+    HttpRequest * http = [[HttpRequest alloc]init];
+    http.delegate = self;
+    NSString * qqUserName = [NSString stringWithFormat:@"%@",[_oauth openId]];
+
+    [http registerUserEmail:qqUserName withPassWard:@"1234" withType:QQLOGIN];
+    
+}
+#pragma mark --- httpdelegate
+-(void)signSucessOrFail:(BOOL)isSucess
+{
+    if ([self.delegate respondsToSelector:@selector(tencentLoginIsSuccess: withDict:)]) {
+        
+        [self.delegate tencentLoginIsSuccess:YES withDict:NULL];
+    }
+}
+#pragma mark ---
 
 - (void)tencentDidNotLogin:(BOOL)cancelled
 {
@@ -94,15 +116,7 @@ static TecentSDK *g_instance = nil;
 }
 
 
-- (void)getUserInfoResponse:(APIResponse*) response
-{
-    
-    if ([self.delegate respondsToSelector:@selector(tencentLoginIsSuccess: withDict:)]) {
-        
-        [self.delegate tencentLoginIsSuccess:YES withDict:response.jsonResponse];
-    }
-    
-}
+
 
 -(void)tencentLogout
 {

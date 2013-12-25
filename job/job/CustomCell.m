@@ -10,6 +10,9 @@
 #import <QuartzCore/QuartzCore.h>
 #import "Tools.h"
 #import "headSetting.h"
+#import "UIImageView+LoadImage.h"
+#import <AFNetworking.h>
+#import <AFNetworking/UIImageView+AFNetworking.h>
 @implementation CustomCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -23,12 +26,13 @@
 -(void)initViews
 {
 
-    self.iconButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.iconButton.frame = CGRectMake(5, 5, 30, 30);
+    self.iconImageView = [[UIImageView alloc]init];
+    self.iconImageView.frame = CGRectMake(5, 5, 30, 30);
     //self.iconButton.layer.borderWidth = 2.0;
-    self.iconButton.layer.masksToBounds = YES;
-    self.iconButton.layer.cornerRadius = 5.5f;
-    [self addSubview:self.iconButton];
+    self.iconImageView.layer.masksToBounds = YES;
+    self.iconImageView.layer.cornerRadius = 5.5f;
+    
+    [self addSubview:self.iconImageView];
     
     self.countLab = [[UILabel alloc]initWithFrame:CGRectMake(5, 35, 30, 30)];
     self.countLab.font = [UIFont systemFontOfSize:7.0f];
@@ -69,27 +73,39 @@
 -(void)insertData:(NSDictionary*)dict
 {
     if ([[dict objectForKey:JOB_SOURCE]isEqualToString:FROM_58]) {
-       
-        [self.iconButton setImage:[UIImage imageNamed:@"58"] forState:UIControlStateNormal];
+        self.iconImageView.image = [UIImage imageNamed:@"58"];
         self.fromLabel.text = @"来自58同城";
     }else if ([[dict objectForKey:JOB_SOURCE]isEqualToString:FROM_LAGOU]){
-        
-        [self.iconButton setImage:[UIImage imageNamed:@"lagou.jpg"] forState:UIControlStateNormal];
+        self.iconImageView.image = [UIImage imageNamed:@"lagou.jpg"];
         self.fromLabel.text = @"来自拉勾网";
     }else if ([[dict objectForKey:JOB_SOURCE]isEqualToString:FROM_WEALINK]){
-        
-        [self.iconButton setImage:[UIImage imageNamed:@"wealink.jpg"] forState:UIControlStateNormal];
+        self.iconImageView.image = [UIImage imageNamed:@"wealink.jpg"];
+
         self.fromLabel.text = @"来自若邻网";
     }else if ([[dict objectForKey:JOB_SOURCE]isEqualToString:FROM_51]) {
-        [self.iconButton setImage:[UIImage imageNamed:@"51Icon.png"] forState:UIControlStateNormal];
+        self.iconImageView.image = [UIImage imageNamed:@"51Icon.png"];
+
         self.fromLabel.text = @"来自前程无忧";
     }else if ([[dict objectForKey:JOB_SOURCE]isEqualToString:FROM_OSCHINA]) {
-        [self.iconButton setImage:[UIImage imageNamed:@"oschina.png"] forState:UIControlStateNormal];
+        self.iconImageView.image = [UIImage imageNamed:@"oschina.png"];
         self.fromLabel.text = @"来自开源中国";
     }
     else
     {
-        [self.iconButton setImage:[UIImage imageNamed:@"AppIcon40x40"] forState:UIControlStateNormal];
+        if ([[dict objectForKey:@"icon_url"]length]>0) {
+            //[self.iconButton setImage:[Tools imageLoadingForUrl:[dict objectForKey:@"icon_url"]] forState:UIControlStateNormal];
+           // [self.iconImageView setImageWithURLString:[dict objectForKey:@"icon_url"] placeholderImage:[UIImage imageNamed:@"Avatar1.png"]];
+            NSURL *url = [NSURL URLWithString:[dict objectForKey:@"icon_url"]];
+            
+            [self.iconImageView setImageWithURL:url placeholderImage:[UIImage imageNamed:@"Avatar1.png"]];
+            
+
+        }
+        else
+        {
+            self.iconImageView.image = [UIImage imageNamed:@"Avatar1.png"];
+
+        }
         self.fromLabel.text = @"来自事业线";
     }
     

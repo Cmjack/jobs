@@ -21,6 +21,8 @@
 -(void)getResume:(NSArray*)resumeArray;//
 
 -(void)getApplyJobs:(NSArray*)jobArrray;
+
+-(void)getSinaLoginData:(NSDictionary*)dict;
 @end
 
 @interface HttpRequest : NSObject

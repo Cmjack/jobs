@@ -9,11 +9,33 @@
 #import "SinaSDK.h"
 #import "WeiboSDK.h"
 #import "headSetting.h"
-@interface SinaSDK ()<WBHttpRequestDelegate>
+#import "HttpRequest.h"
+#import "DataModel.h"
+@interface SinaSDK ()<WBHttpRequestDelegate,WeiboSDKDelegate,HttpRequestDelegate>
 @end
 @implementation SinaSDK
++(id)shareSinaSdk
+{
+    
+    static SinaSDK *g_instance = nil;
+
+    @synchronized(self)
+    {
+        if (nil == g_instance)
+        {
+            g_instance = [[super allocWithZone:nil] init];
+            
+        }
+    }
+    
+    return g_instance;
+}
+
 - (void)ssoButtonPressed
 {
+    [WeiboSDK enableDebugMode:YES];
+    NSLog(@"WeiboSDK:%i",[WeiboSDK registerApp:kAppKey]);
+    
     WBAuthorizeRequest *request = [WBAuthorizeRequest request];
     request.redirectURI = kRedirectURI;
     request.scope = @"all";
@@ -22,46 +44,72 @@
 //                         @"Other_Info_2": @[@"obj1", @"obj2"],
 //                         @"Other_Info_3": @{@"key1": @"obj1", @"key2": @"obj2"}};
     [WeiboSDK sendRequest:request];
+    
+    [DataModel setLoginType:WEIBOLOGIN];
+    
 }
 
-+ (void)ssoOutButtonPressed
+//sso 回调方法。。
+-(void)didReceiveWeiboRequest:(WBBaseRequest *)request
 {
-    NSString *token = [[NSUserDefaults standardUserDefaults]objectForKey:WEIBOTOKEN];
-    [WeiboSDK logOutWithToken:token delegate:self withTag:@"user1"];
+    
 }
-
-
-
+- (void)didReceiveWeiboResponse:(WBBaseResponse *)response
+{
+    if ([response isKindOfClass:WBSendMessageToWeiboResponse.class])
+    {
+        
+    }
+    else if ([response isKindOfClass:WBAuthorizeResponse.class])
+    {
+        
+        [[NSUserDefaults standardUserDefaults]setObject:[(WBAuthorizeResponse *)response accessToken] forKey:WEIBOTOKEN];
+        NSLog(@"token %@",[(WBAuthorizeResponse *)response accessToken]);
+        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[(WBAuthorizeResponse *)response accessToken],@"access_token",[(WBAuthorizeResponse *)response userID],@"uid", nil];
+        [DataModel setUserName:[dict objectForKey:@"uid"]];
+        HttpRequest *http = [[HttpRequest alloc]init];
+        http.delegate = self;
+        [http sinaGetUserInfo:dict];
+    }
+}
+#pragma mark - HttpRequestDelegate
+-(void)getSinaLoginData:(NSDictionary *)dict
+{
+    NSLog(@"%@",dict);
+    [DataModel setHeadURL:[dict objectForKey:@"avatar_large"]];
+    [DataModel setNickName:[dict objectForKey:@"screen_name"]];
+    HttpRequest *http = [[HttpRequest alloc]init];
+    http.delegate = self;
+    [http registerUserEmail:[DataModel getUserName] withPassWard:@"1234" withType:WEIBOLOGIN];
+}
+-(void)signSucessOrFail:(BOOL)isSucess
+{
+   
+    if ([self.delegate respondsToSelector:@selector(sinaLoginSuccess)]) {
+        [self.delegate sinaLoginSuccess];
+    }
+}
+#pragma mark -
+#pragma mark - 多余的。。。
 
 - (void)request:(WBHttpRequest *)request didFinishLoadingWithResult:(NSString *)result
 {
-    NSString *title = nil;
-    UIAlertView *alert = nil;
-    
-    title = @"收到网络回调";
-    alert = [[UIAlertView alloc] initWithTitle:title
-                                       message:[NSString stringWithFormat:@"%@",result]
-                                      delegate:nil
-                             cancelButtonTitle:@"确定"
-                             otherButtonTitles:nil];
-    [alert show];
+   
 }
 
 - (void)request:(WBHttpRequest *)request didFailWithError:(NSError *)error;
 {
-    NSString *title = nil;
-    UIAlertView *alert = nil;
-    
-    title = @"请求异常";
-    alert = [[UIAlertView alloc] initWithTitle:title
-                                       message:[NSString stringWithFormat:@"%@",error]
-                                      delegate:nil
-                             cancelButtonTitle:@"确定"
-                             otherButtonTitles:nil];
-    [alert show];
+
 }
 -(void)request:(WBHttpRequest *)request didFinishLoadingWithDataResult:(NSData *)data
 {
     
 }
+-(void)request:(WBHttpRequest *)request didReceiveResponse:(NSURLResponse *)response
+{
+    
+}
+
+
+
 @end

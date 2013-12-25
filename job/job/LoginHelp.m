@@ -15,22 +15,20 @@
 @implementation LoginHelp
 +(void)autoLogin
 {
-    NSString *tpye = [[NSUserDefaults standardUserDefaults]objectForKey:LOGINTYPE];
-    NSString *username = [[NSUserDefaults standardUserDefaults]objectForKey:@"username"];
-    NSString *password = [[NSUserDefaults standardUserDefaults]objectForKey:@"password"];
+    NSString *tpye = [DataModel getLoginType];
+    NSString *username = [DataModel getUserName];
+    NSString *password = [DataModel getPassword];
     
     NSLog(@"user:%@",username);
     NSLog(@"password:%@",password);
     NSLog(@"type:%@",tpye);
     if ([tpye isEqualToString:QQLOGIN]&&username.length >0) {
         
-        [[[HttpRequest alloc]init]registerUserEmail:username withPassWard:NULL withType:QQLOGIN];
-        [DataModel shareData].isLogin = YES;
+        [[[HttpRequest alloc]init]registerUserEmail:username withPassWard:@"1234" withType:QQLOGIN];
     }
     else if([tpye isEqualToString:WEIBOLOGIN]&&username.length>0)
     {
-        [DataModel shareData].isLogin = YES;
-        [[[HttpRequest alloc]init]registerUserEmail:username withPassWard:NULL withType:WEIBOLOGIN];
+        [[[HttpRequest alloc]init]registerUserEmail:username withPassWard:@"1234" withType:WEIBOLOGIN];
     
     }else if ([tpye isEqualToString:MYAPPLOGIN]&&username.length >0 && password.length >0)
     {
@@ -47,18 +45,21 @@
 
     if ([tpye isEqualToString:QQLOGIN]) {
         
-        [[TecentSDK getinstance]tencentLogout];
+       // [[TecentSDK getinstance]tencentLogout];
     }
     else if([tpye isEqualToString:WEIBOLOGIN])
     {
-        [SinaSDK ssoOutButtonPressed];
+      //  [SinaSDK ssoOutButtonPressed];
         
     }
     [[DataModel shareData].resumeDict removeAllObjects];
     [[NSUserDefaults standardUserDefaults]removeObjectForKey:LOGINTYPE];
-    [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"username"];
-    [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"password"];
-    [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"userinfo"];
+    [[NSUserDefaults standardUserDefaults]removeObjectForKey:USERNAME];
+    [[NSUserDefaults standardUserDefaults]removeObjectForKey:PASSWORD];
     [[NSUserDefaults standardUserDefaults]removeObjectForKey:MYAPPTOKEN];
+    [[NSUserDefaults standardUserDefaults]removeObjectForKey:NICK_NAME];
+    [[NSUserDefaults standardUserDefaults]removeObjectForKey:HEAD_URL];
+    [[NSUserDefaults standardUserDefaults]removeObjectForKey:USER_ID];
+
 }
 @end

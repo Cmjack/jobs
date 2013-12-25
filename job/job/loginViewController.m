@@ -14,7 +14,7 @@
 #import "SinaSDK.h"
 #import "headSetting.h"
 #import "DataModel.h"
-@interface loginViewController ()<HttpRequestDelegate,UIAlertViewDelegate,TecentSDKDelegate>
+@interface loginViewController ()<HttpRequestDelegate,UIAlertViewDelegate,TecentSDKDelegate,SinaSDKDelegate>
 @property(nonatomic, strong)UILabel *userNameLab;
 @property(nonatomic, strong)UILabel *passwordLab;
 
@@ -45,12 +45,8 @@
 }
 - (void)loadView
 {
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(weiboLogin:) name:@"weibologin" object:nil];
-
     self.backgroundColor = [UIColor whiteColor];
-    
     [self initViews];
-        
     // Do any additional setup after loading the view.
     self.loginButton = [UIButton buttonWithType:UIButtonTypeCustom];
     //float y= self.bounds.size.height*1/3;
@@ -148,9 +144,9 @@
 }
 -(void)clickSinaLogin
 {
-    [[[SinaSDK alloc]init]ssoButtonPressed];
-    [[NSUserDefaults standardUserDefaults]setObject:WEIBOLOGIN forKey:LOGINTYPE];
-
+    SinaSDK * sina = [SinaSDK shareSinaSdk];
+    sina.delegate = self;
+    [sina ssoButtonPressed];
 }
 
 -(void)clickQQLogin
@@ -158,7 +154,6 @@
     NSArray *permissions = [NSArray arrayWithObjects:@"all", nil];
     [[[TecentSDK getinstance] oauth] authorize:permissions inSafari:NO];
     [[TecentSDK getinstance]setDelegate:self];
-    [[NSUserDefaults standardUserDefaults]setObject:QQLOGIN forKey:LOGINTYPE];
 
 }
 -(void)clickRegister:(id)sender
@@ -203,8 +198,6 @@
     self.registerButton.enabled = YES;
     if (isSucess) {
         
-        
-        [DataModel shareData].isLogin = YES;
         [self popView];
         
     }else
@@ -220,38 +213,23 @@
 #pragma mark - TecentSDKDelegate
 -(void)tencentLoginIsSuccess:(BOOL)isSuccess withDict:(NSDictionary *)userInfo
 {
-    
-    NSDictionary *newUserInfo = [NSDictionary dictionaryWithObjectsAndKeys:[userInfo objectForKey:@"nickname"],@"nick_name",[userInfo objectForKey:@"figureurl_qq_2"],@"head_url", nil];
-    
-    [DataModel shareData].isLogin = YES;
     [self popView];
     if ([self.delegate respondsToSelector:@selector(loginSuccess:)]) {
-        [self.delegate loginSuccess:newUserInfo];
+        [self.delegate loginSuccess:NULL];
         
     }
 }
-#pragma mark -NSNotificationCenter
--(void)weiboLogin:(NSNotification*)dict
+
+-(void)sinaLoginSuccess
 {
-    NSDictionary *userinfo = [dict userInfo];
-    [[NSUserDefaults standardUserDefaults]setObject:WEIBOLOGIN forKey:LOGINTYPE];
-    [DataModel shareData].isLogin = YES;
-    NSLog(@"%@",userinfo);
-    NSString * wbUserName = [NSString stringWithFormat:@"%@",[userinfo objectForKey:@"id"]];
-    NSDictionary *newUserInfo = [NSDictionary dictionaryWithObjectsAndKeys:[userinfo objectForKey:@"avatar_hd"],@"head_url",
-                                 [userinfo objectForKey:@"screen_name"],@"nick_name",
-                                 
-                                 nil];
-    
-    [[NSUserDefaults standardUserDefaults]setObject:wbUserName forKey:@"username"];
-    
-    [[[HttpRequest alloc]init]registerUserEmail:wbUserName withPassWard:@"1234" withType:@"weibo"];
     [self popView];
     if ([self.delegate respondsToSelector:@selector(loginSuccess:)]) {
-        [self.delegate loginSuccess:newUserInfo];
+        [self.delegate loginSuccess:NULL];
         
     }
 }
+
+
 /*
 #pragma mark - Navigation
 

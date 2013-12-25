@@ -30,17 +30,25 @@
 -(void)registerUserEmail:(NSString*)email withPassWard:(NSString*)passWord withType:(NSString*)type
 {
     NSDictionary * dict = [NSDictionary dictionaryWithObjectsAndKeys:email,@"email",passWord,@"password",type,@"type", nil];
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager POST:[NSString stringWithFormat:@"%@/register", SERVER_URL] parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+     [manager POST:[NSString stringWithFormat:@"%@/register", SERVER_URL] parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"register:%@",responseObject);
-        
+        NSDictionary * dict = [responseObject objectForKey:@"data"];
         BOOL isSalt = NO;
-        if ([responseObject objectForKey:@"salt"]!= NULL) {
-            [[NSUserDefaults standardUserDefaults]setObject:[responseObject objectForKey:@"salt"] forKey:MYAPPTOKEN];
-            [[NSUserDefaults standardUserDefaults]setObject:[[responseObject objectForKey:@"data"] objectForKey:@"_id"] forKey:USER_ID];
-            [[NSUserDefaults standardUserDefaults]setObject:email forKey:@"username"];
-            [[NSUserDefaults standardUserDefaults]setObject:passWord forKey:@"password"];
+        if ([dict objectForKey:@"salt"]!= NULL) {
+            
+            [DataModel setMyToken:[dict objectForKey:@"salt"]];
+            [DataModel setUserId:[dict objectForKey:@"_id"]];
+            [DataModel setUserName:email];
+            [DataModel setPassword:passWord];
+            [DataModel setLoginType:type];
+            if ([[dict objectForKey:@"icon_url"] length]>0) {
+                [DataModel setHeadURL:[dict objectForKey:@"icon_url"] ];
+            }
+            [DataModel shareData].isLogin = YES;
+            
             [self httpRequestForGetResume];
+            
             isSalt = YES;
         }
         if ([self.delegate respondsToSelector:@selector(signSucessOrFail:)]) {
@@ -69,16 +77,18 @@
         //NSDictionary *dict = (NSDictionary*)responseObject;
         if ([[[responseObject objectForKey:@"data"] objectForKey:@"salt"] length]>0) {
             //[self httpRequestForGetResume];
-            [[NSUserDefaults standardUserDefaults]setObject:[[responseObject objectForKey:@"data"] objectForKey:@"salt"] forKey:MYAPPTOKEN];
-            [[NSUserDefaults standardUserDefaults]setObject:[[responseObject objectForKey:@"data"] objectForKey:@"_id"] forKey:USER_ID];
-            
-            [[NSUserDefaults standardUserDefaults]setObject:MYAPPLOGIN forKey:LOGINTYPE];
-            [[NSUserDefaults standardUserDefaults]setObject:name forKey:@"username"];
-            [[NSUserDefaults standardUserDefaults]setObject:salt forKey:@"password"];
-            
+            [DataModel setMyToken:[dict objectForKey:@"salt"]];
+            [DataModel setUserId:[dict objectForKey:@"_id"]];
+            [DataModel setUserName:name];
+            [DataModel setPassword:salt];
+            [DataModel setLoginType:@"default"];
+            if ([[dict objectForKey:@"icon_url"] length]>0) {
+                [DataModel setHeadURL:[dict objectForKey:@"icon_url"] ];
+            }
+
             [DataModel shareData].isLogin = YES;
             [self httpRequestForGetResume];
-            NSLog(@"sss");
+            
             isSucess =YES;
         }
         
@@ -201,8 +211,9 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
     [manager GET:@"https://api.weibo.com/2/users/show.json" parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        [[NSNotificationCenter defaultCenter]postNotificationName:@"weibologin" object:nil userInfo:responseObject];
+        if ([self.delegate respondsToSelector:@selector(getSinaLoginData:)]) {
+            [self.delegate getSinaLoginData:responseObject];
+        }
 
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
@@ -291,13 +302,37 @@
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager POST:[NSString stringWithFormat:@"%@/file_updata", SERVER_URL] parameters:NULL constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-        [formData appendPartWithFileData:data name:@"avatar" fileName:@"filename" mimeType:@"image/png"];
+        [formData appendPartWithFileData:data name:@"avatar" fileName:[DataModel getUserName] mimeType:@"image/png"];
         
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"file :%@",responseObject);
-        [self saveHeadURLTOUserInfo:[[responseObject objectForKey:@"result"] objectForKey:@"url"]];
+        
+        NSString *url = [[responseObject objectForKey:@"result"] objectForKey:@"url"];
+        if (url.length >0) {
+            [self httpPostUserInfo:url];
+        }
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"file error:%@",error);
+    }];
+}
+
+-(void)httpPostUserInfo:(NSString*)strURL
+{
+    NSString *username = [[NSUserDefaults standardUserDefaults]objectForKey:USERNAME];
+    
+    
+    NSDictionary *dict = @{@"param": @{@"username": username, @"icon_url":strURL}};
+    NSLog(@":%@",dict);
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager POST:[NSString stringWithFormat:@"%@/user", SERVER_URL] parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"userinfo:%@",responseObject);
+        
+        [DataModel setHeadURL:strURL];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
     }];
 }
 
@@ -324,10 +359,21 @@
     }
     return NO;
 }
--(void)saveHeadURLTOUserInfo:(NSString*)url
-{
-    
-    
-}
 
+-(void)amendResumeHeadURL:(NSString*)string
+{
+    NSString *userName = [DataModel getUserName];
+    //NSString *type = [[NSUserDefaults standardUserDefaults]objectForKey:LOGINTYPE];
+    NSMutableDictionary *personDict = [[DataModel shareData].resumeDict objectForKey:KEY_PERSON];
+    
+    if (string.length >0) {
+        NSString *head_url = [DataModel getHeadURL];
+        [personDict setObject:head_url forKey:@"icon_url"];
+    }
+    NSDictionary *dictresume = [NSDictionary dictionaryWithObjectsAndKeys:personDict,KEY_PERSON,userName,@"username", nil];
+    
+    [HttpRequest httpRequestForSaveResume:dictresume];
+    
+    [[DataModel shareData].resumeDict setObject:personDict forKey:KEY_PERSON];
+}
 @end

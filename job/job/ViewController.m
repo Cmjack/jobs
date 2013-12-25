@@ -188,7 +188,15 @@
     NSLog(@"%@",self.jobDataArray);
     if (self.jobDataArray.count >0) {
         NSString *_id = [[self.jobDataArray objectAtIndex:0]objectForKey:@"_id"];
-        [request getRefreshJobMessage:_id withkey:self.searchString];
+        if (self.searchString.length >0) {
+            [request getRefreshJobMessage:_id withkey:self.searchString];
+
+        }
+        else
+        {
+            [request getRefreshJobMessage:_id withkey:@" "];
+
+        }
     }else
     {
         [self loadData];
@@ -265,6 +273,8 @@
     float height = 0;
     UIFont *PCAFont = [UIFont boldSystemFontOfSize:13.0f];
     NSDictionary *dict = [self.jobDataArray objectAtIndex:indexPath.row];
+    NSLog(@"11:%@",dict);
+    
     
     NSMutableString *PCAString = [NSMutableString stringWithFormat:@"%@ • %@ • %@",[dict objectForKey:JOB_TITLE],[dict objectForKey:JOB_COMPANY],[dict objectForKey:JOB_LOCATION]];
     CGSize size = CGSizeMake(260, 5000);
@@ -328,19 +338,15 @@
 #pragma mark - loginViewControllerDelegate
 -(void)loginSuccess:(NSDictionary *)userInfo
 {
-    [DataModel shareData].isLogin = YES;
-    [[NSUserDefaults standardUserDefaults]setObject:userInfo forKey:@"userinfo"];
     SettingViewController *setVC = [[SettingViewController alloc]initWithNibName:Nil bundle:nil];
     setVC.delegate = self;
     [self.navigationController pushViewController:setVC animated:YES];
-    
 }
 #pragma mark- SettingViewControllerDelegate
 -(void)cancelUser
 {
     [self showLoginView];
 }
-
 
 - (void)didReceiveMemoryWarning
 {
