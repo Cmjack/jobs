@@ -114,9 +114,19 @@
        NSString  *token = [[NSUserDefaults standardUserDefaults]objectForKey:MYAPPTOKEN];
         NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:jobId,@"job_id",userId,@"user_id",resumeId,@"resume_id",token,@"token", nil];
         NSLog(@"%@",dict);
-        if (jobId.length>0 && userId.length>0 && resumeId.length >0 && token.length>0) {
+        
+        if (jobId.length>0 && userId.length>0 && resumeId.length >0 && token.length>0  ) {
            
-            [[[HttpRequest alloc]init]httpPostApplyJob:dict];
+            if ([self checkResumeMessage]) {
+                [[[HttpRequest alloc]init]httpPostApplyJob:dict];
+
+            }
+            else
+            {
+                UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:nil message:@"对不起,您的简历信息不完整！" delegate:self cancelButtonTitle:@"确认" otherButtonTitles: nil];
+                [alertView show];
+            }
+            
         }else
         {
             UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:nil message:@"对不起，暂时无法帮你投递！" delegate:self cancelButtonTitle:@"确认" otherButtonTitles: nil];
@@ -128,6 +138,13 @@
        
     }
     
+}
+-(BOOL)checkResumeMessage
+{
+    if ([[[[DataModel shareData].resumeDict objectForKey:KEY_PERSON] objectForKey:USERNAME] length]>0 && [[[DataModel shareData].resumeDict objectForKey:KEY_WORK] count]>0 && [[[DataModel shareData].resumeDict objectForKey:KEY_EDUCATION] count]>0) {
+        return YES;
+    }
+    return NO;
 }
 
 - (void)didReceiveMemoryWarning
