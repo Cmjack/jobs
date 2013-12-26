@@ -25,34 +25,23 @@
     return [UIImage imageWithData:data];
     
 }
-+(UIImage*)imageLoadingForUrl:(NSString*)stringURL
++(UIImage*)imageLoadingForUrl:(NSString*)string
 {
-    dispatch_queue_t queue  =dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_async(queue, ^{
-        
-        NSURL *url = [NSURL URLWithString:stringURL];
-        UIImage *image = [[UIImage alloc]initWithData:[NSData dataWithContentsOfURL:url]];
-        NSData *imageData = UIImageJPEGRepresentation(image, 1.0);
-        //[self writeImageToDocuments:imageData withImageName:fileName withFileType:fileType];
-        
-    });
-
-    
-    NSURL *url = [NSURL URLWithString:stringURL];
+    NSURL *url = [NSURL URLWithString:string];
     NSData *data = [NSData dataWithContentsOfURL:url];
     return [UIImage imageWithData:data];
 
 }
-//-(void)ssss
-//{
-//    dispatch_queue_t queue  =dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-//    dispatch_async(queue, ^{
-//        
-//        NSURL *url = [NSURL URLWithString:string];
-//        UIImage *image = [[UIImage alloc]initWithData:[NSData dataWithContentsOfURL:url]];
-//        NSData *imageData = UIImageJPEGRepresentation(image, 1.0);
-//        [self writeImageToDocuments:imageData withImageName:fileName withFileType:fileType];
-//        
-//    });
-//}
++(UIImage*)drawImageInBounds:(UIImage*)image
+{
+    
+    UIImageView *imageview = [[UIImageView alloc]initWithImage:image];
+    imageview.frame = CGRectMake(0, 0, 48, 48);
+    
+    
+    UIGraphicsBeginImageContextWithOptions(imageview.frame.size, NO, 0.0);
+    [imageview.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *image2 = UIGraphicsGetImageFromCurrentImageContext();
+    return image2;
+}
 @end

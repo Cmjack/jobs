@@ -363,7 +363,6 @@
 -(void)amendResumeHeadURL:(NSString*)string
 {
     NSString *userName = [DataModel getUserName];
-    //NSString *type = [[NSUserDefaults standardUserDefaults]objectForKey:LOGINTYPE];
     NSMutableDictionary *personDict = [[DataModel shareData].resumeDict objectForKey:KEY_PERSON];
     
     if (string.length >0) {
