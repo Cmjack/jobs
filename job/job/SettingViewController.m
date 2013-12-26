@@ -192,9 +192,11 @@
 {
     //加载图片
     //选择框消失
-    self.headImage =image;
+    self.headImage = [Tools drawImageInBounds:image];
+    
     [self.setTableview reloadData];
-    [[[HttpRequest alloc]init]httpPostFile:image];
+    
+    [[[HttpRequest alloc]init]httpPostFile:self.headImage];
     
     [picker dismissViewControllerAnimated:YES completion:nil];
 }

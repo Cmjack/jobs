@@ -11,5 +11,6 @@
 @interface Tools : NSObject
 +(float)autoSizeLab:(CGSize)size  withFont:(UIFont*)font withSting:(NSString*)string;
 +(UIImage*)imageLoading;
-+(UIImage*)imageLoadingForUrl:(NSString*)stringURL;
++(UIImage*)imageLoadingForUrl:(NSString*)string;
++(UIImage*)drawImageInBounds:(UIImage*)image;
 @end
