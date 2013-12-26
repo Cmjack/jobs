@@ -56,7 +56,7 @@
     self.setTableview = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
     self.setTableview.delegate = self;
     self.setTableview.dataSource = self;
-    self.setTableview.backgroundColor = [UIColor clearColor];
+    //self.setTableview.backgroundColor = [UIColor clearColor];
     [self.view addSubview:self.setTableview];
     self.title = @"个人中心";
     
@@ -112,7 +112,7 @@
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellString];
         if (cell == NULL) {
             cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellString];
-            cell.backgroundColor = [UIColor clearColor];
+            //cell.backgroundColor = [UIColor clearColor];
             [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
             
         }
