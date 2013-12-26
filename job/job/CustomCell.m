@@ -10,7 +10,6 @@
 #import <QuartzCore/QuartzCore.h>
 #import "Tools.h"
 #import "headSetting.h"
-#import "UIImageView+LoadImage.h"
 #import <AFNetworking.h>
 #import <AFNetworking/UIImageView+AFNetworking.h>
 @implementation CustomCell
