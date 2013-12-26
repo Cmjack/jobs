@@ -24,7 +24,6 @@
 		3F0D5503185AFA14005841A6 /* TencentOpenApi_IOS_Bundle.bundle in Sources */ = {isa = PBXBuildFile; fileRef = 3F0D54F0185AF667005841A6 /* TencentOpenApi_IOS_Bundle.bundle */; };
 		3F29547D18681B21006CA8C9 /* GetResumeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F29547C18681B21006CA8C9 /* GetResumeViewController.m */; };
 		3F29548018682919006CA8C9 /* ApplyJobsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F29547F18682919006CA8C9 /* ApplyJobsViewController.m */; };
-		3F49427B186AECA700FF638C /* UIImageView+LoadImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F49427A186AECA700FF638C /* UIImageView+LoadImage.m */; };
 		3F596A87186003C900C63C95 /* JobDatailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F596A86186003C900C63C95 /* JobDatailViewController.m */; };
 		3F596A8A1860044700C63C95 /* JobDetailsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F596A891860044700C63C95 /* JobDetailsCell.m */; };
 		3F596A8D1860293800C63C95 /* JobWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F596A8C1860293800C63C95 /* JobWebViewController.m */; };
@@ -140,8 +139,6 @@
 		3F29547C18681B21006CA8C9 /* GetResumeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetResumeViewController.m; sourceTree = "<group>"; };
 		3F29547E18682919006CA8C9 /* ApplyJobsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplyJobsViewController.h; sourceTree = "<group>"; };
 		3F29547F18682919006CA8C9 /* ApplyJobsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplyJobsViewController.m; sourceTree = "<group>"; };
-		3F494279186AECA600FF638C /* UIImageView+LoadImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+LoadImage.h"; sourceTree = "<group>"; };
-		3F49427A186AECA700FF638C /* UIImageView+LoadImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+LoadImage.m"; sourceTree = "<group>"; };
 		3F596A85186003C900C63C95 /* JobDatailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobDatailViewController.h; sourceTree = "<group>"; };
 		3F596A86186003C900C63C95 /* JobDatailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JobDatailViewController.m; sourceTree = "<group>"; };
 		3F596A881860044700C63C95 /* JobDetailsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobDetailsCell.h; sourceTree = "<group>"; };
@@ -618,8 +615,6 @@
 				9DD5658218504BA1007939BA /* Tools.m */,
 				9DD5658518504C52007939BA /* JobFont.h */,
 				9DD5658618504C52007939BA /* JobFont.m */,
-				3F494279186AECA600FF638C /* UIImageView+LoadImage.h */,
-				3F49427A186AECA700FF638C /* UIImageView+LoadImage.m */,
 			);
 			name = Tools;
 			sourceTree = "<group>";
@@ -837,7 +832,6 @@
 				9DD5657C18501C4D007939BA /* InputViewController.m in Sources */,
 				3F6287DE1862E37A00360749 /* LoginHelp.m in Sources */,
 				9D66ABAF184ED9A500C03098 /* PersonMessageViewController.m in Sources */,
-				3F49427B186AECA700FF638C /* UIImageView+LoadImage.m in Sources */,
 				3F29547D18681B21006CA8C9 /* GetResumeViewController.m in Sources */,
 				9D66ABC1184F220900C03098 /* EditDiplomaTableViewController.m in Sources */,
 				9D7EF5AF184DB0E600182DB2 /* CustomCell.m in Sources */,
