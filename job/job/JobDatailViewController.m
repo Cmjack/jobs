@@ -123,13 +123,13 @@
             }
             else
             {
-                UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:nil message:@"对不起,您的简历信息不完整！" delegate:self cancelButtonTitle:@"确认" otherButtonTitles: nil];
+                UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:nil message:@"对不起,您的简历信息不完整,暂时无法帮你投递！" delegate:self cancelButtonTitle:@"确认" otherButtonTitles: nil];
                 [alertView show];
             }
             
         }else
         {
-            UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:nil message:@"对不起，暂时无法帮你投递！" delegate:self cancelButtonTitle:@"确认" otherButtonTitles: nil];
+            UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:nil message:@"对不起,您的简历信息不完整,暂时无法帮你投递！" delegate:self cancelButtonTitle:@"确认" otherButtonTitles: nil];
             [alertView show];
         }
         
