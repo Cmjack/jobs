@@ -319,6 +319,7 @@
 
 -(void)httpPostUserInfo:(NSString*)strURL
 {
+    
     NSString *username = [[NSUserDefaults standardUserDefaults]objectForKey:USERNAME];
     
     

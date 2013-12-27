@@ -17,6 +17,8 @@
 #import "LoginHelp.h"
 #import "SinaSDK.h"
 #import "TecentSDK.h"
+#import <AFNetworkReachabilityManager.h>
+
 @interface AppDelegate()
 @end
 @implementation AppDelegate
@@ -26,11 +28,31 @@
 
    
     
-    BOOL isNetWork = [HttpRequest checkNotShowAlertView];
-    if (!isNetWork) {
-        [LoginHelp autoLogin];
-
-    }
+//    BOOL isNetWork = [HttpRequest checkNotShowAlertView];
+//    if (!isNetWork) {
+//        
+//
+//    }
+    static BOOL islogin = NO;
+    AFNetworkReachabilityManager *manager = [AFNetworkReachabilityManager sharedManager];
+    [manager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+       
+       if(status == AFNetworkReachabilityStatusNotReachable)
+        {
+            islogin =NO;
+            UIAlertView *alertview = [[UIAlertView alloc]initWithTitle:nil message:@"网络异常" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            [alertview show];
+        }
+        else
+        {
+            if (islogin == NO) {
+                [LoginHelp autoLogin];
+                islogin =YES;
+            }
+        }
+        
+        
+    }];
     
     
     self.window =[[UIWindow alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
