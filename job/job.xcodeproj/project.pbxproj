@@ -80,7 +80,6 @@
 		9DA9EAF0184DABFA00EF35A5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9DA9EAEE184DABFA00EF35A5 /* InfoPlist.strings */; };
 		9DA9EAF2184DABFA00EF35A5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DA9EAF1184DABFA00EF35A5 /* main.m */; };
 		9DA9EAF6184DABFA00EF35A5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DA9EAF5184DABFA00EF35A5 /* AppDelegate.m */; };
-		9DA9EAF9184DABFA00EF35A5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DA9EAF7184DABFA00EF35A5 /* Main.storyboard */; };
 		9DA9EAFC184DABFA00EF35A5 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DA9EAFB184DABFA00EF35A5 /* ViewController.m */; };
 		9DA9EAFE184DABFA00EF35A5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9DA9EAFD184DABFA00EF35A5 /* Images.xcassets */; };
 		9DA9EB05184DABFA00EF35A5 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DA9EB04184DABFA00EF35A5 /* XCTest.framework */; };
@@ -170,6 +169,8 @@
 		3F6F9D751858631500FDF258 /* SearchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchView.h; sourceTree = "<group>"; };
 		3F6F9D761858631500FDF258 /* SearchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchView.m; sourceTree = "<group>"; };
 		3F6F9D7A18587A4600FDF258 /* SearchIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SearchIcon.png; sourceTree = "<group>"; };
+		3F6FAD9418740B9000A1C0AB /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		3F6FAD9518740B9000A1C0AB /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		3F8F3FEF18613DE80021A65D /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
 		3F8F3FF018613DE80021A65D /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 		3FA37F3A18616C4900E0FC6B /* JIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JIViewController.h; sourceTree = "<group>"; };
@@ -228,7 +229,6 @@
 		9DA9EAF3184DABFA00EF35A5 /* job-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "job-Prefix.pch"; sourceTree = "<group>"; };
 		9DA9EAF4184DABFA00EF35A5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		9DA9EAF5184DABFA00EF35A5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		9DA9EAF8184DABFA00EF35A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9DA9EAFA184DABFA00EF35A5 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		9DA9EAFB184DABFA00EF35A5 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		9DA9EAFD184DABFA00EF35A5 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -548,7 +548,6 @@
 			children = (
 				9DA9EAF4184DABFA00EF35A5 /* AppDelegate.h */,
 				9DA9EAF5184DABFA00EF35A5 /* AppDelegate.m */,
-				9DA9EAF7184DABFA00EF35A5 /* Main.storyboard */,
 				3F0D54EB185AF667005841A6 /* tencentSDK */,
 				3FEE698D185AD6470084189B /* libWeiboSDK */,
 				9DD5658818507827007939BA /* login */,
@@ -693,6 +692,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = 9DA9EAD9184DABFA00EF35A5;
 			productRefGroup = 9DA9EAE3184DABFA00EF35A5 /* Products */;
@@ -732,7 +732,6 @@
 				3F5FF564185EB61D0063EACB /* qq.png in Resources */,
 				9DA9EAF0184DABFA00EF35A5 /* InfoPlist.strings in Resources */,
 				3FA64940185999E90099D32B /* arrowDown@2x.png in Resources */,
-				9DA9EAF9184DABFA00EF35A5 /* Main.storyboard in Resources */,
 				9DD5657E18503530007939BA /* 58.png in Resources */,
 				3FA6493F185999E90099D32B /* arrowDown.png in Resources */,
 				3FA64941185999E90099D32B /* arrowUp.png in Resources */,
@@ -869,22 +868,16 @@
 			isa = PBXVariantGroup;
 			children = (
 				9DA9EAEF184DABFA00EF35A5 /* en */,
+				3F6FAD9418740B9000A1C0AB /* zh-Hans */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		9DA9EAF7184DABFA00EF35A5 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				9DA9EAF8184DABFA00EF35A5 /* Base */,
-			);
-			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 		9DA9EB0D184DABFA00EF35A5 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				9DA9EB0E184DABFA00EF35A5 /* en */,
+				3F6FAD9518740B9000A1C0AB /* zh-Hans */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
