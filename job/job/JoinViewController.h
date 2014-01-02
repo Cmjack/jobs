@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+@protocol JoinViewControllerDelegate <NSObject>
 
+-(void)JoinViewControllerSuccessRefreshData;
+
+@end
 @interface JoinViewController : UIViewController
 @property(nonatomic, strong)NSDictionary *dictMessage;
+@property(nonatomic, weak)id<JoinViewControllerDelegate> delegate;
 @end
+
+

@@ -23,7 +23,7 @@
 
 
 
-@interface ViewController ()<UITableViewDataSource,UITableViewDelegate,HttpRequestDelegate,SearchViewDelegate,PullingRefreshTableViewDelegate,loginViewControllerDelegate,SettingViewControllerDelegate>
+@interface ViewController ()<UITableViewDataSource,UITableViewDelegate,HttpRequestDelegate,SearchViewDelegate,PullingRefreshTableViewDelegate,loginViewControllerDelegate,SettingViewControllerDelegate,JoinViewControllerDelegate>
 @property(nonatomic,strong)PullingRefreshTableView *jobTableView;
 @property(nonatomic,strong)CustomCell *customCell;
 @property(nonatomic,strong)UIImageView *headImageView;
@@ -138,6 +138,7 @@
         return;
     }
     JoinViewController *join = [[JoinViewController alloc]initWithNibName:nil bundle:nil];
+    join.delegate = self;
     [self.navigationController pushViewController:join animated:YES];
     
 }
@@ -334,6 +335,11 @@
     
     [self.jobTableView tableViewDidEndDragging:scrollView];
     
+}
+#pragma mark - JoinViewControllerDelegate
+-(void)JoinViewControllerSuccessRefreshData
+{
+    [self refreshData];
 }
 #pragma mark - loginViewControllerDelegate
 -(void)loginSuccess:(NSDictionary *)userInfo

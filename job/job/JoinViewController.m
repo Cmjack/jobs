@@ -112,7 +112,9 @@
             
             [[[HttpRequest alloc]init]httpRequestForPostJoinMessgae:[NSDictionary dictionaryWithObjectsAndKeys:dict,@"param", nil]];
             [self.navigationController popViewControllerAnimated:YES];
-            
+            if ([self.delegate respondsToSelector:@selector(JoinViewControllerSuccessRefreshData)]) {
+                [self.delegate JoinViewControllerSuccessRefreshData];
+            }
         }
         else{
             
